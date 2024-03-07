@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>include/kmer.h</itemPath>
+      <itemPath>include/Kmer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -44,7 +44,7 @@
           </incDir>
         </ccTool>
       </compileType>
-      <item path="include/kmer.h" ex="false" tool="3" flavor2="0">
+      <item path="include/Kmer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Kmer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -72,7 +72,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="include/kmer.h" ex="false" tool="3" flavor2="0">
+      <item path="include/Kmer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Kmer.cpp" ex="false" tool="1" flavor2="0">
       </item>

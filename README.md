@@ -1,3 +1,3 @@
 # MyProgram
-para completar Kmer0 falta hacer las pruebas del github
-voy por el 16
+
+Kmer 0 completado

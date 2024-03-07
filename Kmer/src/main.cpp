@@ -4,11 +4,8 @@
  */
 
 /* 
- * File:   main.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andrés Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * @author Javier Martínez Baena <jbaena@ugr.es>
+ * @file:   main.cpp
+ * @author Juan Reche Aguilar
  *
  * Created on 24 October 2023, 13:58
  */
@@ -16,11 +13,12 @@
 #include <iostream>
 #include <string>
 
-#include "kmer.h"
+#include "Kmer.h"
 
 using namespace std;
 
 /**
+ * @brief
  * This program first reads from the standard input an integer k (length of Kmer)
  * and a string with a genetic sequence. Then, it obtains from the genetic 
  * sequence, the list of kmers (of length k) and saves them in the array kmers. 
@@ -56,11 +54,12 @@ int main(int argc, char* argv[]) {
     // This is the array where the kmers of the input genetic sequence will be
     // saved
     Kmer kmers[DIM_ARRAY_KMERS];
-    int total_utilizados = 0;
     
     // This is the array where the complementary kmers will be
     // saved
     Kmer complementaryKmers[DIM_ARRAY_KMERS];
+    
+    
     
     // Read K (integer) and a string with the input nucleoides list
     int K;
@@ -70,38 +69,34 @@ int main(int argc, char* argv[]) {
     cin >> K;
     cin >> genome;
     
-    // Obtain the kmers: find the kmers in the input string and put them in an array of Kmers
-    if(genome.length() >= K && K > 0){
-        for(int i = 0; i <= genome.length() - K && i < DIM_ARRAY_KMERS; i++){
-        
-            kmers[i] = Kmer(genome.substr(i, K));
-            total_utilizados++;
-        }
-    }
+    int total_utilizados = genome.length() - K  + 1;
     
-    // Normalize each Kmer in the array
+    if(total_utilizados > DIM_ARRAY_KMERS) total_utilizados = 100;
+    if(genome.length() < K) total_utilizados = 0;
+    
+    if(K != 0 ) cout << total_utilizados << endl;
+        
     for(int i = 0; i < total_utilizados; i++){
         
+        // Obtain the kmers: find the kmers in the input string 
+        // and put them in an array of Kmers
+        kmers[i] = Kmer(genome.substr(i, K));
+            
+        // Normalize each Kmer in the array
         kmers[i].normalize(VALID_NUCLEOTIDES);
-    }
-     
-    
-    // Obtain the complementary kmers and turn them into lowercase
-    for(int i = 0; i < total_utilizados; i++){
-        
+            
+        // Obtain the complementary kmers and turn them into lowercase
         complementaryKmers[i] = kmers[i].complementary(VALID_NUCLEOTIDES,
                                                      COMPLEMENTARY_NUCLEOTIDES);
         ToLower(complementaryKmers[i]);
-    }
-    
-    
-    // Show the list of kmers and complementary kmers as in the example
-    cout << total_utilizados << endl;
-    for(int i = 0; i < total_utilizados; i++){
-       
+            
+        // Show the list of kmers and complementary kmers as in the example
         cout << kmers[i].toString() << "<-->"
              << complementaryKmers[i].toString() << endl;
+            
     }
+    
+    
     
     return 0;
 }

@@ -16,7 +16,7 @@
 
 #include<iostream>
 #include<cctype>
-#include"kmer.h"
+#include"Kmer.h"
 
 using namespace std;
 
