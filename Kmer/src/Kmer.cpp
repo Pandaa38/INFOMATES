@@ -25,9 +25,7 @@ Kmer::Kmer(int k){
     if(k <= 0) throw std::invalid_argument( string("Kmer(int k): ") 
                                             + "K is less or equal than zero ");
     
-    for(int i = 0; i < k; i++){
-        _text += MISSING_NUCLEOTIDE;
-    }
+    _text = string(k, MISSING_NUCLEOTIDE);
 }
 
 Kmer::Kmer(const std::string& text){
@@ -76,13 +74,15 @@ char& Kmer::at(int index){
 
 void Kmer::normalize(const std::string& validNucleotides){
     
+    Kmer normalize(_text);
+    ToUpper(normalize);
+    _text = normalize.toString();
+    
     for(int i = 0; i < _text.length(); i++){
         
-        if(IsValidNucleotide( toupper(_text[i]), validNucleotides)){
-            _text[i] = toupper(_text[i]);
-        }
-        else
+        if(!IsValidNucleotide( toupper(_text[i]), validNucleotides)){
             _text[i] = MISSING_NUCLEOTIDE;
+        }
     }
 }
 
@@ -96,15 +96,14 @@ Kmer Kmer::complementary(const std::string& nucleotides,
                 "the sizes of nucleotides and complementaryNucleotides "
                 "are not the same");
     
-    string complemented_nucleotides;
+    string complemented_nucleotides = _text;
     
     for(int i = 0; i < size(); i++){
         
         if(IsValidNucleotide(_text[i], nucleotides)){
             int pos = nucleotides.find(_text[i]);
-            complemented_nucleotides.push_back(complementaryNucleotides[pos]);
+            complemented_nucleotides[i] = complementaryNucleotides[pos];
         }
-        else complemented_nucleotides.push_back(_text.at(i));
     }
     
     return Kmer(complemented_nucleotides);
@@ -112,11 +111,10 @@ Kmer Kmer::complementary(const std::string& nucleotides,
 
 bool IsValidNucleotide(char nucleotide,const std::string& validNucleotides){
     
-    bool valid = false;
-    for(int i = 0; i < validNucleotides.length() && !valid; i++){
-        if(nucleotide == validNucleotides[i]) 
-            valid = true;
-    }
+    bool valid = true;
+    if(validNucleotides.find_first_of(nucleotide) == -1)
+        valid = false;
+    
     return valid;
 }
 

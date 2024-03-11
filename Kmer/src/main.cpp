@@ -69,14 +69,15 @@ int main(int argc, char* argv[]) {
     cin >> K;
     cin >> genome;
     
-    int total_utilizados = genome.length() - K  + 1;
+    //Calculate total_utilizados
+    int total_used = genome.length() - K  + 1;
     
-    if(total_utilizados > DIM_ARRAY_KMERS) total_utilizados = 100;
-    if(genome.length() < K) total_utilizados = 0;
+    if(total_used > DIM_ARRAY_KMERS) total_used = DIM_ARRAY_KMERS;
+    if(genome.length() < K) total_used = 0;
     
-    if(K != 0 ) cout << total_utilizados << endl;
+    if(K != 0 ) cout << total_used << endl;
         
-    for(int i = 0; i < total_utilizados; i++){
+    for(int i = 0; i < total_used; i++){
         
         // Obtain the kmers: find the kmers in the input string 
         // and put them in an array of Kmers
@@ -95,7 +96,6 @@ int main(int argc, char* argv[]) {
              << complementaryKmers[i].toString() << endl;
             
     }
-    
     
     
     return 0;
