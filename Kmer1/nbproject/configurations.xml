@@ -46,9 +46,21 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
+          <incFile>
+            <pElem>include/ArrayKmerFreqFunctions.h</pElem>
+            <pElem>include/Kmer.h</pElem>
+            <pElem>include/KmerFreq.h</pElem>
+          </incFile>
           <commandLine>-Wall -pedantic</commandLine>
         </ccTool>
       </compileType>
+      <folder path="HeaderFiles">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <item path="include/ArrayKmerFreqFunctions.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Kmer.h" ex="false" tool="3" flavor2="0">

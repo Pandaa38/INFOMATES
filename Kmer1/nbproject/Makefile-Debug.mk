@@ -68,22 +68,22 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/kmer1: ${OBJECTFILES}
 ${OBJECTDIR}/src/ArrayKmerFreqFunctions.o: src/ArrayKmerFreqFunctions.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ArrayKmerFreqFunctions.o src/ArrayKmerFreqFunctions.cpp
+	$(COMPILE.cc) -g -Iinclude -include include/ArrayKmerFreqFunctions.h -include include/Kmer.h -include include/KmerFreq.h -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ArrayKmerFreqFunctions.o src/ArrayKmerFreqFunctions.cpp
 
 ${OBJECTDIR}/src/Kmer.o: src/Kmer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Kmer.o src/Kmer.cpp
+	$(COMPILE.cc) -g -Iinclude -include include/ArrayKmerFreqFunctions.h -include include/Kmer.h -include include/KmerFreq.h -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Kmer.o src/Kmer.cpp
 
 ${OBJECTDIR}/src/KmerFreq.o: src/KmerFreq.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/KmerFreq.o src/KmerFreq.cpp
+	$(COMPILE.cc) -g -Iinclude -include include/ArrayKmerFreqFunctions.h -include include/Kmer.h -include include/KmerFreq.h -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/KmerFreq.o src/KmerFreq.cpp
 
 ${OBJECTDIR}/src/main.o: src/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.cpp
+	$(COMPILE.cc) -g -Iinclude -include include/ArrayKmerFreqFunctions.h -include include/Kmer.h -include include/KmerFreq.h -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.cpp
 
 # Subprojects
 .build-subprojects:

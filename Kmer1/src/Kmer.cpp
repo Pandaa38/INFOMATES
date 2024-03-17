@@ -18,20 +18,19 @@
 #include<cctype>
 #include"Kmer.h"
 
-using namespace std;
 
 Kmer::Kmer(int k){
     
-    if(k <= 0) throw std::invalid_argument( string("Kmer(int k): ") 
+    if(k <= 0) throw std::invalid_argument( std::string("Kmer(int k): ") 
                                             + "K is less or equal than zero ");
     
-    _text = string(k, MISSING_NUCLEOTIDE);
+    _text = std::string(k, MISSING_NUCLEOTIDE);
 }
 
 Kmer::Kmer(const std::string& text){
     
     if(text.length() == 0) 
-        throw std::invalid_argument(string(" Kmer(const std::string& text): ")
+        throw std::invalid_argument(std::string(" Kmer(const std::string& text): ")
                                     + "text is empty");
     
     _text = text;
@@ -47,7 +46,7 @@ int Kmer::size() const{
     return _text.length();
 }
 
-string Kmer::toString() const{
+std::string Kmer::toString() const{
     
     return _text;
 }
@@ -56,9 +55,8 @@ const char& Kmer::at(int index) const{
     
     if(index < 0 || index >= getK())
         throw std::out_of_range(
-                string("const char& Kmer::at(int index) const: ") + 
-                "invalid position" + to_string(index));
-    
+                std::string("const char& Kmer::at(int index) const: ") + 
+                "invalid position" + std::to_string(index));
     
     return _text.at(index);
 }
@@ -66,8 +64,8 @@ const char& Kmer::at(int index) const{
 char& Kmer::at(int index){
     
     if(index < 0 || index >= getK())
-        throw std::out_of_range( string("char& Kmer::at(int index): ") + 
-                                "invalid position" + to_string(index));
+        throw std::out_of_range( std::string("char& Kmer::at(int index): ") + 
+                                "invalid position" + std::to_string(index));
     
     return _text.at(index);
 }
@@ -105,12 +103,12 @@ Kmer Kmer::complementary(const std::string& nucleotides,
     
     if(nucleotides.size() != complementaryNucleotides.size())
         throw std::invalid_argument(
-                string( "Kmer Kmer::complementary(const std::string& nucleotides,"
+         std::string( "Kmer Kmer::complementary(const std::string& nucleotides,"
                 "const std::string& complementaryNucleotides) const: ") +
                 "the sizes of nucleotides and complementaryNucleotides "
                 "are not the same");
     
-    string complemented_nucleotides = _text;
+    std::string complemented_nucleotides = _text;
     
     for(int i = 0; i < size(); i++){
         

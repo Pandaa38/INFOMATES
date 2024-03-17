@@ -16,10 +16,41 @@
 
 #include "ArrayKmerFreqFunctions.h"
 
-void ReadArrayKmerFreq(KmerFreq array[],int dim, int nElements){
+void ReadArrayKmerFreq(KmerFreq& array[], int dim, int& nElements){
+    
+    std::cin >> nElements;
+    
+    for(int i = 0; i < nElements && i < dim; i++){
+        std::cin >> array[i].setKmer();
+        std::cin >> array[i].setFrequency();
+    }
+}
+
+void PrintArrayKmerFreq(const KmerFreq array[], int nElements){
+    
+    for(int i = 0; i < nElements; i++){
+        std::cout << array[i].getKmer().toString() << " " 
+                  << array[i].getFrequency() << std::endl;
+        
+    }
+}
+
+void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
+                               int second){
+    
+    if(first > nElements || second > nElements)
+        throw std::out_of_range (std::string("first or second are positions") +
+                                 "out of the range of the given array");
     
     
+    Kmer intermediate_Kmer() = array[first].getKmer();
+    int intermediate_int = array[first].getFrequency();
     
+    array[first].setKmer(array[second].getKmer());
+    array[first].setFrequency(array[second].getFrequency());
+    
+    array[second].setKmer(intermediate_Kmer);
+    array[second].setFrequency(intermediate_int);
 }
 
 void NormalizeArrayKmerFreq(KmerFreq array[], int nElements, 
