@@ -121,6 +121,15 @@ Kmer Kmer::complementary(const std::string& nucleotides,
     return Kmer(complemented_nucleotides);
 }
 
+bool Kmer::ThereIsMissingNucleotide(){
+    
+    bool missing = false;
+    for(int i; i < getK() && !missing; i++){
+        
+        if(_text[i] == MISSING_NUCLEOTIDE) missing = true;
+    }
+}
+
 bool IsValidNucleotide(char nucleotide,const std::string& validNucleotides){
     
     bool valid = true;

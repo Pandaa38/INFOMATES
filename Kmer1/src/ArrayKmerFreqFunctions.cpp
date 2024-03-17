@@ -53,19 +53,99 @@ void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
     array[second].setFrequency(intermediate_int);
 }
 
-void NormalizeArrayKmerFreq(KmerFreq array[], int nElements, 
+int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
+        int initialPos, int finalPos){
+    
+    bool finded = false;
+    int pos = initialPos + 1;
+    
+    while(pos < finalPos && !finded){
+        
+        if(kmer == array[pos]) finded = true;
+        pos++;
+    }
+    
+    if(finded == false) pos = -1;
+    
+    return pos;
+}
+
+
+void SortArrayKmerFreq(KmerFreq array[], int nElements){
+    
+    for (int izda = 0 ; izda < nElements ; izda++) {
+        
+        KmerFreq minimo = array[izda](); 
+        int pos_min = izda; 
+        
+        for (int i = izda + 1; i < nElements ; i++)
+            if (array[i].getFrequency() < minimo.getFrequency()){ 
+            minimo = array[i];
+            pos_min = i;
+        }
+
+        SwapElementsArrayKmerFreq(array[], nElements, izda, pos_min);
+    }
+}
+
+
+void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements, 
                             std::string validNucleotides){ 
     
     // Loop to traverse and normalize each one of the kmers in array
           // Normalize kmer i
+    for(int i = 0; i < nElements; i++){
+        array[i].setKmer(array[i].getKmer().normalize(validNucleotides));
+    }
     
     
     // Loop to traverse the kmers in array from position 1 to position nElements-1
-          // index = Position of array[i].getKmer() in the subarray that begins
+    for(int i = 0; i < nElements; i++){
+        // index = Position of array[i].getKmer() in the subarray that begins
           //         at position 0 and ends at position i-1
-          // If array[i].getKmer() was found in the the subarray from 0 to i-1 
-               // Accumulate the frequencies of the kmers at positions 
-               //    index and i in the kmer at position index
-               // Delete from the array, the kmer at position i 
+        
+        index = FindKmerInArrayKmerFreq(array[], array[i], i, nElements);
+        
+        // If array[i].getKmer() was found in the the subarray from 0 to i-1 
+        if(index != -1) {
+            // Accumulate the frequencies of the kmers at positions 
+            //    index and i in the kmer at position index
+            int freq = array[i].getFrequency() + array[index].getFrequency();
+             array[i].setFrequency(freq);
+             
+             // Delete from the array, the kmer at position i
+             DeletePosArrayKmerFreq(array[], nElements, i);
+        } 
+    }
 }
 
+void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
+    
+    if(pos < 0 || pos > nElements - 1)
+        throw std::out_of_range( std::string( "pos is not in the range")
+                                       + "from 0 to nElements-1");
+    
+    
+    int tope = nElements-1;
+    
+    for(int i = pos ; i < tope ; i++)
+        array[i] = array[i+1];
+    
+    nElements -= 1;
+}
+
+void ZipArrayKmerFreq(KmerFreq array[], int& nElements, 
+        bool deleteMissing=false, int lowerBound=0){
+    
+    for(int i = 0; i < nElements; i++){
+        
+        if(deleteMissing && array[i].getKmer().ThereIsMissingNucleotide()){
+            DeletePosArrayKmerFreq(array[], nElements, i);            
+        }
+        
+        if(array[i].getFrequency() <  lowerBound)
+            DeletePosArrayKmerFreq(array[], nElements, i);
+        
+    }
+    
+}

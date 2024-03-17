@@ -137,6 +137,8 @@ public:
     Kmer complementary(const std::string& nucleotides, 
          const std::string& complementaryNucleotides) const;
     
+    bool ThereIsMissingNucleotide();
+    
 private:
     /**
      * A string with a list of characters representing the nucleotides in 

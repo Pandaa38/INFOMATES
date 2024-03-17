@@ -48,7 +48,7 @@ void PrintArrayKmerFreq(const KmerFreq array[], int nElements);
  * @throw Throws a std::out_of_range exception if first or second are positions 
  * out of the range of the given array
 */
-void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
+void SwapElementsArrayKmerFreq(const KmerFreq array[], int nElements, int first,
                                int second);
 
 /**
@@ -62,8 +62,9 @@ void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
  * that begins at position @p initialPos and ends at position @p finalPos 
  * (both included). If the given Kmer is not found, then -1 is returned.
  */
-int FindKmerInArrayKmerFreq(KmerFreq array[], Kmer kmer,
+int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
         int initialPos, int finalPos);
+
 
 /**
  * @brief Sorts the given array of KmerFreq in decreasing order of
@@ -110,7 +111,7 @@ _G 5
  * @param validNucleotides a string with the list of characters (nucleotides) 
  * that should be considered as valid. Input parameter
 */
-void NormalizeArrayKmerFreq(KmerFreq array[], int nElements, 
+void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements, 
         std::string validNucleotides);
 
 /**
@@ -123,7 +124,7 @@ void NormalizeArrayKmerFreq(KmerFreq array[], int nElements,
  * @throw std::out_of_range Throws an std::out_of_range exception if @p pos 
  * is not in the range from 0 to nElements-1 (both included).
  */
-void DeletePosArrayKmerFreq(KmerFreq array[], int nElements, int pos);
+void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos);
 
 /**
  * @brief Deletes the KmerFreq objects from the argument array which verifies
@@ -145,7 +146,7 @@ void DeletePosArrayKmerFreq(KmerFreq array[], int nElements, int pos);
  * frequency less or equals to this value, are deleted. This parameter has zero
  * as default value. Input parameter
  */
-void ZipArrayKmerFreq(KmerFreq array[], int nElements, 
+void ZipArrayKmerFreq(KmerFreq array[], int& nElements, 
         bool deleteMissing=false, int lowerBound=0);
 
 #endif /* ARRAYKMERFREQFUNCTIONS_H */

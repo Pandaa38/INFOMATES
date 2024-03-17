@@ -17,10 +17,10 @@
 #ifndef KMER_FREQ_H
 #define KMER_FREQ_H
 
-#include "Kmer.h"
-
 #include <iostream>
 #include <string>
+#include"Kmer.h"
+
 
 /**
  * @class KmerFreq
