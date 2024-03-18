@@ -112,7 +112,7 @@ _G 5
  * that should be considered as valid. Input parameter
 */
 void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements, 
-        std::string validNucleotides);
+        const std::string&validNucleotides);
 
 /**
  * @brief Deletes the KmerFreq object from the argument array that is at 
