@@ -18,8 +18,9 @@
 void ReadArrayKmerFreq(KmerFreq array[], int dim, int& nElements){
     
     std::cin >> nElements;
+    if(nElements > dim) nElements = dim;
     
-    for(int i = 0; i < nElements && i < dim; i++){
+    for(int i = 0; i < nElements; i++){
         
         int freq;
         std::string nucleotide;
@@ -37,8 +38,7 @@ void PrintArrayKmerFreq(const KmerFreq array[], int nElements){
     if(nElements > 0) std::cout << nElements << std::endl;
     
     for(int i = 0; i < nElements; i++){
-        std::cout << array[i].getKmer().toString() << " " 
-                  << array[i].getFrequency() << std::endl;
+        std::cout << array[i].toString() << std::endl;
         
     }
 }
@@ -171,7 +171,7 @@ void ZipArrayKmerFreq(KmerFreq array[], int& nElements,
             }
         }
         
-        if(array[i].getFrequency() < lowerBound){
+        if(array[i].getFrequency() <= lowerBound){
             DeletePosArrayKmerFreq(array, nElements, i);
             i--;
         }
