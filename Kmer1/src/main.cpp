@@ -51,16 +51,17 @@ int main(int argc, char* argv[]) {
     // will be stored
     KmerFreq kmers[DIM_ARRAY_KMERS];
     
-    int nKmers = 3; // Number of elements in the array kmers
+    int nKmers; // Number of elements in the array kmers
 
     // Read an integer n (number of pairs to read)
     
     // Read the n pairs kmers-frequency from the standard input and put them 
     //      in the array kmers
     
-    //ReadArrayKmerFreq(kmers, DIM_ARRAY_KMERS, nKmers);
+    ReadArrayKmerFreq(kmers, DIM_ARRAY_KMERS, nKmers);
     
     // Normalizes each kmer in the array kmers
+    /*
     kmers[0].setFrequency(2);
     Kmer k0("Ag");
     kmers[0].setKmer(k0);
@@ -72,11 +73,12 @@ int main(int argc, char* argv[]) {
     kmers[2].setFrequency(3);
     Kmer k2("Bg");
     kmers[2].setKmer(k2);
+    */
     
-    //NormalizeArrayKmerFreq(kmers, nKmers, VALID_NUCLEOTIDES);
+    NormalizeArrayKmerFreq(kmers, nKmers, VALID_NUCLEOTIDES);
     
     // Zip the kmers in the array kmers
-    //ZipArrayKmerFreq(kmers, nKmers, true, 1);
+    ZipArrayKmerFreq(kmers, nKmers, true, 0);
     
     // Sort the array kmers
     SortArrayKmerFreq(kmers, nKmers);

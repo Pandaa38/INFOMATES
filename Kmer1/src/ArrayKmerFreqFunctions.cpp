@@ -69,7 +69,7 @@ int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
         if(array[initialPos].getKmer().toString() == kmer.toString())
             found = true;
         
-        initialPos++;
+        else initialPos++;
     }
     
     if(!found) initialPos = -1;
@@ -77,29 +77,29 @@ int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
     return initialPos;
 }
 
-// Use insert metho
+// Use selection sort
 void SortArrayKmerFreq(KmerFreq array[], int nElements){
     
-    for (int izda = 0 ; izda < nElements ; izda++) {
+    for (int left = 0 ; left < nElements ; left++) {
         
-        KmerFreq minimo = array[izda]; 
-        int pos_min = izda;
+        KmerFreq max = array[left]; 
+        int pos_max = left;
         
-        for (int i = izda + 1; i < nElements ; i++){
-            if (array[i].getFrequency() < minimo.getFrequency()){
-                minimo = array[i];
-                pos_min = i;
+        for (int i = left + 1; i < nElements ; i++){
+            if (array[i].getFrequency() > max.getFrequency()){
+                max = array[i];
+                pos_max = i;
             }
             
-            if (array[i].getFrequency() == minimo.getFrequency()){
-                if(array[i].getKmer().toString() < minimo.getKmer().toString()){
-                    minimo = array[i];
-                    pos_min = i;
+            if (array[i].getFrequency() == max.getFrequency()){
+                if(array[i].getKmer().toString() < max.getKmer().toString()){
+                    max = array[i];
+                    pos_max = i;
                 }
             }
         }
 
-        SwapElementsArrayKmerFreq(array, nElements, izda, pos_min);
+        SwapElementsArrayKmerFreq(array, nElements, left, pos_max);
     }
 }
 
