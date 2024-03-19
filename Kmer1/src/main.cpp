@@ -60,21 +60,7 @@ int main(int argc, char* argv[]) {
     
     ReadArrayKmerFreq(kmers, DIM_ARRAY_KMERS, nKmers);
     
-    // Normalizes each kmer in the array kmers
-    /*
-    kmers[0].setFrequency(2);
-    Kmer k0("Ag");
-    kmers[0].setKmer(k0);
-    
-    kmers[1].setFrequency(3);
-    Kmer k1("Ab");
-    kmers[1].setKmer(k1);
-    
-    kmers[2].setFrequency(3);
-    Kmer k2("Bg");
-    kmers[2].setKmer(k2);
-    */
-    
+    // Normalizes each kmer in the array kmers  
     NormalizeArrayKmerFreq(kmers, nKmers, VALID_NUCLEOTIDES);
     
     // Zip the kmers in the array kmers

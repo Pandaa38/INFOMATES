@@ -21,7 +21,7 @@
 
 KmerFreq::KmerFreq(){
     _frequency = 0;
-    _kmer = Kmer(1);
+    _kmer = Kmer();
 }
 
 const Kmer& KmerFreq::getKmer() const{
