@@ -63,32 +63,40 @@ int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
         int initialPos, int finalPos){
     
     bool found = false;
-    int pos = initialPos;
     
-    while(pos <= finalPos && !found){
+    while(initialPos <= finalPos && !found){
         
-        if(array[pos].getKmer().toString() == kmer.toString())
+        if(array[initialPos].getKmer().toString() == kmer.toString())
             found = true;
-        pos++;
+        
+        initialPos++;
     }
     
-    if(!found) pos = -1;
+    if(!found) initialPos = -1;
     
-    return pos;
+    return initialPos;
 }
 
-
+// Use insert metho
 void SortArrayKmerFreq(KmerFreq array[], int nElements){
     
     for (int izda = 0 ; izda < nElements ; izda++) {
         
         KmerFreq minimo = array[izda]; 
-        int pos_min = izda; 
+        int pos_min = izda;
         
-        for (int i = izda + 1; i < nElements ; i++)
-            if (array[i].getFrequency() < minimo.getFrequency()){ 
-            minimo = array[i];
-            pos_min = i;
+        for (int i = izda + 1; i < nElements ; i++){
+            if (array[i].getFrequency() < minimo.getFrequency()){
+                minimo = array[i];
+                pos_min = i;
+            }
+            
+            if (array[i].getFrequency() == minimo.getFrequency()){
+                if(array[i].getKmer().toString() < minimo.getKmer().toString()){
+                    minimo = array[i];
+                    pos_min = i;
+                }
+            }
         }
 
         SwapElementsArrayKmerFreq(array, nElements, izda, pos_min);
@@ -136,7 +144,7 @@ void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements,
 
 void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
     
-    if(pos < 0 || pos > nElements - 1)
+    if(pos < 0 || pos >= nElements)
         throw std::out_of_range( std::string( "pos is not in the range")
                                        + "from 0 to nElements-1");
     
@@ -150,7 +158,8 @@ void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
 void ZipArrayKmerFreq(KmerFreq array[], int& nElements, 
                        bool deleteMissing, int lowerBound){
     
-    for(int i = 0; i < nElements; i++){
+    int i = 0;
+    while(i < nElements){
         
         if(deleteMissing){
             
@@ -162,9 +171,11 @@ void ZipArrayKmerFreq(KmerFreq array[], int& nElements,
             }
         }
         
-        if(array[i].getFrequency() <= lowerBound){
+        if(array[i].getFrequency() < lowerBound){
             DeletePosArrayKmerFreq(array, nElements, i);
             i--;
         }
+        
+        i++;
     }
 }

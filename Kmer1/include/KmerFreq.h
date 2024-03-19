@@ -73,7 +73,7 @@ public:
      * @return A string with the nucleotide and frequency of the kmer
      * in this object
      */
-    std::string toString();
+    std::string toString() const;
     
 private:
     Kmer _kmer; ///< the Kmer object

@@ -44,7 +44,7 @@ void KmerFreq::setFrequency(int frequency){
     _frequency = frequency;
 }
 
-std::string KmerFreq::toString(){
+std::string KmerFreq::toString() const{
     
     return std::string(_kmer.toString()) + " " + std::to_string(_frequency);
 }

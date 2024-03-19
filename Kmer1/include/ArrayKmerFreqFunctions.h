@@ -48,7 +48,7 @@ void PrintArrayKmerFreq(const KmerFreq array[], int nElements);
  * @throw Throws a std::out_of_range exception if first or second are positions 
  * out of the range of the given array
 */
-void SwapElementsArrayKmerFreq(const KmerFreq array[], int nElements, int first,
+void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
                                int second);
 
 /**

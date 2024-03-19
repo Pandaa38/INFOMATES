@@ -19,7 +19,10 @@
             <file>file:/home/juan/Documentos/MyProgram/Kmer1/src/ArrayKmerFreqFunctions.cpp</file>
             <file>file:/home/juan/Documentos/MyProgram/Kmer1/data/4pairsDNA_normalized_zipped.k1out</file>
             <file>file:/home/juan/Documentos/MyProgram/Kmer1/src/main.cpp</file>
+            <file>file:/home/juan/Documentos/MyProgram/Kmer1/include/ArrayKmerFreqFunctions.h</file>
+            <file>file:/home/juan/Documentos/MyProgram/Kmer1/src/KmerFreq.cpp</file>
             <file>file:/home/juan/Documentos/MyProgram/Kmer1/data/4pairsDNA.k1in</file>
+            <file>file:/home/juan/Documentos/MyProgram/Kmer1/include/KmerFreq.h</file>
         </group>
     </open-files>
 </project-private>
