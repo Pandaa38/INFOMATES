@@ -13,7 +13,6 @@
  * Created on 27 October 2023, 12:00
  */
 
-
 #include "ArrayKmerFreqFunctions.h"
 
 void ReadArrayKmerFreq(KmerFreq array[], int dim, int& nElements){
@@ -34,6 +33,8 @@ void ReadArrayKmerFreq(KmerFreq array[], int dim, int& nElements){
 }
 
 void PrintArrayKmerFreq(const KmerFreq array[], int nElements){
+    
+    if(nElements > 0) std::cout << nElements << std::endl;
     
     for(int i = 0; i < nElements; i++){
         std::cout << array[i].getKmer().toString() << " " 
@@ -61,18 +62,17 @@ void SwapElementsArrayKmerFreq(KmerFreq array[], int nElements, int first,
 int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
         int initialPos, int finalPos){
     
-    bool finded = false;
-    int pos = initialPos + 1;
+    bool found = false;
+    int pos = initialPos;
     
-    while(pos < finalPos && !finded){
+    while(pos <= finalPos && !found){
         
-        if(kmer.toString() == array[pos].getKmer().toString()) 
-            finded = true;
-        
+        if(array[pos].getKmer().toString() == kmer.toString())
+            found = true;
         pos++;
     }
     
-    if(finded == false) pos = -1;
+    if(!found) pos = -1;
     
     return pos;
 }
@@ -108,25 +108,30 @@ void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements,
         array[i].setKmer(normalized);
     }
     
+    int i = 1;
     
     // Loop to traverse the kmers in array from position 1 to position nElements-1
-    for(int i = 0; i < nElements; i++){
-        // index = Position of array[i].getKmer() in the subarray that begins
-          //         at position 0 and ends at position i-1
+    while(i < nElements){
         
-        int index = FindKmerInArrayKmerFreq(array, array[i].getKmer(), i, nElements);
+        // index = Position of array[i].getKmer() in the subarray that begins
+        //         at position 0 and ends at position i-1
+        int index = FindKmerInArrayKmerFreq(array, array[i].getKmer(), 0, i-1);
         
         // If array[i].getKmer() was found in the the subarray from 0 to i-1 
-        if(index != -1) {
+        if(index != -1){
+            
             // Accumulate the frequencies of the kmers at positions 
             //    index and i in the kmer at position index
             int freq = array[i].getFrequency() + array[index].getFrequency();
-             array[i].setFrequency(freq);
-             
-             // Delete from the array, the kmer at position i
-             DeletePosArrayKmerFreq(array, nElements, i);
-        } 
+            array[index].setFrequency(freq);
+            
+            // Delete from the array, the kmer at position i
+            DeletePosArrayKmerFreq(array, nElements, i);
+        }
+        
+        else i++;
     }
+
 }
 
 void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
@@ -136,12 +141,10 @@ void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
                                        + "from 0 to nElements-1");
     
     
-    int tope = nElements-1;
+    for(int i = pos; i < nElements - 1; i++)
+        SwapElementsArrayKmerFreq(array, nElements, i, i+1);
     
-    for(int i = pos ; i < tope ; i++)
-        array[i] = array[i+1];
-    
-    nElements -= 1;
+    nElements--;
 }
 
 void ZipArrayKmerFreq(KmerFreq array[], int& nElements, 
@@ -150,14 +153,18 @@ void ZipArrayKmerFreq(KmerFreq array[], int& nElements,
     for(int i = 0; i < nElements; i++){
         
         if(deleteMissing){
-            Kmer miss = array[i].getKmer();
-            if(miss.ThereIsMissingNucleotide())
-                DeletePosArrayKmerFreq(array, nElements, i);            
+            
+            Kmer Kmer_delete = array[i].getKmer();
+            
+            if(Kmer_delete.ThereIsMissingNucleotide()){
+                DeletePosArrayKmerFreq(array, nElements, i);
+                i--;
+            }
         }
         
-        if(array[i].getFrequency() <  lowerBound)
+        if(array[i].getFrequency() <= lowerBound){
             DeletePosArrayKmerFreq(array, nElements, i);
-        
+            i--;
+        }
     }
-    
 }

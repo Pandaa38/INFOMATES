@@ -61,19 +61,19 @@ int main(int argc, char* argv[]) {
     // Read the n pairs kmers-frequency from the standard input and put them 
     //      in the array kmers
     
-    ReadArrayKmerFreq(kmers[], DIM_ARRAY_KMERS, nKmers);
+    ReadArrayKmerFreq(kmers, DIM_ARRAY_KMERS, nKmers);
     
     // Normalizes each kmer in the array kmers
-    NormalizeArrayKmerFreq(kmers[], nKmers, VALID_NUCLEOTIDES);
+    NormalizeArrayKmerFreq(kmers, nKmers, VALID_NUCLEOTIDES);
     
     // Zip the kmers in the array kmers
-    ZipArrayKmerFreq(kmers[], nKmers);
+    ZipArrayKmerFreq(kmers, nKmers, true, 1);
     
     // Sort the array kmers
-    SortArrayKmerFreq(kmers[], nKmers)
+    SortArrayKmerFreq(kmers, nKmers);
     
     // Print the array kmers in the standard output
-    PrintArrayKmerFreq(kmers[], nKmers);
+    PrintArrayKmerFreq(kmers, nKmers);
 
     return 0;
 }
