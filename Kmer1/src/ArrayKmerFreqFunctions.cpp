@@ -91,7 +91,7 @@ void SortArrayKmerFreq(KmerFreq array[], int nElements){
                 pos_max = i;
             }
             
-            if (array[i].getFrequency() == max.getFrequency()){
+            else if (array[i].getFrequency() == max.getFrequency()){
                 if(array[i].getKmer().toString() < max.getKmer().toString()){
                     max = array[i];
                     pos_max = i;
@@ -109,9 +109,10 @@ void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements,
     
     // Loop to traverse and normalize each one of the kmers in array
           // Normalize kmer i
+    Kmer normalized;
     for(int i = 0; i < nElements; i++){
         
-        Kmer normalized = array[i].getKmer();
+        normalized = array[i].getKmer();
         normalized.normalize(validNucleotides);
         array[i].setKmer(normalized);
     }

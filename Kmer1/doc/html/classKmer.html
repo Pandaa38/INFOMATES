@@ -113,8 +113,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a5573b9ac8221d4fd2f11b30bfc7d0c7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classKmer.html">Kmer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKmer.html#a5573b9ac8221d4fd2f11b30bfc7d0c7a">complementary</a> (const std::string &amp;nucleotides, const std::string &amp;complementaryNucleotides) const</td></tr>
 <tr class="memdesc:a5573b9ac8221d4fd2f11b30bfc7d0c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the complementary of this <a class="el" href="classKmer.html" title="It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...">Kmer</a>. For example, given the <a class="el" href="classKmer.html" title="It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...">Kmer</a> "TAGAC", the complementary is "ATCTG" (assuming that we use. <code>nucleotides="ATGC"</code> and <code>complementaryNucleotides="TACG"</code>). If a nucleotide in this object is not in <code>nucleotides</code>, then that nucleotide remains the same in the returned kmer. Query method.  <a href="classKmer.html#a5573b9ac8221d4fd2f11b30bfc7d0c7a">More...</a><br /></td></tr>
 <tr class="separator:a5573b9ac8221d4fd2f11b30bfc7d0c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18b1833d4a1eef7d34474d41227b1e22"><td class="memItemLeft" align="right" valign="top"><a id="a18b1833d4a1eef7d34474d41227b1e22"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>ThereIsMissingNucleotide</b> ()</td></tr>
+<tr class="memitem:a18b1833d4a1eef7d34474d41227b1e22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKmer.html#a18b1833d4a1eef7d34474d41227b1e22">ThereIsMissingNucleotide</a> ()</td></tr>
+<tr class="memdesc:a18b1833d4a1eef7d34474d41227b1e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">look if there is a MISSING_NUCLEOTIDE in _text  <a href="classKmer.html#a18b1833d4a1eef7d34474d41227b1e22">More...</a><br /></td></tr>
 <tr class="separator:a18b1833d4a1eef7d34474d41227b1e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
@@ -459,6 +459,44 @@ Static Public Attributes</h2></td></tr>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> _text.length();</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a18b1833d4a1eef7d34474d41227b1e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18b1833d4a1eef7d34474d41227b1e22">&#9670;&nbsp;</a></span>ThereIsMissingNucleotide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kmer::ThereIsMissingNucleotide </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>look if there is a MISSING_NUCLEOTIDE in _text </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>if there is a MISSING_NUCLEOTIDE </td></tr>
+    <tr><td class="paramname">false</td><td>if there isn`t </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Kmer_8cpp_source.html#l00124">124</a> of file <a class="el" href="Kmer_8cpp_source.html">Kmer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                   {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> missing = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">int</span> miss = _text.find(<a class="code" href="classKmer.html#a4cdc2682181a0435d9fe703316fad091">MISSING_NUCLEOTIDE</a>);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;   </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">if</span>(miss != -1) missing = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">return</span> missing;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>

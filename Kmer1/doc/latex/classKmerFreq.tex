@@ -23,7 +23,7 @@ void \mbox{\hyperlink{classKmerFreq_a4eb114f842390e0091cda7a2aab9d8ec}{set\+Kmer
 \begin{DoxyCompactList}\small\item\em Sets the \mbox{\hyperlink{classKmer}{Kmer}} of this \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. Modifier method. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classKmerFreq_a02f30c44425e7b245e46253c5e532930}{set\+Frequency}} (int frequency)
 \begin{DoxyCompactList}\small\item\em Sets the frequency of this \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object Modifier method. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{classKmerFreq_ab4b9b3f574e6af89ea19e83afbed64bd}{to\+String}} ()
+std\+::string \mbox{\hyperlink{classKmerFreq_ac00840559fe053f4efc4d9d9a546d660}{to\+String}} () const
 \begin{DoxyCompactList}\small\item\em Obtains a string with the string and frequency of the kmer in this object (separated by a whitespace). Query method. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -144,11 +144,11 @@ Definition at line 37 of file Kmer\+Freq.\+cpp.
 \DoxyCodeLine{40 \}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{classKmerFreq_ab4b9b3f574e6af89ea19e83afbed64bd}\label{classKmerFreq_ab4b9b3f574e6af89ea19e83afbed64bd}} 
+\mbox{\Hypertarget{classKmerFreq_ac00840559fe053f4efc4d9d9a546d660}\label{classKmerFreq_ac00840559fe053f4efc4d9d9a546d660}} 
 \index{KmerFreq@{KmerFreq}!toString@{toString}}
 \index{toString@{toString}!KmerFreq@{KmerFreq}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
-{\footnotesize\ttfamily std\+::string Kmer\+Freq\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::string Kmer\+Freq\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
@@ -163,7 +163,7 @@ Definition at line 47 of file Kmer\+Freq.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{47                             \{}
+\DoxyCodeLine{47                                   \{}
 \DoxyCodeLine{48     }
 \DoxyCodeLine{49     \textcolor{keywordflow}{return} std::string(\_kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}()) + \textcolor{stringliteral}{"{} "{}} + std::to\_string(\_frequency);}
 \DoxyCodeLine{50 \}}

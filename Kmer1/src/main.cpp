@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
     
     // Print the array kmers in the standard output
     PrintArrayKmerFreq(kmers, nKmers);
-
+    
     return 0;
 }
 

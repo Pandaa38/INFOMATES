@@ -36,9 +36,8 @@ void \mbox{\hyperlink{classKmer_ac4f03c56da85aed417d2139199e7a6bd}{normalize}} (
 \begin{DoxyCompactList}\small\item\em Normalizes this \mbox{\hyperlink{classKmer}{Kmer}}. That is, it converts all the characters to uppercase. Then, invalid characters are replaced by the MISSING\+\_\+\+NUCLEOTIDE value. Modifier method. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classKmer}{Kmer}} \mbox{\hyperlink{classKmer_a5573b9ac8221d4fd2f11b30bfc7d0c7a}{complementary}} (const std\+::string \&nucleotides, const std\+::string \&complementary\+Nucleotides) const
 \begin{DoxyCompactList}\small\item\em Returns the complementary of this \mbox{\hyperlink{classKmer}{Kmer}}. For example, given the \mbox{\hyperlink{classKmer}{Kmer}} \char`\"{}\+TAGAC\char`\"{}, the complementary is \char`\"{}\+ATCTG\char`\"{} (assuming that we use. {\ttfamily nucleotides=\char`\"{}\+ATGC\char`\"{}} and {\ttfamily complementary\+Nucleotides=\char`\"{}\+TACG\char`\"{}}). If a nucleotide in this object is not in {\ttfamily nucleotides}, then that nucleotide remains the same in the returned kmer. Query method. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classKmer_a18b1833d4a1eef7d34474d41227b1e22}\label{classKmer_a18b1833d4a1eef7d34474d41227b1e22}} 
-bool {\bfseries There\+Is\+Missing\+Nucleotide} ()
-\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{classKmer_a18b1833d4a1eef7d34474d41227b1e22}{There\+Is\+Missing\+Nucleotide}} ()
+\begin{DoxyCompactList}\small\item\em look if there is a MISSING\+\_\+\+NUCLEOTIDE in \+\_\+text \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -343,6 +342,43 @@ Definition at line 44 of file Kmer.\+cpp.
 \DoxyCodeLine{45     }
 \DoxyCodeLine{46     \textcolor{keywordflow}{return} \_text.length();}
 \DoxyCodeLine{47 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmer_a18b1833d4a1eef7d34474d41227b1e22}\label{classKmer_a18b1833d4a1eef7d34474d41227b1e22}} 
+\index{Kmer@{Kmer}!ThereIsMissingNucleotide@{ThereIsMissingNucleotide}}
+\index{ThereIsMissingNucleotide@{ThereIsMissingNucleotide}!Kmer@{Kmer}}
+\doxysubsubsection{\texorpdfstring{ThereIsMissingNucleotide()}{ThereIsMissingNucleotide()}}
+{\footnotesize\ttfamily bool Kmer\+::\+There\+Is\+Missing\+Nucleotide (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+look if there is a MISSING\+\_\+\+NUCLEOTIDE in \+\_\+text 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em true} & if there is a MISSING\+\_\+\+NUCLEOTIDE \\
+\hline
+{\em false} & if there isn\`{}t \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line 124 of file Kmer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{124                                    \{}
+\DoxyCodeLine{125     }
+\DoxyCodeLine{126     \textcolor{keywordtype}{bool} missing = \textcolor{keyword}{false};}
+\DoxyCodeLine{127     \textcolor{keywordtype}{int} miss = \_text.find(\mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{MISSING\_NUCLEOTIDE}});}
+\DoxyCodeLine{128    }
+\DoxyCodeLine{129     \textcolor{keywordflow}{if}(miss != -\/1) missing = \textcolor{keyword}{true};}
+\DoxyCodeLine{130     }
+\DoxyCodeLine{131     \textcolor{keywordflow}{return} missing;}
+\DoxyCodeLine{132 \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{classKmer_ae394adf5587405c5204a07df6b95cebb}\label{classKmer_ae394adf5587405c5204a07df6b95cebb}} 

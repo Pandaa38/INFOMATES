@@ -93,9 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a02f30c44425e7b245e46253c5e532930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKmerFreq.html#a02f30c44425e7b245e46253c5e532930">setFrequency</a> (int frequency)</td></tr>
 <tr class="memdesc:a02f30c44425e7b245e46253c5e532930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the frequency of this <a class="el" href="classKmerFreq.html" title="A pair formed by a Kmer object and a frequency (an int), that gives the frequency of a Kmer (times it...">KmerFreq</a> object Modifier method.  <a href="classKmerFreq.html#a02f30c44425e7b245e46253c5e532930">More...</a><br /></td></tr>
 <tr class="separator:a02f30c44425e7b245e46253c5e532930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4b9b3f574e6af89ea19e83afbed64bd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKmerFreq.html#ab4b9b3f574e6af89ea19e83afbed64bd">toString</a> ()</td></tr>
-<tr class="memdesc:ab4b9b3f574e6af89ea19e83afbed64bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains a string with the string and frequency of the kmer in this object (separated by a whitespace). Query method.  <a href="classKmerFreq.html#ab4b9b3f574e6af89ea19e83afbed64bd">More...</a><br /></td></tr>
-<tr class="separator:ab4b9b3f574e6af89ea19e83afbed64bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac00840559fe053f4efc4d9d9a546d660"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classKmerFreq.html#ac00840559fe053f4efc4d9d9a546d660">toString</a> () const</td></tr>
+<tr class="memdesc:ac00840559fe053f4efc4d9d9a546d660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains a string with the string and frequency of the kmer in this object (separated by a whitespace). Query method.  <a href="classKmerFreq.html#ac00840559fe053f4efc4d9d9a546d660">More...</a><br /></td></tr>
+<tr class="separator:ac00840559fe053f4efc4d9d9a546d660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A pair formed by a <a class="el" href="classKmer.html" title="It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...">Kmer</a> object and a frequency (an int), that gives the frequency of a <a class="el" href="classKmer.html" title="It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...">Kmer</a> (times it appears) in a genoma. </p>
@@ -224,8 +224,8 @@ Public Member Functions</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ab4b9b3f574e6af89ea19e83afbed64bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4b9b3f574e6af89ea19e83afbed64bd">&#9670;&nbsp;</a></span>toString()</h2>
+<a id="ac00840559fe053f4efc4d9d9a546d660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac00840559fe053f4efc4d9d9a546d660">&#9670;&nbsp;</a></span>toString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +234,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">std::string KmerFreq::toString </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -243,7 +243,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A string with the nucleotide and frequency of the kmer in this object </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="KmerFreq_8cpp_source.html#l00047">47</a> of file <a class="el" href="KmerFreq_8cpp_source.html">KmerFreq.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                            {</div>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                  {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> std::string(_kmer.<a class="code" href="classKmer.html#ae394adf5587405c5204a07df6b95cebb">toString</a>()) + <span class="stringliteral">&quot; &quot;</span> + std::to_string(_frequency);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
