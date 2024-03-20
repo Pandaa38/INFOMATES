@@ -57,7 +57,6 @@ int main(int argc, char* argv[]) {
     
     // Read the n pairs kmers-frequency from the standard input and put them 
     //      in the array kmers
-    
     ReadArrayKmerFreq(kmers, DIM_ARRAY_KMERS, nKmers);
     
     // Normalizes each kmer in the array kmers  

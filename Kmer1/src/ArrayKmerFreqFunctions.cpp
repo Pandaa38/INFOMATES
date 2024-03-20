@@ -159,9 +159,37 @@ void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
 void ZipArrayKmerFreq(KmerFreq array[], int& nElements, 
                        bool deleteMissing, int lowerBound){
     
+    /* esto funciona siempre
+    int i = 0;
+    if(deleteMissing){
+        
+        while(i < nElements){
+            
+            Kmer Kmer_delete = array[i].getKmer();
+            
+            if(Kmer_delete.ThereIsMissingNucleotide()){
+                DeletePosArrayKmerFreq(array, nElements, i);
+            }
+            
+            else i++;
+        }
+       
+    }
+    
+    i = 0;
+    while(i < nElements){
+         
+        if(array[i].getFrequency() <= lowerBound){
+            DeletePosArrayKmerFreq(array, nElements, i);
+            i--;
+        }
+        else i++;
+    }
+     */
+    
     int i = 0;
     while(i < nElements){
-        
+         
         if(deleteMissing){
             
             Kmer Kmer_delete = array[i].getKmer();
@@ -176,7 +204,6 @@ void ZipArrayKmerFreq(KmerFreq array[], int& nElements,
             DeletePosArrayKmerFreq(array, nElements, i);
             i--;
         }
-        
-        i++;
+        else i++;
     }
 }
