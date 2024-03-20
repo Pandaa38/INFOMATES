@@ -188,21 +188,20 @@ void ZipArrayKmerFreq(KmerFreq array[], int& nElements,
      */
     
     int i = 0;
+    
     while(i < nElements){
-         
-        if(deleteMissing){
+        
+        if(array[i].getFrequency() <= lowerBound){
+            DeletePosArrayKmerFreq(array, nElements, i);
+        }
+        else if(deleteMissing){
             
             Kmer Kmer_delete = array[i].getKmer();
             
             if(Kmer_delete.ThereIsMissingNucleotide()){
                 DeletePosArrayKmerFreq(array, nElements, i);
-                i--;
             }
-        }
-        
-        if(array[i].getFrequency() <= lowerBound){
-            DeletePosArrayKmerFreq(array, nElements, i);
-            i--;
+            else i++;
         }
         else i++;
     }

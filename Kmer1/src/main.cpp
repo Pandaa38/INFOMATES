@@ -38,7 +38,40 @@ using namespace std;
 CC 3
 GC 2
  */
+
+#include <sstream>
+#include <regex>
+
+#define ENDL "\n"
+
+const string VALID_NUCLEOTIDES_ADN = "ACGT";
+const string COMPLEMENTARY_NUCLEOTIDES_ADN = "TGCA";
+const string VALID_NUCLEOTIDES_ARN = "ACGU";
+const string COMPLEMENTARY_NUCLEOTIDES_ARN = "UGCA";
+const int MAX = 10;
+
+std::string printAKF(const KmerFreq array[], int nElements) {
+    string res = "";
+    res += std::to_string(nElements) + " ";
+    for (int i = 0; i < nElements; i++) {
+        res += array[i].toString() + " ";
+    }
+    return res;
+}
+void fillAKF_aa_cc_gg(KmerFreq *kfa, int &nKmers, const std::string &ss1="aa", const std::string &ss2="cc",
+        const std::string &ss3="gg", int i1=1, int i2=11, int i3=111) {
+    nKmers = 0;
+    kfa[nKmers].setKmer(ss1);
+    kfa[nKmers++].setFrequency(i1);
+    kfa[nKmers].setKmer(ss2);
+    kfa[nKmers++].setFrequency(i2);
+    kfa[nKmers].setKmer(ss3);
+    kfa[nKmers++].setFrequency(i3);
+}
+
 int main(int argc, char* argv[]) {
+    
+    /*
     // This string contains the list of nucleotides that are considered as
     // valid within a genetic sequence. The rest of characters are considered as
     // unknown nucleotides 
@@ -70,6 +103,13 @@ int main(int argc, char* argv[]) {
     
     // Print the array kmers in the standard output
     PrintArrayKmerFreq(kmers, nKmers);
+    */
+    
+    Kmer kmer1(VALID_NUCLEOTIDES_ADN);
+    Kmer kmer2(kmer1.complementary(VALID_NUCLEOTIDES_ADN, COMPLEMENTARY_NUCLEOTIDES_ADN));
+    string skmer3 = COMPLEMENTARY_NUCLEOTIDES_ADN;
+    cout << kmer2.toString();
+    
     
     return 0;
 }
