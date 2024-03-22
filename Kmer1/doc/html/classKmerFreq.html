@@ -187,8 +187,11 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="KmerFreq_8cpp_source.html#l00042">42</a> of file <a class="el" href="KmerFreq_8cpp_source.html">KmerFreq.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                        {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    _frequency = frequency;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span>(frequency &lt; 0)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">throw</span> std::out_of_range( std::string(<span class="stringliteral">&quot;frequency is negative&quot;</span>));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _frequency = frequency;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -242,11 +245,11 @@ Public Member Functions</h2></td></tr>
 <p>Obtains a string with the string and frequency of the kmer in this object (separated by a whitespace). Query method. </p>
 <dl class="section return"><dt>Returns</dt><dd>A string with the nucleotide and frequency of the kmer in this object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="KmerFreq_8cpp_source.html#l00047">47</a> of file <a class="el" href="KmerFreq_8cpp_source.html">KmerFreq.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                  {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> std::string(_kmer.<a class="code" href="classKmer.html#ae394adf5587405c5204a07df6b95cebb">toString</a>()) + <span class="stringliteral">&quot; &quot;</span> + std::to_string(_frequency);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="KmerFreq_8cpp_source.html#l00050">50</a> of file <a class="el" href="KmerFreq_8cpp_source.html">KmerFreq.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                  {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> std::string(_kmer.<a class="code" href="classKmer.html#ae394adf5587405c5204a07df6b95cebb">toString</a>()) + <span class="stringliteral">&quot; &quot;</span> + std::to_string(_frequency);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
 <div class="ttc" id="aclassKmer_html_ae394adf5587405c5204a07df6b95cebb"><div class="ttname"><a href="classKmer.html#ae394adf5587405c5204a07df6b95cebb">Kmer::toString</a></div><div class="ttdeci">std::string toString() const</div><div class="ttdoc">Returns a string with a list of characters, each one representing a nucleotide of this Kmer....</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00049">Kmer.cpp:49</a></div></div>
 </div><!-- fragment -->
 </div>

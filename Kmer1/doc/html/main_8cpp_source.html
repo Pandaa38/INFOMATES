@@ -90,48 +90,54 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// This string contains the list of nucleotides that are considered as</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// valid within a genetic sequence. The rest of characters are considered as</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// unknown nucleotides </span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">string</span> VALID_NUCLEOTIDES = <span class="stringliteral">&quot;ACGT&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// This is a constant with the dimension of the array kmers</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> DIM_ARRAY_KMERS=100;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;regex&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define ENDL &quot;\n&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// This is the array where the kmers read from the standard input </span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// will be stored</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classKmerFreq.html">KmerFreq</a> kmers[DIM_ARRAY_KMERS];</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> nKmers; <span class="comment">// Number of elements in the array kmers</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Read an integer n (number of pairs to read)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// This string contains the list of nucleotides that are considered as</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// valid within a genetic sequence. The rest of characters are considered as</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// unknown nucleotides </span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">string</span> VALID_NUCLEOTIDES = <span class="stringliteral">&quot;ACGT&quot;</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// This is a constant with the dimension of the array kmers</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> DIM_ARRAY_KMERS=100;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// Read the n pairs kmers-frequency from the standard input and put them </span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">//      in the array kmers</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa72d1f4e21752896649ea626a5b98d96">ReadArrayKmerFreq</a>(kmers, DIM_ARRAY_KMERS, nKmers);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// Normalizes each kmer in the array kmers  </span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#af6f212b10fa8b548115b914f586903d1">NormalizeArrayKmerFreq</a>(kmers, nKmers, VALID_NUCLEOTIDES);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// This is the array where the kmers read from the standard input </span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// will be stored</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classKmerFreq.html">KmerFreq</a> kmers[DIM_ARRAY_KMERS];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">int</span> nKmers; <span class="comment">// Number of elements in the array kmers</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// Read an integer n (number of pairs to read)</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Zip the kmers in the array kmers</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa4fe763a55721921d6311e19f7cf44f1">ZipArrayKmerFreq</a>(kmers, nKmers, <span class="keyword">true</span>, 0);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Sort the array kmers</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa5f4265a04597caca7e9d0eb3718fd5e">SortArrayKmerFreq</a>(kmers, nKmers);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// Print the array kmers in the standard output</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#a959f7cfb4ac563f11d9e55fd6213bbd5">PrintArrayKmerFreq</a>(kmers, nKmers);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_a959f7cfb4ac563f11d9e55fd6213bbd5"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#a959f7cfb4ac563f11d9e55fd6213bbd5">PrintArrayKmerFreq</a></div><div class="ttdeci">void PrintArrayKmerFreq(const KmerFreq array[], int nElements)</div><div class="ttdoc">Prints in the standard output the number of used elements and the elements of an array of KmerFreq.</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00036">ArrayKmerFreqFunctions.cpp:36</a></div></div>
-<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_aa4fe763a55721921d6311e19f7cf44f1"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#aa4fe763a55721921d6311e19f7cf44f1">ZipArrayKmerFreq</a></div><div class="ttdeci">void ZipArrayKmerFreq(KmerFreq array[], int &amp;nElements, bool deleteMissing, int lowerBound)</div><div class="ttdoc">Deletes the KmerFreq objects from the argument array which verifies one the following two criteria:</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00159">ArrayKmerFreqFunctions.cpp:159</a></div></div>
-<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_aa5f4265a04597caca7e9d0eb3718fd5e"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#aa5f4265a04597caca7e9d0eb3718fd5e">SortArrayKmerFreq</a></div><div class="ttdeci">void SortArrayKmerFreq(KmerFreq array[], int nElements)</div><div class="ttdoc">Sorts the given array of KmerFreq in decreasing order of frequency using a sort algorithm....</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00081">ArrayKmerFreqFunctions.cpp:81</a></div></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Read the n pairs kmers-frequency from the standard input and put them </span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">//      in the array kmers</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa72d1f4e21752896649ea626a5b98d96">ReadArrayKmerFreq</a>(kmers, DIM_ARRAY_KMERS, nKmers);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Normalizes each kmer in the array kmers  </span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#af6f212b10fa8b548115b914f586903d1">NormalizeArrayKmerFreq</a>(kmers, nKmers, VALID_NUCLEOTIDES);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// Zip the kmers in the array kmers</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa4fe763a55721921d6311e19f7cf44f1">ZipArrayKmerFreq</a>(kmers, nKmers, <span class="keyword">true</span>, 0);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Sort the array kmers</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#aa5f4265a04597caca7e9d0eb3718fd5e">SortArrayKmerFreq</a>(kmers, nKmers);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Print the array kmers in the standard output</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="ArrayKmerFreqFunctions_8cpp.html#a959f7cfb4ac563f11d9e55fd6213bbd5">PrintArrayKmerFreq</a>(kmers, nKmers);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_a959f7cfb4ac563f11d9e55fd6213bbd5"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#a959f7cfb4ac563f11d9e55fd6213bbd5">PrintArrayKmerFreq</a></div><div class="ttdeci">void PrintArrayKmerFreq(const KmerFreq array[], int nElements)</div><div class="ttdoc">Prints in the standard output the number of used elements and the elements of an array of KmerFreq.</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00040">ArrayKmerFreqFunctions.cpp:40</a></div></div>
+<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_aa4fe763a55721921d6311e19f7cf44f1"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#aa4fe763a55721921d6311e19f7cf44f1">ZipArrayKmerFreq</a></div><div class="ttdeci">void ZipArrayKmerFreq(KmerFreq array[], int &amp;nElements, bool deleteMissing, int lowerBound)</div><div class="ttdoc">Deletes the KmerFreq objects from the argument array which verifies one the following two criteria:</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00163">ArrayKmerFreqFunctions.cpp:163</a></div></div>
+<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_aa5f4265a04597caca7e9d0eb3718fd5e"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#aa5f4265a04597caca7e9d0eb3718fd5e">SortArrayKmerFreq</a></div><div class="ttdeci">void SortArrayKmerFreq(KmerFreq array[], int nElements)</div><div class="ttdoc">Sorts the given array of KmerFreq in decreasing order of frequency using a sort algorithm....</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00085">ArrayKmerFreqFunctions.cpp:85</a></div></div>
 <div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_aa72d1f4e21752896649ea626a5b98d96"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#aa72d1f4e21752896649ea626a5b98d96">ReadArrayKmerFreq</a></div><div class="ttdeci">void ReadArrayKmerFreq(KmerFreq array[], int dim, int &amp;nElements)</div><div class="ttdoc">Reads the number of used elements and the elements of an array of KmerFreq If nElements is greater th...</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00018">ArrayKmerFreqFunctions.cpp:18</a></div></div>
-<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_af6f212b10fa8b548115b914f586903d1"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#af6f212b10fa8b548115b914f586903d1">NormalizeArrayKmerFreq</a></div><div class="ttdeci">void NormalizeArrayKmerFreq(KmerFreq array[], int &amp;nElements, const std::string &amp;validNucleotides)</div><div class="ttdoc">Normalizes the given array of KmerFreq. That is, for each Kmer in the array, all its characters are c...</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00107">ArrayKmerFreqFunctions.cpp:107</a></div></div>
+<div class="ttc" id="aArrayKmerFreqFunctions_8cpp_html_af6f212b10fa8b548115b914f586903d1"><div class="ttname"><a href="ArrayKmerFreqFunctions_8cpp.html#af6f212b10fa8b548115b914f586903d1">NormalizeArrayKmerFreq</a></div><div class="ttdeci">void NormalizeArrayKmerFreq(KmerFreq array[], int &amp;nElements, const std::string &amp;validNucleotides)</div><div class="ttdoc">Normalizes the given array of KmerFreq. That is, for each Kmer in the array, all its characters are c...</div><div class="ttdef"><b>Definition:</b> <a href="ArrayKmerFreqFunctions_8cpp_source.html#l00111">ArrayKmerFreqFunctions.cpp:111</a></div></div>
 <div class="ttc" id="aArrayKmerFreqFunctions_8h_html"><div class="ttname"><a href="ArrayKmerFreqFunctions_8h.html">ArrayKmerFreqFunctions.h</a></div></div>
 <div class="ttc" id="aKmerFreq_8h_html"><div class="ttname"><a href="KmerFreq_8h.html">KmerFreq.h</a></div></div>
 <div class="ttc" id="aclassKmerFreq_html"><div class="ttname"><a href="classKmerFreq.html">KmerFreq</a></div><div class="ttdoc">A pair formed by a Kmer object and a frequency (an int), that gives the frequency of a Kmer (times it...</div><div class="ttdef"><b>Definition:</b> <a href="KmerFreq_8h_source.html#l00030">KmerFreq.h:30</a></div></div>

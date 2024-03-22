@@ -18,18 +18,22 @@
 void ReadArrayKmerFreq(KmerFreq array[], int dim, int& nElements){
     
     std::cin >> nElements;
-    if(nElements > dim) nElements = dim;
     
-    for(int i = 0; i < nElements; i++){
+    if(nElements > 0){
         
-        int freq;
-        std::string nucleotide;
-        
-        std::cin >> nucleotide;
-        std::cin >> freq;
-        
-        array[i].setKmer(Kmer(nucleotide));
-        array[i].setFrequency(freq);
+        if(nElements > dim) nElements = dim;
+
+        for(int i = 0; i < nElements; i++){
+
+            int freq;
+            std::string nucleotide;
+
+            std::cin >> nucleotide;
+            std::cin >> freq;
+
+            array[i].setKmer(Kmer(nucleotide));
+            array[i].setFrequency(freq);
+        }
     }
 }
 
@@ -38,8 +42,8 @@ void PrintArrayKmerFreq(const KmerFreq array[], int nElements){
     if(nElements > 0) std::cout << nElements << std::endl;
     
     for(int i = 0; i < nElements; i++){
-        std::cout << array[i].toString() << std::endl;
         
+        std::cout << array[i].toString() << std::endl;
     }
 }
 
@@ -72,7 +76,7 @@ int FindKmerInArrayKmerFreq(const KmerFreq array[], const Kmer& kmer,
         else initialPos++;
     }
     
-    if(!found) initialPos = -1;
+    if(!found) initialPos = std::string::npos;
     
     return initialPos;
 }
@@ -127,7 +131,7 @@ void NormalizeArrayKmerFreq(KmerFreq array[], int& nElements,
         int index = FindKmerInArrayKmerFreq(array, array[i].getKmer(), 0, i-1);
         
         // If array[i].getKmer() was found in the the subarray from 0 to i-1 
-        if(index != -1){
+        if(index != std::string::npos){
             
             // Accumulate the frequencies of the kmers at positions 
             //    index and i in the kmer at position index
@@ -151,7 +155,7 @@ void DeletePosArrayKmerFreq(KmerFreq array[], int& nElements, int pos){
     
     
     for(int i = pos; i < nElements - 1; i++)
-        SwapElementsArrayKmerFreq(array, nElements, i, i+1);
+        array[i] = array[i + 1];
     
     nElements--;
 }

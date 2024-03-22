@@ -41,6 +41,9 @@ void KmerFreq::setKmer(const Kmer& kmer){
 
 void KmerFreq::setFrequency(int frequency){
     
+    if(frequency < 0)
+        throw std::out_of_range( std::string("frequency is negative"));
+    
     _frequency = frequency;
 }
 

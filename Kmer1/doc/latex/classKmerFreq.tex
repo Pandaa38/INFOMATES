@@ -113,8 +113,11 @@ Definition at line 42 of file Kmer\+Freq.\+cpp.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{42                                         \{}
 \DoxyCodeLine{43     }
-\DoxyCodeLine{44     \_frequency = frequency;}
-\DoxyCodeLine{45 \}}
+\DoxyCodeLine{44     \textcolor{keywordflow}{if}(frequency < 0)}
+\DoxyCodeLine{45         \textcolor{keywordflow}{throw} std::out\_of\_range( std::string(\textcolor{stringliteral}{"{}frequency is negative"{}}));}
+\DoxyCodeLine{46     }
+\DoxyCodeLine{47     \_frequency = frequency;}
+\DoxyCodeLine{48 \}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{classKmerFreq_a4eb114f842390e0091cda7a2aab9d8ec}\label{classKmerFreq_a4eb114f842390e0091cda7a2aab9d8ec}} 
@@ -159,14 +162,14 @@ A string with the nucleotide and frequency of the kmer in this object
 \end{DoxyReturn}
 
 
-Definition at line 47 of file Kmer\+Freq.\+cpp.
+Definition at line 50 of file Kmer\+Freq.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{47                                   \{}
-\DoxyCodeLine{48     }
-\DoxyCodeLine{49     \textcolor{keywordflow}{return} std::string(\_kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}()) + \textcolor{stringliteral}{"{} "{}} + std::to\_string(\_frequency);}
-\DoxyCodeLine{50 \}}
+\DoxyCodeLine{50                                   \{}
+\DoxyCodeLine{51     }
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} std::string(\_kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}()) + \textcolor{stringliteral}{"{} "{}} + std::to\_string(\_frequency);}
+\DoxyCodeLine{53 \}}
 
 \end{DoxyCode}
 
