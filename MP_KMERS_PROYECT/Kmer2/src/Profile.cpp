@@ -15,6 +15,8 @@
 
 
 #include "Profile.h"
+#include <fstream>
+#include <iostream>
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
@@ -158,20 +160,78 @@ void Profile::sort(){
     }
 }
 
-void Profile::save(char fileName[]){
+void Profile::save(const char& fileName[]) const{
+       
+    std::ofstream outFile;
     
-    //if() throw std::ios_base::failure();
-    
-    
+    outFile.open(fileName);
+    if (!outFile) {
+        throw std::ios_base::failure("Error opening output file");
+    }
+    outFile << MAGIC_STRING_T << std::endl;
+    outFile << toString();
+
+    if (!outFile) {
+        throw std::ios_base::failure("Error writting to output file");
+    }
 }
 
 void Profile::load(char fileName[]){
     
+    std::ifstream inFile;
+    
+    inFile.open(fileName);
+    if (!inFile) {
+        throw std::ios_base::failure("Error opening input file");
+    }
+    
+    std::string magic_str;
+    inFile >> magic_str;
+    if(magic_str != MAGIC_STRING_T)
+        throw std::invalid_argument("An invalid magic string is" + 
+                                    "found in the given file");
+    
+    std::getline(inFile, _profileId);
+    inFile.ignore("\n");
+    
+    inFile >> _size;
+    if(_size > DIM_VECTOR_KMER_FREQ)
+        throw std::out_of_range("The number of kmers in the given file" +
+                                "exceeds the maximun capacity");
+    
+    int freq;
+    std::string nucleotide;
+    
+    for(int i = 0; i < _size; i++){
+        
+        inFile >> nucleotide;
+        inFile >> freq;
+        
+        _vectorKmerFreq[i].setKmer(Kmer(nucleotide));
+        _vectorKmerFreq[i].setFrequency(freq);
+    }
+    
+    if (!inFile)
+        throw std::ios_base::failure("Error reading from input file");
+    
+    inFile.close();
 }
 
 void Profile::append(KmerFreq kmerFreq){
     
+    if(_size == DIM_VECTOR_KMER_FREQ)
+        throw std::out_of_range("The array is full");
     
+    int index = findKmer(kmerFreq.getKmer());
+    if(index != -1){
+        int freq = _vectorKmerFreq[index].getFrequency() 
+                   + kmerFreq.getFrequency();
+        _vectorKmerFreq[index].setFrequency(freq);
+    }
+    else{
+        _vectorKmerFreq[_size] = kmerFreq;
+        _size++;
+    }
 }
 
 void Profile::normalize(const std::string& validNucleotides){
@@ -240,5 +300,12 @@ void Profile::zip(bool deleteMissing, int lowerBound){
             else i++;
         }
         else i++;
+    }
+}
+
+void Profile::join(const Profile& profile){
+    
+    for(int i = 0; i < profile.getSize(); i++){
+        append(profile.at(i));
     }
 }

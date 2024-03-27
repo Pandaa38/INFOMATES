@@ -167,7 +167,7 @@ public:
      * if the given file cannot be opened or if an error occurs while writing
      * to the file
      */
-    void save(char fileName[]);
+    void save(const char& fileName[]) const;
 
     /**
      * @brief Loads into this object the Profile object stored in the given 
@@ -186,7 +186,7 @@ public:
      * @throw throw std::invalid_argument Throws a std::invalid_argument if
      * an invalid magic string is found in the given file
      */
-    void load(char fileName[]);
+    void load(const char& fileName[]);
      
     /**
      * @brief Appends a copy of the given KmerFreq to this Profile object.
@@ -280,7 +280,7 @@ _G 5
      * Modifier method
      * @param profile A Profile object. Input parameter
      */
-    void join(Profile profile);
+    void join(const Profile& profile);
     
 private:
     static const int DIM_VECTOR_KMER_FREQ = 2000; ///< The capacity of the array _vectorKmerFreq
