@@ -56,10 +56,12 @@ function doTest  {
         then
             BINARY=./dist/$RELEASE/GNU-Linux/$RELEASE
         else
-
             if grep "está actualizado" $MAKEOUT;
             then
                 BINARY=$(grep "está actualizado" $MAKEOUT | sed "s/^.*'dist/dist/;s/' está actualizado.*$//")
+            elif grep "is up to date" $MAKEOUT;
+            then
+                BINARY=$(grep "is up to date" $MAKEOUT | sed "s/^.*'dist/dist/;s/' is up to date.*$//")
             else
                 BINARY=$(grep "g++ .* -o dist/" $MAKEOUT | sed "s/^.*-o //;s/ build.*$//")
             fi
@@ -172,12 +174,13 @@ function doTest  {
 if [ -d ../Scripts ]
 then
     source ../Scripts/doConfig.sh
-       source ../Scripts/ansiterminal.sh
+    source ../Scripts/ansiterminal.sh
 else
-   if [ -d ../../Scripts ]
+   if [ -d ../../Scripts ] # Si estamos en carpeta scripts del proyecto
    then
        source ../../Scripts/doConfig.sh
-       source ../../Scripts/ansiterminal.sh
+       #source ../../Scripts/ansiterminal.sh
+       source ../Scripts/ansiterminal.sh
    else
     printf "\n${RED}Unable to find Scripts library${WHITE}\n\n"
     exit

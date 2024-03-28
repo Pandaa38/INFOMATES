@@ -20,21 +20,9 @@
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
-/*
- private:
-    static const int DIM_VECTOR_KMER_FREQ = 2000; ///< The capacity of the array _vectorKmerFreq
-    static const std::string MAGIC_STRING_T; ///< A const string with the magic string for text files
-
-    std::string _profileId; ///< profile identifier
-    KmerFreq _vectorKmerFreq[DIM_VECTOR_KMER_FREQ]; ///< array of KmerFreq
-    int _size; ///< Number of used elements in _vectorKmerFreq
-};
- */
-
 Profile::Profile(){
     
     _profileId = "unknown";
-    _vectorKmerFreq[DIM_VECTOR_KMER_FREQ];
 }
 
 Profile::Profile(int size){
@@ -85,13 +73,13 @@ int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{
     
     while(!found && initialPos <= finalPos){
         
-        if(_vectorKmerFreq[initialPos] == kmer) 
+        if(_vectorKmerFreq[initialPos].getKmer().toString() == kmer.toString()) 
             found = true;
         else
             initialPos ++;
     }
     
-    if(!found) initialPos = std::string::npos;
+    if(!found) initialPos = -1;
     
     return initialPos;
 }
@@ -101,7 +89,7 @@ int Profile::findKmer(const Kmer& kmer) const{
     return findKmer(kmer, 0, _size - 1);
 }
 
-std::string Profile::toString(){
+std::string Profile::toString() const{
     
     std::string kmer_str;
     
@@ -160,11 +148,11 @@ void Profile::sort(){
     }
 }
 
-void Profile::save(const char& fileName[]) const{
+void Profile::save(const char fileName[]) const{
        
     std::ofstream outFile;
-    
     outFile.open(fileName);
+    
     if (!outFile) {
         throw std::ios_base::failure("Error opening output file");
     }
@@ -174,30 +162,32 @@ void Profile::save(const char& fileName[]) const{
     if (!outFile) {
         throw std::ios_base::failure("Error writting to output file");
     }
+    
+    outFile.close();
 }
 
-void Profile::load(char fileName[]){
+void Profile::load(const char fileName[]){
     
     std::ifstream inFile;
-    
     inFile.open(fileName);
+    
     if (!inFile) {
         throw std::ios_base::failure("Error opening input file");
     }
     
     std::string magic_str;
     inFile >> magic_str;
+    
     if(magic_str != MAGIC_STRING_T)
-        throw std::invalid_argument("An invalid magic string is" + 
-                                    "found in the given file");
+        throw std::invalid_argument(std::string("An invalid magic string is") + 
+                                    ("found in the given file"));
     
     std::getline(inFile, _profileId);
-    inFile.ignore("\n");
-    
     inFile >> _size;
+
     if(_size > DIM_VECTOR_KMER_FREQ)
-        throw std::out_of_range("The number of kmers in the given file" +
-                                "exceeds the maximun capacity");
+        throw std::out_of_range(std::string("The number of kmers in the given")+
+                                ("file exceeds the maximun capacity"));
     
     int freq;
     std::string nucleotide;
@@ -237,22 +227,24 @@ void Profile::append(KmerFreq kmerFreq){
 void Profile::normalize(const std::string& validNucleotides){
     
     //Normalize each Kmer
+    Kmer normalized;
     for(int i = 0; i < _size; i++){
         
-        _vectorKmerFreq[i].getKmer().normalize(validNucleotides);
+        normalized = _vectorKmerFreq[i].getKmer();
+        normalized.normalize(validNucleotides);
+        _vectorKmerFreq[i].setKmer(normalized);
     }
     
     int i = 1;
-    
     // Loop to traverse the kmers in array from position 1 to position nElements-1
     while(i < _size){
         
         // index = Position of array[i].getKmer() in the subarray that begins
         //         at position 0 and ends at position i-1
-        int index = findKmer(_vectorKmerFreq[i], 0, i-1);
+        int index = findKmer(_vectorKmerFreq[i].getKmer(), 0, i-1);
         
         // If array[i].getKmer() was found in the the subarray from 0 to i-1 
-        if(index != std::string::npos){
+        if(index != -1){
             
             // Accumulate the frequencies of the kmers at positions 
             //    index and i in the kmer at position index

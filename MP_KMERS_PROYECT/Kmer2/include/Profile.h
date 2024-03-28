@@ -167,7 +167,7 @@ public:
      * if the given file cannot be opened or if an error occurs while writing
      * to the file
      */
-    void save(const char& fileName[]) const;
+    void save(const char fileName[]) const;
 
     /**
      * @brief Loads into this object the Profile object stored in the given 
@@ -186,7 +186,7 @@ public:
      * @throw throw std::invalid_argument Throws a std::invalid_argument if
      * an invalid magic string is found in the given file
      */
-    void load(const char& fileName[]);
+    void load(const char fileName[]);
      
     /**
      * @brief Appends a copy of the given KmerFreq to this Profile object.

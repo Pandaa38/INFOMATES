@@ -14,7 +14,6 @@
  */
 
 #include <iostream>
-
 #include "Profile.h"
 
 using namespace std;
@@ -82,16 +81,36 @@ int main(int argc, char* argv[]) {
 
     // Check if the number of running arguments is correct, otherwise call to
     // showEnglishHelp(cerr) and end main()
-
+    if(argc < 2){
+        showEnglishHelp(cerr);
+        return 1;
+    }
+    
+    Profile profile;
+    
     // Load and normalize the first input Profile file
-
+    profile.load(argv[1]);
+    profile.normalize(VALID_NUCLEOTIDES);
+    
     // Use a loop to load, normalize and obtain the join with the rest of Profiles
-
+    Profile intermediate;
+    for(int i = 1; i < argc - 1; i++){
+        
+        intermediate.load(argv[i]);
+        intermediate.normalize(VALID_NUCLEOTIDES);
+        
+        if(intermediate.getProfileId() == profile.getProfileId())
+            profile.join(intermediate);
+    }
+    
     // Zip the resulting Profile
-
+    profile.zip(true);
+    
     // Sort the zipped Profile
-
+    profile.sort();
+    
     // Save the final Profile to the output file
-
+    profile.save(argv[0]);
+    
     return 0;
 }
