@@ -115,7 +115,9 @@ int main(int argc, char* argv[]) {
         intermediate.normalize(VALID_NUCLEOTIDES);
         
         if(intermediate.getProfileId() == profile.getProfileId())
+            intermediate.normalize(VALID_NUCLEOTIDES);
             profile.join(intermediate);
+        }
     }
     
     // Zip the resulting Profile

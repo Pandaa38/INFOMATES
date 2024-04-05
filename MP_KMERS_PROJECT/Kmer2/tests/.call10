@@ -1,0 +1,1 @@
+Test #10 [tests//51.human_chr6_k4_k5.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/kmer2  tests/output/human_chr6_s60000_l500000_k4_k5.prf ../Genomes/human_chr6_s60000_l500000_k4.prf ../Genomes/human_chr6_s60000_l500000.prf

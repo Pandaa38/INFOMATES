@@ -169,7 +169,6 @@ void Profile::save(const char fileName[]) const{
     }
     
     outFile.close();
-   
 }
 
 void Profile::load(const char fileName[]){
