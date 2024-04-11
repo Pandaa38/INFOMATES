@@ -1,1 +1,0 @@
-Test #1 [tests//1.InvalidArguments_1.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/kmer2 

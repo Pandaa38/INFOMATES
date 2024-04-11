@@ -1,4 +1,0 @@
-%%%OUTPUT
-terminate called after throwing an instance of 'std::ios_base::failure[abi:cxx11]'
-  what():  Error opening input file: iostream error
-Aborted (core dumped)

@@ -1,1 +1,0 @@
-Test #8 [tests//3.human1_human2.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/kmer2  tests/output/human.prf ../Genomes/human1.prf ../Genomes/human2.prf

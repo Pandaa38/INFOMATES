@@ -87,7 +87,7 @@ const int DIM_VECTOR_KMER_FREQ = 2000;
 
 
 int main(int argc, char* argv[]) {
-    /*
+    
     // This string contains the list of nucleotides that are considered as
     // valid within a genetic sequence. The rest of characters are considered as
     // unknown nucleotides 
@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
         intermediate.load(argv[i]);
         intermediate.normalize(VALID_NUCLEOTIDES);
         
-        if(intermediate.getProfileId() == profile.getProfileId())
+        if(intermediate.getProfileId() == profile.getProfileId()){
             intermediate.normalize(VALID_NUCLEOTIDES);
             profile.join(intermediate);
         }
@@ -130,10 +130,10 @@ int main(int argc, char* argv[]) {
     profile.save(argv[1]);
     
     //cout << profile.toString();
-    */
     
-   Profile l1; const char* fileName = "tests/validation/test_noHeader.prf";l1.load(fileName);
-    cout << l1.toString();
+    
+   //Profile l1; const char* fileName = "tests/validation/test_noHeader.prf";l1.load(fileName);
+    //cout << l1.toString();
     
     
     

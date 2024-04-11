@@ -1,1 +1,0 @@
-Test #4 [tests//2.OnlyOneInputFile2.test] valgrind --leak-check=full  dist/Debug/GNU-Linux/kmer2  tests/output/7pairsDNA.prf ../Genomes/7pairsDNA.prf
