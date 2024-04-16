@@ -95,25 +95,31 @@ int main(int argc, char* argv[]) {
     }
                     
     // Allocate a dynamic array of Profiles
-    int num_candidates = argc - pos_base -1;
+    int num_candidates = argc - pos_base;
     Profile *candidates;
     candidates = new Profile [num_candidates];
     
     // Load the input Profiles
     Profile base;
     base.load(argv[pos_base]);
-    for(int i = 0; i < num_candidates; i++){
+    base.sort();
+    
+    for(int i = 0; (i + 1) < num_candidates; i++){
         
-        candidates[i].load(argv[pos_base + i]);
+        candidates[i].load(argv[(pos_base+1) + i]);
+        candidates[i].sort();
     }
     
     // Calculate and print the distance from the first Profile to the rest
-    int distance_mode = base.getDistance(candidates[1]);
-    int distance;
-    int index;
+    double distance_mode = base.getDistance(candidates[0]);
+    double distance;
+    int index = 0;
     
     for(int i = 1; i < num_candidates; i++){
+        
         distance = base.getDistance(candidates[i]);
+        cout << "Distance to " << argv[pos_base + i] << ": " << distance << endl;
+        
         
         if(mode == "max" && distance > distance_mode){
              distance_mode = distance;
@@ -127,12 +133,19 @@ int main(int argc, char* argv[]) {
     
     //preguntar si es mejor hacer array y luego coger el primero
     // Print name of the file and identifier that takes min|max distance to the first one
-    cout << (string)argv[index];
-    
-    
+    if(mode == "min"){
+        cout << "Nearest profile file: " <<(string)argv[pos_base+index] << endl;
+        cout << "Identifier of the nearest profile: " 
+             << candidates[index].getProfileId() << endl;
+    }
+    else{
+        cout << "Farthest profile file: " <<(string)argv[pos_base+index]<< endl;
+        cout << "Identifier of the farthest profile: " 
+             << candidates[index].getProfileId();
+    }
     
     // Deallocate the dynamic array of Profile
-    
+    delete [] candidates;
     
     return 0;
 }

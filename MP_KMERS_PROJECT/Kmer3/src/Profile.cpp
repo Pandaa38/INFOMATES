@@ -16,6 +16,7 @@
 
 #include "Profile.h"
 #include <fstream>
+#include <math.h>
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
@@ -65,6 +66,28 @@ int Profile::getCapacity() const{
     return DIM_VECTOR_KMER_FREQ;
 }
 
+double Profile::getDistance(const Profile& otherProfile){
+    
+    if(_size == 0 || otherProfile._size == 0)
+        throw std::invalid_argument("the profile is empty");
+    
+    int sum = 0;
+    int rank;
+    
+    for(int i = 0; i < this->_size; i++){
+        
+        rank = otherProfile.findKmer(this->at(i).getKmer());
+        if(rank == (-1)) 
+            rank = otherProfile._size;
+        
+        sum += abs(rank - i);
+    }
+    
+    double distance = sum/(this->_size * otherProfile._size);
+  
+    return distance;
+}
+
 int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{
     
     bool found = false;
@@ -87,8 +110,6 @@ int Profile::findKmer(const Kmer& kmer) const{
     return findKmer(kmer, 0, _size - 1);
 }
 
-
-//preguntar si cosnt &
 std::string Profile::toString() const{
     
     std::string kmer_str;
@@ -103,7 +124,6 @@ std::string Profile::toString() const{
     
     return kmer_str;
 }
-
 
 void Profile::SwapElements(int first, int second){
     
@@ -172,7 +192,7 @@ int Profile::split(int first, int last){ //por que funciona?
     return right;
 }
 
-void Profile::SelectionSort(){ //funciona
+void Profile::SelectionSort(){ //funciona olee
     
     for (int left = 0 ; left < _size ; left++) {
         
@@ -271,9 +291,9 @@ void Profile::load(const char fileName[]){
     if(!inFile)
         throw std::ios_base::failure("Error reading from input file: size");
 
-    if(_size > DIM_VECTOR_KMER_FREQ)
+    if(_size > DIM_VECTOR_KMER_FREQ || _size < 0)
         throw std::out_of_range(std::string("The number of kmers in the given")+
-                                ("file exceeds the maximun capacity"));
+                          ("file exceeds the maximun capacity or is negative"));
     
     int freq;
     std::string nucleotide;
