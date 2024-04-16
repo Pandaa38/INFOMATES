@@ -19,10 +19,7 @@
 #include <string>
 
 
-KmerFreq::KmerFreq(){
-    _frequency = 0;
-    _kmer = Kmer();
-}
+KmerFreq::KmerFreq(): _kmer(Kmer()), _frequency(0){}
 
 const Kmer& KmerFreq::getKmer() const{
     

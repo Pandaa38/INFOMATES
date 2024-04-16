@@ -180,7 +180,58 @@ public:
     * out of the range of the array
     */
     void SwapElements(int first, int second);
-
+    
+    /**
+     * @brief Use Quicksort method to sort the kmers
+     * 
+     * @param first the position of the first element. Input parameter
+     * @param second the position of the second element. Input parameter
+     * 
+     * @throw Throws a std::out_of_range exception if first or second are positions 
+     * out of the range of the array
+     */
+    void QuickSort(int first, int last);
+    
+    /**
+     * @brief help the funtion QuickSort to select the next pivot
+     * 
+     * @param first the position of the first element. Input parameter
+     * @param second the position of the second element. Input parameter
+     * 
+     * @return pos of next pivot
+     */
+    int split (int first, int last);
+    
+    /**
+     * @brief Use SelectionSort method to sort the kmers
+     */
+    void SelectionSort();
+    
+    /**
+     * @brief compare if the KmerFreq large is bigger than KmerFreq small
+     * 
+     * @param large (KmerFreq). Input parameter
+     * @param small (KmerFreq). Input parameter
+     * 
+     * @return 
+     * @retval @true if large is bigger
+     * @retval @false if small is bigger
+     */
+    bool IsBigger(const KmerFreq& large, const KmerFreq& small);
+    
+    /**
+     * @brief compare if the KmerFreq large is bigger or equal to the
+     *  KmerFreq small
+     * 
+     * @param large (KmerFreq). Input parameter
+     * @param small (KmerFreq). Input parameter
+     * 
+     * @return 
+     * @retval @true if large is bigger or equal
+     * @retval @false if small is bigger
+     */
+    bool IsBiggerEqual(const KmerFreq& one, const KmerFreq& two);
+    
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.
      * If two KmerFreq objects have the same frequency, then the alphabetical 

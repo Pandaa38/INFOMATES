@@ -19,18 +19,13 @@
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
-Profile::Profile(){
-    
-    _size = 0;
-    _profileId = "unknown";
-}
+Profile::Profile(): _size(0), _profileId("unknown"){}
 
-Profile::Profile(int size){
+Profile::Profile(int size) : _profileId("unknown"){
     
     if(size < 0 || size > DIM_VECTOR_KMER_FREQ)
         throw std::out_of_range("invalid size for a profile");
     
-    _profileId = "unknown";
     _size = size;
 }
 

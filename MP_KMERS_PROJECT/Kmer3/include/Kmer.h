@@ -139,8 +139,8 @@ public:
     
     /**
      * @brief look if there is a MISSING_NUCLEOTIDE in _text
-     * @return @retval true if there is a MISSING_NUCLEOTIDE
-     * @retval false if there isn`t
+     * @return @retval @true if there is a MISSING_NUCLEOTIDE
+     * @retval @false if there isn`t
      */
     bool ThereIsMissingNucleotide();
     

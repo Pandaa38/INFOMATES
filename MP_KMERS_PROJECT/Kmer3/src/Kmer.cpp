@@ -29,7 +29,7 @@ Kmer::Kmer(int k){
 
 Kmer::Kmer(const std::string& text){
     
-    if(text.length() == 0) 
+    if(text.empty()) 
         throw std::invalid_argument(std::string(" Kmer(const std::string& text): ")
                                     + "text is empty");
     
