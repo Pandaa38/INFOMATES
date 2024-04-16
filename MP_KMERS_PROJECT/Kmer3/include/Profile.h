@@ -217,7 +217,7 @@ public:
      * @retval @true if large is bigger
      * @retval @false if small is bigger
      */
-    bool IsBigger(const KmerFreq& large, const KmerFreq& small);
+    bool IsBigger(const KmerFreq& large, const KmerFreq& small) const;
     
     /**
      * @brief compare if the KmerFreq large is bigger or equal to the
@@ -230,7 +230,7 @@ public:
      * @retval @true if large is bigger or equal
      * @retval @false if small is bigger
      */
-    bool IsBiggerEqual(const KmerFreq& one, const KmerFreq& two);
+    bool IsBiggerEqual(const KmerFreq& one, const KmerFreq& two) const;
     
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.

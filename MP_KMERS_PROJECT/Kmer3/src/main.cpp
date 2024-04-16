@@ -75,16 +75,64 @@ Identifier of the farthest profile: worm
  */
 int main(int argc, char* argv[]) {
     
+    std::string mode = "min";
+    int pos_base = 1;
     // Process the main() arguments
+     if(argc < 3){
+        showEnglishHelp(cerr);
+        return 1;
+    }
     
+    if((string)argv[1] == "-t"){
+        if((string)argv[2] != "min" && (string)argv[2] != "max" ){
+            showEnglishHelp(cerr);
+            return 1;
+        }
+        else{
+            mode = (string)argv[2];
+            pos_base = 3;
+        }
+    }
+                    
     // Allocate a dynamic array of Profiles
+    int num_candidates = argc - pos_base -1;
+    Profile *candidates;
+    candidates = new Profile [num_candidates];
     
     // Load the input Profiles
+    Profile base;
+    base.load(argv[pos_base]);
+    for(int i = 0; i < num_candidates; i++){
+        
+        candidates[i].load(argv[pos_base + i]);
+    }
     
     // Calculate and print the distance from the first Profile to the rest
+    int distance_mode = base.getDistance(candidates[1]);
+    int distance;
+    int index;
     
+    for(int i = 1; i < num_candidates; i++){
+        distance = base.getDistance(candidates[i]);
+        
+        if(mode == "max" && distance > distance_mode){
+             distance_mode = distance;
+             index = i;
+        }
+        else if(mode == "min" && distance < distance_mode){
+            distance_mode = distance;
+            index = i;
+        }
+    }
+    
+    //preguntar si es mejor hacer array y luego coger el primero
     // Print name of the file and identifier that takes min|max distance to the first one
-
+    cout << (string)argv[index];
+    
+    
+    
     // Deallocate the dynamic array of Profile
+    
+    
     return 0;
 }

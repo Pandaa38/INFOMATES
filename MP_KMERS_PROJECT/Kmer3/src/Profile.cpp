@@ -19,7 +19,7 @@
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
-Profile::Profile(): _size(0), _profileId("unknown"){}
+Profile::Profile(): _profileId("unknown"), _size(0) {}
 
 Profile::Profile(int size) : _profileId("unknown"){
     
@@ -192,8 +192,7 @@ void Profile::SelectionSort(){ //funciona
     }
 }
 
-// POR QUE FUNCIONA SI CAMBIO EL COMPARAR STRING NO LO ENTIENDOOO
-bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small){
+bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small) const{
     
     bool bigger = false;
     
@@ -208,7 +207,7 @@ bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small){
     return bigger;
 }
 
-bool Profile::IsBiggerEqual(const KmerFreq& large, const KmerFreq& small){
+bool Profile::IsBiggerEqual(const KmerFreq& large, const KmerFreq& small) const{
     
     bool bigger_equal = IsBigger(large,small);
     
@@ -298,7 +297,7 @@ void Profile::load(const char fileName[]){
     inFile.close();
 }
 
-void Profile::append(KmerFreq kmerFreq){
+void Profile::append(const KmerFreq& kmerFreq){
     
     if(_size == DIM_VECTOR_KMER_FREQ)
         throw std::out_of_range("The array is full");

@@ -1,0 +1,7 @@
+"make" -f nbproject/Makefile-Debug.mk QMAKE= SUBPROJECTS= .build-conf
+make[1]: se entra en el directorio '/home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer3'
+"make"  -f nbproject/Makefile-Debug.mk dist/Debug/GNU-Linux/kmer3
+make[2]: se entra en el directorio '/home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer3'
+make[2]: 'dist/Debug/GNU-Linux/kmer3' está actualizado.
+make[2]: se sale del directorio '/home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer3'
+make[1]: se sale del directorio '/home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer3'
