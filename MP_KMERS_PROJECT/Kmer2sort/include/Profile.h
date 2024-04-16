@@ -176,10 +176,30 @@ public:
      */
     void SelectionSort();
     
+    /**
+     * @brief compare if the KmerFreq large is bigger than KmerFreq small
+     * 
+     * @param large (KmerFreq). Input parameter
+     * @param small (KmerFreq). Input parameter
+     * 
+     * @return 
+     * @retval @true if large is bigger
+     * @retval @false if small is bigger
+     */
+    bool IsBigger(const KmerFreq& large, const KmerFreq& small);
     
-    bool IsSmaller(const KmerFreq& one, const KmerFreq& two);
-    
-    bool IsSmallerEqual(const KmerFreq& one, const KmerFreq& two);
+    /**
+     * @brief compare if the KmerFreq large is bigger or equal to the
+     *  KmerFreq small
+     * 
+     * @param large (KmerFreq). Input parameter
+     * @param small (KmerFreq). Input parameter
+     * 
+     * @return 
+     * @retval @true if large is bigger or equal
+     * @retval @false if small is bigger
+     */
+    bool IsBiggerEqual(const KmerFreq& one, const KmerFreq& two);
     
 
     /**

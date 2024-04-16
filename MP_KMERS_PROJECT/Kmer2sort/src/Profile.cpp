@@ -157,10 +157,10 @@ int Profile::split(int first, int last){ //por que funciona?
     right = last; // dcha go back
     
     while (left <= right){
-        while (left <= right && IsSmallerEqual(_vectorKmerFreq[right],value_pivote))
+        while (left <= right && IsBiggerEqual(value_pivote,_vectorKmerFreq[right]))
             left++;
         
-        while (left <= right && IsSmallerEqual(value_pivote,_vectorKmerFreq[right]))
+        while (left <= right && IsBiggerEqual(_vectorKmerFreq[right],value_pivote))
             right--;
         
         if (left < right) {
@@ -186,7 +186,7 @@ void Profile::SelectionSort(){ //funciona
         
         for (int i = left + 1; i < _size ; i++){
             
-            if(IsSmaller(max,_vectorKmerFreq[i])){
+            if(IsBigger(_vectorKmerFreq[i],max)){
                 max = _vectorKmerFreq[i];
                 pos_max = i;
             }
@@ -198,33 +198,33 @@ void Profile::SelectionSort(){ //funciona
 }
 
 // POR QUE FUNCIONA SI CAMBIO EL COMPARAR STRING NO LO ENTIENDOOO
-bool Profile::IsSmaller(const KmerFreq& small, const KmerFreq& large){
+bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small){
     
-    bool smaller = false;
+    bool bigger = false;
     
     if(small.getFrequency() < large.getFrequency())
-        smaller = true;
+        bigger = true;
     else if(small.getFrequency() == large.getFrequency()){
         
         if(small.getKmer().toString() > large.getKmer().toString())
-            smaller = true;
+            bigger = true;
     }
     
-    return smaller;
+    return bigger;
 }
 
-bool Profile::IsSmallerEqual(const KmerFreq& one, const KmerFreq& two){
+bool Profile::IsBiggerEqual(const KmerFreq& large, const KmerFreq& small){
     
-    bool smaller_equal = IsSmaller(one,two);
+    bool bigger_equal = IsBigger(large,small);
     
-    if(!smaller_equal){
+    if(!bigger_equal){
         
-        if(one.getFrequency() == two.getFrequency())
-            smaller_equal = true;
+        if(large.getFrequency() == small.getFrequency())
+            bigger_equal = true;
         
     }   
     
-    return smaller_equal;
+    return bigger_equal;
 }
 
 void Profile::sort(){
