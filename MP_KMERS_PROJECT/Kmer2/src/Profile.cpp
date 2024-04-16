@@ -32,6 +32,12 @@ Profile::Profile(int size){
     
     _profileId = "unknown";
     _size = size;
+    
+    KmerFreq initializer; //MISSING_NUCLEOTIDE for the Kmer 
+                          //and 0 for the frequency
+    for(int i = 0; i < _size; i++){
+        _vectorKmerFreq[i] = initializer;
+    }
 }
 
 const std::string& Profile::getProfileId() const{
@@ -92,23 +98,19 @@ int Profile::findKmer(const Kmer& kmer) const{
     return findKmer(kmer, 0, _size - 1);
 }
 
-
-//preguntar si cosnt &
 std::string Profile::toString() const{
     
     std::string kmer_str;
-    //kmer_str = MAGIC_STRING_T + "\n";
+
     kmer_str += _profileId + "\n" + std::to_string(_size) + "\n";
     
     for(int i = 0; i < _size; i++){
         
-        kmer_str += _vectorKmerFreq[i].toString();
-        kmer_str += "\n";
+        kmer_str += _vectorKmerFreq[i].toString() + "\n";
     }
     
     return kmer_str;
 }
-
 
 void Profile::SwapElements(int first, int second){
     
@@ -165,7 +167,7 @@ void Profile::save(const char fileName[]) const{
     outFile << toString();
 
     if (!outFile) {
-        throw std::ios_base::failure("Error writting to output file");
+        throw std::ios_base::failure("Error while writting to the output file");
     }
     
     outFile.close();

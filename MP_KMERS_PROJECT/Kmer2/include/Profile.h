@@ -148,6 +148,8 @@ public:
     * out of the range of the array
    */
     void SwapElements(int first, int second);
+    
+    bool IsSmaller(const KmerFreq& one, const KmerFreq& two);
 
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.
