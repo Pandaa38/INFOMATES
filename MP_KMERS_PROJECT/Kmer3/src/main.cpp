@@ -75,14 +75,16 @@ Identifier of the farthest profile: worm
  */
 int main(int argc, char* argv[]) {
     
-    std::string mode = "min";
+    std::string mode = "min"; //Default
     int pos_base = 1;
+    
     // Process the main() arguments
      if(argc < 3){
         showEnglishHelp(cerr);
         return 1;
     }
     
+    //mejorar para test 3 (pone -f)
     if((string)argv[1] == "-t"){
         if((string)argv[2] != "min" && (string)argv[2] != "max" ){
             showEnglishHelp(cerr);
@@ -93,9 +95,27 @@ int main(int argc, char* argv[]) {
             pos_base = 3;
         }
     }
-                    
+    /*
+    else if(){
+        string posible = argv[1]; //cambiar nombre y mirar si mejor con [][]
+        bool correct = true;
+        
+        if(posible.length() != 2)
+            correct = false;
+        
+        else if(posible[0] != '-')
+            correct = false;
+        
+        else{
+            
+        }
+            
+    }
+    tal vez hacer un bool donde intente abrir el archivo si no se puede abrir error
+    
+    */
     // Allocate a dynamic array of Profiles
-    int num_candidates = argc - pos_base;
+    int num_candidates = argc - pos_base -1;
     Profile *candidates;
     candidates = new Profile [num_candidates];
     
@@ -104,10 +124,11 @@ int main(int argc, char* argv[]) {
     base.load(argv[pos_base]);
     base.sort();
     
-    for(int i = 0; (i + 1) < num_candidates; i++){
+    for(int i = 0; i < num_candidates; i++){
         
-        candidates[i].load(argv[(pos_base+1) + i]);
+        candidates[i].load(argv[pos_base+1 + i]);
         candidates[i].sort();
+
     }
     
     // Calculate and print the distance from the first Profile to the rest
@@ -115,10 +136,10 @@ int main(int argc, char* argv[]) {
     double distance;
     int index = 0;
     
-    for(int i = 1; i < num_candidates; i++){
+    for(int i = 0; i < num_candidates; i++){
         
         distance = base.getDistance(candidates[i]);
-        cout << "Distance to " << argv[pos_base + i] << ": " << distance << endl;
+        cout << "Distance to "<<argv[pos_base+1 + i]<< ": "<< distance <<endl;
         
         
         if(mode == "max" && distance > distance_mode){

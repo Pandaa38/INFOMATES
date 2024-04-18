@@ -190,7 +190,7 @@ public:
      * @throw Throws a std::out_of_range exception if first or second are positions 
      * out of the range of the array
      */
-    void QuickSort(int first, int last);
+    void quickSort(int first, int last);
     
     /**
      * @brief help the funtion QuickSort to select the next pivot
@@ -205,7 +205,7 @@ public:
     /**
      * @brief Use SelectionSort method to sort the kmers
      */
-    void SelectionSort();
+    void selectionSort();
     
     /**
      * @brief compare if the KmerFreq large is bigger than KmerFreq small
@@ -217,7 +217,7 @@ public:
      * @retval @true if large is bigger
      * @retval @false if small is bigger
      */
-    bool IsBigger(const KmerFreq& large, const KmerFreq& small) const;
+    bool isBigger(const KmerFreq& large, const KmerFreq& small) const;
     
     /**
      * @brief compare if the KmerFreq large is bigger or equal to the
@@ -230,7 +230,7 @@ public:
      * @retval @true if large is bigger or equal
      * @retval @false if small is bigger
      */
-    bool IsBiggerEqual(const KmerFreq& one, const KmerFreq& two) const;
+    bool isBiggerEqual(const KmerFreq& one, const KmerFreq& two) const;
     
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.

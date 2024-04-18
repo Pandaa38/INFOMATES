@@ -25,7 +25,7 @@ Profile::Profile(): _profileId("unknown"), _size(0) {}
 Profile::Profile(int size) : _profileId("unknown"){
     
     if(size < 0 || size > DIM_VECTOR_KMER_FREQ)
-        throw std::out_of_range("invalid size for a profile");
+        throw std::out_of_range("Profile: invalid size for a profile");
     
     _size = size;
 }
@@ -42,16 +42,16 @@ void Profile::setProfileId(const std::string& id){
 
 const KmerFreq& Profile::at(int index) const{
     
-    if(index < 0 || index > _size)
-        throw std::out_of_range("Invalid position");
+    if(index < 0 || index >= _size)
+        throw std::out_of_range("at: Invalid position");
     
     return _vectorKmerFreq[index];
 }
 
 KmerFreq& Profile::at(int index){
     
-    if(index < 0 || index > _size)
-        throw std::out_of_range("Invalid position");
+    if(index < 0 || index >= _size)
+        throw std::out_of_range("at: Invalid position");
     
     return _vectorKmerFreq[index];
 }
@@ -67,9 +67,9 @@ int Profile::getCapacity() const{
 }
 
 double Profile::getDistance(const Profile& otherProfile){
-    
+    /*
     if(_size == 0 || otherProfile._size == 0)
-        throw std::invalid_argument("the profile is empty");
+        throw std::invalid_argument("getDistance: the profile is empty");
     
     int sum = 0;
     int rank;
@@ -84,8 +84,8 @@ double Profile::getDistance(const Profile& otherProfile){
     }
     
     double distance = sum/(this->_size * otherProfile._size);
-  
-    return distance;
+    */
+    return 0.0;
 }
 
 int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{
@@ -140,14 +140,14 @@ void Profile::SwapElements(int first, int second){
     
 }
 
-void Profile::QuickSort(int first, int last){ 
+void Profile::quickSort(int first, int last){ 
     
     const int SelctionTheBest = 10;
     
     bool mayselection = (first - last) <= SelctionTheBest;
     
     if(mayselection){
-        SelectionSort();
+        selectionSort();
     }
     else{
         
@@ -157,13 +157,13 @@ void Profile::QuickSort(int first, int last){
 
             pos_pivote = split(first, last);
 
-            QuickSort (first, pos_pivote - 1); // Ordena primera mitad
-            QuickSort (pos_pivote + 1, last); // Ordena segunda mitad
+            quickSort (first, pos_pivote - 1); // Ordena primera mitad
+            quickSort (pos_pivote + 1, last); // Ordena segunda mitad
         }
     }
 }
 
-int Profile::split(int first, int last){ //por que funciona?
+int Profile::split(int first, int last){
     
     int left, right;
     KmerFreq value_pivote = _vectorKmerFreq[first];
@@ -172,10 +172,10 @@ int Profile::split(int first, int last){ //por que funciona?
     right = last; // dcha go back
     
     while (left <= right){
-        while (left <= right && IsBiggerEqual(value_pivote,_vectorKmerFreq[right]))
+        while (left <= right && isBiggerEqual(value_pivote,_vectorKmerFreq[right]))
             left++;
         
-        while (left <= right && IsBiggerEqual(_vectorKmerFreq[right],value_pivote))
+        while (left <= right && isBiggerEqual(_vectorKmerFreq[right],value_pivote))
             right--;
         
         if (left < right) {
@@ -192,7 +192,7 @@ int Profile::split(int first, int last){ //por que funciona?
     return right;
 }
 
-void Profile::SelectionSort(){ //funciona olee
+void Profile::selectionSort(){
     
     for (int left = 0 ; left < _size ; left++) {
         
@@ -201,7 +201,7 @@ void Profile::SelectionSort(){ //funciona olee
         
         for (int i = left + 1; i < _size ; i++){
             
-            if(IsBigger(_vectorKmerFreq[i],max)){
+            if(isBigger(_vectorKmerFreq[i],max)){
                 max = _vectorKmerFreq[i];
                 pos_max = i;
             }
@@ -212,7 +212,7 @@ void Profile::SelectionSort(){ //funciona olee
     }
 }
 
-bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small) const{
+bool Profile::isBigger(const KmerFreq& large, const KmerFreq& small) const{
     
     bool bigger = false;
     
@@ -227,9 +227,9 @@ bool Profile::IsBigger(const KmerFreq& large, const KmerFreq& small) const{
     return bigger;
 }
 
-bool Profile::IsBiggerEqual(const KmerFreq& large, const KmerFreq& small) const{
+bool Profile::isBiggerEqual(const KmerFreq& large, const KmerFreq& small) const{
     
-    bool bigger_equal = IsBigger(large,small);
+    bool bigger_equal = isBigger(large,small);
     
     if(!bigger_equal){
         
@@ -243,7 +243,7 @@ bool Profile::IsBiggerEqual(const KmerFreq& large, const KmerFreq& small) const{
 
 void Profile::sort(){
     
-    QuickSort(0, _size-1);
+    quickSort(0, _size-1);
 }
 
 void Profile::save(const char fileName[]) const{
@@ -256,12 +256,12 @@ void Profile::save(const char fileName[]) const{
     }
     outFile << MAGIC_STRING_T << std::endl;
     outFile << toString();
-
+    
+    outFile.close();
+    
     if (!outFile) {
         throw std::ios_base::failure("Error writting to output file");
     }
-    
-    outFile.close();
 }
 
 void Profile::load(const char fileName[]){
@@ -291,7 +291,7 @@ void Profile::load(const char fileName[]){
     if(!inFile)
         throw std::ios_base::failure("Error reading from input file: size");
 
-    if(_size > DIM_VECTOR_KMER_FREQ || _size < 0)
+    if(_size > DIM_VECTOR_KMER_FREQ || _size <= 0)
         throw std::out_of_range(std::string("The number of kmers in the given")+
                           ("file exceeds the maximun capacity or is negative"));
     
@@ -311,16 +311,16 @@ void Profile::load(const char fileName[]){
         _vectorKmerFreq[i].setFrequency(freq); 
     }
     
-    //if(!inFile)
-        //throw std::ios_base::failure("Error reading from input file");
-    
     inFile.close();
+    
+    if(!inFile)
+        throw std::ios_base::failure("Error reading from input file");
 }
 
 void Profile::append(const KmerFreq& kmerFreq){
     
     if(_size == DIM_VECTOR_KMER_FREQ)
-        throw std::out_of_range("The array is full");
+        throw std::out_of_range("append: The array is full");
     
     int index = findKmer(kmerFreq.getKmer());
     if(index != -1){
@@ -329,6 +329,9 @@ void Profile::append(const KmerFreq& kmerFreq){
         _vectorKmerFreq[index].setFrequency(freq);
     }
     else{
+        if((_size +1) == DIM_VECTOR_KMER_FREQ)
+            throw std::out_of_range("append: The array is full");
+        
         _vectorKmerFreq[_size] = kmerFreq;
         _size++;
     }
@@ -373,8 +376,8 @@ void Profile::normalize(const std::string& validNucleotides){
 void Profile::deletePos(int pos){
     
     if(pos < 0 || pos >= _size)
-        throw std::out_of_range( std::string( "pos is not in the range")
-                                       + "from 0 to nElements-1");
+        throw std::out_of_range( std::string("deletePos: pos is not in the")
+                                       + "range from 0 to nElements-1");
     
     
     for(int i = pos; i < _size - 1; i++)
