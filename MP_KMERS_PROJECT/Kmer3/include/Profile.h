@@ -130,7 +130,7 @@ public:
      * @return The distance between this Profile object and the given 
      * argument @p otherProfile.
      */
-    double getDistance(const Profile& otherProfile);
+    double getDistance(const Profile& otherProfile) const;
     
     /**
      * @brief Searchs the given kmer in the list of kmers in this

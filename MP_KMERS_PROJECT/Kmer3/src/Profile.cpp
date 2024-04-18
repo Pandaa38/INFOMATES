@@ -16,7 +16,7 @@
 
 #include "Profile.h"
 #include <fstream>
-#include <math.h>
+//#include <math.h> #include <cmath>
 
 const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
 
@@ -66,26 +66,26 @@ int Profile::getCapacity() const{
     return DIM_VECTOR_KMER_FREQ;
 }
 
-double Profile::getDistance(const Profile& otherProfile){
-    /*
+double Profile::getDistance(const Profile& otherProfile) const{
+    
     if(_size == 0 || otherProfile._size == 0)
         throw std::invalid_argument("getDistance: the profile is empty");
     
-    int sum = 0;
+    double sum = 0.0;
     int rank;
     
-    for(int i = 0; i < this->_size; i++){
+    for(int i = 0; i < _size; i++){
         
-        rank = otherProfile.findKmer(this->at(i).getKmer());
-        if(rank == (-1)) 
+        rank = otherProfile.findKmer(at(i).getKmer());
+        if(rank == (-1))
             rank = otherProfile._size;
         
-        sum += abs(rank - i);
+        sum += std::abs(rank - i);
     }
     
-    double distance = sum/(this->_size * otherProfile._size);
-    */
-    return 0.0;
+    double distance = sum/(_size * otherProfile._size);
+    
+    return distance;
 }
 
 int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{

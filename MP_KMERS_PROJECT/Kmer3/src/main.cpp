@@ -75,6 +75,7 @@ Identifier of the farthest profile: worm
  */
 int main(int argc, char* argv[]) {
     
+    //preguntar si string o bool
     std::string mode = "min"; //Default
     int pos_base = 1;
     
@@ -85,35 +86,24 @@ int main(int argc, char* argv[]) {
     }
     
     //mejorar para test 3 (pone -f)
-    if((string)argv[1] == "-t"){
-        if((string)argv[2] != "min" && (string)argv[2] != "max" ){
+    if(argv[1][0] == '-'){
+        if(argv[1][1] == 't'){
+            if((string)argv[2] != "min" && (string)argv[2] != "max" ){
+                showEnglishHelp(cerr);
+                return 1;
+            }
+            else{
+                mode = (string)argv[2];
+                pos_base = 3;
+            }
+        }
+        else{
             showEnglishHelp(cerr);
             return 1;
         }
-        else{
-            mode = (string)argv[2];
-            pos_base = 3;
-        }
     }
-    /*
-    else if(){
-        string posible = argv[1]; //cambiar nombre y mirar si mejor con [][]
-        bool correct = true;
-        
-        if(posible.length() != 2)
-            correct = false;
-        
-        else if(posible[0] != '-')
-            correct = false;
-        
-        else{
-            
-        }
-            
-    }
-    tal vez hacer un bool donde intente abrir el archivo si no se puede abrir error
     
-    */
+    
     // Allocate a dynamic array of Profiles
     int num_candidates = argc - pos_base -1;
     Profile *candidates;
@@ -155,14 +145,16 @@ int main(int argc, char* argv[]) {
     //preguntar si es mejor hacer array y luego coger el primero
     // Print name of the file and identifier that takes min|max distance to the first one
     if(mode == "min"){
-        cout << "Nearest profile file: " <<(string)argv[pos_base+index] << endl;
+        cout << "Nearest profile file: " << (string)argv[pos_base+1+index]
+             << endl;
         cout << "Identifier of the nearest profile: " 
              << candidates[index].getProfileId() << endl;
     }
     else{
-        cout << "Farthest profile file: " <<(string)argv[pos_base+index]<< endl;
+        cout << "Farthest profile file: " << (string)argv[pos_base+1+index] 
+             << endl;
         cout << "Identifier of the farthest profile: " 
-             << candidates[index].getProfileId();
+             << candidates[index].getProfileId() << endl;
     }
     
     // Deallocate the dynamic array of Profile
