@@ -71,21 +71,24 @@ double Profile::getDistance(const Profile& otherProfile) const{
     if(_size == 0 || otherProfile._size == 0)
         throw std::invalid_argument("getDistance: the profile is empty");
     
-    double sum = 0.0;
-    int rank;
+    double dist = 0.0;
     
-    for(int i = 0; i < _size; i++){
+    
+    for (int i=0; i<_size; i++){
         
-        rank = otherProfile.findKmer(at(i).getKmer());
-        if(rank == (-1))
-            rank = otherProfile._size;
+        double rank_this = i;
         
-        sum += std::abs(rank - i);
+        int rank_other = otherProfile.findKmer(_vectorKmerFreq[i].getKmer());
+        if (rank_other == -1) // It is not found in otherLanguage
+            rank_other = _size;
+        
+        dist += std::abs(rank_other - rank_this);
+        
     }
     
-    double distance = sum/(_size * otherProfile._size);
+    dist = dist/(_size * otherProfile._size);
     
-    return distance;
+    return dist;
 }
 
 int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{

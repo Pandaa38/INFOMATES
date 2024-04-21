@@ -74,34 +74,40 @@ Farthest profile file: ../Genomes/worm1.prf
 Identifier of the farthest profile: worm
  */
 int main(int argc, char* argv[]) {
-    
-    //preguntar si string o bool
-    std::string mode = "min"; //Default
-    int pos_base = 1;
-    
+        
     // Process the main() arguments
      if(argc < 3){
         showEnglishHelp(cerr);
         return 1;
     }
+     
+    bool min = true; //Default
+    int pos_base = 1;
     
     //mejorar para test 3 (pone -f)
     if(argv[1][0] == '-'){
         if(argv[1][1] == 't'){
-            if((string)argv[2] != "min" && (string)argv[2] != "max" ){
+            
+            pos_base = 3;
+            
+            if(argc - pos_base < 2){
                 showEnglishHelp(cerr);
                 return 1;
             }
-            else{
-                mode = (string)argv[2];
-                pos_base = 3;
+            
+            if((string)argv[2] == "max"){
+                min = false;
             }
-        }
+            else if((string)argv[2] != "max"){
+                showEnglishHelp(cerr);
+                return 1;
+            }
+        }//if(argv[1][1] == 't')
         else{
             showEnglishHelp(cerr);
             return 1;
         }
-    }
+    }//if(argv[1][0] == '-')
     
     
     // Allocate a dynamic array of Profiles
@@ -118,33 +124,28 @@ int main(int argc, char* argv[]) {
         
         candidates[i].load(argv[pos_base+1 + i]);
         candidates[i].sort();
-
     }
     
     // Calculate and print the distance from the first Profile to the rest
-    double distance_mode = base.getDistance(candidates[0]);
-    double distance;
+    double dist_mode = min ? 1:0; //dist c [0,1] 
     int index = 0;
     
     for(int i = 0; i < num_candidates; i++){
         
-        distance = base.getDistance(candidates[i]);
-        cout << "Distance to "<<argv[pos_base+1 + i]<< ": "<< distance <<endl;
+        double dist = base.getDistance(candidates[i]);
+        cout << "Distance to " << argv[pos_base+1 + i] << ": " << dist <<endl;
         
+        bool new_dist_mode = min ? dist <= dist_mode : dist >= dist_mode;
         
-        if(mode == "max" && distance > distance_mode){
-             distance_mode = distance;
-             index = i;
-        }
-        else if(mode == "min" && distance < distance_mode){
-            distance_mode = distance;
+        if(new_dist_mode){
             index = i;
+            dist_mode = dist;
         }
     }
     
     //preguntar si es mejor hacer array y luego coger el primero
     // Print name of the file and identifier that takes min|max distance to the first one
-    if(mode == "min"){
+    if(min){
         cout << "Nearest profile file: " << (string)argv[pos_base+1+index]
              << endl;
         cout << "Identifier of the nearest profile: " 
