@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
     // Load the input Profiles
     Profile base;
     base.load(argv[pos_base]);
-    //base.sort();
+    //base.sort(); estoy seguro que deberia ordenarlos 
     
     for(int i = 0; i < num_candidates; i++){
         
@@ -145,6 +145,7 @@ int main(int argc, char* argv[]) {
         }
     }
     
+    
     // Print name of the file and identifier that takes min|max distance to the first one
     if(min){
         cout << "Nearest profile file: " << (string)argv[pos_base+1+index]
@@ -158,7 +159,14 @@ int main(int argc, char* argv[]) {
         cout << "Identifier of the farthest profile: " 
              << candidates[index].getProfileId() << endl;
     }
-        
+    
+    /* Preguntar creo que cortijo seria suspenso
+    cout << (min ? "Nearest" : "Farthest") << " profile file: " 
+         << (string)argv[pos_base+1+index] << endl;
+    cout << "Identifier of the " << (min ? "nearest" : "farthest")<< " profile: " 
+         << candidates[index].getProfileId() << endl;
+    */
+    
     // Deallocate the dynamic array of Profile
     delete [] candidates;
     

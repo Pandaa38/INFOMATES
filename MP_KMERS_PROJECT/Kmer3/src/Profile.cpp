@@ -68,7 +68,7 @@ int Profile::getCapacity() const{
 
 double Profile::getDistance(const Profile& otherProfile) const{
     
-    int size_this = getSize(), size_other = otherProfile.getSize();
+    int size_this = _size, size_other = otherProfile.getSize();
     
     if(size_this == 0 || size_other == 0)
         throw std::invalid_argument("getDistance: the profile is empty");
