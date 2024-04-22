@@ -68,25 +68,23 @@ int Profile::getCapacity() const{
 
 double Profile::getDistance(const Profile& otherProfile) const{
     
-    if(_size == 0 || otherProfile._size == 0)
+    int size_this = getSize(), size_other = otherProfile.getSize();
+    
+    if(size_this == 0 || size_other == 0)
         throw std::invalid_argument("getDistance: the profile is empty");
     
     double dist = 0.0;
-    
-    
-    for (int i=0; i<_size; i++){
         
-        double rank_this = i;
+    for (int i = 0; i < size_this; i++){
+                
+        int rank = otherProfile.findKmer(at(i).getKmer());
+        if (rank == -1) // It is not found in otherProfile
+            rank = size_other;
         
-        int rank_other = otherProfile.findKmer(_vectorKmerFreq[i].getKmer());
-        if (rank_other == -1) // It is not found in otherLanguage
-            rank_other = _size;
-        
-        dist += std::abs(rank_other - rank_this);
-        
+        dist += abs(i - rank);
     }
     
-    dist = dist/(_size * otherProfile._size);
+    dist /= (size_this * size_other);
     
     return dist;
 }

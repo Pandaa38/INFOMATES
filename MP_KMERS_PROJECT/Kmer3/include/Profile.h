@@ -132,6 +132,7 @@ public:
      */
     double getDistance(const Profile& otherProfile) const;
     
+    
     /**
      * @brief Searchs the given kmer in the list of kmers in this
      * Profile, but only in positions from initialPos to finalPos 

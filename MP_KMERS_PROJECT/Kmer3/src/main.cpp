@@ -112,29 +112,31 @@ int main(int argc, char* argv[]) {
     
     // Allocate a dynamic array of Profiles
     int num_candidates = argc - pos_base -1;
-    Profile *candidates;
+    
+    Profile *candidates = nullptr;
     candidates = new Profile [num_candidates];
     
     // Load the input Profiles
     Profile base;
     base.load(argv[pos_base]);
-    base.sort();
+    //base.sort();
     
     for(int i = 0; i < num_candidates; i++){
         
         candidates[i].load(argv[pos_base+1 + i]);
-        candidates[i].sort();
+        //candidates[i].sort(); //puede que sea error
     }
     
     // Calculate and print the distance from the first Profile to the rest
     double dist_mode = min ? 1:0; //dist c [0,1] 
-    int index = 0;
+    int index; //= 0;
     
     for(int i = 0; i < num_candidates; i++){
         
         double dist = base.getDistance(candidates[i]);
-        cout << "Distance to " << argv[pos_base+1 + i] << ": " << dist <<endl;
+        cout << "Distance to " << argv[pos_base+1 + i] << ": " << dist << endl;
         
+        //preguntar si < o <=
         bool new_dist_mode = min ? dist <= dist_mode : dist >= dist_mode;
         
         if(new_dist_mode){
@@ -143,7 +145,6 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    //preguntar si es mejor hacer array y luego coger el primero
     // Print name of the file and identifier that takes min|max distance to the first one
     if(min){
         cout << "Nearest profile file: " << (string)argv[pos_base+1+index]
@@ -157,7 +158,7 @@ int main(int argc, char* argv[]) {
         cout << "Identifier of the farthest profile: " 
              << candidates[index].getProfileId() << endl;
     }
-    
+        
     // Deallocate the dynamic array of Profile
     delete [] candidates;
     
