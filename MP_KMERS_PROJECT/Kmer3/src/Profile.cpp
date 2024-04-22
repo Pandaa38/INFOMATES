@@ -253,7 +253,7 @@ void Profile::save(const char fileName[]) const{
     outFile.open(fileName);
     
     if (!outFile) {
-        throw std::ios_base::failure("Error opening output file");
+        throw std::ios_base::failure("save: Error opening output file");
     }
     outFile << MAGIC_STRING_T << std::endl;
     outFile << toString();
@@ -261,7 +261,7 @@ void Profile::save(const char fileName[]) const{
     outFile.close();
     
     if (!outFile) {
-        throw std::ios_base::failure("Error writting to output file");
+        throw std::ios_base::failure("save: Error writting to output file");
     }
 }
 
