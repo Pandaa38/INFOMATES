@@ -320,17 +320,17 @@ void Profile::load(const char fileName[]){
 
 void Profile::append(const KmerFreq& kmerFreq){
     
-    if(_size == DIM_VECTOR_KMER_FREQ)
-        throw std::out_of_range("append: The array is full");
-    
     int index = findKmer(kmerFreq.getKmer());
+    
     if(index != -1){
-        int freq = _vectorKmerFreq[index].getFrequency() 
-                   + kmerFreq.getFrequency();
+        
+        int freq = _vectorKmerFreq[index].getFrequency()
+                                                    + kmerFreq.getFrequency();
         _vectorKmerFreq[index].setFrequency(freq);
     }
     else{
-        if((_size +1) == DIM_VECTOR_KMER_FREQ)
+        
+        if(_size >= DIM_VECTOR_KMER_FREQ)
             throw std::out_of_range("append: The array is full");
         
         _vectorKmerFreq[_size] = kmerFreq;

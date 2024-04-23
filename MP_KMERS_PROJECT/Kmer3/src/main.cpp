@@ -86,7 +86,6 @@ const int DIM_VECTOR_KMER_FREQ = 2000;
 
 int main(int argc, char* argv[]) {
     
-    /*
     // Process the main() arguments
      if(argc < 3){
         showEnglishHelp(cerr);
@@ -98,6 +97,7 @@ int main(int argc, char* argv[]) {
     
     //mejorar para test 3 (pone -f)
     if(argv[1][0] == '-'){
+        
         if(argv[1][1] == 't'){
             
             pos_base = 3;
@@ -179,18 +179,14 @@ int main(int argc, char* argv[]) {
          << candidates[index].getProfileId() << endl;
     */
     
-    /*
+    
     // Deallocate the dynamic array of Profile
     delete [] candidates;
-    */
     
-    //preguntar test 56 de Kmer2
+    
+    //preguntar test 56 de Kmer2 (ya funciona)
     //Profile profl(DIM_VECTOR_KMER_FREQ); Kmer km; KmerFreq kmf; kmf.setKmer(km); kmf.setFrequency(10); profl.append(kmf);
     //cout << profl.getSize();
-    
-    Profile l1(1); KmerFreq kmf; Kmer km("aa"); kmf.setKmer(km); kmf.setFrequency(10); l1.append(kmf); Kmer km2("cF"); kmf.setKmer(km2); l1.append(kmf); Kmer km3("xu"); kmf.setKmer(km3); l1.append(kmf); l1.normalize(VALID_NUCLEOTIDES_ADN);
-    cout << l1.toString();
-    
     
     return 0;
 }
