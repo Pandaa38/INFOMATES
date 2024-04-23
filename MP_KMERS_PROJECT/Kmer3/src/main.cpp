@@ -5,16 +5,12 @@
 
 /**
  * @file main.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andrés Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * @author Javier Martínez Baena <jbaena@ugr.es>
+ * @author Juan Reche Aguilar
  *
  * Created on 16 November 2023, 14:15
  */
 
 #include <iostream>
-
 #include "Profile.h"
 
 using namespace std;
@@ -73,16 +69,6 @@ Distance to ../Genomes/mouse1.prf: 0.224901
 Farthest profile file: ../Genomes/worm1.prf
 Identifier of the farthest profile: worm
  */
-
-#include <regex>
-
-const string VALID_NUCLEOTIDES_ADN = "ACGT";
-const string COMPLEMENTARY_NUCLEOTIDES_ADN = "TGCA";
-const string VALID_NUCLEOTIDES_ARN = "ACGU";
-const string COMPLEMENTARY_NUCLEOTIDES_ARN = "UGCA";
-
-const int DIM_VECTOR_KMER_FREQ = 2000;
-#define ENDL "\n"
 
 int main(int argc, char* argv[]) {
     
@@ -157,7 +143,7 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    
+    /*
     // Print name of the file and identifier that takes min|max distance to the first one
     if(min){
         cout << "Nearest profile file: " << (string)argv[pos_base+1+index]
@@ -171,22 +157,16 @@ int main(int argc, char* argv[]) {
         cout << "Identifier of the farthest profile: " 
              << candidates[index].getProfileId() << endl;
     }
+    */
     
-    /* Preguntar creo que cortijo seria suspenso
+    //Preguntar creo que cortijo seria suspenso
     cout << (min ? "Nearest" : "Farthest") << " profile file: " 
          << (string)argv[pos_base+1+index] << endl;
     cout << "Identifier of the " << (min ? "nearest" : "farthest")<< " profile: " 
          << candidates[index].getProfileId() << endl;
-    */
-    
     
     // Deallocate the dynamic array of Profile
     delete [] candidates;
-    
-    
-    //preguntar test 56 de Kmer2 (ya funciona)
-    //Profile profl(DIM_VECTOR_KMER_FREQ); Kmer km; KmerFreq kmf; kmf.setKmer(km); kmf.setFrequency(10); profl.append(kmf);
-    //cout << profl.getSize();
     
     return 0;
 }

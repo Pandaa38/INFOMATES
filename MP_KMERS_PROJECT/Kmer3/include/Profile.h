@@ -5,10 +5,7 @@
 
 /** 
  * @file Profile.h
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andrés Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * @author Javier Martínez Baena <jbaena@ugr.es>
+ * @author Juan Reche Aguilar
  * 
  * Created on 16 November 2023, 14:15
  */
