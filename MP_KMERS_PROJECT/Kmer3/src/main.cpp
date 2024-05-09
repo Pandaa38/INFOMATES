@@ -70,6 +70,33 @@ Farthest profile file: ../Genomes/worm1.prf
 Identifier of the farthest profile: worm
  */
 
+bool min_mode(double n1, double n2){
+    return n1 <= n2;
+}
+bool max_mode(double n1, double n2){
+    return n1 >= n2;
+}
+
+int pos_min_max(const Profile& base, const Profile* candidates, int num,
+        bool (*min_max)(double n1, double n2) )
+{
+    int pos = 0;
+    double min_max_dist = base.getDistance(candidates[0]);
+    
+    for(int i = 1; i < num; i++){
+        
+        double dist = base.getDistance(candidates[i]);
+        
+        if(min_max(dist, min_max_dist)){
+            min_max_dist = dist;
+            pos = i;
+        }
+    }
+    
+    return pos;
+}
+
+
 int main(int argc, char* argv[]) {
     
     // Process the main() arguments
@@ -81,7 +108,6 @@ int main(int argc, char* argv[]) {
     bool min = true; //Default
     int pos_base = 1;
     
-    //mejorar para test 3 (pone -f)
     if(argv[1][0] == '-'){
         
         if(argv[1][1] == 't'){
@@ -96,7 +122,7 @@ int main(int argc, char* argv[]) {
             if((string)argv[2] == "max"){
                 min = false;
             }
-            else if((string)argv[2] != "max"){
+            else if((string)argv[2] != "max" && (string)argv[2] != "min"){
                 showEnglishHelp(cerr);
                 return 1;
             }
@@ -114,18 +140,37 @@ int main(int argc, char* argv[]) {
     Profile *candidates = nullptr;
     candidates = new Profile [num_candidates];
     
+    double *distances = nullptr;
+    distances = new double [num_candidates];
+    
     // Load the input Profiles
     Profile base;
     base.load(argv[pos_base]);
-    //base.sort(); estoy seguro que deberia ordenarlos 
     
     for(int i = 0; i < num_candidates; i++){
         
         candidates[i].load(argv[pos_base+1 + i]);
-        //candidates[i].sort(); //puede que sea error
     }
     
     // Calculate and print the distance from the first Profile to the rest
+    for(int i = 0; i < num_candidates; i++){
+        
+        distances[i] = base.getDistance(candidates[i]);
+        cout << "Distance to " << argv[pos_base+1 + i] << ": " 
+             << distances[i] << endl;
+    }
+    
+    int index;
+    
+    if(min){
+        index = pos_min_max(base, candidates, num_candidates, min_mode);
+    }
+    else{
+        index = pos_min_max(base, candidates, num_candidates, max_mode);
+    }
+    
+    
+    /*
     double dist_mode = min ? 1:0; //dist c [0,1] 
     int index; //= 0;
     
@@ -134,7 +179,6 @@ int main(int argc, char* argv[]) {
         double dist = base.getDistance(candidates[i]);
         cout << "Distance to " << argv[pos_base+1 + i] << ": " << dist << endl;
         
-        //preguntar si < o <=
         bool new_dist_mode = min ? dist <= dist_mode : dist >= dist_mode;
         
         if(new_dist_mode){
@@ -142,7 +186,8 @@ int main(int argc, char* argv[]) {
             dist_mode = dist;
         }
     }
-    
+     */
+        
     /*
     // Print name of the file and identifier that takes min|max distance to the first one
     if(min){
@@ -159,7 +204,6 @@ int main(int argc, char* argv[]) {
     }
     */
     
-    //Preguntar creo que cortijo seria suspenso
     cout << (min ? "Nearest" : "Farthest") << " profile file: " 
          << (string)argv[pos_base+1+index] << endl;
     cout << "Identifier of the " << (min ? "nearest" : "farthest")<< " profile: " 
@@ -167,6 +211,7 @@ int main(int argc, char* argv[]) {
     
     // Deallocate the dynamic array of Profile
     delete [] candidates;
+    delete [] distances;
     
     return 0;
 }
