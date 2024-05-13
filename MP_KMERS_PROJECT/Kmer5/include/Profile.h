@@ -55,7 +55,7 @@ public:
      * @param orig the Profile object used as source for the copy. Input 
      * parameter
      */
-    Profile(Profile orig);
+    Profile(const Profile& orig);
 
     /**
      * @brief Destructor
@@ -69,21 +69,21 @@ public:
      * parameter
      * @return A reference to this object
      */
-    Profile operator=(Profile orig);
+    Profile operator=(const Profile& orig);
 
     /**
      * @brief Returns the identifier of this profile object.
      * Query method
      * @return A const reference to the identifier of this profile object
      */
-    std::string getProfileId();
+    const std::string& getProfileId() const;
 
     /**
      * @brief Sets a new identifier for this profile object.
      * Modifier method
      * @param id The new identifier. Input parameter
      */
-    void setProfileId(std::string id);
+    void setProfileId(const std::string& id);
 
 
     /**
@@ -95,7 +95,7 @@ public:
      * given index is not valid
      * @return A const reference to the KmerFreq at the given position
      */
-    KmerFreq at(int index); 
+    const KmerFreq& at(int index) const; 
 
     /**
      * @brief Gets a reference to the KmerFreq at the given position of the 
@@ -106,21 +106,21 @@ public:
      * given index is not valid
      * @return A reference to the KmerFreq at the given position
      */
-    KmerFreq at(int index); 
+    KmerFreq& at(int index); 
 
     /**
      * @brief Gets the number of KmerFreq objects.
      * Query method
      * @return The number of KmerFreq objects 
      */
-    int getSize();
+    int getSize() const;
     
     /**
      * @brief Gets the capacity of the vector of KmerFreq objects.
      * Query method
      * @return The capacity of the vector of KmerFreq objects
      */
-    int getCapacity();
+    int getCapacity() const;
     
     /**
      * @brief Gets the distance between this Profile object (\f$P_1\f$) and 
@@ -152,7 +152,7 @@ public:
      * @return The distance between this Profile object and the given 
      * argument @p otherProfile.
      */
-    double getDistance(Profile otherProfile);
+    double getDistance(const Profile& otherProfile) const;
     
     /**
      * @brief Searchs the given kmer in the list of kmers in this
@@ -167,7 +167,7 @@ public:
      * @return If found, it returns the position where the kmer 
      * was found. If not, it returns -1
      */
-    int findKmer(Kmer kmer, int initialPos, int finalPos);
+    int findKmer(const Kmer& kmer, int initialPos, int finalPos) const;
 
     /**
      * @brief Searchs the given kmer in the list of kmers in this
@@ -179,7 +179,7 @@ public:
      * @return If found, it returns the position where the kmer 
      * was found. If not, it returns -1
      */
-    int findKmer(Kmer kmer);
+    int findKmer(const Kmer& kmer) const;
 
     /**
      * @brief Obtains a string with the following content:
@@ -191,8 +191,17 @@ public:
      * @return A string with the number of kmers and the list of pairs of
      * kmer-frequency in the object
      */
-    std::string toString();
-
+    std::string toString() const;
+    
+    void swapElements(int first, int second);
+    void quickSort(int first, int last);
+    int split(int first, int last);
+    void selectionSort();
+    
+    //sobrecarga de operadores
+    void isBigger(const KmerFreq& large, const KmerFreq& small) const;
+    bool isBiggerEqual(const KmerFreq& large, const KmerFreq& small) const;
+    
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.
      * If two KmerFreq objects have the same frequency, then the alphabetical 
@@ -215,7 +224,7 @@ public:
      * if the given file cannot be opened or if an error occurs while writing
      * to the file
      */
-    void save(char fileName[], char mode = 't');
+    void save(const char fileName[], char mode = 't') const;
 
     /**
      * @brief Loads into this object the Profile object stored in the given 
@@ -232,7 +241,7 @@ public:
      * @throw throw std::invalid_argument Throws a std::invalid_argument if
      * an invalid magic string is found in the given file
      */
-    void load(char fileName[]);
+    void load(const char fileName[]);
      
     /**
      * @brief Appends a copy of the given KmerFreq to this Profile object.
@@ -243,7 +252,7 @@ public:
      * Modifier method
      * @param kmerFreq The KmerFreq to append to this object. Input paramether
      */
-    void append(KmerFreq kmerFreq);
+    void append(const KmerFreq& kmerFreq);
     
     /**
      * @brief Normalizes the Kmers of the vector of KmerFreq in this object. 
@@ -279,7 +288,7 @@ _G 5
      * @param validNucleotides a string with the list of characters (nucleotides) 
      * that should be considered as valid. Input parameter
      */
-    void normalize(std::string validNucleotides);
+    void normalize(const std::string& validNucleotides);
 
     /**
      * @brief Deletes the KmerFreq object from the vector of KmerFreq in this
@@ -323,7 +332,7 @@ _G 5
      * @deprecated This method could be removed in future versions of this 
      * class. Use the operator += instead.
      */
-    void join(Profile profile);
+    void join(const Profile& profile);
     
     /**
      * @brief Overloading of the [] operator for Profile class
@@ -378,6 +387,14 @@ private:
 
     static const std::string MAGIC_STRING_T; ///< A const string with the magic string for text files
     static const std::string MAGIC_STRING_B; ///< A const string with the magic string for binary files
+
+    void allocate(int nElements);
+    void dellocate();
+    void rellocate(int increase = BLOCK_SIZE);
+    void copy(const Profile &otherProfile);
+
+
+
 };
 
 /**

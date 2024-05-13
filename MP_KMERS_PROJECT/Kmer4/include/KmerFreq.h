@@ -77,6 +77,8 @@ private:
     int _frequency; ///< the frequency
 }; // end class KmerFreq
 
+void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size);
+
 #endif /* KMER_FREQ_H */
 
 

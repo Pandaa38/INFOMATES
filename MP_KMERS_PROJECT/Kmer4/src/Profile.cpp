@@ -21,7 +21,7 @@ Profile::Profile():_profileId("unknown"),_size(0){
     this -> allocate(INITIAL_CAPACITY);
 }
 
-Profile::Profile(int size) : _profileId("unknown"){
+Profile::Profile(int size) : _profileId("unknown"), _size(size){
     
     if(size < 0)
         throw std::out_of_range("Profile(int): invalid size for a profile");
@@ -61,7 +61,7 @@ void Profile::setProfileId(const std::string& id){
 const KmerFreq& Profile::at(int index) const{
     
     if(index < 0 || index >= _size)
-        throw std::out_of_range("at(int) const: Invalid position");
+        throw std::out_of_range("const at(int): Invalid position");
     
     return _vectorKmerFreq[index];
 }
@@ -475,9 +475,13 @@ void Profile::rellocate(int increase){
     
     KmerFreq* temp = new KmerFreq [_capacity + increase];
     
+    /*
     for(int i = 0; i < _size; i++){
         temp[i] = _vectorKmerFreq[i];
     }
+    */
+    
+    copy_kmer(_vectorKmerFreq, temp, _size);
     
     delete [] _vectorKmerFreq;
     _vectorKmerFreq = temp;
@@ -492,9 +496,13 @@ void Profile::copy(const Profile &otherProfile){
     
     this -> allocate(_capacity);
     
+    copy_kmer(otherProfile._vectorKmerFreq, _vectorKmerFreq, _size);
+    
+    /*
     for(int i = 0; i < _size; i++){
         
         _vectorKmerFreq[i] = otherProfile.at(i);
     }
-    
+    */
 }
+

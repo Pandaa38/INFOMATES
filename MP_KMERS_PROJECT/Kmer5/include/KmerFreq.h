@@ -38,21 +38,21 @@ public:
      * Query method
      * @return A const reference to the Kmer of this KmerFreq object
      */
-    Kmer getKmer();
+    const Kmer& getKmer() const;
 
     /**
      * @brief Gets the frequency of this KmerFreq object
      * Query method
      * @return The frequency of this KmerFreq object
      */
-    int getFrequency();
+    int getFrequency() const;
 
     /**
      * @brief Sets the Kmer of this KmerFreq object.
      * Modifier method
      * @param kmer The new Kmer value for this object. Input parameter
      */
-    void setKmer(Kmer kmer);
+    void setKmer(const Kmer& kmer);
 
     /**
      * @brief Sets the frequency of this KmerFreq object
@@ -70,7 +70,7 @@ public:
      * @return A string with the nucleotide and frequency of the kmer
      * in this object
      */
-    std::string toString();
+    std::string toString() const;
     
     /**
      * @brief Writes this object to the given output stream. It first writes
@@ -96,6 +96,8 @@ private:
     Kmer _kmer; ///< the Kmer object
     int _frequency; ///< the frequency
 }; // end class KmerFreq
+
+void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size);
 
 /**
  * @brief Overloading of the stream insertion operator for KmerFreq class

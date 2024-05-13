@@ -311,25 +311,25 @@ public:
      * are obtained, these will be merged into the first identical kmer by 
      * adding their frequencies. 
      * For example, suposse the following list of kmers:
-4
-Ct 5
-hG 4
-nG 1
-cT 4
+    4
+    Ct 5
+    hG 4
+    nG 1
+    cT 4
      * 
      * After the process of normalization of every kmer, we obtain the following 
      * list of kmers:
      * 
-4
-CT 5
-_G 4
-_G 1
-CT 4
+    4
+    CT 5
+    _G 4
+    _G 1
+    CT 4
      * 
      * The final step will transform the list into:
-2
-CT 9
-_G 5
+    2
+    CT 9
+    _G 5
      * 
      * Modifier method
      * @param validNucleotides a string with the list of characters (nucleotides) 

@@ -91,9 +91,8 @@ int pos_min_max(const double* distances, int size,
     return pos;
 }
 
-
 int main(int argc, char* argv[]) {
-    
+        
     // Process the main() arguments
      if(argc < 3){
         showEnglishHelp(cerr);
@@ -164,7 +163,7 @@ int main(int argc, char* argv[]) {
     delete [] distances;
     
     candidates = nullptr; //no se si necesario
-    distances = nullptr;
+    distances = nullptr;    
     
     return 0;
 }

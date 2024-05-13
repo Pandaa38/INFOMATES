@@ -45,3 +45,11 @@ std::string KmerFreq::toString() const{
     
     return std::string(_kmer.toString()) + " " + std::to_string(_frequency);
 }
+
+void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
+    
+    for(int i = 0; i < size; i++){
+        destino[i] = origen[i];
+    }
+    
+}
