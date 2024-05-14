@@ -197,11 +197,7 @@ public:
     void quickSort(int first, int last);
     int split(int first, int last);
     void selectionSort();
-    
-    //sobrecarga de operadores
-    void isBigger(const KmerFreq& large, const KmerFreq& small) const;
-    bool isBiggerEqual(const KmerFreq& large, const KmerFreq& small) const;
-    
+        
     /**
      * @brief Sorts the vector of KmerFreq in decreasing order of frequency.
      * If two KmerFreq objects have the same frequency, then the alphabetical 
@@ -340,7 +336,7 @@ _G 5
      * Query method
      * @return A const reference to the KmerFreq object at position @p index
      */
-    KmerFreq operator[](int index);
+    const KmerFreq& operator[](int index) const;
 
     /**
      * @brief Overloading of the [] operator for Profile class
@@ -348,7 +344,7 @@ _G 5
      * Query and modifier method
      * @return A reference to the KmerFreq object at position @p index
      */
-    KmerFreq operator[](int index);
+    KmerFreq& operator[](int index);
     
     /**
      * @brief Overloading of the += operator with a KmerFreq parameter. 
@@ -362,7 +358,7 @@ _G 5
      * Input parameter
      * @return A reference to this object.
      */
-    Profile operator+=(KmerFreq kmerFreq);
+    Profile& operator+=(const KmerFreq& kmerFreq);
 
     /**
      * @brief Overloading of the += operator with a Profile parameter. 
@@ -374,7 +370,10 @@ _G 5
      * @param profile A Profile object. Input parameter
      * @return A reference to this object.
      */
-    Profile operator+=(Profile profile);
+    Profile& operator+=(const Profile& profile);
+    
+    
+    friend std::istream& operator>>(std::istream& is, Profile profile);
     
 private:
     std::string _profileId; ///< Profile identifier
@@ -403,7 +402,7 @@ private:
  * @param profile the Profile object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream operator<<(std::ostream os, Profile profile);
+std::ostream& operator<<(std::ostream& os, Profile profile);
 
 /**
  * @brief Overloading of the stream extraction operator for Profile class.
@@ -415,6 +414,6 @@ std::ostream operator<<(std::ostream os, Profile profile);
  * @param profile the Profile object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream operator>>(std::istream is, Profile profile);
+std::istream& operator>>(std::istream& is, Profile profile);
 
 #endif /* PROFILE_H */

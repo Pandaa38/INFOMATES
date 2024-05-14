@@ -50,6 +50,60 @@ void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
     
     for(int i = 0; i < size; i++){
         destino[i] = origen[i];
-    }
+    }    
+}
+
+std::ostream& operator<<(std::ostream& os, KmerFreq kmerFreq){
     
+    os << kmerFreq.toString();
+}
+
+std::istream& operator>>(std::istream& is, KmerFreq kmerFreq){
+    
+    int number;
+    Kmer nucleotide;
+    
+    is >> number >> nucleotide;
+    
+    kmerFreq.setFrequency(number);
+    kmerFreq.setKmer(nucleotide);
+}
+
+bool operator>(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    
+    bool bigger = false;
+    
+    if(kmerFreq1.getFrequency() > kmerFreq2.getFrequency())
+        bigger = true;
+    else if(kmerFreq1.getFrequency() == kmerFreq2.getFrequency()){
+        
+        if(kmerFreq1.getKmer().toString() < kmerFreq2.getKmer().toString())
+            bigger = true;
+    }
+    return bigger;
+}
+
+bool operator<(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    return kmerFreq2 > kmerFreq1;
+}
+
+bool operator==(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    
+    return (kmerFreq1.getKmer() == kmerFreq2.getKmer() && 
+            kmerFreq1.getFrequency() == kmerFreq2.getFrequency());
+}
+
+bool operator!=(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    
+    return !(kmerFreq1 == kmerFreq2);
+}
+
+bool operator<=(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    
+    return (kmerFreq1 < kmerFreq2 || kmerFreq1 == kmerFreq2);
+}
+
+bool operator>=(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
+    
+    return (kmerFreq1 > kmerFreq2 || kmerFreq1 == kmerFreq2);
 }

@@ -145,7 +145,7 @@ public:
      * Query method
      * @param outputStream An output stream where this object will be written
      */
-    void write(std::ostream outputStream);
+    void write(std::ostream& outputStream);
     
     /**
      * @brief Reads this object from the given input stream. It reads characters
@@ -153,14 +153,16 @@ public:
      * Modifier method
      * @param inputSstream An input stream from which this object will be read
      */
-    void read(std::istream inputStream);
+    void read(std::istream& inputStream);
     
     /**
      * @brief look if there is a MISSING_NUCLEOTIDE in _text
      * @return @retval @true if there is a MISSING_NUCLEOTIDE
      * @retval @false if there isn`t
      */
-    bool ThereIsMissingNucleotide();
+    bool thereIsMissingNucleotide();
+    
+    void clear();
     
 private:
     /**
@@ -203,7 +205,7 @@ void ToUpper(Kmer& kmer);
  * @param kmer the Kmer object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream operator<<(std::ostream os, Kmer kmer);
+std::ostream& operator<<(std::ostream& os, const Kmer& kmer);
 
 /**
  * @brief Overloading of the stream extraction operator for Kmer class. It
@@ -213,6 +215,6 @@ std::ostream operator<<(std::ostream os, Kmer kmer);
  * @param kmer the Kmer object
  * @return @p is the input stream
  */
-std::istream operator>>(std::istream is, Kmer kmer);
+std::istream& operator>>(std::istream& is, Kmer& kmer);
 
 #endif /* KMER_H */

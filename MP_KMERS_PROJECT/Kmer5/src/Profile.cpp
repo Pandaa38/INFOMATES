@@ -115,7 +115,7 @@ int Profile::findKmer(const Kmer& kmer, int initialPos, int finalPos) const{
     
     while(!found && initialPos <= finalPos){
         
-        if(this->at(initialPos).getKmer().toString() == kmer.toString()) 
+        if(at(initialPos).getKmer().toString() == kmer.toString()) 
             found = true;
         else
             initialPos ++;
@@ -193,10 +193,10 @@ int Profile::split(int first, int last){
     right = last; // dcha go back
     
     while (left <= right){
-        while (left <= right && isBiggerEqual(value_pivote,_vectorKmerFreq[right]))
+        while (left <= right && value_pivote <= _vectorKmerFreq[right])
             left++;
         
-        while (left <= right && isBiggerEqual(_vectorKmerFreq[right],value_pivote))
+        while (left <= right && _vectorKmerFreq[right] <= value_pivote)
             right--;
         
         if (left < right) {
@@ -222,7 +222,7 @@ void Profile::selectionSort(){
         
         for (int i = left + 1; i < _size ; i++){
             
-            if(isBigger(_vectorKmerFreq[i],max)){
+            if(_vectorKmerFreq[i] < max){
                 max = _vectorKmerFreq[i];
                 pos_max = i;
             }
@@ -233,48 +233,31 @@ void Profile::selectionSort(){
     }
 }
 
-bool Profile::isBigger(const KmerFreq& large, const KmerFreq& small) const{
-    
-    bool bigger = false;
-    
-    if(small.getFrequency() < large.getFrequency())
-        bigger = true;
-    else if(small.getFrequency() == large.getFrequency()){
-        
-        if(small.getKmer().toString() > large.getKmer().toString())
-            bigger = true;
-    }
-    return bigger;
-}
-
-bool Profile::isBiggerEqual(const KmerFreq& large, const KmerFreq& small) const{
-    
-    bool bigger_equal = isBigger(large,small);
-    
-    if(!bigger_equal){
-        
-        if(large.getFrequency() == small.getFrequency())
-            bigger_equal = true;
-        
-    }
-    return bigger_equal;
-}
-
 void Profile::sort(){
     
     quickSort(0, _size-1);
 }
 
-void Profile::save(const char fileName[]) const{
-
+void Profile::save(const char fileName[], char mode = 't') const{
+    
+    if(mode != 't' && mode != 'b')
+        throw std::invalid_argument("save: invalid mode('t' or 'b')")
+    
     std::ofstream outFile;
     outFile.open(fileName);
     
     if (!outFile) {
         throw std::ios_base::failure("save: Error opening output file");
     }
-    outFile << MAGIC_STRING_T << std::endl;
-    outFile << toString();
+    
+    if(mode == 't'){
+        //mode text
+        outFile << MAGIC_STRING_T << std::endl;
+        outFile << toString();
+    }
+    else{
+        //mode binary
+    }
     
     outFile.close();
     
@@ -436,7 +419,7 @@ void Profile::zip(bool deleteMissing, int lowerBound){
             
             Kmer Kmer_delete = _vectorKmerFreq[i].getKmer();
             
-            if(Kmer_delete.ThereIsMissingNucleotide()){
+            if(Kmer_delete.thereIsMissingNucleotide()){
                 deletePos(i);
             }
             else i++;
@@ -446,6 +429,26 @@ void Profile::zip(bool deleteMissing, int lowerBound){
 }
 
 void Profile::join(const Profile& profile){
+    
+    this += profile;
+}
+
+const KmerFreq& Profile::operator[](int index) const{
+    
+    return _vectorKmerFreq[index];
+}
+
+KmerFreq& Profile::operator[](int index){
+    
+    return _vectorKmerFreq[index];
+}
+
+Profile& Profile::operator+=(const KmerFreq& kmerFreq){
+    
+    append(kmerFreq);
+}
+
+Profile& Profile::operator+=(const Profile& profile){
     
     for(int i = 0; i < profile.getSize(); i++){
         append(profile.at(i));
@@ -504,5 +507,37 @@ void Profile::copy(const Profile &otherProfile){
         _vectorKmerFreq[i] = otherProfile.at(i);
     }
     */
+}
+
+std::ostream& operator<<(std::ostream& os, Profile profile){
+    
+    os << profile.toString();
+        
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Profile profile){
+    
+    profile.dellocate();
+    
+    std::string id;
+    int n_kmer;
+    
+    is >> id >> n_kmer;
+    
+    profile.setProfileId(id);
+    profile.allocate(n_kmer); //make throw if n_kmer < 0 
+                              //no se si sufiente o mejor que lo haga el operador
+    profile._size = n_kmer;
+    
+    
+    KmerFreq kmerfreq_aux;
+    
+    for(int i = 0; i < n_kmer; i++){
+        
+        is >> profile._vectorKmerFreq[i]; //tal vez mejor un aux
+    }
+    
+    return is;
 }
 
