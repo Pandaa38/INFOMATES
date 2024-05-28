@@ -82,7 +82,7 @@ public:
      * @param orig the KmerCounter object used as source for the copy. 
      * Input parameter
      */
-    KmerCounter(KmerCounter orig);
+    KmerCounter(const KmerCounter& orig);
 
     /**
      * @brief Destructor
@@ -97,14 +97,14 @@ public:
      * Query method
      * @return The number of nucleotides that can be part of a kmer
      */
-    int getNumNucleotides();
+    int getNumNucleotides() const;
     
     /**
      * @brief Returns the number of nucleotides in each kmer
      * Query method
      * @return The number of nucleotides in each kmer
      */
-    int getK();
+    int getK() const;
     
     /**
      * @brief Returns the number of different kmers that can be built using
@@ -113,7 +113,7 @@ public:
      * @return The number of different kmers that can be built using
      * @p _k nucleotides 
      */
-    int getNumKmers();
+    int getNumKmers() const;
     
 
     /**
@@ -121,7 +121,7 @@ public:
      * Query method
      * @return the number of kmers with a frequency greater than 0
      */
-    int getNumberActiveKmers();
+    int getNumberActiveKmers() const;
     
     /**
      * @brief Obtains a string with the following content:
@@ -133,7 +133,7 @@ public:
      * Query method
      * @return A string with the content of this object
      */
-    std::string toString();
+    std::string toString() const;
 
     /**
      * @brief Increases the current frequency of the given kmer using the value 
@@ -148,7 +148,7 @@ public:
      * @param frequency The quantity that will be added to the current 
      * frequency. Input parameter
      */
-    void increaseFrequency(Kmer kmer, int frequency = 1);
+    void increaseFrequency(const Kmer& kmer, int frequency = 1);
 
     /**
      * @brief Overloading of the assignment operator.
@@ -157,7 +157,7 @@ public:
      * Input parameter
      * @return A reference to this object
      */
-    KmerCounter operator=(KmerCounter orig);
+    KmerCounter& operator=(const KmerCounter& orig);
 
     /**
      * @brief Overloading of the operator +=. It increases the current 
@@ -171,7 +171,7 @@ public:
      * kmers).
      * @return A reference to this object
      */
-    KmerCounter operator+=(KmerCounter kc);
+    KmerCounter& operator+=(const KmerCounter& kc);
 
     /**
      * @brief Reads the given text file and calculates the frequencies of each 
@@ -186,7 +186,7 @@ public:
      * @throw std::ios_base::failure Throws a std::ios_base::failure if the
      * given file cannot be opened
      */
-    void calculateFrequencies(char* fileName);
+    void calculateFrequencies(const char* fileName);
 
     /**
      * @brief Builds a Profile object from this KmerCounter object. The 
@@ -224,19 +224,24 @@ private:
      */
     std::string _allNucleotides;
     
+    void allocate(int nrow, int ncol);
+    void dellocate();
+    //void rellocate();
+    void copy(const KmerCounter& other);
+    
     /**
      * @brief Returns the numbers of rows of the matrix in this object.
      * Query method
      * @return The numbers of rows of the matrix in this object
      */
-    int getNumRows();
+    int getNumRows() const;
     
     /**
      * @brief Returns the numbers of columns of the matrix in this object.
      * Query method
      * @return The numbers of columns of the matrix in this object
      */
-    int getNumCols();
+    int getNumCols() const;
     
     /**
      * Returns the index (a row or a column in the frequency matrix) 
@@ -308,7 +313,7 @@ private:
      * @param column Column of the element. Input parameter
      * @return A const reference to the element at the given position
      */
-    int operator()(int row, int column);
+    const int& operator()(int row, int column) const;
 
     /**
      * @brief Overloading of the () operator to access to the element at a 
@@ -318,7 +323,7 @@ private:
      * @param column Column of the element. Input parameter
      * @return A reference to the element at the given position
      */
-    int operator()(int row, int column);
+    int& operator()(int row, int column);
 };
 
 #endif /* KMER_COUNTER_H */

@@ -129,7 +129,7 @@ void Kmer::read(std::istream& inputStream){
 }
 */
 
-bool Kmer::thereIsMissingNucleotide(){
+bool Kmer::thereIsMissingNucleotide() const{
     
     bool missing = false;
     int miss = _text.find(MISSING_NUCLEOTIDE);
@@ -139,10 +139,22 @@ bool Kmer::thereIsMissingNucleotide(){
     return missing;
 }
 
-void Kmer::clear(){
+bool Kmer::thereIsInvalidNucleotide(const std::string& validNucleotides) const{
     
-    _text = "";
+    bool invalid = false;
+    
+    for(int i = 0; i < size() && !invalid; i++){
+        if(!IsValidNucleotide(at(i), validNucleotides))
+            invalid = true;
+    }
+    
+    return invalid;
 }
+
+//void Kmer::setText(const std::string& text){
+    
+    //_text = text;
+//}
 
 bool IsValidNucleotide(char nucleotide,const std::string& validNucleotides){
     
@@ -171,10 +183,13 @@ std::ostream& operator<<(std::ostream& os, const Kmer& kmer){
     return os;
 }
 
-//los kmer siempre son de lenght == 2?
 std::istream& operator>>(std::istream& is, Kmer& kmer){
     
-    is >> kmer.at(0) >> kmer.at(1);
+    std::string kmer_text;
+     
+    is >> kmer_text;
+    
+    kmer = Kmer(kmer_text);
     
     return is;
 }

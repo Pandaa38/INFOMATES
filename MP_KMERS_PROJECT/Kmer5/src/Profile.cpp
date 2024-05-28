@@ -451,15 +451,12 @@ Profile& Profile::operator+=(const KmerFreq& kmerFreq){
 Profile& Profile::operator+=(const Profile& profile){
     
     for(int i = 0; i < profile.getSize(); i++){
-        append(profile.at(i));
+        this += profile.at(i);
     }
 }
 
 //Private Methods
 void Profile::allocate(int nElements){
-    
-    if(nElements < 0)
-        throw std::invalid_argument("allocate: nElements <= 0");
     
     _vectorKmerFreq = new KmerFreq[nElements];
     _capacity = nElements;
@@ -478,12 +475,6 @@ void Profile::rellocate(int increase){
     
     KmerFreq* temp = new KmerFreq [_capacity + increase];
     
-    /*
-    for(int i = 0; i < _size; i++){
-        temp[i] = _vectorKmerFreq[i];
-    }
-    */
-    
     copy_kmer(_vectorKmerFreq, temp, _size);
     
     delete [] _vectorKmerFreq;
@@ -500,13 +491,6 @@ void Profile::copy(const Profile &otherProfile){
     this -> allocate(_capacity);
     
     copy_kmer(otherProfile._vectorKmerFreq, _vectorKmerFreq, _size);
-    
-    /*
-    for(int i = 0; i < _size; i++){
-        
-        _vectorKmerFreq[i] = otherProfile.at(i);
-    }
-    */
 }
 
 std::ostream& operator<<(std::ostream& os, Profile profile){
@@ -526,8 +510,8 @@ std::istream& operator>>(std::istream& is, Profile profile){
     is >> id >> n_kmer;
     
     profile.setProfileId(id);
-    profile.allocate(n_kmer); //make throw if n_kmer < 0 
-                              //no se si sufiente o mejor que lo haga el operador
+    profile.allocate(n_kmer);  
+                              
     profile._size = n_kmer;
     
     

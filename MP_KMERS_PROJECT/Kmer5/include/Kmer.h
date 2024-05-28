@@ -160,9 +160,10 @@ public:
      * @return @retval @true if there is a MISSING_NUCLEOTIDE
      * @retval @false if there isn`t
      */
-    bool thereIsMissingNucleotide();
+    bool thereIsMissingNucleotide() const;
+    bool thereIsInvalidNucleotide(const std::string& validNucleotides) const;
     
-    void clear();
+    //void setText(const std::string& text);
     
 private:
     /**
@@ -170,6 +171,7 @@ private:
      * this Kmer. 
      */
     std::string _text;
+
 }; // end class Kmer
 
 /**
