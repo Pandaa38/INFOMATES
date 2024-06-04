@@ -16,6 +16,7 @@ Kmer 5:
 	CLASIFY  
 	  
 Pasar test de unida para detectar los fallos  
+error: test 106, 107, 129
 
 	
 

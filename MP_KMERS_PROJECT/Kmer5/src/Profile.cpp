@@ -221,7 +221,7 @@ void Profile::selectionSort(){
         
         for (int i = left + 1; i < _size ; i++){
             
-            if(_vectorKmerFreq[i] < max){
+            if(_vectorKmerFreq[i] > max){
                 max = _vectorKmerFreq[i];
                 pos_max = i;
             }
@@ -243,22 +243,33 @@ void Profile::save(const char fileName[], char mode) const{
         throw std::invalid_argument("save: invalid mode('t' or 'b')");
     
     std::ofstream outFile;
-    outFile.open(fileName);
+    
+    if (mode == 't') {
+        // Open file in text mode
+        outFile.open(fileName);
+    } else {
+        // Open file in binary mode
+        outFile.open(fileName, std::ios::binary);
+    }
+    
     
     if (!outFile) {
         throw std::ios_base::failure("save: Error opening output file");
     }
     
     if(mode == 't'){
-        //mode text
+        // text mode
         outFile << MAGIC_STRING_T << std::endl;
         //outFile << toString();
+        
+        outFile <<  _profileId + "\n" + std::to_string(_size) + "\n";
         for(int i = 0; i < getSize(); i++){
             outFile << _vectorKmerFreq[i] << "\n";
         }
     }
     else{
-        //mode binary
+        // binary mode
+        
         outFile.write(MAGIC_STRING_B.c_str(), MAGIC_STRING_B.length() + 1);
         for(int i = 0; i < getSize(); i++){
             _vectorKmerFreq[i].write(outFile);
@@ -287,7 +298,7 @@ void Profile::load(const char fileName[]){
     inFile >> magic_str;
     inFile.ignore();
     
-    if(magic_str != MAGIC_STRING_T){
+    if(magic_str != MAGIC_STRING_T && magic_str != MAGIC_STRING_B){
         inFile.close();
         throw std::invalid_argument(std::string("load: An invalid magic string")
                                         + ("is found in the given file"));
@@ -502,14 +513,14 @@ void Profile::copy(const Profile &otherProfile){
     copy_kmer(otherProfile._vectorKmerFreq, _vectorKmerFreq, _size);
 }
 
-std::ostream& operator<<(std::ostream& os, Profile profile){
+std::ostream& operator<<(std::ostream& os, const Profile& profile){
     
     os << profile.toString();
         
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Profile profile){
+std::istream& operator>>(std::istream& is, Profile& profile){
     
     profile.dellocate();
     

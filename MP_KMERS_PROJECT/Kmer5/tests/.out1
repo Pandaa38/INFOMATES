@@ -1,90 +1,28 @@
-==7762== Memcheck, a memory error detector
-==7762== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==7762== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==7762== Command: /home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer5/./dist/LEARN/GNU-Linux/LEARN
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x10D66D: KmerCounter::getNumberActiveKmers() const (KmerCounter.cpp:69)
-==7762==    by 0x10E2F3: KmerCounter::toProfile() (KmerCounter.cpp:161)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x10FCF6: Profile::Profile(int) (Profile.cpp:27)
-==7762==    by 0x10E307: KmerCounter::toProfile() (KmerCounter.cpp:162)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x111F9D: Profile::allocate(int) (Profile.cpp:470)
-==7762==    by 0x10FD43: Profile::Profile(int) (Profile.cpp:30)
-==7762==    by 0x10E307: KmerCounter::toProfile() (KmerCounter.cpp:162)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x484A2A0: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==7762==    by 0x111FC1: Profile::allocate(int) (Profile.cpp:470)
-==7762==    by 0x10FD43: Profile::Profile(int) (Profile.cpp:30)
-==7762==    by 0x10E307: KmerCounter::toProfile() (KmerCounter.cpp:162)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x111FED: Profile::allocate(int) (Profile.cpp:470)
-==7762==    by 0x10FD43: Profile::Profile(int) (Profile.cpp:30)
-==7762==    by 0x10E307: KmerCounter::toProfile() (KmerCounter.cpp:162)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x10E348: KmerCounter::toProfile() (KmerCounter.cpp:170)
-==7762==    by 0x113101: main (LEARN.cpp:159)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x111E16: Profile::zip(bool, int) (Profile.cpp:419)
-==7762==    by 0x113143: main (LEARN.cpp:164)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x111B91: Profile::deletePos(int) (Profile.cpp:404)
-==7762==    by 0x111D91: Profile::zip(bool, int) (Profile.cpp:422)
-==7762==    by 0x113143: main (LEARN.cpp:164)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x111C99: Profile::deletePos(int) (Profile.cpp:409)
-==7762==    by 0x111D91: Profile::zip(bool, int) (Profile.cpp:422)
-==7762==    by 0x113143: main (LEARN.cpp:164)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x110854: Profile::quickSort(int, int) (Profile.cpp:169)
-==7762==    by 0x110BC8: Profile::sort() (Profile.cpp:237)
-==7762==    by 0x11314F: main (LEARN.cpp:167)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x110B5E: Profile::selectionSort() (Profile.cpp:217)
-==7762==    by 0x110861: Profile::quickSort(int, int) (Profile.cpp:170)
-==7762==    by 0x110BC8: Profile::sort() (Profile.cpp:237)
-==7762==    by 0x11314F: main (LEARN.cpp:167)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x110DC9: Profile::save(char const*, char) const (Profile.cpp:256)
-==7762==    by 0x113179: main (LEARN.cpp:170)
-==7762== 
-==7762== Conditional jump or move depends on uninitialised value(s)
-==7762==    at 0x1120EE: Profile::dellocate() (Profile.cpp:476)
-==7762==    by 0x10FE29: Profile::~Profile() (Profile.cpp:39)
-==7762==    by 0x113185: main (LEARN.cpp:171)
-==7762== 
-==7762== Use of uninitialised value of size 8
-==7762==    at 0x49BA474: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
-==7762==    by 0x10CDF7: Kmer::~Kmer() (Kmer.h:28)
-==7762==    by 0x112879: KmerFreq::~KmerFreq() (KmerFreq.h:27)
-==7762==    by 0x1120FB: Profile::dellocate() (Profile.cpp:476)
-==7762==    by 0x10FE29: Profile::~Profile() (Profile.cpp:39)
-==7762==    by 0x113185: main (LEARN.cpp:171)
-==7762== 
-==7762== 
-==7762== HEAP SUMMARY:
-==7762==     in use at exit: 0 bytes in 0 blocks
-==7762==   total heap usage: 8 allocs, 8 frees, 109,616 bytes allocated
-==7762== 
-==7762== All heap blocks were freed -- no leaks are possible
-==7762== 
-==7762== Use --track-origins=yes to see where uninitialised values come from
-==7762== For lists of detected and suppressed errors, rerun with: -s
-==7762== ERROR SUMMARY: 6910 errors from 14 contexts (suppressed: 0 from 0)
+==30507== Memcheck, a memory error detector
+==30507== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==30507== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==30507== Command: /home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer5/./dist/LEARN/GNU-Linux/LEARN
+==30507== 
+ERROR in LEARN parameters
+Run with the following parameters:
+LEARN [-t|-b] [-k kValue] [-n nucleotidesSet] [-p profileId] [-o outputFilename] <file1.dna> [<file2.dna> <file3.dna> .... ]
+
+Parameters:
+-t|-b: text mode or binary mode for the output file (-t by default)
+-k kValue: number of nucleotides in a kmer (5 by default)
+-n nucleotidesSet: set of possible nucleotides in a kmer (ACGT by default). Note that the characters should be provided in uppercase
+-p profileId: profile identifier (unknown by default)
+-o outputFilename: name of the output file (output.prf by default)
+<file1.dna> <file2.dna> <file3.dna> ....: names of the input files (at least one is mandatory)
+
+This program learns a profile model from a set of input DNA files <file1.dna> <file2.dna> <file3.dna> ....
+
+==30507== 
+==30507== HEAP SUMMARY:
+==30507==     in use at exit: 0 bytes in 0 blocks
+==30507==   total heap usage: 1 allocs, 1 frees, 72,704 bytes allocated
+==30507== 
+==30507== All heap blocks were freed -- no leaks are possible
+==30507== 
+==30507== For lists of detected and suppressed errors, rerun with: -s
+==30507== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

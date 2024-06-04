@@ -1,4 +1,4 @@
-/*
+ /*
  * Metodología de la Programación: Kmer5
  * Curso 2023/2024
  */
@@ -105,7 +105,7 @@ void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size);
  * @param kmerFreq the KmerFreq object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream& operator<<(std::ostream& os, KmerFreq kmerFreq);
+std::ostream& operator<<(std::ostream& os, const KmerFreq& kmerFreq);
 
 /**
  * @brief Overloading of the stream extraction operator for KmerFreq class
@@ -113,7 +113,7 @@ std::ostream& operator<<(std::ostream& os, KmerFreq kmerFreq);
  * @param kmerFreq the KmerFreq object. Input parameter
  * @return @p is A reference to the input stream
  */
-std::istream& operator>>(std::istream& is, KmerFreq kmerFreq);
+std::istream& operator>>(std::istream& is, KmerFreq& kmerFreq);
 
 /**
  * @brief Overloading of the relational operator > for KmerFreq class

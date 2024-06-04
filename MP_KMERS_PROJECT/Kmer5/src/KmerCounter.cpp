@@ -62,11 +62,11 @@ int KmerCounter::getNumKmers() const{
 
 int KmerCounter::getNumberActiveKmers() const{
     
-    int nak;
+    int nak = 0;
     
     for(int i = 0; i < getNumRows(); i++){
         for(int j = 0; j < getNumCols(); j++){
-            if((*this)(i,j) != 0)
+            if((*this)(i,j) > 0)
                 nak++;
         }
     }
@@ -90,14 +90,11 @@ void KmerCounter::increaseFrequency(const Kmer& kmer, int frequency){
     
     if(kmer.thereIsInvalidNucleotide(_allNucleotides))
         throw std::invalid_argument("increaseFrequency: invalid kmer");
+
+    int row = -1, col = -1;
+    getRowColumn(kmer, row, col);
     
-    std::string rp = kmer.toString().substr(0,(_k+1)/2);
-    std::string lp = kmer.toString().substr(0,1-(_k+1)/2);
-    
-    int rpos = getIndex(rp);
-    int lpos = getIndex(lp);
-    
-    _frequency[rpos][lpos] += frequency;
+    _frequency[row][col] += frequency;
 }
 
 KmerCounter& KmerCounter::operator=(const KmerCounter& orig){
@@ -196,6 +193,8 @@ void KmerCounter::dellocate(){
     
     delete [] _frequency[0];
     delete [] _frequency;
+    
+    _frequency = nullptr;
 }
 
 void KmerCounter::copy(const KmerCounter& other){
@@ -204,12 +203,12 @@ void KmerCounter::copy(const KmerCounter& other){
     _validNucleotides = other._validNucleotides;
     _allNucleotides = other._allNucleotides;
     
-    dellocate();
+    //dellocate();
     allocate(other.getNumRows(),other.getNumCols());
     
     for(int i = 0; i < getNumRows(); i++){
         for(int j = 0; j < getNumCols(); j++){
-            _frequency[i][j] = other(i,j);
+            (*this)(i,j) = other(i,j);
         }
     }
 }
@@ -265,7 +264,7 @@ string KmerCounter::getInvertedIndex(int index, int nCharacters) const {
     return result;
 }
 
-void KmerCounter::getRowColumn(const Kmer& kmer, int& row, int& column){
+void KmerCounter::getRowColumn(const Kmer& kmer, int& row, int& column) const{
     
     int rp = ( _k + 1)/2;
     
@@ -274,6 +273,11 @@ void KmerCounter::getRowColumn(const Kmer& kmer, int& row, int& column){
 }
 
 Kmer KmerCounter::getKmer(int row, int column) const{
+    
+    if(row < 0 || column < 0 || row >= getNumRows() || column >= getNumCols()){
+        throw std::invalid_argument(std::string("getKmer: the given row or") +
+                ("column are out of the correct bounds"));
+    }
     
     int rp = ( _k + 1)/2;
     int lp = _k - ( _k + 1)/2;
@@ -287,11 +291,14 @@ Kmer KmerCounter::getKmer(int row, int column) const{
 
 void KmerCounter::initFrequencies(){
     
+    (*this) = KmerCounter(getK(), _validNucleotides);
+    /*
     for(int i; i < getNumRows(); i++){
         for(int j; j < getNumCols(); j++){
             (*this)(i,j) = 0;
         }
     }
+    */
 }
 
 const int& KmerCounter::operator()(int row, int column) const{

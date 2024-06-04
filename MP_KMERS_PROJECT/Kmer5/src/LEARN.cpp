@@ -72,19 +72,12 @@ TA 1
  * @return 0 If there is no error; a value > 0 if error
  */
 
-#include <regex>
-#include <cmath>
-
-const string VALID_NUCLEOTIDES_ADN = "ACGT";
-const string COMPLEMENTARY_NUCLEOTIDES_ADN = "TGCA";
-const string VALID_NUCLEOTIDES_ARN = "ACGU";
-const string COMPLEMENTARY_NUCLEOTIDES_ARN = "UGCA";
-const int DIM_VECTOR_KMER_FREQ = 2000;
-#define ENDL "\n"
-
 int main(int argc, char *argv[]) {  
     // Process the main() arguments
-    
+    if(argc < 3){
+        showEnglishHelp(cerr);
+        return 1;
+    }
     //DEFAULT
     /*
      * -t (text)
@@ -93,7 +86,7 @@ int main(int argc, char *argv[]) {
      * nucleotidesSet = ACGT
      * salida = output.prf
      */
-    /*
+    
     int kValue = 5;
     char mode = 't';
     std::string nucleotidesSet;
@@ -134,6 +127,11 @@ int main(int argc, char *argv[]) {
                     output = argv[pos+1];
                     pos+=2;
                 }
+                else{
+                    showEnglishHelp(cerr);
+                    return 1;
+                }
+                    
             }//strlen(argv[pos]) == 2
             else {
                 // Error, se ha puesto solo ‘-’
@@ -142,13 +140,16 @@ int main(int argc, char *argv[]) {
             }
 
         }//argv[pos][0] == '-'
-        // Aquí comienza lista de ficheros de entrada. 
+        // Aquí comienza lista de ficheros de entrada.
+        //if(pos + 1 <= argc){
+        //    showEnglishHelp(cerr);
+        //    return 1;
+        //}
         else 
             fin = true;
         
     }
-    
-    
+        
     // Loop to calculate the kmer frecuencies of the input genome files using 
     // a KmerCounter object
     KmerCounter kmerCounter(kValue);
@@ -178,10 +179,33 @@ int main(int argc, char *argv[]) {
     profile.sort();
     
     // Save the Profile object in the output file
-    profile.save(output.c_str(), mode);
-     */
+    profile.save(output.c_str());
+     
     
-    Kmer kmer(3);
-    cout << kmer;
+    /*
+     * ERROR CON ESCRIBIR EN BINARIO
+    Profile l1;
+    Profile l2;
+    l1.setProfileId("Test1");
+    KmerFreq kmf;
+    for (int i = 0; i < 10; i++) {
+        Kmer kmer(i + 1);
+        kmf.setKmer(kmer);
+        kmf.setFrequency(10 - i);
+        l1.append(kmf);
+        kmer.at(0) = 'A';
+        kmf.setKmer(kmer);
+        kmf.setFrequency(10 - i);
+        l1.append(kmf);
+    }
+    l1.sort();
+    
+    const char* fileName = "tests/output/testb_save.bgr";
+    l1.save(fileName, 'b');
+    
+    l2.load(fileName);
+    bool iguales = true;
+    iguales = l1.toString() == l2.toString();
+    cout << boolalpha << iguales;
+    */     
 }
-

@@ -373,9 +373,9 @@ _G 5
     Profile& operator+=(const Profile& profile);
     
     
-    friend std::istream& operator>>(std::istream& is, Profile profile);
+    friend std::istream& operator>>(std::istream& is, Profile& profile);
     
-private:
+//private:
     std::string _profileId; ///< Profile identifier
     KmerFreq* _vectorKmerFreq; ///< Dynamic array of KmerFreq
     int _size; ///< Number of used elements in the dynamic array _vectorKmerFreq
@@ -402,7 +402,7 @@ private:
  * @param profile the Profile object. Input parameter
  * @return @p os A reference to the output stream
  */
-std::ostream& operator<<(std::ostream& os, Profile profile);
+std::ostream& operator<<(std::ostream& os, const Profile& profile);
 
 /**
  * @brief Overloading of the stream extraction operator for Profile class.
@@ -414,6 +414,6 @@ std::ostream& operator<<(std::ostream& os, Profile profile);
  * @param profile the Profile object. Output parameter
  * @return @p is A reference to the input stream
  */
-std::istream& operator>>(std::istream& is, Profile profile);
+std::istream& operator>>(std::istream& is, Profile& profile);
 
 #endif /* PROFILE_H */

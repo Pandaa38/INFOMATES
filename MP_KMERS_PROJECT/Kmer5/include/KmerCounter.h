@@ -205,7 +205,7 @@ public:
      */
     Profile toProfile();
 
-private:
+//private:
     int** _frequency; ///< 2D matrix with the frequency of each kmer
     
     int _k; ///< Value of K (number of nucleotides in each kmer)
@@ -281,7 +281,7 @@ private:
      * @param column The column in the frequency matrix corresponding to 
      * Kmer @p kmer. Output parameter
      */
-    void getRowColumn(const Kmer& kmer, int& row, int& column) ;
+    void getRowColumn(const Kmer& kmer, int& row, int& column) const;
 
     /**
      * @brief Returns the Kmer that is defined by the provided row and column 

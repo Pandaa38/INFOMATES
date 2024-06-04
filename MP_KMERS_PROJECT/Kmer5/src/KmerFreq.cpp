@@ -70,18 +70,18 @@ void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
     }    
 }
 
-std::ostream& operator<<(std::ostream& os, KmerFreq kmerFreq){
+std::ostream& operator<<(std::ostream& os, const KmerFreq& kmerFreq){
     
     os << kmerFreq.toString();
     return os;
 }
 
-std::istream& operator>>(std::istream& is, KmerFreq kmerFreq){
+std::istream& operator>>(std::istream& is, KmerFreq& kmerFreq){
     
     int number;
     Kmer nucleotide;
     
-    is >> number >> nucleotide;
+    is >> nucleotide >> number;
     
     kmerFreq.setFrequency(number);
     kmerFreq.setKmer(nucleotide);
