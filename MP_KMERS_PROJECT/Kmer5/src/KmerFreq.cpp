@@ -46,6 +46,23 @@ std::string KmerFreq::toString() const{
     return std::string(_kmer.toString()) + " " + std::to_string(_frequency);
 }
 
+void KmerFreq::write(std::ostream& outputStream) const{
+    
+    _kmer.write(outputStream);
+    outputStream.write(reinterpret_cast<char*>(_frequency), sizeof(int));
+    
+}
+
+void KmerFreq::read(std::istream& inputStream){
+    
+    Kmer aux;
+    aux.read(inputStream);
+    
+    this->setKmer(aux);
+    
+    inputStream.read(reinterpret_cast<char*>(&_frequency), sizeof(int));
+}
+
 void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
     
     for(int i = 0; i < size; i++){
@@ -56,6 +73,7 @@ void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
 std::ostream& operator<<(std::ostream& os, KmerFreq kmerFreq){
     
     os << kmerFreq.toString();
+    return os;
 }
 
 std::istream& operator>>(std::istream& is, KmerFreq kmerFreq){
@@ -67,6 +85,8 @@ std::istream& operator>>(std::istream& is, KmerFreq kmerFreq){
     
     kmerFreq.setFrequency(number);
     kmerFreq.setKmer(nucleotide);
+    
+    return is;
 }
 
 bool operator>(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
@@ -89,7 +109,7 @@ bool operator<(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
 
 bool operator==(const KmerFreq& kmerFreq1, const KmerFreq& kmerFreq2){
     
-    return (kmerFreq1.getKmer() == kmerFreq2.getKmer() && 
+    return (kmerFreq1.getKmer().toString() == kmerFreq2.getKmer().toString() && 
             kmerFreq1.getFrequency() == kmerFreq2.getFrequency());
 }
 

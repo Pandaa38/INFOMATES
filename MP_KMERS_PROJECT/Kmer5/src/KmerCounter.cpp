@@ -14,7 +14,7 @@
  */
 
 #include <random>
-
+#include <fstream>
 #include "KmerCounter.h"
 
 using namespace std;
@@ -118,7 +118,7 @@ KmerCounter& KmerCounter::operator+=(const KmerCounter& kc){
     for (int i = 0; i < getNumRows(); i++){
         for(int j = 0; j < getNumCols(); j++){
             
-            this(i,j) += kc(i,j);            
+            (*this)(i,j) += kc(i,j);            
         }
     }
     
@@ -134,7 +134,7 @@ void KmerCounter::calculateFrequencies(const char* fileName){
         throw std::ios_base::failure(std::string("calculateFrequencies: ")
                                         + "filename cannot be opened");
     
-    initFrequencies();
+    this->initFrequencies();
     
     std::string genome;
     int total_used;
@@ -153,30 +153,31 @@ void KmerCounter::calculateFrequencies(const char* fileName){
     }
     
     delete [] kmerArray;
+    inFile.close();
 }
 
-int KmerCounter::getIndex(const std::string& kmer) const{
-    int index = 0;
-    int base = 1;
-
-    for (size_t i = 0; i < kmer.size(); i++) {
-        size_t pos = _allNucleotides.find(kmer[kmer.size()-i-1]);
-        if (pos == string::npos)
-            return -1;
-        index += pos * base;
-        base *= _allNucleotides.size();
+Profile KmerCounter::toProfile(){
+    
+    const int nActive = getNumberActiveKmers();
+    Profile profile(nActive);
+    
+    bool finished = false;
+    int nAdded = 0;
+    
+    for(int i = 0; i < getNumRows() && !finished; i++){
+        for(int j = 0; j < getNumCols() && !finished; j++){
+            
+            if( (*this)(i,j) > 0){
+                profile.at(nAdded).setFrequency((*this)(i,j));
+                profile.at(nAdded).setKmer(this->getKmer(i,j));
+                
+                nAdded++;
+                finished = nAdded >= nActive;
+            }
+        }
     }
-    return index;
-}
 
-string KmerCounter::getInvertedIndex(int index, int nCharacters) const {
-    string result(nCharacters, Kmer::MISSING_NUCLEOTIDE);
-
-    for (int i = result.size(); i > 0; i--) {
-        result[i - 1] = _allNucleotides[index % _allNucleotides.size()];
-        index = index / _allNucleotides.size();
-    }
-    return result;
+    return profile;
 }
 
 void KmerCounter::allocate(int nrow, int ncol){
@@ -238,6 +239,59 @@ int KmerCounter::getNumCols() const{
     */
     
     return pow(_allNucleotides.length(),lp);
+}
+
+int KmerCounter::getIndex(const std::string& kmer) const{
+    int index = 0;
+    int base = 1;
+
+    for (size_t i = 0; i < kmer.size(); i++) {
+        size_t pos = _allNucleotides.find(kmer[kmer.size()-i-1]);
+        if (pos == string::npos)
+            return -1;
+        index += pos * base;
+        base *= _allNucleotides.size();
+    }
+    return index;
+}
+
+string KmerCounter::getInvertedIndex(int index, int nCharacters) const {
+    string result(nCharacters, Kmer::MISSING_NUCLEOTIDE);
+
+    for (int i = result.size(); i > 0; i--) {
+        result[i - 1] = _allNucleotides[index % _allNucleotides.size()];
+        index = index / _allNucleotides.size();
+    }
+    return result;
+}
+
+void KmerCounter::getRowColumn(const Kmer& kmer, int& row, int& column){
+    
+    int rp = ( _k + 1)/2;
+    
+    row = this->getIndex(kmer.toString().substr(0,rp));
+    column = this->getIndex(kmer.toString().substr(rp));
+}
+
+Kmer KmerCounter::getKmer(int row, int column) const{
+    
+    int rp = ( _k + 1)/2;
+    int lp = _k - ( _k + 1)/2;
+    
+    std::string genome = getInvertedIndex(row, rp)+getInvertedIndex(column, lp);
+    
+    Kmer kmer(genome);
+    
+    return kmer;
+}
+
+void KmerCounter::initFrequencies(){
+    
+    for(int i; i < getNumRows(); i++){
+        for(int j; j < getNumCols(); j++){
+            (*this)(i,j) = 0;
+        }
+    }
 }
 
 const int& KmerCounter::operator()(int row, int column) const{

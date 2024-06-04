@@ -145,7 +145,7 @@ public:
      * Query method
      * @param outputStream An output stream where this object will be written
      */
-    void write(std::ostream& outputStream);
+    void write(std::ostream& outputStream) const;
     
     /**
      * @brief Reads this object from the given input stream. It reads characters

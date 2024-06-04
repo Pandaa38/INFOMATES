@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=kmer
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/kmer
+CND_ARTIFACT_NAME_Debug=kmer0
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/kmer0
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=kmer.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/kmer.tar
+CND_PACKAGE_NAME_Debug=kmer0.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/kmer0.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=kmer
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/kmer
+CND_ARTIFACT_NAME_Release=kmer0
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/kmer0
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=kmer.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/kmer.tar
+CND_PACKAGE_NAME_Release=kmer0.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/kmer0.tar
 #
 # include compiler specific variables
 #

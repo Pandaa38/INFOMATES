@@ -1,0 +1,25 @@
+==7908== Memcheck, a memory error detector
+==7908== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==7908== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==7908== Command: /home/juan/Documentos/MyProgram/MP_KMERS_PROJECT/Kmer5/./dist/LEARN/GNU-Linux/LEARN -K 1 -p human -o tests/output/human1.prf ../Genomes/human1.dna
+==7908== 
+==7908== 
+==7908== Process terminating with default action of signal 15 (SIGTERM)
+==7908==    at 0x484ED20: strlen (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7908==    by 0x112C40: main (LEARN.cpp:97)
+==7908== 
+==7908== HEAP SUMMARY:
+==7908==     in use at exit: 72,704 bytes in 1 blocks
+==7908==   total heap usage: 1 allocs, 0 frees, 72,704 bytes allocated
+==7908== 
+==7908== LEAK SUMMARY:
+==7908==    definitely lost: 0 bytes in 0 blocks
+==7908==    indirectly lost: 0 bytes in 0 blocks
+==7908==      possibly lost: 0 bytes in 0 blocks
+==7908==    still reachable: 72,704 bytes in 1 blocks
+==7908==         suppressed: 0 bytes in 0 blocks
+==7908== Reachable blocks (those to which a pointer was found) are not shown.
+==7908== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==7908== 
+==7908== For lists of detected and suppressed errors, rerun with: -s
+==7908== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

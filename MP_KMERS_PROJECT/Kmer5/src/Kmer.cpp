@@ -117,17 +117,15 @@ Kmer Kmer::complementary(const std::string& nucleotides,
     return Kmer(complemented_nucleotides);
 }
 
-/*
-void Kmer::write(std::ostream& outputStream){
+void Kmer::write(std::ostream& outputStream) const{
     
-    outputStream << _text + "\0";
+    outputStream.write(_text.c_str(), size() + 1);
 }
 
 void Kmer::read(std::istream& inputStream){
     
-    inputStream >> _text;
+    inputStream.read(reinterpret_cast<char*>(&_text), size());
 }
-*/
 
 bool Kmer::thereIsMissingNucleotide() const{
     
@@ -151,11 +149,6 @@ bool Kmer::thereIsInvalidNucleotide(const std::string& validNucleotides) const{
     return invalid;
 }
 
-//void Kmer::setText(const std::string& text){
-    
-    //_text = text;
-//}
-
 bool IsValidNucleotide(char nucleotide,const std::string& validNucleotides){
     
     bool valid = true;
@@ -174,7 +167,6 @@ void ToUpper(Kmer& kmer){
     
     kmer.toUpper();
 }
-
 
 std::ostream& operator<<(std::ostream& os, const Kmer& kmer){
     

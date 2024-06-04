@@ -69,7 +69,7 @@ public:
      * parameter
      * @return A reference to this object
      */
-    Profile operator=(const Profile& orig);
+    Profile& operator=(const Profile& orig);
 
     /**
      * @brief Returns the identifier of this profile object.

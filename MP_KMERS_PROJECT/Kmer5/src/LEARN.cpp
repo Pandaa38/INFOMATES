@@ -13,7 +13,11 @@
  * Created on 22 December 2023, 10:00
  */
 
+#include <iostream>
+#include <cstring>
+#include "KmerCounter.h"
 
+using namespace std;
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
@@ -67,18 +71,117 @@ TA 1
  * @param argv The vector of command line parameters (cstrings)
  * @return 0 If there is no error; a value > 0 if error
  */
-int main(int argc, char *argv[]) {   
+
+#include <regex>
+#include <cmath>
+
+const string VALID_NUCLEOTIDES_ADN = "ACGT";
+const string COMPLEMENTARY_NUCLEOTIDES_ADN = "TGCA";
+const string VALID_NUCLEOTIDES_ARN = "ACGU";
+const string COMPLEMENTARY_NUCLEOTIDES_ARN = "UGCA";
+const int DIM_VECTOR_KMER_FREQ = 2000;
+#define ENDL "\n"
+
+int main(int argc, char *argv[]) {  
     // Process the main() arguments
+    
+    //DEFAULT
+    /*
+     * -t (text)
+     * id unknow
+     * k = 5 (ya en el constructor)
+     * nucleotidesSet = ACGT
+     * salida = output.prf
+     */
+    /*
+    int kValue = 5;
+    char mode = 't';
+    std::string nucleotidesSet;
+    std::string id;
+    std::string output = "output.prf";
+    
+    int pos = 1;
+    bool fin = false;
+    
+    while ((pos < argc) && (!fin)) {
+        if (argv[pos][0] == '-') {
+            if (strlen(argv[pos]) == 2) { // Se necesita una letra
+                //MODE
+                if (argv[pos][1] == 't') {
+                    // Modo texto. 
+                    pos++;
+                } else if (argv[pos][1] == 'b') {
+                    mode = 'b';
+                    pos++;
+                }
+                // K VALUE
+                else if (argv[pos][1] == 'k' && (pos + 1 < argc)) {
+                    kValue = atoi(argv[pos+1]);
+                    pos+=2;
+                }
+                //PROFILE ID
+                else if (argv[pos][1] == 'p' && (pos + 1 < argc)) {
+                    id = argv[pos+1];
+                    pos+=2;
+                }
+                // VALID NUCLEOTIDES
+                else if (argv[pos][1] == 'n' && (pos + 1 < argc)) {
+                    nucleotidesSet = argv[pos+1];
+                    pos+=2;
+                }
+                // OUTPUT
+                else if (argv[pos][1] == 'o' && (pos + 1 < argc)) {
+                    output = argv[pos+1];
+                    pos+=2;
+                }
+            }//strlen(argv[pos]) == 2
+            else {
+                // Error, se ha puesto solo ‘-’
+                showEnglishHelp(cerr);
+                return 1;
+            }
+
+        }//argv[pos][0] == '-'
+        // Aquí comienza lista de ficheros de entrada. 
+        else 
+            fin = true;
+        
+    }
+    
     
     // Loop to calculate the kmer frecuencies of the input genome files using 
     // a KmerCounter object
+    KmerCounter kmerCounter(kValue);
+    KmerCounter tmp(kValue);
+    
+    if(!nucleotidesSet.empty()){
+        kmerCounter = KmerCounter(kValue,nucleotidesSet);
+        tmp = KmerCounter(kValue,nucleotidesSet);
+    }
+    
+    for(int i = pos;i < argc; i++){
+        
+        tmp.calculateFrequencies(argv[i]);
+        kmerCounter += tmp;
+    }
+    
     
     // Obtain a Profile object from the KmerCounter object
+    Profile profile = kmerCounter.toProfile();
+    if(!id.empty())
+        profile.setProfileId(id);
     
     // Zip the Profile object
+    profile.zip(true);
     
     // Sort the Profile object
+    profile.sort();
     
     // Save the Profile object in the output file
+    profile.save(output.c_str(), mode);
+     */
+    
+    Kmer kmer(3);
+    cout << kmer;
 }
 

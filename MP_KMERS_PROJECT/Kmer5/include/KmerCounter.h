@@ -17,7 +17,6 @@
 #define KMER_COUNTER_H
 
 #include <string>
-
 #include "Profile.h"
 
 /**
@@ -282,7 +281,7 @@ private:
      * @param column The column in the frequency matrix corresponding to 
      * Kmer @p kmer. Output parameter
      */
-    void getRowColumn(Kmer kmer, int row, int column);
+    void getRowColumn(const Kmer& kmer, int& row, int& column) ;
 
     /**
      * @brief Returns the Kmer that is defined by the provided row and column 
@@ -296,7 +295,7 @@ private:
      * of the correct bounds
      * @return the Kmer that is defined by the provided row and column 
      */
-    Kmer getKmer(int row, int column);
+    Kmer getKmer(int row, int column) const;
     
     /**
      * @brief Sets the frequency of each kmer to 0, that is, it fills with 0 the 

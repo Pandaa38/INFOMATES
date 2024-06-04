@@ -14,8 +14,8 @@
 #include "Profile.h"
 #include <fstream>
 
-const string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
-const string Profile::MAGIC_STRING_B="MP-KMER-B-1.0";
+const std::string Profile::MAGIC_STRING_T="MP-KMER-T-1.0";
+const std::string Profile::MAGIC_STRING_B="MP-KMER-B-1.0";
 
 Profile::Profile():_profileId("unknown"),_size(0){
     
@@ -134,7 +134,6 @@ int Profile::findKmer(const Kmer& kmer) const{
 std::string Profile::toString() const{
     
     std::string kmer_str;
-    //kmer_str = MAGIC_STRING_T + "\n";
     kmer_str += _profileId + "\n" + std::to_string(_size) + "\n";
     
     for(int i = 0; i < _size; i++){
@@ -238,10 +237,10 @@ void Profile::sort(){
     quickSort(0, _size-1);
 }
 
-void Profile::save(const char fileName[], char mode = 't') const{
+void Profile::save(const char fileName[], char mode) const{
     
     if(mode != 't' && mode != 'b')
-        throw std::invalid_argument("save: invalid mode('t' or 'b')")
+        throw std::invalid_argument("save: invalid mode('t' or 'b')");
     
     std::ofstream outFile;
     outFile.open(fileName);
@@ -253,10 +252,17 @@ void Profile::save(const char fileName[], char mode = 't') const{
     if(mode == 't'){
         //mode text
         outFile << MAGIC_STRING_T << std::endl;
-        outFile << toString();
+        //outFile << toString();
+        for(int i = 0; i < getSize(); i++){
+            outFile << _vectorKmerFreq[i] << "\n";
+        }
     }
     else{
         //mode binary
+        outFile.write(MAGIC_STRING_B.c_str(), MAGIC_STRING_B.length() + 1);
+        for(int i = 0; i < getSize(); i++){
+            _vectorKmerFreq[i].write(outFile);
+        }
     }
     
     outFile.close();
@@ -430,7 +436,7 @@ void Profile::zip(bool deleteMissing, int lowerBound){
 
 void Profile::join(const Profile& profile){
     
-    this += profile;
+    (*this) += profile;
 }
 
 const KmerFreq& Profile::operator[](int index) const{
@@ -446,13 +452,16 @@ KmerFreq& Profile::operator[](int index){
 Profile& Profile::operator+=(const KmerFreq& kmerFreq){
     
     append(kmerFreq);
+    return *this;
 }
 
 Profile& Profile::operator+=(const Profile& profile){
     
     for(int i = 0; i < profile.getSize(); i++){
-        this += profile.at(i);
+        (*this) += profile.at(i);
     }
+    
+    return *this;
 }
 
 //Private Methods
