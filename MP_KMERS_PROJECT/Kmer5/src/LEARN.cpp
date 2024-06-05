@@ -74,7 +74,7 @@ TA 1
 
 int main(int argc, char *argv[]) {  
     // Process the main() arguments
-    if(argc < 3){
+    if(argc < 2){
         showEnglishHelp(cerr);
         return 1;
     }
@@ -96,6 +96,8 @@ int main(int argc, char *argv[]) {
     int pos = 1;
     bool fin = false;
     
+    //cout << argc << endl;
+    
     while ((pos < argc) && (!fin)) {
         if (argv[pos][0] == '-') {
             if (strlen(argv[pos]) == 2) { // Se necesita una letra
@@ -116,6 +118,7 @@ int main(int argc, char *argv[]) {
                 else if (argv[pos][1] == 'p' && (pos + 1 < argc)) {
                     id = argv[pos+1];
                     pos+=2;
+                    //cout << pos << endl;
                 }
                 // VALID NUCLEOTIDES
                 else if (argv[pos][1] == 'n' && (pos + 1 < argc)) {
@@ -126,6 +129,7 @@ int main(int argc, char *argv[]) {
                 else if (argv[pos][1] == 'o' && (pos + 1 < argc)) {
                     output = argv[pos+1];
                     pos+=2;
+                    //cout << pos << endl;
                 }
                 else{
                     showEnglishHelp(cerr);
@@ -141,13 +145,14 @@ int main(int argc, char *argv[]) {
 
         }//argv[pos][0] == '-'
         // Aquí comienza lista de ficheros de entrada.
-        //if(pos + 1 <= argc){
-        //    showEnglishHelp(cerr);
-        //    return 1;
-        //}
         else 
             fin = true;
-        
+    }
+    
+    if(pos + 1 >= argc){
+            
+            showEnglishHelp(cerr);
+            return 1;
     }
         
     // Loop to calculate the kmer frecuencies of the input genome files using 
@@ -179,7 +184,7 @@ int main(int argc, char *argv[]) {
     profile.sort();
     
     // Save the Profile object in the output file
-    profile.save(output.c_str());
+    profile.save(output.c_str(), mode);
      
     
     /*

@@ -12,11 +12,12 @@ Kmer 5:
 	KmerFreq terminado  
 	Profile terminado  
 	KmerCounter terminado(muchos fallos)  
-	LEARN terminado
+	LEARN (pulir examinar argumentos)  
 	CLASIFY  
 	  
 Pasar test de unida para detectar los fallos  
 error: test 106, 107, 129
+
 
 	
 

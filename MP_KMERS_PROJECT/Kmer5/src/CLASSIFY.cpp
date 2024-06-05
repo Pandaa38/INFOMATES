@@ -10,6 +10,12 @@
  * Created on 22 December 2023, 10:00
  */
 
+#include <iostream>
+#include <cstring>
+#include "KmerCounter.h"
+
+using namespace std;
+
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
@@ -71,24 +77,122 @@ Final decision: homo sapiens with a distance of 0.0557804
  * @param argv The vector of command line parameters (cstrings)
  * @return 0 If there is no error; a value > 0 if error
  */
+
+
+int min_dist(const double* distances, int size){
+    
+    int pos = 0;
+    
+    for(int i = 1; i < size; i++){
+        
+        if(distances[i] <= distances[pos])
+            pos = i;
+    }
+    
+    return pos;
+}
+
 int main(int argc, char *argv[]) {
     // Process the main() arguments
+    if(argc < 3){
+        showEnglishHelp(cerr);
+        return 1;
+    }
+    //DEFAULT
+    /* (en el constructor)
+     * k = 5
+     * nucleotidesSet = DEFAULT_VALID_NUCLEOTIDES
+     */
+    
+    int kValue = 5;
+    std::string nucleotidesSet;
+    
+    int pos = 1;
+    bool fin = false;
+    
+    while ((pos < argc) && (!fin)) {
+        if (argv[pos][0] == '-') {
+            if (strlen(argv[pos]) == 2) { // Se necesita una letra
+                
+                // K VALUE
+                if (argv[pos][1] == 'k' && (pos + 1 < argc)) {
+                    kValue = atoi(argv[pos+1]);
+                    pos+=2;
+                }
+                // NUCLEOTIDES SET
+                else if (argv[pos][1] == 'n' && (pos + 1 < argc)) {
+                    nucleotidesSet = (argv[pos+1]);
+                    pos+=2;
+                }
+                else{
+                    showEnglishHelp(cerr);
+                    return 1;
+                }
+                
+            }//strlen(argv[pos]) == 2
+            else {
+                // Error, se ha puesto solo ‘-’
+                showEnglishHelp(cerr);
+                return 1;
+            }
+        }//argv[pos][0] == '-'
+        // Aquí comienza lista de ficheros de entrada.
+        else 
+            fin = true;
+    }
+    if(pos + 1 >= argc){
+            
+            showEnglishHelp(cerr);
+            return 1;
+    }
     
     // Calculate the kmer frecuencies of the input genome file using 
     //    a KmerCounter object
+    KmerCounter kmerCounter(kValue);
+    if(!nucleotidesSet.empty())
+        kmerCounter = KmerCounter(kValue, nucleotidesSet);
+    
+    kmerCounter.calculateFrequencies(argv[pos]);
     
     // Obtain a Profile object for the input genome from the KmerCounter object
+    Profile base = kmerCounter.toProfile();
     
     // Zip the for the input genome Profile object
+    base.zip(true);
     
     // Sort the for the input genome Profile object
+    base.sort();
     
     // Use a loop to print the distance from the input genome to 
     //   each one of the provided profile models
+    int num_candidates = argc - pos - 1;
+    
+    Profile *candidates = new Profile [num_candidates];
+    double *distances = new double [num_candidates];
+    
+    for(int i = 0; i < num_candidates; i++){
+        candidates[i].load(argv[pos+1 + i]);
+    }
+    
+    for(int i = 0; i < num_candidates; i++){
+        
+        distances[i] = base.getDistance(candidates[i]);
+        cout << "Distance to " << argv[pos+1 + i] << " (" 
+             << candidates[i].getProfileId()<< "): " << distances[i] << endl;
+    }
+    int index = min_dist(distances, num_candidates);
     
     // Print the identifier and distance to the closest profile
+    cout << endl;
+    cout << "Final decision: " << candidates[index].getProfileId()
+         << " with a distance of " << distances[index] << endl;
     
+    delete [] candidates;
+    delete [] distances;
     
- 
+    candidates = nullptr;
+    distances = nullptr;    
+    
+    return 0;
 }
 

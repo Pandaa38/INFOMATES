@@ -375,7 +375,7 @@ _G 5
     
     friend std::istream& operator>>(std::istream& is, Profile& profile);
     
-//private:
+private:
     std::string _profileId; ///< Profile identifier
     KmerFreq* _vectorKmerFreq; ///< Dynamic array of KmerFreq
     int _size; ///< Number of used elements in the dynamic array _vectorKmerFreq

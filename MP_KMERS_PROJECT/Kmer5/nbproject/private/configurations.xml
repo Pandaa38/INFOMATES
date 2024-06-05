@@ -92,8 +92,9 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>./dist/LEARN/GNU-Linux/LEARN  -k 2 -p 'homo sapiens' -o tests/output/human1_k2.prf ../Genomes/human1.dna</runcommandpicklistitem>
+          <runcommandpicklistitem>./dist/LEARN/GNU-Linux/LEARN  -p human -o tests/output/human1.prf</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>./dist/LEARN/GNU-Linux/LEARN  -k 2 -p 'homo sapiens' -o tests/output/human1_k2.prf ../Genomes/human1.dna</runcommand>
+        <runcommand>./dist/LEARN/GNU-Linux/LEARN  -p human -o tests/output/human1.prf</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

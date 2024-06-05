@@ -129,7 +129,7 @@ int main(int argc, char* argv[]) {
     
     
     // Allocate a dynamic array of Profiles
-    int num_candidates = argc - pos_base -1;
+    int num_candidates = argc - pos_base - 1;
     
     Profile *candidates = new Profile [num_candidates];
     double *distances = new double [num_candidates];

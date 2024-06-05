@@ -1,1 +1,0 @@
-Test #1 [tests//01.1learn_missingParameters1.test] valgrind --leak-check=full  ./dist/LEARN/GNU-Linux/LEARN 
