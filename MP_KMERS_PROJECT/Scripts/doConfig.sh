@@ -472,7 +472,7 @@ WHITE='\033[1;37m'
 # Use of memory leak detector
 USE_VALGRIND=NO
 # Seconds to wait before killing a (possibly) hang program
-SECS_WAIT=15
+SECS_WAIT=50
 # Executes the script in interactive or batch mode
 DO_INTERACTIVE=YES
 # Forces the name of the ZIP. If left empty, the zip uses the name of the root foder

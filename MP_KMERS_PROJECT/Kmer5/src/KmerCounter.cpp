@@ -37,7 +37,8 @@ KmerCounter::KmerCounter(int k, std::string validNucleotides)
     int nrow = getNumRows();
     int ncol = getNumCols();
    
-    allocate(nrow, ncol);    
+    allocate(nrow, ncol);
+    initFrequencies();    
 } 
 
 KmerCounter::KmerCounter(const KmerCounter& orig){
@@ -180,7 +181,6 @@ Profile KmerCounter::toProfile(){
 void KmerCounter::allocate(int nrow, int ncol){
     
     //array 1D con array apuntado a pos
-    
     _frequency = new int* [nrow];
     _frequency[0] = new int [nrow * ncol];
     
@@ -215,28 +215,13 @@ void KmerCounter::copy(const KmerCounter& other){
 
 int KmerCounter::getNumRows() const{
     int rp = ( _k + 1)/2;
-    /*
-    int nrow = 1;
-    
-    for(int i = 0; i < rp; i++){
-        nrow *= _allNucleotides.length();
-    }
-    */
-    
+
     return pow(_allNucleotides.length(),rp);
 }
 
 int KmerCounter::getNumCols() const{
     int lp = _k - ( _k + 1)/2;
-    
-    /*
-    int ncol = 1;
-    
-    for(int i = 0; i < lp; i++){
-        ncol *= _allNucleotides.length();
-    }
-    */
-    
+
     return pow(_allNucleotides.length(),lp);
 }
 
@@ -290,15 +275,12 @@ Kmer KmerCounter::getKmer(int row, int column) const{
 }
 
 void KmerCounter::initFrequencies(){
-    
-    (*this) = KmerCounter(getK(), _validNucleotides);
-    /*
-    for(int i; i < getNumRows(); i++){
-        for(int j; j < getNumCols(); j++){
+        
+    for(int i = 0; i < getNumRows(); i++){
+        for(int j = 0; j < getNumCols(); j++){
             (*this)(i,j) = 0;
         }
-    }
-    */
+    }    
 }
 
 const int& KmerCounter::operator()(int row, int column) const{

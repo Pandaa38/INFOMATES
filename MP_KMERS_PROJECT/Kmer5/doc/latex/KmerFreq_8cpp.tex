@@ -1,0 +1,310 @@
+\hypertarget{KmerFreq_8cpp}{}\doxysection{src/\+Kmer\+Freq.cpp File Reference}
+\label{KmerFreq_8cpp}\index{src/KmerFreq.cpp@{src/KmerFreq.cpp}}
+{\ttfamily \#include \char`\"{}Kmer\+Freq.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{KmerFreq_8cpp_a8cdc8bddf5c0a8097f06e8e3fa3653a3}\label{KmerFreq_8cpp_a8cdc8bddf5c0a8097f06e8e3fa3653a3}} 
+void {\bfseries copy\+\_\+kmer} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} $\ast$origen, \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} $\ast$destino, int size)
+\item 
+std\+::ostream \& \mbox{\hyperlink{KmerFreq_8cpp_a0d43865a65e05cf702f043338d05f961}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq)
+\begin{DoxyCompactList}\small\item\em Overloading of the stream insertion operator for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+std\+::istream \& \mbox{\hyperlink{KmerFreq_8cpp_aeaeee1edff493295727e8c8acf27f00a}{operator$>$$>$}} (std\+::istream \&is, \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq)
+\begin{DoxyCompactList}\small\item\em Overloading of the stream extraction operator for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_adbe5340c45a13ab89d30250cf4d41185}{operator$>$}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the relational operator $>$ for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_a2e7b5f5af57dbc787ed92da207ed1739}{operator$<$}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator $<$ for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_ac020f5dfc2f156dc028cf8498a7659b1}{operator==}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator == for \mbox{\hyperlink{classKmer}{Kmer}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_ac93643a037f973cb790c5767ae079ba9}{operator!=}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator != for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_ad9993dee69ace19ba7615b559ceea776}{operator$<$=}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator $<$= for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{KmerFreq_8cpp_a0b357008385fc89ab46dc942fb03b17b}{operator$>$=}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq1, const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq2)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator $>$= for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Juan Reche Aguilar
+\end{DoxyAuthor}
+Created on 27 de octubre de 2023, 11\+:03 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{KmerFreq_8cpp_ac93643a037f973cb790c5767ae079ba9}\label{KmerFreq_8cpp_ac93643a037f973cb790c5767ae079ba9}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator != for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+{\em kmer\+Freq2} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two kmer\+Freq1 are not equals (see operator==); false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 116 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{116                                                                      \{}
+\DoxyCodeLine{117     }
+\DoxyCodeLine{118     \textcolor{keywordflow}{return} !(kmerFreq1 == kmerFreq2);}
+\DoxyCodeLine{119 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_a2e7b5f5af57dbc787ed92da207ed1739}\label{KmerFreq_8cpp_a2e7b5f5af57dbc787ed92da207ed1739}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator $<$ for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+{\em kmer\+Freq2} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if kmer\+Freq1 $<$ kmer\+Freq2; false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{106                                                                     \{}
+\DoxyCodeLine{107     \textcolor{keywordflow}{return} kmerFreq2 > kmerFreq1;}
+\DoxyCodeLine{108 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_a0d43865a65e05cf702f043338d05f961}\label{KmerFreq_8cpp_a0d43865a65e05cf702f043338d05f961}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq }\end{DoxyParamCaption})}
+
+
+
+Overloading of the stream insertion operator for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream to be used. Output parameter \\
+\hline
+{\em kmer\+Freq} & the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily os} A reference to the output stream 
+\end{DoxyReturn}
+
+
+Definition at line 73 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73                                                                 \{}
+\DoxyCodeLine{74     }
+\DoxyCodeLine{75     os << kmerFreq.\mbox{\hyperlink{classKmerFreq_ac00840559fe053f4efc4d9d9a546d660}{toString}}();}
+\DoxyCodeLine{76     \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{77 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_ad9993dee69ace19ba7615b559ceea776}\label{KmerFreq_8cpp_ad9993dee69ace19ba7615b559ceea776}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily bool operator$<$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator $<$= for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+{\em kmer\+Freq2} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if kmer\+Freq1 $<$= kmer\+Freq2; false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{121                                                                      \{}
+\DoxyCodeLine{122     }
+\DoxyCodeLine{123     \textcolor{keywordflow}{return} (kmerFreq1 < kmerFreq2 || kmerFreq1 == kmerFreq2);}
+\DoxyCodeLine{124 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_ac020f5dfc2f156dc028cf8498a7659b1}\label{KmerFreq_8cpp_ac020f5dfc2f156dc028cf8498a7659b1}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator == for \mbox{\hyperlink{classKmer}{Kmer}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & a \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. Input parameter \\
+\hline
+{\em kmer\+Freq2} & a \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two kmers contains the same pair Kmer-\/frequency; false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 110 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{110                                                                      \{}
+\DoxyCodeLine{111     }
+\DoxyCodeLine{112     \textcolor{keywordflow}{return} (kmerFreq1.\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}().\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}() == kmerFreq2.\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}().\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}() \&\& }
+\DoxyCodeLine{113             kmerFreq1.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}() == kmerFreq2.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}());}
+\DoxyCodeLine{114 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_adbe5340c45a13ab89d30250cf4d41185}\label{KmerFreq_8cpp_adbe5340c45a13ab89d30250cf4d41185}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the relational operator $>$ for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & The first object to be compared. Input parameter \\
+\hline
+{\em kmer\+Freq2} & The second object to be compared. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the frequency of {\ttfamily kmer\+Freq1} is greater than that of {\ttfamily kmer\+Freq2} or if both frequencies are equals and the text of {\ttfamily kmer\+Freq1} is minor than the text of {\ttfamily kmer\+Freq2}; false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 92 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{92                                                                     \{}
+\DoxyCodeLine{93     }
+\DoxyCodeLine{94     \textcolor{keywordtype}{bool} bigger = \textcolor{keyword}{false};}
+\DoxyCodeLine{95     }
+\DoxyCodeLine{96     \textcolor{keywordflow}{if}(kmerFreq1.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}() > kmerFreq2.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}())}
+\DoxyCodeLine{97         bigger = \textcolor{keyword}{true};}
+\DoxyCodeLine{98     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(kmerFreq1.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}() == kmerFreq2.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}())\{}
+\DoxyCodeLine{99         }
+\DoxyCodeLine{100         \textcolor{keywordflow}{if}(kmerFreq1.\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}().\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}() < kmerFreq2.\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}().\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}())}
+\DoxyCodeLine{101             bigger = \textcolor{keyword}{true};}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103     \textcolor{keywordflow}{return} bigger;}
+\DoxyCodeLine{104 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_a0b357008385fc89ab46dc942fb03b17b}\label{KmerFreq_8cpp_a0b357008385fc89ab46dc942fb03b17b}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily bool operator$>$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq1,  }\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq2 }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator $>$= for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq1} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+{\em kmer\+Freq2} & a \mbox{\hyperlink{classKmer}{Kmer}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if kmer\+Freq1 $>$= kmer\+Freq2; false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{126                                                                      \{}
+\DoxyCodeLine{127     }
+\DoxyCodeLine{128     \textcolor{keywordflow}{return} (kmerFreq1 > kmerFreq2 || kmerFreq1 == kmerFreq2);}
+\DoxyCodeLine{129 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{KmerFreq_8cpp_aeaeee1edff493295727e8c8acf27f00a}\label{KmerFreq_8cpp_aeaeee1edff493295727e8c8acf27f00a}} 
+\index{KmerFreq.cpp@{KmerFreq.cpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!KmerFreq.cpp@{KmerFreq.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily std\+::istream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{\mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq }\end{DoxyParamCaption})}
+
+
+
+Overloading of the stream extraction operator for \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is} & The input stream to be used. Output parameter \\
+\hline
+{\em kmer\+Freq} & the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily is} A reference to the input stream 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file Kmer\+Freq.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79                                                           \{}
+\DoxyCodeLine{80     }
+\DoxyCodeLine{81     \textcolor{keywordtype}{int} number;}
+\DoxyCodeLine{82     \mbox{\hyperlink{classKmer}{Kmer}} nucleotide;}
+\DoxyCodeLine{83     }
+\DoxyCodeLine{84     is >> nucleotide >> number;}
+\DoxyCodeLine{85     }
+\DoxyCodeLine{86     kmerFreq.\mbox{\hyperlink{classKmerFreq_a02f30c44425e7b245e46253c5e532930}{setFrequency}}(number);}
+\DoxyCodeLine{87     kmerFreq.\mbox{\hyperlink{classKmerFreq_a4eb114f842390e0091cda7a2aab9d8ec}{setKmer}}(nucleotide);}
+\DoxyCodeLine{88     }
+\DoxyCodeLine{89     \textcolor{keywordflow}{return} is;}
+\DoxyCodeLine{90 \}}
+
+\end{DoxyCode}

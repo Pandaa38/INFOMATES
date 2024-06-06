@@ -73,6 +73,7 @@ TA 1
  */
 
 int main(int argc, char *argv[]) {  
+    
     // Process the main() arguments
     if(argc < 2){
         showEnglishHelp(cerr);
@@ -95,8 +96,6 @@ int main(int argc, char *argv[]) {
     
     int pos = 1;
     bool fin = false;
-    
-    //cout << argc << endl;
     
     while ((pos < argc) && (!fin)) {
         if (argv[pos][0] == '-') {
@@ -185,32 +184,5 @@ int main(int argc, char *argv[]) {
     
     // Save the Profile object in the output file
     profile.save(output.c_str(), mode);
-     
     
-    /*
-     * ERROR CON ESCRIBIR EN BINARIO
-    Profile l1;
-    Profile l2;
-    l1.setProfileId("Test1");
-    KmerFreq kmf;
-    for (int i = 0; i < 10; i++) {
-        Kmer kmer(i + 1);
-        kmf.setKmer(kmer);
-        kmf.setFrequency(10 - i);
-        l1.append(kmf);
-        kmer.at(0) = 'A';
-        kmf.setKmer(kmer);
-        kmf.setFrequency(10 - i);
-        l1.append(kmf);
-    }
-    l1.sort();
-    
-    const char* fileName = "tests/output/testb_save.bgr";
-    l1.save(fileName, 'b');
-    
-    l2.load(fileName);
-    bool iguales = true;
-    iguales = l1.toString() == l2.toString();
-    cout << boolalpha << iguales;
-    */     
 }

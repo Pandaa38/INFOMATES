@@ -31,7 +31,6 @@ Profile::Profile(int size) : _profileId("unknown"), _size(size){
 }
 
 Profile::Profile(const Profile& orig){
-    
     this -> copy(orig);
 }
 
@@ -251,8 +250,7 @@ void Profile::save(const char fileName[], char mode) const{
         // Open file in binary mode
         outFile.open(fileName, std::ios::binary);
     }
-    
-    
+        
     if (!outFile) {
         throw std::ios_base::failure("save: Error opening output file");
     }
@@ -260,17 +258,14 @@ void Profile::save(const char fileName[], char mode) const{
     if(mode == 't'){
         // text mode
         outFile << MAGIC_STRING_T << std::endl;
-        //outFile << toString();
-        
-        outFile <<  _profileId + "\n" + std::to_string(_size) + "\n";
-        for(int i = 0; i < getSize(); i++){
-            outFile << _vectorKmerFreq[i] << "\n";
-        }
+
+        outFile << (*this);
     }
     else{
         // binary mode
+        outFile << MAGIC_STRING_B << std::endl;
+        outFile <<  _profileId + "\n" + std::to_string(_size) + "\n";
         
-        outFile.write(MAGIC_STRING_B.c_str(), MAGIC_STRING_B.length() + 1);
         for(int i = 0; i < getSize(); i++){
             _vectorKmerFreq[i].write(outFile);
         }
@@ -278,15 +273,13 @@ void Profile::save(const char fileName[], char mode) const{
     
     outFile.close();
     
-    if (!outFile) {
-        throw std::ios_base::failure("save: Error writting to output file");
-    }
+    //if (!outFile) {
+    //    throw std::ios_base::failure("save: Error writting to output file");
+    //}
 }
 
 void Profile::load(const char fileName[]){
-   
-    dellocate();
-    
+       
     std::ifstream inFile;
     inFile.open(fileName);
     
@@ -304,54 +297,46 @@ void Profile::load(const char fileName[]){
                                         + ("is found in the given file"));
     }
     
-    std::getline(inFile, _profileId);
-        
-    if(!inFile){
-        inFile.close();
-        throw std::ios_base::failure("load: Error reading from input file: id");
-    }
+    dellocate();
     
-    int size;
-    inFile >> size;
-        
-    if(!inFile){
-        inFile.close();
-        throw std::ios_base::failure("load: Error reading from input file: size");
+    if(magic_str == MAGIC_STRING_T){
+        inFile >> (*this);
     }
-    if(_size < 0){
-        inFile.close();
-        throw std::out_of_range(std::string("load: The number of kmers in ")+
-                ("the given file exceeds the maximun capacity or is negative"));
-    }
-    
-    int freq;
-    std::string nucleotide;
-    KmerFreq next_kmerfreq;
-    
-    for(int i = 0; i < size; i++){
-        
-        inFile >> nucleotide;
-        if(!inFile){
+    else{
+
+        std::getline(inFile, _profileId);
+
+        if (!inFile) {
             inFile.close();
-            throw std::ios_base::failure("load: Error reading from input file: nucleotide");
+            throw std::ios_base::failure("load: Error reading from input file: id");
+        }
+
+        int size;
+        inFile >> size;
+        inFile.ignore();
+
+        if (!inFile) {
+            inFile.close();
+            throw std::ios_base::failure("load: Error reading from input file: size");
+        }
+        if (size < 0) {
+            inFile.close();
+            throw std::out_of_range(std::string("load: The number of kmers in ")+
+                    ("the given file exceeds the maximun capacity or is negative"));
         }
         
-        inFile >> freq;
-        if(!inFile){
-            inFile.close();
-            throw std::ios_base::failure("load: Error reading from input file: freq");
+        KmerFreq aux;
+        for(int i = 0; i < size ; i++){
+            aux.read(inFile);
+            (*this) += aux;
+            //append(aux);
         }
-        
-        next_kmerfreq.setKmer(Kmer(nucleotide));
-        next_kmerfreq.setFrequency(freq);
-        
-        append(next_kmerfreq);
     }
     
     inFile.close();
     
-    if(!inFile)
-        throw std::ios_base::failure("load: Error reading from input file");
+//    if(!inFile)
+//        throw std::ios_base::failure("load: Error closing");
 }
 
 void Profile::append(const KmerFreq& kmerFreq){
@@ -527,13 +512,14 @@ std::istream& operator>>(std::istream& is, Profile& profile){
     std::string id;
     int n_kmer;
     
-    is >> id >> n_kmer;
+    std::getline(is, id);
+    
+    is >> n_kmer;
     
     profile.setProfileId(id);
     profile.allocate(n_kmer);  
                               
     profile._size = n_kmer;
-    
     
     KmerFreq kmerfreq_aux;
     

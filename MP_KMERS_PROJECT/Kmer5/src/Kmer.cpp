@@ -124,7 +124,18 @@ void Kmer::write(std::ostream& outputStream) const{
 
 void Kmer::read(std::istream& inputStream){
     
-    inputStream.read(reinterpret_cast<char*>(&_text), size());
+    //hacer bucle leer caracter a caracter
+    std::string kmero;
+    char caracter;
+    
+    do{
+        inputStream.read(reinterpret_cast<char*>(&caracter), sizeof(char));
+        if(caracter != '\0'){
+            kmero += caracter;
+        }
+    }while(caracter != '\0');
+    
+    _text = kmero;
 }
 
 bool Kmer::thereIsMissingNucleotide() const{

@@ -49,7 +49,7 @@ std::string KmerFreq::toString() const{
 void KmerFreq::write(std::ostream& outputStream) const{
     
     _kmer.write(outputStream);
-    outputStream.write(reinterpret_cast<char*>(_frequency), sizeof(int));
+    outputStream.write(reinterpret_cast<const char*>(&_frequency), sizeof(int));
     
 }
 
@@ -72,7 +72,7 @@ void copy_kmer(const KmerFreq *origen, KmerFreq *destino, int size){
 
 std::ostream& operator<<(std::ostream& os, const KmerFreq& kmerFreq){
     
-    os << kmerFreq.toString();
+    os << kmerFreq.getKmer() << " " << kmerFreq.getFrequency();
     return os;
 }
 

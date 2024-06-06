@@ -90,11 +90,12 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>./dist/LEARN/GNU-Linux/LEARN  -k 2 -p 'homo sapiens' -o tests/output/human1_k2.prf ../Genomes/human1.dna</runcommandpicklistitem>
           <runcommandpicklistitem>./dist/LEARN/GNU-Linux/LEARN  -p human -o tests/output/human1.prf</runcommandpicklistitem>
+          <runcommandpicklistitem>./dist/CLASSIFY/GNU-Linux/CLASSIFY  ../Genomes/unknownACGT.dna ../Genomes/human_chr6_s60000_l500000.prf ../Genomes/drosophila_chr2L_s1_l500000.prf</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>./dist/LEARN/GNU-Linux/LEARN  -p human -o tests/output/human1.prf</runcommand>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -125,6 +126,7 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
+          <runcommandpicklistitem>./dist/CLASSIFY/GNU-Linux/CLASSIFY  ../Genomes/unknownACGT.dna ../Genomes/human_chr6_s60000_l500000.prf ../Genomes/drosophila_chr2L_s1_l500000.prf</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}"</runcommand>

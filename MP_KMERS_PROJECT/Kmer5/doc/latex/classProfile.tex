@@ -1,0 +1,1198 @@
+\hypertarget{classProfile}{}\doxysection{Profile Class Reference}
+\label{classProfile}\index{Profile@{Profile}}
+
+
+It defines a model (profile) for a given biological species. It contains a vector of pairs Kmer-\/frequency (objects of the class \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}}) and an identifier (string) of the profile.  
+
+
+
+
+{\ttfamily \#include $<$Profile.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classProfile_a4eea708cdbed0262d9e7ddbe3f1e3f89}\label{classProfile_a4eea708cdbed0262d9e7ddbe3f1e3f89}} 
+\mbox{\hyperlink{classProfile_a4eea708cdbed0262d9e7ddbe3f1e3f89}{Profile}} ()
+\begin{DoxyCompactList}\small\item\em Base constructor. It builds a \mbox{\hyperlink{classProfile}{Profile}} object with \char`\"{}unknown\char`\"{} as identifier, and an empty vector of pairs Kmer-\/frequency. The vector will have Kmer\+::\+INITIAL\+\_\+\+CAPACITY as initial capacity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile_a7c775ded698a62c74cf8a60f965a3175}{Profile}} (int size)
+\begin{DoxyCompactList}\small\item\em It builds a \mbox{\hyperlink{classProfile}{Profile}} object with \char`\"{}unknown\char`\"{} as identifier, and a vector with a size of {\ttfamily size} pairs Kmer-\/frequency. The vector will also have {\ttfamily size} as initial capacity. Each pair will be initialized as \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}} for the \mbox{\hyperlink{classKmer}{Kmer}} and 0 for the frequency. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile_ab24ce27cac3af0470d3d9dff259d40af}{Profile}} (const \mbox{\hyperlink{classProfile}{Profile}} \&orig)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classProfile_a58fa758a59bc4ee3c1a9980e360e4e98}\label{classProfile_a58fa758a59bc4ee3c1a9980e360e4e98}} 
+\mbox{\hyperlink{classProfile_a58fa758a59bc4ee3c1a9980e360e4e98}{$\sim$\+Profile}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile}{Profile}} \& \mbox{\hyperlink{classProfile_abcd9eb81e41916bfa3e6a2e70d77ec36}{operator=}} (const \mbox{\hyperlink{classProfile}{Profile}} \&orig)
+\begin{DoxyCompactList}\small\item\em Overloading of the assignment operator for \mbox{\hyperlink{classProfile}{Profile}} class. Modifier method. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classProfile_a468b394b3d808644f78fb45af72c0533}{get\+Profile\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Returns the identifier of this profile object. Query method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_a61f455b03b0842bfeaebe404de23e0f6}{set\+Profile\+Id}} (const std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em Sets a new identifier for this profile object. Modifier method. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& \mbox{\hyperlink{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}{at}} (int index) const
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position of the vector in this object. Query method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& \mbox{\hyperlink{classProfile_a05a62606369c53b9a6f148510b983fdc}{at}} (int index)
+\begin{DoxyCompactList}\small\item\em Gets a reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position of the vector in this object Query and modifier method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classProfile_a35d3903904bea29113171ee3c61a0b80}{get\+Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects. Query method. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classProfile_ac7fdfdcdbdb4b1042c3378e7fd2b87a3}{get\+Distance}} (const \mbox{\hyperlink{classProfile}{Profile}} \&other\+Profile) const
+\begin{DoxyCompactList}\small\item\em Gets the distance between this \mbox{\hyperlink{classProfile}{Profile}} object ( $P_1$) and the given argument object {\ttfamily other\+Profile} ( $P_2$). The distance between two Profiles $P_1$ and $P_2$ is calculated in the following way\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classProfile_a276a6053846192c47c2683bddaf4cabd}{find\+Kmer}} (const \mbox{\hyperlink{classKmer}{Kmer}} \&kmer, int initial\+Pos, int final\+Pos) const
+\begin{DoxyCompactList}\small\item\em Searchs the given kmer in the list of kmers in this \mbox{\hyperlink{classProfile}{Profile}}, but only in positions from initial\+Pos to final\+Pos (both included). If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the first kmer in the list of kmers and this-\/$>$\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{get\+Size()}}-\/1 the last kmer. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classProfile_a5d70a275b94cc9a75d2a95208609a9d5}{find\+Kmer}} (const \mbox{\hyperlink{classKmer}{Kmer}} \&kmer) const
+\begin{DoxyCompactList}\small\item\em Searchs the given kmer in the list of kmers in this \mbox{\hyperlink{classProfile}{Profile}}. If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the first kmer in the list of kmers and this-\/$>$\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{get\+Size()}}-\/1 the last kmer. Query method. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classProfile_aebf59be07939461a353f8875c53439da}{to\+String}} () const
+\begin{DoxyCompactList}\small\item\em Obtains a string with the following content\+: \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classProfile_a59f3bf32901134540eca8fcadac295cc}\label{classProfile_a59f3bf32901134540eca8fcadac295cc}} 
+void {\bfseries swap\+Elements} (int first, int second)
+\item 
+\mbox{\Hypertarget{classProfile_a2622ef8c79e698e96ec21d82d2bb7a18}\label{classProfile_a2622ef8c79e698e96ec21d82d2bb7a18}} 
+void {\bfseries quick\+Sort} (int first, int last)
+\item 
+\mbox{\Hypertarget{classProfile_a533035031c7b3935237c7ec63229fb88}\label{classProfile_a533035031c7b3935237c7ec63229fb88}} 
+int {\bfseries split} (int first, int last)
+\item 
+\mbox{\Hypertarget{classProfile_a063df27bfafe92a883e2f09bb01dce77}\label{classProfile_a063df27bfafe92a883e2f09bb01dce77}} 
+void {\bfseries selection\+Sort} ()
+\item 
+\mbox{\Hypertarget{classProfile_a570418ae069bf73b6c41802ec4925a67}\label{classProfile_a570418ae069bf73b6c41802ec4925a67}} 
+void \mbox{\hyperlink{classProfile_a570418ae069bf73b6c41802ec4925a67}{sort}} ()
+\begin{DoxyCompactList}\small\item\em Sorts the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in decreasing order of frequency. If two \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects have the same frequency, then the alphabetical order of the kmers of those objects will be considered (the object with a kmer that comes first alphabetically will appear first). Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_ace8940dd5a2eca67f1dacb0ecaf754ea}{save}} (const char file\+Name\mbox{[}$\,$\mbox{]}, char mode=\textquotesingle{}t\textquotesingle{}) const
+\begin{DoxyCompactList}\small\item\em Saves this \mbox{\hyperlink{classProfile}{Profile}} object in the given file. Query method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_a13cd5a8edb2b02ac2d86ac87d8be4eab}{load}} (const char file\+Name\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Loads into this object the \mbox{\hyperlink{classProfile}{Profile}} object stored in the given file. Note that this method should remove any Kmer-\/frequency pairs that this object previously contained. Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_af14dbca99de21a387371ee3f51bef60b}{append}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq)
+\begin{DoxyCompactList}\small\item\em Appends a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} to this \mbox{\hyperlink{classProfile}{Profile}} object. If the kmer is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_a773c29240773a3eec195cf42ac90d265}{normalize}} (const std\+::string \&valid\+Nucleotides)
+\item 
+void \mbox{\hyperlink{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}{delete\+Pos}} (int pos)
+\begin{DoxyCompactList}\small\item\em Deletes the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object from the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in this object at the position {\ttfamily pos}. We consider that the first element has position 0, and the last element position size()-\/1. Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_ad4b354430500852139736ec518ccbd40}{zip}} (bool delete\+Missing=false, int lower\+Bound=0)
+\begin{DoxyCompactList}\small\item\em Deletes the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects from the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in this object which verifies one the following two criteria\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classProfile_a547825ab66a44ec358345df30d77c627}{join}} (const \mbox{\hyperlink{classProfile}{Profile}} \&profile)
+\begin{DoxyCompactList}\small\item\em Appends to this \mbox{\hyperlink{classProfile}{Profile}} object, the list of pairs ~\newline
+ kmer-\/frequency objects contained in the \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile}. This method uses the method \mbox{\hyperlink{classProfile_af14dbca99de21a387371ee3f51bef60b}{append(const Kmer\+Freq\& kmer\+Freq)}} to append the pairs kmer-\/frequency contained in the argument \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile} Modifier method. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& \mbox{\hyperlink{classProfile_aec0d39ec9fb9cc300dec1d4b3ae36267}{operator\mbox{[}$\,$\mbox{]}}} (int index) const
+\begin{DoxyCompactList}\small\item\em Overloading of the \mbox{[}\mbox{]} operator for \mbox{\hyperlink{classProfile}{Profile}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& \mbox{\hyperlink{classProfile_a994ef4d9d0c21dfb299697b097e81374}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\begin{DoxyCompactList}\small\item\em Overloading of the \mbox{[}\mbox{]} operator for \mbox{\hyperlink{classProfile}{Profile}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile}{Profile}} \& \mbox{\hyperlink{classProfile_a76c17739fb9d67cd2e9c0a7d3a1de564}{operator+=}} (const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&kmer\+Freq)
+\begin{DoxyCompactList}\small\item\em Overloading of the += operator with a \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} parameter. It appends to this \mbox{\hyperlink{classProfile}{Profile}} object a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}}. If the kmer is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile}{Profile}} \& \mbox{\hyperlink{classProfile_ad853bc62e6c80c42de56a255d844ea74}{operator+=}} (const \mbox{\hyperlink{classProfile}{Profile}} \&profile)
+\begin{DoxyCompactList}\small\item\em Overloading of the += operator with a \mbox{\hyperlink{classProfile}{Profile}} parameter. For each kmer in the given \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile}, if that kmer is found in this object, then its frequency is increased with the one in {\ttfamily profile}. If not, a copy of the kmer-\/pair is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::istream \& \mbox{\hyperlink{classProfile_a9442d4828efc90e26089c6000c682fa8}{operator$>$$>$}} (std\+::istream \&is, \mbox{\hyperlink{classProfile}{Profile}} \&profile)
+\begin{DoxyCompactList}\small\item\em Overloading of the stream extraction operator for \mbox{\hyperlink{classProfile}{Profile}} class. Note that this operator should remove any Kmer-\/frequency pairs that the argument \mbox{\hyperlink{classProfile}{Profile}} object previously contained. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It defines a model (profile) for a given biological species. It contains a vector of pairs Kmer-\/frequency (objects of the class \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}}) and an identifier (string) of the profile. 
+
+Definition at line 29 of file Profile.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classProfile_a7c775ded698a62c74cf8a60f965a3175}\label{classProfile_a7c775ded698a62c74cf8a60f965a3175}} 
+\index{Profile@{Profile}!Profile@{Profile}}
+\index{Profile@{Profile}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{Profile()}{Profile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Profile\+::\+Profile (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+It builds a \mbox{\hyperlink{classProfile}{Profile}} object with \char`\"{}unknown\char`\"{} as identifier, and a vector with a size of {\ttfamily size} pairs Kmer-\/frequency. The vector will also have {\ttfamily size} as initial capacity. Each pair will be initialized as \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}} for the \mbox{\hyperlink{classKmer}{Kmer}} and 0 for the frequency. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws a std\+::out\+\_\+of\+\_\+range exception if {\ttfamily size} $<$0 \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size for the vector of kmers in this \mbox{\hyperlink{classProfile}{Profile}}. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25                          : \_profileId(\textcolor{stringliteral}{"{}unknown"{}}), \_size(size)\{}
+\DoxyCodeLine{26     }
+\DoxyCodeLine{27     \textcolor{keywordflow}{if}(size < 0)}
+\DoxyCodeLine{28         \textcolor{keywordflow}{throw} std::out\_of\_range(\textcolor{stringliteral}{"{}Profile(int): invalid size for a profile"{}});}
+\DoxyCodeLine{29     }
+\DoxyCodeLine{30     \textcolor{keyword}{this} -\/> allocate(size);}
+\DoxyCodeLine{31 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_ab24ce27cac3af0470d3d9dff259d40af}\label{classProfile_ab24ce27cac3af0470d3d9dff259d40af}} 
+\index{Profile@{Profile}!Profile@{Profile}}
+\index{Profile@{Profile}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{Profile()}{Profile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Profile\+::\+Profile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classProfile}{Profile}} \&}]{orig }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & the \mbox{\hyperlink{classProfile}{Profile}} object used as source for the copy. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33                                    \{}
+\DoxyCodeLine{34     }
+\DoxyCodeLine{35     \textcolor{keyword}{this} -\/> copy(orig);}
+\DoxyCodeLine{36 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classProfile_af14dbca99de21a387371ee3f51bef60b}\label{classProfile_af14dbca99de21a387371ee3f51bef60b}} 
+\index{Profile@{Profile}!append@{append}}
+\index{append@{append}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void Profile\+::append (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq }\end{DoxyParamCaption})}
+
+
+
+Appends a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} to this \mbox{\hyperlink{classProfile}{Profile}} object. If the kmer is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq} & The \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} to append to this object. Input paramether \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 395 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{395                                             \{}
+\DoxyCodeLine{396     }
+\DoxyCodeLine{397     \textcolor{keywordtype}{int} index = \mbox{\hyperlink{classProfile_a276a6053846192c47c2683bddaf4cabd}{findKmer}}(kmerFreq.\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}());}
+\DoxyCodeLine{398     }
+\DoxyCodeLine{399     \textcolor{keywordflow}{if}(index != -\/1)\{}
+\DoxyCodeLine{400         }
+\DoxyCodeLine{401         \textcolor{keywordtype}{int} freq = \_vectorKmerFreq[index].\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}()}
+\DoxyCodeLine{402                                                     + kmerFreq.\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}();}
+\DoxyCodeLine{403         \_vectorKmerFreq[index].\mbox{\hyperlink{classKmerFreq_a02f30c44425e7b245e46253c5e532930}{setFrequency}}(freq);}
+\DoxyCodeLine{404     \}}
+\DoxyCodeLine{405     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{406         }
+\DoxyCodeLine{407         \textcolor{keywordflow}{if}(\_size >= \_capacity)}
+\DoxyCodeLine{408             \textcolor{keyword}{this} -\/> rellocate();}
+\DoxyCodeLine{409     }
+\DoxyCodeLine{410         \_vectorKmerFreq[\_size] = kmerFreq;}
+\DoxyCodeLine{411         \_size++;}
+\DoxyCodeLine{412     \}}
+\DoxyCodeLine{413 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a05a62606369c53b9a6f148510b983fdc}\label{classProfile_a05a62606369c53b9a6f148510b983fdc}} 
+\index{Profile@{Profile}!at@{at}}
+\index{at@{at}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& Profile\+::at (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Gets a reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position of the vector in this object Query and modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the position to consider. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws an std\+::out\+\_\+of\+\_\+range exception if the given index is not valid \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{70                               \{}
+\DoxyCodeLine{71     }
+\DoxyCodeLine{72     \textcolor{keywordflow}{if}(index < 0 || index >= \_size)}
+\DoxyCodeLine{73         \textcolor{keywordflow}{throw} std::out\_of\_range(\textcolor{stringliteral}{"{}at(int): Invalid position"{}});}
+\DoxyCodeLine{74     }
+\DoxyCodeLine{75     \textcolor{keywordflow}{return} \_vectorKmerFreq[index];}
+\DoxyCodeLine{76 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}\label{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}} 
+\index{Profile@{Profile}!at@{at}}
+\index{at@{at}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& Profile\+::at (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const}
+
+
+
+Gets a const reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position of the vector in this object. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the position to consider. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws an std\+::out\+\_\+of\+\_\+range exception if the given index is not valid \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A const reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{62                                           \{}
+\DoxyCodeLine{63     }
+\DoxyCodeLine{64     \textcolor{keywordflow}{if}(index < 0 || index >= \_size)}
+\DoxyCodeLine{65         \textcolor{keywordflow}{throw} std::out\_of\_range(\textcolor{stringliteral}{"{}const at(int): Invalid position"{}});}
+\DoxyCodeLine{66     }
+\DoxyCodeLine{67     \textcolor{keywordflow}{return} \_vectorKmerFreq[index];}
+\DoxyCodeLine{68 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}\label{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}} 
+\index{Profile@{Profile}!deletePos@{deletePos}}
+\index{deletePos@{deletePos}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{deletePos()}{deletePos()}}
+{\footnotesize\ttfamily void Profile\+::delete\+Pos (\begin{DoxyParamCaption}\item[{int}]{pos }\end{DoxyParamCaption})}
+
+
+
+Deletes the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object from the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in this object at the position {\ttfamily pos}. We consider that the first element has position 0, and the last element position size()-\/1. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The index of the position to be deleted. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws an std\+::out\+\_\+of\+\_\+range exception if {\ttfamily pos} is not in the range from 0 to size()-\/1 (both included). \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 451 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{451                               \{}
+\DoxyCodeLine{452     }
+\DoxyCodeLine{453     \textcolor{keywordflow}{if}(pos < 0 || pos >= \_size)}
+\DoxyCodeLine{454         \textcolor{keywordflow}{throw} std::out\_of\_range( std::string(\textcolor{stringliteral}{"{}deletePos: pos is not in the"{}})}
+\DoxyCodeLine{455                                        + \textcolor{stringliteral}{"{}range from 0 to nElements-\/1"{}});}
+\DoxyCodeLine{456     }
+\DoxyCodeLine{457     }
+\DoxyCodeLine{458     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = pos; i < \_size -\/ 1; i++)}
+\DoxyCodeLine{459         \_vectorKmerFreq[i] = \_vectorKmerFreq[i + 1];}
+\DoxyCodeLine{460     }
+\DoxyCodeLine{461     \_size-\/-\/;}
+\DoxyCodeLine{462 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a5d70a275b94cc9a75d2a95208609a9d5}\label{classProfile_a5d70a275b94cc9a75d2a95208609a9d5}} 
+\index{Profile@{Profile}!findKmer@{findKmer}}
+\index{findKmer@{findKmer}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{findKmer()}{findKmer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int Profile\+::find\+Kmer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmer}{Kmer}} \&}]{kmer }\end{DoxyParamCaption}) const}
+
+
+
+Searchs the given kmer in the list of kmers in this \mbox{\hyperlink{classProfile}{Profile}}. If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the first kmer in the list of kmers and this-\/$>$\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{get\+Size()}}-\/1 the last kmer. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & A kmer. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If found, it returns the position where the kmer was found. If not, it returns -\/1 
+\end{DoxyReturn}
+
+
+Definition at line 129 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{129                                            \{}
+\DoxyCodeLine{130     }
+\DoxyCodeLine{131     \textcolor{keywordflow}{return} \mbox{\hyperlink{classProfile_a276a6053846192c47c2683bddaf4cabd}{findKmer}}(kmer, 0, \_size -\/ 1);}
+\DoxyCodeLine{132 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a276a6053846192c47c2683bddaf4cabd}\label{classProfile_a276a6053846192c47c2683bddaf4cabd}} 
+\index{Profile@{Profile}!findKmer@{findKmer}}
+\index{findKmer@{findKmer}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{findKmer()}{findKmer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int Profile\+::find\+Kmer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmer}{Kmer}} \&}]{kmer,  }\item[{int}]{initial\+Pos,  }\item[{int}]{final\+Pos }\end{DoxyParamCaption}) const}
+
+
+
+Searchs the given kmer in the list of kmers in this \mbox{\hyperlink{classProfile}{Profile}}, but only in positions from initial\+Pos to final\+Pos (both included). If found, it returns the position where it was found. If not, it returns -\/1. We consider that position 0 is the first kmer in the list of kmers and this-\/$>$\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{get\+Size()}}-\/1 the last kmer. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & A kmer. Input parameter \\
+\hline
+{\em initial\+Pos} & initial position where to do the search. Input parameter \\
+\hline
+{\em final\+Pos} & final position where to do the search. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If found, it returns the position where the kmer was found. If not, it returns -\/1 
+\end{DoxyReturn}
+
+
+Definition at line 112 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{112                                                                          \{}
+\DoxyCodeLine{113     }
+\DoxyCodeLine{114     \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{115     }
+\DoxyCodeLine{116     \textcolor{keywordflow}{while}(!found \&\& initialPos <= finalPos)\{}
+\DoxyCodeLine{117         }
+\DoxyCodeLine{118         \textcolor{keywordflow}{if}(\mbox{\hyperlink{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}{at}}(initialPos).getKmer().\mbox{\hyperlink{classProfile_aebf59be07939461a353f8875c53439da}{toString}}() == kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}()) }
+\DoxyCodeLine{119             found = \textcolor{keyword}{true};}
+\DoxyCodeLine{120         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{121             initialPos ++;}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123     }
+\DoxyCodeLine{124     \textcolor{keywordflow}{if}(!found) initialPos = -\/1;}
+\DoxyCodeLine{125     }
+\DoxyCodeLine{126     \textcolor{keywordflow}{return} initialPos;}
+\DoxyCodeLine{127 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a35d3903904bea29113171ee3c61a0b80}\label{classProfile_a35d3903904bea29113171ee3c61a0b80}} 
+\index{Profile@{Profile}!getCapacity@{getCapacity}}
+\index{getCapacity@{getCapacity}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{getCapacity()}{getCapacity()}}
+{\footnotesize\ttfamily int Profile\+::get\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the capacity of the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects 
+\end{DoxyReturn}
+
+
+Definition at line 83 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83                               \{}
+\DoxyCodeLine{84     }
+\DoxyCodeLine{85     \textcolor{keywordflow}{return} \_capacity;}
+\DoxyCodeLine{86 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_ac7fdfdcdbdb4b1042c3378e7fd2b87a3}\label{classProfile_ac7fdfdcdbdb4b1042c3378e7fd2b87a3}} 
+\index{Profile@{Profile}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Profile\+::get\+Distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classProfile}{Profile}} \&}]{other\+Profile }\end{DoxyParamCaption}) const}
+
+
+
+Gets the distance between this \mbox{\hyperlink{classProfile}{Profile}} object ( $P_1$) and the given argument object {\ttfamily other\+Profile} ( $P_2$). The distance between two Profiles $P_1$ and $P_2$ is calculated in the following way\+: 
+
+$d = \frac{ \sum_{kmer_i(P_1)} | rank_{kmer_i(P_1)}^{P_1} - rank_{kmer_i(P_1)}^{P_2} | }{size(P_1) * size(P_2) }$,
+
+where $kmer_i(p_j)$ is the kmer $i$ of the \mbox{\hyperlink{classProfile}{Profile}} $p_j, j \in \{1, 2\}$ and $rank_{kmer_i(p_j)}^{p_k}$ is the ranking of the kmer $i$ of the \mbox{\hyperlink{classProfile}{Profile}} $p_j, j \in \{1, 2\}$ in the \mbox{\hyperlink{classProfile}{Profile}} $p_k$.
+
+The rank of a kmer is the position in which it appears in the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}}. We consider 0 as the first position (rank equals to 0). When calculating $rank_{kmer_i(P_1)}^{P_2}$, if the kmer $kmer_i(P_1)$ does not appears in the \mbox{\hyperlink{classProfile}{Profile}} $P_2$ we consider that the rank is equals to the size of \mbox{\hyperlink{classProfile}{Profile}} $P_2$. Query method 
+\begin{DoxyParams}{Parameters}
+{\em other\+Profile} & A \mbox{\hyperlink{classProfile}{Profile}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+The list of kmers of this and other\+Profile should be ordered in decreasing order of frequency. This is not checked in this method. 
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Throws} & a std\+::invalid\+\_\+argument exception if the implicit object ($\ast$this) or the argument \mbox{\hyperlink{classProfile}{Profile}} object are empty, that is, they do not have any kmer. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+The distance between this \mbox{\hyperlink{classProfile}{Profile}} object and the given argument {\ttfamily other\+Profile}. 
+\end{DoxyReturn}
+
+
+Definition at line 88 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{88                                                             \{}
+\DoxyCodeLine{89     }
+\DoxyCodeLine{90     \textcolor{keywordtype}{int} size\_this = \_size, size\_other = otherProfile.\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{getSize}}();}
+\DoxyCodeLine{91     }
+\DoxyCodeLine{92     \textcolor{keywordflow}{if}(size\_this == 0 || size\_other == 0)}
+\DoxyCodeLine{93         \textcolor{keywordflow}{throw} std::invalid\_argument(std::string(\textcolor{stringliteral}{"{}getDistance(const Profile\& "{}}) +}
+\DoxyCodeLine{94                             \textcolor{stringliteral}{"{}otherProfile): the profile is empty"{}});}
+\DoxyCodeLine{95     }
+\DoxyCodeLine{96     \textcolor{keywordtype}{double} dist = 0.0;}
+\DoxyCodeLine{97         }
+\DoxyCodeLine{98     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size\_this; i++)\{}
+\DoxyCodeLine{99                 }
+\DoxyCodeLine{100         \textcolor{keywordtype}{int} rank = otherProfile.\mbox{\hyperlink{classProfile_a276a6053846192c47c2683bddaf4cabd}{findKmer}}(\mbox{\hyperlink{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}{at}}(i).getKmer());}
+\DoxyCodeLine{101         \textcolor{keywordflow}{if} (rank == -\/1) \textcolor{comment}{// It is not found in otherProfile}}
+\DoxyCodeLine{102             rank = size\_other;}
+\DoxyCodeLine{103         }
+\DoxyCodeLine{104         dist += abs(i -\/ rank);}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106     }
+\DoxyCodeLine{107     dist /= (size\_this * size\_other);}
+\DoxyCodeLine{108     }
+\DoxyCodeLine{109     \textcolor{keywordflow}{return} dist;}
+\DoxyCodeLine{110 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a468b394b3d808644f78fb45af72c0533}\label{classProfile_a468b394b3d808644f78fb45af72c0533}} 
+\index{Profile@{Profile}!getProfileId@{getProfileId}}
+\index{getProfileId@{getProfileId}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{getProfileId()}{getProfileId()}}
+{\footnotesize\ttfamily const std\+::string \& Profile\+::get\+Profile\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the identifier of this profile object. Query method. 
+
+\begin{DoxyReturn}{Returns}
+A const reference to the identifier of this profile object 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52                                             \{}
+\DoxyCodeLine{53     }
+\DoxyCodeLine{54     \textcolor{keywordflow}{return} \_profileId;}
+\DoxyCodeLine{55 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a6978b4455292f9ea904ac21ec0703b76}\label{classProfile_a6978b4455292f9ea904ac21ec0703b76}} 
+\index{Profile@{Profile}!getSize@{getSize}}
+\index{getSize@{getSize}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily int Profile\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The number of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{78                           \{}
+\DoxyCodeLine{79     }
+\DoxyCodeLine{80     \textcolor{keywordflow}{return} \_size;}
+\DoxyCodeLine{81 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a547825ab66a44ec358345df30d77c627}\label{classProfile_a547825ab66a44ec358345df30d77c627}} 
+\index{Profile@{Profile}!join@{join}}
+\index{join@{join}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily void Profile\+::join (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classProfile}{Profile}} \&}]{profile }\end{DoxyParamCaption})}
+
+
+
+Appends to this \mbox{\hyperlink{classProfile}{Profile}} object, the list of pairs ~\newline
+ kmer-\/frequency objects contained in the \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile}. This method uses the method \mbox{\hyperlink{classProfile_af14dbca99de21a387371ee3f51bef60b}{append(const Kmer\+Freq\& kmer\+Freq)}} to append the pairs kmer-\/frequency contained in the argument \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile} Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em profile} & A \mbox{\hyperlink{classProfile}{Profile}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000003}{Deprecated}}]This method could be removed in future versions of this class. Use the operator += instead. \end{DoxyRefDesc}
+
+
+Definition at line 486 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{486                                         \{}
+\DoxyCodeLine{487     }
+\DoxyCodeLine{488     (*this) += profile;}
+\DoxyCodeLine{489 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a13cd5a8edb2b02ac2d86ac87d8be4eab}\label{classProfile_a13cd5a8edb2b02ac2d86ac87d8be4eab}} 
+\index{Profile@{Profile}!load@{load}}
+\index{load@{load}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Profile\+::load (\begin{DoxyParamCaption}\item[{const char}]{file\+Name\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Loads into this object the \mbox{\hyperlink{classProfile}{Profile}} object stored in the given file. Note that this method should remove any Kmer-\/frequency pairs that this object previously contained. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & A c-\/string with the name of the file where the \mbox{\hyperlink{classProfile}{Profile}} will be stored. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws a std\+::out\+\_\+of\+\_\+range exception if the number of kmers in the given file is negative. \\
+\hline
+{\em std\+::ios\+\_\+base\+::failure} & Throws a std\+::ios\+\_\+base\+::failure exception if the given file cannot be opened or if an error occurs while reading from the file \\
+\hline
+{\em throw} & std\+::invalid\+\_\+argument Throws a std\+::invalid\+\_\+argument if an invalid magic string is found in the given file \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 289 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{289                                        \{}
+\DoxyCodeLine{290        }
+\DoxyCodeLine{291     std::ifstream inFile;}
+\DoxyCodeLine{292     inFile.open(fileName);}
+\DoxyCodeLine{293     }
+\DoxyCodeLine{294     \textcolor{keywordflow}{if} (!inFile)\{}
+\DoxyCodeLine{295         \textcolor{keywordflow}{throw} std::ios\_base::failure(\textcolor{stringliteral}{"{}load: Error opening input file"{}});}
+\DoxyCodeLine{296     \}}
+\DoxyCodeLine{297     }
+\DoxyCodeLine{298     std::string magic\_str;}
+\DoxyCodeLine{299     inFile >> magic\_str;}
+\DoxyCodeLine{300     inFile.ignore();}
+\DoxyCodeLine{301     }
+\DoxyCodeLine{302     \textcolor{keywordflow}{if}(magic\_str != MAGIC\_STRING\_T \&\& magic\_str != MAGIC\_STRING\_B)\{}
+\DoxyCodeLine{303         inFile.close();}
+\DoxyCodeLine{304         \textcolor{keywordflow}{throw} std::invalid\_argument(std::string(\textcolor{stringliteral}{"{}load: An invalid magic string"{}})}
+\DoxyCodeLine{305                                         + (\textcolor{stringliteral}{"{}is found in the given file"{}}));}
+\DoxyCodeLine{306     \}}
+\DoxyCodeLine{307     }
+\DoxyCodeLine{308     dellocate();}
+\DoxyCodeLine{309     }
+\DoxyCodeLine{310     \textcolor{keywordflow}{if}(magic\_str == MAGIC\_STRING\_T)\{}
+\DoxyCodeLine{311         inFile >> (*this);}
+\DoxyCodeLine{312     \}}
+\DoxyCodeLine{313     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315         std::getline(inFile, \_profileId);}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317         \textcolor{keywordflow}{if} (!inFile) \{}
+\DoxyCodeLine{318             inFile.close();}
+\DoxyCodeLine{319             \textcolor{keywordflow}{throw} std::ios\_base::failure(\textcolor{stringliteral}{"{}load: Error reading from input file: id"{}});}
+\DoxyCodeLine{320         \}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322         \textcolor{keywordtype}{int} size;}
+\DoxyCodeLine{323         inFile >> size;}
+\DoxyCodeLine{324         inFile.ignore();}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326         \textcolor{keywordflow}{if} (!inFile) \{}
+\DoxyCodeLine{327             inFile.close();}
+\DoxyCodeLine{328             \textcolor{keywordflow}{throw} std::ios\_base::failure(\textcolor{stringliteral}{"{}load: Error reading from input file: size"{}});}
+\DoxyCodeLine{329         \}}
+\DoxyCodeLine{330         \textcolor{keywordflow}{if} (size < 0) \{}
+\DoxyCodeLine{331             inFile.close();}
+\DoxyCodeLine{332             \textcolor{keywordflow}{throw} std::out\_of\_range(std::string(\textcolor{stringliteral}{"{}load: The number of kmers in "{}})+}
+\DoxyCodeLine{333                     (\textcolor{stringliteral}{"{}the given file exceeds the maximun capacity or is negative"{}}));}
+\DoxyCodeLine{334         \}}
+\DoxyCodeLine{335         }
+\DoxyCodeLine{336         \mbox{\hyperlink{classKmerFreq}{KmerFreq}} aux;}
+\DoxyCodeLine{337         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < size ; i++)\{}
+\DoxyCodeLine{338             aux.\mbox{\hyperlink{classKmerFreq_ad9b159c9f9d55924f42de9e1f3b2e555}{read}}(inFile);}
+\DoxyCodeLine{339             \mbox{\hyperlink{classProfile_af14dbca99de21a387371ee3f51bef60b}{append}}(aux);}
+\DoxyCodeLine{340         \}}
+\DoxyCodeLine{341     \}}
+\DoxyCodeLine{342     }
+\DoxyCodeLine{343 \textcolor{comment}{//    }}
+\DoxyCodeLine{344 \textcolor{comment}{//    std::getline(inFile, \_profileId);}}
+\DoxyCodeLine{345 \textcolor{comment}{//        }}
+\DoxyCodeLine{346 \textcolor{comment}{//    if(!inFile)\{}}
+\DoxyCodeLine{347 \textcolor{comment}{//        inFile.close();}}
+\DoxyCodeLine{348 \textcolor{comment}{//        throw std::ios\_base::failure("{}load: Error reading from input file: id"{});}}
+\DoxyCodeLine{349 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{350 \textcolor{comment}{//    }}
+\DoxyCodeLine{351 \textcolor{comment}{//    int size;}}
+\DoxyCodeLine{352 \textcolor{comment}{//    inFile >> size;}}
+\DoxyCodeLine{353 \textcolor{comment}{//    inFile.ignore();}}
+\DoxyCodeLine{354 \textcolor{comment}{//        }}
+\DoxyCodeLine{355 \textcolor{comment}{//    if(!inFile)\{}}
+\DoxyCodeLine{356 \textcolor{comment}{//        inFile.close();}}
+\DoxyCodeLine{357 \textcolor{comment}{//        throw std::ios\_base::failure("{}load: Error reading from input file: size"{});}}
+\DoxyCodeLine{358 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{359 \textcolor{comment}{//    if(size < 0)\{}}
+\DoxyCodeLine{360 \textcolor{comment}{//        inFile.close();}}
+\DoxyCodeLine{361 \textcolor{comment}{//        throw std::out\_of\_range(std::string("{}load: The number of kmers in "{})+}}
+\DoxyCodeLine{362 \textcolor{comment}{//                ("{}the given file exceeds the maximun capacity or is negative"{}));}}
+\DoxyCodeLine{363 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{364 \textcolor{comment}{//    }}
+\DoxyCodeLine{365 \textcolor{comment}{//    int freq;}}
+\DoxyCodeLine{366 \textcolor{comment}{//    std::string nucleotide;}}
+\DoxyCodeLine{367 \textcolor{comment}{//    KmerFreq next\_kmerfreq;}}
+\DoxyCodeLine{368 \textcolor{comment}{//    }}
+\DoxyCodeLine{369 \textcolor{comment}{//    for(int i = 0; i < size; i++)\{}}
+\DoxyCodeLine{370 \textcolor{comment}{//        }}
+\DoxyCodeLine{371 \textcolor{comment}{//        inFile >> nucleotide;}}
+\DoxyCodeLine{372 \textcolor{comment}{//        if(!inFile)\{}}
+\DoxyCodeLine{373 \textcolor{comment}{//            inFile.close();}}
+\DoxyCodeLine{374 \textcolor{comment}{//            throw std::ios\_base::failure("{}load: Error reading from input file: nucleotide"{});}}
+\DoxyCodeLine{375 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{376 \textcolor{comment}{//        }}
+\DoxyCodeLine{377 \textcolor{comment}{//        inFile >> freq;}}
+\DoxyCodeLine{378 \textcolor{comment}{//        if(!inFile)\{}}
+\DoxyCodeLine{379 \textcolor{comment}{//            inFile.close();}}
+\DoxyCodeLine{380 \textcolor{comment}{//            throw std::ios\_base::failure("{}load: Error reading from input file: freq"{});}}
+\DoxyCodeLine{381 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{382 \textcolor{comment}{//        }}
+\DoxyCodeLine{383 \textcolor{comment}{//        next\_kmerfreq.setKmer(Kmer(nucleotide));}}
+\DoxyCodeLine{384 \textcolor{comment}{//        next\_kmerfreq.setFrequency(freq);}}
+\DoxyCodeLine{385 \textcolor{comment}{//        }}
+\DoxyCodeLine{386 \textcolor{comment}{//        append(next\_kmerfreq);}}
+\DoxyCodeLine{387 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{388     }
+\DoxyCodeLine{389     inFile.close();}
+\DoxyCodeLine{390     }
+\DoxyCodeLine{391 \textcolor{comment}{//    if(!inFile)}}
+\DoxyCodeLine{392 \textcolor{comment}{//        throw std::ios\_base::failure("{}load: Error closing"{});}}
+\DoxyCodeLine{393 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a773c29240773a3eec195cf42ac90d265}\label{classProfile_a773c29240773a3eec195cf42ac90d265}} 
+\index{Profile@{Profile}!normalize@{normalize}}
+\index{normalize@{normalize}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily void Profile\+::normalize (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{valid\+Nucleotides }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}   @brief Normalizes the Kmers of the vector of KmerFreq in this object. 
+   That is, for each Kmer in the vector, all its characters are converted 
+   to uppercase. Then, invalid characters are replaced by the 
+   MISSING_NUCLEOTIDE value.
+
+   If after the previous normalization process of every kmer, identical kmers 
+   are obtained, these will be merged into the first identical kmer by 
+   adding their frequencies. 
+   For example, suposse the following list of kmers:
+\end{DoxyVerb}
+ 4 Ct 5 hG 4 nG 1 cT 4 \begin{DoxyVerb}   After the process of normalization of every kmer, we obtain the following 
+   list of kmers:
+\end{DoxyVerb}
+ 4 CT 5 \+\_\+G 4 \+\_\+G 1 CT 4 \begin{DoxyVerb}   The final step will transform the list into:
+\end{DoxyVerb}
+ 2 CT 9 \+\_\+G 5 \begin{DoxyVerb}   Modifier method
+   @param validNucleotides a string with the list of characters (nucleotides) 
+   that should be considered as valid. Input parameter
+\end{DoxyVerb}
+ 
+
+Definition at line 415 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{415                                                         \{}
+\DoxyCodeLine{416     }
+\DoxyCodeLine{417     \textcolor{comment}{//Normalize each Kmer}}
+\DoxyCodeLine{418     \mbox{\hyperlink{classKmer}{Kmer}} normalized;}
+\DoxyCodeLine{419     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \_size; i++)\{}
+\DoxyCodeLine{420         }
+\DoxyCodeLine{421         normalized = \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}();}
+\DoxyCodeLine{422         normalized.\mbox{\hyperlink{classKmer_ac4f03c56da85aed417d2139199e7a6bd}{normalize}}(validNucleotides);}
+\DoxyCodeLine{423         \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_a4eb114f842390e0091cda7a2aab9d8ec}{setKmer}}(normalized);}
+\DoxyCodeLine{424     \}}
+\DoxyCodeLine{425     }
+\DoxyCodeLine{426     \textcolor{keywordtype}{int} i = 1;}
+\DoxyCodeLine{427     \textcolor{comment}{// Loop to traverse the kmers in array from position 1 to position nElements-\/1}}
+\DoxyCodeLine{428     \textcolor{keywordflow}{while}(i < \_size)\{}
+\DoxyCodeLine{429         }
+\DoxyCodeLine{430         \textcolor{comment}{// index = Position of array[i].getKmer() in the subarray that begins}}
+\DoxyCodeLine{431         \textcolor{comment}{//         at position 0 and ends at position i-\/1}}
+\DoxyCodeLine{432         \textcolor{keywordtype}{int} index = \mbox{\hyperlink{classProfile_a276a6053846192c47c2683bddaf4cabd}{findKmer}}(\_vectorKmerFreq[i].getKmer(), 0, i-\/1);}
+\DoxyCodeLine{433         }
+\DoxyCodeLine{434         \textcolor{comment}{// If array[i].getKmer() was found in the the subarray from 0 to i-\/1 }}
+\DoxyCodeLine{435         \textcolor{keywordflow}{if}(index != -\/1)\{}
+\DoxyCodeLine{436             }
+\DoxyCodeLine{437             \textcolor{comment}{// Accumulate the frequencies of the kmers at positions }}
+\DoxyCodeLine{438             \textcolor{comment}{//    index and i in the kmer at position index}}
+\DoxyCodeLine{439             \textcolor{keywordtype}{int} freq = \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}() }
+\DoxyCodeLine{440                        + \_vectorKmerFreq[index].\mbox{\hyperlink{classKmerFreq_a7050b1a322f4a846c2c010320826ecd9}{getFrequency}}();}
+\DoxyCodeLine{441             \_vectorKmerFreq[index].\mbox{\hyperlink{classKmerFreq_a02f30c44425e7b245e46253c5e532930}{setFrequency}}(freq);}
+\DoxyCodeLine{442             }
+\DoxyCodeLine{443             \textcolor{comment}{// Delete from the array, the kmer at position i}}
+\DoxyCodeLine{444             \mbox{\hyperlink{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}{deletePos}}(i);}
+\DoxyCodeLine{445         \}}
+\DoxyCodeLine{446         }
+\DoxyCodeLine{447         \textcolor{keywordflow}{else} i++;}
+\DoxyCodeLine{448     \}}
+\DoxyCodeLine{449 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a76c17739fb9d67cd2e9c0a7d3a1de564}\label{classProfile_a76c17739fb9d67cd2e9c0a7d3a1de564}} 
+\index{Profile@{Profile}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classProfile}{Profile}} \& Profile\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \&}]{kmer\+Freq }\end{DoxyParamCaption})}
+
+
+
+Overloading of the += operator with a \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} parameter. It appends to this \mbox{\hyperlink{classProfile}{Profile}} object a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}}. If the kmer is found in this object, then its frequency is increased with the one of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object. If not, a copy of the given \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer\+Freq} & The \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object to append to this object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this object. 
+\end{DoxyReturn}
+
+
+Definition at line 501 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{501                                                     \{}
+\DoxyCodeLine{502     }
+\DoxyCodeLine{503     \mbox{\hyperlink{classProfile_af14dbca99de21a387371ee3f51bef60b}{append}}(kmerFreq);}
+\DoxyCodeLine{504     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{505 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_ad853bc62e6c80c42de56a255d844ea74}\label{classProfile_ad853bc62e6c80c42de56a255d844ea74}} 
+\index{Profile@{Profile}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classProfile}{Profile}} \& Profile\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classProfile}{Profile}} \&}]{profile }\end{DoxyParamCaption})}
+
+
+
+Overloading of the += operator with a \mbox{\hyperlink{classProfile}{Profile}} parameter. For each kmer in the given \mbox{\hyperlink{classProfile}{Profile}} {\ttfamily profile}, if that kmer is found in this object, then its frequency is increased with the one in {\ttfamily profile}. If not, a copy of the kmer-\/pair is appended to the end of the list of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects in this \mbox{\hyperlink{classProfile}{Profile}}. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em profile} & A \mbox{\hyperlink{classProfile}{Profile}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this object. 
+\end{DoxyReturn}
+
+
+Definition at line 507 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{507                                                   \{}
+\DoxyCodeLine{508     }
+\DoxyCodeLine{509     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < profile.\mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{getSize}}(); i++)\{}
+\DoxyCodeLine{510         (*this) += profile.\mbox{\hyperlink{classProfile_a1e3a111507230aeb795e2c0ec4a9cc9d}{at}}(i);}
+\DoxyCodeLine{511     \}}
+\DoxyCodeLine{512     }
+\DoxyCodeLine{513     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{514 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_abcd9eb81e41916bfa3e6a2e70d77ec36}\label{classProfile_abcd9eb81e41916bfa3e6a2e70d77ec36}} 
+\index{Profile@{Profile}!operator=@{operator=}}
+\index{operator=@{operator=}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classProfile}{Profile}} \& Profile\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classProfile}{Profile}} \&}]{orig }\end{DoxyParamCaption})}
+
+
+
+Overloading of the assignment operator for \mbox{\hyperlink{classProfile}{Profile}} class. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & the \mbox{\hyperlink{classProfile}{Profile}} object used as source for the assignment. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this object 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{42                                               \{}
+\DoxyCodeLine{43     }
+\DoxyCodeLine{44     \textcolor{keywordflow}{if}(\&orig != \textcolor{keyword}{this})\{}
+\DoxyCodeLine{45         \textcolor{keyword}{this} -\/>dellocate();}
+\DoxyCodeLine{46         \textcolor{keyword}{this} -\/>copy(orig);}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48     }
+\DoxyCodeLine{49     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{50 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a994ef4d9d0c21dfb299697b097e81374}\label{classProfile_a994ef4d9d0c21dfb299697b097e81374}} 
+\index{Profile@{Profile}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& Profile\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Overloading of the \mbox{[}\mbox{]} operator for \mbox{\hyperlink{classProfile}{Profile}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of the element. Input parameter Query and modifier method \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object at position {\ttfamily index} 
+\end{DoxyReturn}
+
+
+Definition at line 496 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{496                                       \{}
+\DoxyCodeLine{497     }
+\DoxyCodeLine{498     \textcolor{keywordflow}{return} \_vectorKmerFreq[index];}
+\DoxyCodeLine{499 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_aec0d39ec9fb9cc300dec1d4b3ae36267}\label{classProfile_aec0d39ec9fb9cc300dec1d4b3ae36267}} 
+\index{Profile@{Profile}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} \& Profile\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const}
+
+
+
+Overloading of the \mbox{[}\mbox{]} operator for \mbox{\hyperlink{classProfile}{Profile}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of the element. Input parameter Query method \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const reference to the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} object at position {\ttfamily index} 
+\end{DoxyReturn}
+
+
+Definition at line 491 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{491                                                   \{}
+\DoxyCodeLine{492     }
+\DoxyCodeLine{493     \textcolor{keywordflow}{return} \_vectorKmerFreq[index];}
+\DoxyCodeLine{494 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_ace8940dd5a2eca67f1dacb0ecaf754ea}\label{classProfile_ace8940dd5a2eca67f1dacb0ecaf754ea}} 
+\index{Profile@{Profile}!save@{save}}
+\index{save@{save}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void Profile\+::save (\begin{DoxyParamCaption}\item[{const char}]{file\+Name\mbox{[}$\,$\mbox{]},  }\item[{char}]{mode = {\ttfamily \textquotesingle{}t\textquotesingle{}} }\end{DoxyParamCaption}) const}
+
+
+
+Saves this \mbox{\hyperlink{classProfile}{Profile}} object in the given file. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & A c-\/string with the name of the file where this \mbox{\hyperlink{classProfile}{Profile}} object will be saved. Input parameter \\
+\hline
+{\em mode} & The mode to use to save this \mbox{\hyperlink{classProfile}{Profile}} object\+: \textquotesingle{}t\textquotesingle{} for text mode and \textquotesingle{}b\textquotesingle{} for binary mode. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & Throws a std\+::invalid\+\_\+argument exception if the given @mode is not valid (\textquotesingle{}t\textquotesingle{} or \textquotesingle{}b\textquotesingle{}) \\
+\hline
+{\em std\+::ios\+\_\+base\+::failure} & Throws a std\+::ios\+\_\+base\+::failure exception if the given file cannot be opened or if an error occurs while writing to the file \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 240 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{240                                                         \{}
+\DoxyCodeLine{241     }
+\DoxyCodeLine{242     \textcolor{keywordflow}{if}(mode != \textcolor{charliteral}{'t'} \&\& mode != \textcolor{charliteral}{'b'})}
+\DoxyCodeLine{243         \textcolor{keywordflow}{throw} std::invalid\_argument(\textcolor{stringliteral}{"{}save: invalid mode('t' or 'b')"{}});}
+\DoxyCodeLine{244     }
+\DoxyCodeLine{245     std::ofstream outFile;}
+\DoxyCodeLine{246     }
+\DoxyCodeLine{247     \textcolor{keywordflow}{if} (mode == \textcolor{charliteral}{'t'}) \{}
+\DoxyCodeLine{248         \textcolor{comment}{// Open file in text mode}}
+\DoxyCodeLine{249         outFile.open(fileName);}
+\DoxyCodeLine{250     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{251         \textcolor{comment}{// Open file in binary mode}}
+\DoxyCodeLine{252         outFile.open(fileName, std::ios::binary);}
+\DoxyCodeLine{253     \}}
+\DoxyCodeLine{254     }
+\DoxyCodeLine{255     }
+\DoxyCodeLine{256     \textcolor{keywordflow}{if} (!outFile) \{}
+\DoxyCodeLine{257         \textcolor{keywordflow}{throw} std::ios\_base::failure(\textcolor{stringliteral}{"{}save: Error opening output file"{}});}
+\DoxyCodeLine{258     \}}
+\DoxyCodeLine{259     }
+\DoxyCodeLine{260     \textcolor{keywordflow}{if}(mode == \textcolor{charliteral}{'t'})\{}
+\DoxyCodeLine{261         \textcolor{comment}{// text mode}}
+\DoxyCodeLine{262         outFile << MAGIC\_STRING\_T << std::endl;}
+\DoxyCodeLine{263         \textcolor{comment}{//outFile << toString();}}
+\DoxyCodeLine{264         \textcolor{comment}{//usar operador}}
+\DoxyCodeLine{265 \textcolor{comment}{//        outFile <<  \_profileId + "{}\(\backslash\)n"{} + std::to\_string(\_size) + "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{266 \textcolor{comment}{//        for(int i = 0; i < getSize(); i++)\{}}
+\DoxyCodeLine{267 \textcolor{comment}{//            outFile << \_vectorKmerFreq[i] << "{}\(\backslash\)n"{};}}
+\DoxyCodeLine{268 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{269         outFile << (*this);}
+\DoxyCodeLine{270     \}}
+\DoxyCodeLine{271     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{272         \textcolor{comment}{// binary mode}}
+\DoxyCodeLine{273         }
+\DoxyCodeLine{274         outFile << MAGIC\_STRING\_B << std::endl;}
+\DoxyCodeLine{275         outFile <<  \_profileId + \textcolor{stringliteral}{"{}\(\backslash\)n"{}} + std::to\_string(\_size) + \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{276         }
+\DoxyCodeLine{277         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classProfile_a6978b4455292f9ea904ac21ec0703b76}{getSize}}(); i++)\{}
+\DoxyCodeLine{278             \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_a6cc3e41e138ec34216dc6f71ca4be182}{write}}(outFile);}
+\DoxyCodeLine{279         \}}
+\DoxyCodeLine{280     \}}
+\DoxyCodeLine{281     }
+\DoxyCodeLine{282     outFile.close();}
+\DoxyCodeLine{283     }
+\DoxyCodeLine{284     \textcolor{keywordflow}{if} (!outFile) \{}
+\DoxyCodeLine{285         \textcolor{keywordflow}{throw} std::ios\_base::failure(\textcolor{stringliteral}{"{}save: Error writting to output file"{}});}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_a61f455b03b0842bfeaebe404de23e0f6}\label{classProfile_a61f455b03b0842bfeaebe404de23e0f6}} 
+\index{Profile@{Profile}!setProfileId@{setProfileId}}
+\index{setProfileId@{setProfileId}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{setProfileId()}{setProfileId()}}
+{\footnotesize\ttfamily void Profile\+::set\+Profile\+Id (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+Sets a new identifier for this profile object. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The new identifier. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57                                              \{}
+\DoxyCodeLine{58     }
+\DoxyCodeLine{59     \_profileId = id;}
+\DoxyCodeLine{60 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_aebf59be07939461a353f8875c53439da}\label{classProfile_aebf59be07939461a353f8875c53439da}} 
+\index{Profile@{Profile}!toString@{toString}}
+\index{toString@{toString}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Profile\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtains a string with the following content\+: 
+
+
+\begin{DoxyItemize}
+\item In the first line, the profile identifier of this \mbox{\hyperlink{classProfile}{Profile}}
+\item In the second line, the number of kmers in this \mbox{\hyperlink{classProfile}{Profile}} ~\newline
+
+\item In the following lines, each one of the pairs kmer-\/frequency (separated by a whitespace). Query method \begin{DoxyReturn}{Returns}
+A string with the number of kmers and the list of pairs of kmer-\/frequency in the object 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+
+Definition at line 134 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{134                                  \{}
+\DoxyCodeLine{135     }
+\DoxyCodeLine{136     std::string kmer\_str;}
+\DoxyCodeLine{137     kmer\_str += \_profileId + \textcolor{stringliteral}{"{}\(\backslash\)n"{}} + std::to\_string(\_size) + \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{138     }
+\DoxyCodeLine{139     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \_size; i++)\{}
+\DoxyCodeLine{140         }
+\DoxyCodeLine{141         kmer\_str += \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_ac00840559fe053f4efc4d9d9a546d660}{toString}}();}
+\DoxyCodeLine{142         kmer\_str += \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144     }
+\DoxyCodeLine{145     \textcolor{keywordflow}{return} kmer\_str;}
+\DoxyCodeLine{146 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classProfile_ad4b354430500852139736ec518ccbd40}\label{classProfile_ad4b354430500852139736ec518ccbd40}} 
+\index{Profile@{Profile}!zip@{zip}}
+\index{zip@{zip}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{zip()}{zip()}}
+{\footnotesize\ttfamily void Profile\+::zip (\begin{DoxyParamCaption}\item[{bool}]{delete\+Missing = {\ttfamily false},  }\item[{int}]{lower\+Bound = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Deletes the \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects from the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in this object which verifies one the following two criteria\+: 
+
+
+\begin{DoxyEnumerate}
+\item The argument delete\+Missing is true and the \mbox{\hyperlink{classKmer}{Kmer}} contains an unknown nucleotide
+\begin{DoxyEnumerate}
+\item The frequency is less or equals to {\ttfamily lower\+Bound}.
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+
+Note that the number of elements in the argument array could be modified. Modifier method 
+\begin{DoxyParams}{Parameters}
+{\em delete\+Missing} & A bool value that indicates whether kmers with any unknown nucleotide should be removed. This parameter is false by default. Input parameter \\
+\hline
+{\em lower\+Bound} & An integer value that defines which \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects should be deleted from the vector of \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} in this object. \mbox{\hyperlink{classKmerFreq}{Kmer\+Freq}} objects with a frequency less or equals to this value, are deleted. This parameter has zero as default value. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 464 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{464                                                    \{}
+\DoxyCodeLine{465     }
+\DoxyCodeLine{466     \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{467     }
+\DoxyCodeLine{468     \textcolor{keywordflow}{while}(i < \_size)\{}
+\DoxyCodeLine{469         }
+\DoxyCodeLine{470         \textcolor{keywordflow}{if}(\_vectorKmerFreq[i].getFrequency() <= lowerBound)\{}
+\DoxyCodeLine{471             \mbox{\hyperlink{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}{deletePos}}(i);}
+\DoxyCodeLine{472         \}}
+\DoxyCodeLine{473         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(deleteMissing)\{}
+\DoxyCodeLine{474             }
+\DoxyCodeLine{475             \mbox{\hyperlink{classKmer}{Kmer}} Kmer\_delete = \_vectorKmerFreq[i].\mbox{\hyperlink{classKmerFreq_a88c835ab19d85b09415bf5a10c607154}{getKmer}}();}
+\DoxyCodeLine{476             }
+\DoxyCodeLine{477             \textcolor{keywordflow}{if}(Kmer\_delete.\mbox{\hyperlink{classKmer_adcd3fe69747c2801dee2f181f722a80d}{thereIsMissingNucleotide}}())\{}
+\DoxyCodeLine{478                 \mbox{\hyperlink{classProfile_a5fd206ead3a0755075038ac3ce3f81f7}{deletePos}}(i);}
+\DoxyCodeLine{479             \}}
+\DoxyCodeLine{480             \textcolor{keywordflow}{else} i++;}
+\DoxyCodeLine{481         \}}
+\DoxyCodeLine{482         \textcolor{keywordflow}{else} i++;}
+\DoxyCodeLine{483     \}}
+\DoxyCodeLine{484 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classProfile_a9442d4828efc90e26089c6000c682fa8}\label{classProfile_a9442d4828efc90e26089c6000c682fa8}} 
+\index{Profile@{Profile}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Profile@{Profile}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$}{operator>>}}
+{\footnotesize\ttfamily std\+::istream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{\mbox{\hyperlink{classProfile}{Profile}} \&}]{profile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Overloading of the stream extraction operator for \mbox{\hyperlink{classProfile}{Profile}} class. Note that this operator should remove any Kmer-\/frequency pairs that the argument \mbox{\hyperlink{classProfile}{Profile}} object previously contained. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & Throws a std\+::out\+\_\+of\+\_\+range if the number of kmers read from the file is negative. \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em is} & The input stream to be used. Output parameter \\
+\hline
+{\em profile} & the \mbox{\hyperlink{classProfile}{Profile}} object. Output parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily is} A reference to the input stream 
+\end{DoxyReturn}
+
+
+Definition at line 561 of file Profile.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{561                                                         \{}
+\DoxyCodeLine{562     }
+\DoxyCodeLine{563     profile.dellocate();}
+\DoxyCodeLine{564     }
+\DoxyCodeLine{565     std::string id;}
+\DoxyCodeLine{566     \textcolor{keywordtype}{int} n\_kmer;}
+\DoxyCodeLine{567     }
+\DoxyCodeLine{568     std::getline(is, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{569 \textcolor{comment}{//    is.ignore();}}
+\DoxyCodeLine{570     }
+\DoxyCodeLine{571     is >> n\_kmer;}
+\DoxyCodeLine{572     }
+\DoxyCodeLine{573     profile.\mbox{\hyperlink{classProfile_a61f455b03b0842bfeaebe404de23e0f6}{setProfileId}}(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{574     profile.allocate(n\_kmer);  }
+\DoxyCodeLine{575                               }
+\DoxyCodeLine{576     profile.\_size = n\_kmer;}
+\DoxyCodeLine{577     }
+\DoxyCodeLine{578     \mbox{\hyperlink{classKmerFreq}{KmerFreq}} kmerfreq\_aux;}
+\DoxyCodeLine{579     }
+\DoxyCodeLine{580     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n\_kmer; i++)\{}
+\DoxyCodeLine{581         }
+\DoxyCodeLine{582         is >> profile.\_vectorKmerFreq[i]; \textcolor{comment}{//tal vez mejor un aux}}
+\DoxyCodeLine{583     \}}
+\DoxyCodeLine{584     }
+\DoxyCodeLine{585     \textcolor{keywordflow}{return} is;}
+\DoxyCodeLine{586 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{Profile_8h}{Profile.\+h}}\item 
+src/\mbox{\hyperlink{Profile_8cpp}{Profile.\+cpp}}\end{DoxyCompactItemize}

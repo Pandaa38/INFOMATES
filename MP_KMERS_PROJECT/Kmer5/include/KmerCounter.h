@@ -205,7 +205,7 @@ public:
      */
     Profile toProfile();
 
-//private:
+private:
     int** _frequency; ///< 2D matrix with the frequency of each kmer
     
     int _k; ///< Value of K (number of nucleotides in each kmer)

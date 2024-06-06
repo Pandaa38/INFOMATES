@@ -1,0 +1,214 @@
+\hypertarget{LEARN_8cpp}{}\doxysection{src/\+LEARN.cpp File Reference}
+\label{LEARN_8cpp}\index{src/LEARN.cpp@{src/LEARN.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include \char`\"{}Kmer\+Counter.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{show\+English\+Help}} (ostream \&output\+Stream)
+\item 
+int \mbox{\hyperlink{LEARN_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Silvia Acid Carrillo \href{mailto:acid@decsai.ugr.es}{\texttt{ acid@decsai.\+ugr.\+es}} 
+
+Andrés Cano Utrera \href{mailto:acu@decsai.ugr.es}{\texttt{ acu@decsai.\+ugr.\+es}} 
+
+Luis Castillo Vidal \href{mailto:L.Castillo@decsai.ugr.es}{\texttt{ L.\+Castillo@decsai.\+ugr.\+es}} 
+
+Javier Martínez Baena \href{mailto:jbaena@ugr.es}{\texttt{ jbaena@ugr.\+es}}
+\end{DoxyAuthor}
+Created on 22 December 2023, 10\+:00 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{LEARN_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{LEARN_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{LEARN.cpp@{LEARN.cpp}!main@{main}}
+\index{main@{main}!LEARN.cpp@{LEARN.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+This program learns a \mbox{\hyperlink{classProfile}{Profile}} model from a set of input DNA files (file1.\+dna, file2.\+dna, ...). The learned \mbox{\hyperlink{classProfile}{Profile}} object is then zipped (kmers with any missing nucleotide or with frequency equals to zero will be removed) and ordered by frequency and saved in the file output\+Filename (or output.\+prf if the output file is not provided).
+
+Running sintax\+: \begin{quote}
+LEARN \mbox{[}-\/t$\vert$-\/b\mbox{]} \mbox{[}-\/k k\+Value\mbox{]} \mbox{[}-\/n nucleotides\+Set\mbox{]} \mbox{[}-\/p profile\+Id\mbox{]} \mbox{[}-\/o output\+Filename\mbox{]} $<$file1.\+dna$>$ \mbox{[}$<$file2.\+dna$>$ $<$file3.\+dna$>$ ....\mbox{]} \end{quote}
+~\newline
+ Running example\+: \begin{quote}
+LEARN -\/k 2 -\/p bug -\/o /tmp/unknown\+ACGT.prf ../\+Genomes/unknown\+ACGT.dna \end{quote}
+~\newline
+ \begin{quote}
+cat /tmp/unknown\+ACGT.prf \end{quote}
+MP-\/\+KMER-\/\+T-\/1.\+0 bug 7 GG 2 AC 1 AG 1 AT 1 CC 1 GA 1 TA 1
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & The number of command line parameters \\
+\hline
+{\em argv} & The vector of command line parameters (cstrings) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 If there is no error; a value $>$ 0 if error 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file LEARN.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{75                                  \{  }
+\DoxyCodeLine{76     }
+\DoxyCodeLine{77     \textcolor{comment}{// Process the main() arguments}}
+\DoxyCodeLine{78     \textcolor{keywordflow}{if}(argc < 2)\{}
+\DoxyCodeLine{79         \mbox{\hyperlink{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{80         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82     \textcolor{comment}{//DEFAULT}}
+\DoxyCodeLine{83     \textcolor{comment}{/*}}
+\DoxyCodeLine{84 \textcolor{comment}{     * -\/t (text)}}
+\DoxyCodeLine{85 \textcolor{comment}{     * id unknow}}
+\DoxyCodeLine{86 \textcolor{comment}{     * k = 5 (ya en el constructor)}}
+\DoxyCodeLine{87 \textcolor{comment}{     * nucleotidesSet = ACGT}}
+\DoxyCodeLine{88 \textcolor{comment}{     * salida = output.prf}}
+\DoxyCodeLine{89 \textcolor{comment}{     */}}
+\DoxyCodeLine{90     }
+\DoxyCodeLine{91     \textcolor{keywordtype}{int} kValue = 5;}
+\DoxyCodeLine{92     \textcolor{keywordtype}{char} mode = \textcolor{charliteral}{'t'};}
+\DoxyCodeLine{93     std::string nucleotidesSet;}
+\DoxyCodeLine{94     std::string id;}
+\DoxyCodeLine{95     std::string output = \textcolor{stringliteral}{"{}output.prf"{}};}
+\DoxyCodeLine{96     }
+\DoxyCodeLine{97     \textcolor{keywordtype}{int} pos = 1;}
+\DoxyCodeLine{98     \textcolor{keywordtype}{bool} fin = \textcolor{keyword}{false};}
+\DoxyCodeLine{99     }
+\DoxyCodeLine{100     \textcolor{keywordflow}{while} ((pos < argc) \&\& (!fin)) \{}
+\DoxyCodeLine{101         \textcolor{keywordflow}{if} (argv[pos][0] == \textcolor{charliteral}{'-\/'}) \{}
+\DoxyCodeLine{102             \textcolor{keywordflow}{if} (strlen(argv[pos]) == 2) \{ \textcolor{comment}{// Se necesita una letra}}
+\DoxyCodeLine{103                 \textcolor{comment}{//MODE}}
+\DoxyCodeLine{104                 \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'t'}) \{}
+\DoxyCodeLine{105                     \textcolor{comment}{// Modo texto. }}
+\DoxyCodeLine{106                     pos++;}
+\DoxyCodeLine{107                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'b'}) \{}
+\DoxyCodeLine{108                     mode = \textcolor{charliteral}{'b'};}
+\DoxyCodeLine{109                     pos++;}
+\DoxyCodeLine{110                 \}}
+\DoxyCodeLine{111                 \textcolor{comment}{// K VALUE}}
+\DoxyCodeLine{112                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'k'} \&\& (pos + 1 < argc)) \{}
+\DoxyCodeLine{113                     kValue = atoi(argv[pos+1]);}
+\DoxyCodeLine{114                     pos+=2;}
+\DoxyCodeLine{115                 \}}
+\DoxyCodeLine{116                 \textcolor{comment}{//PROFILE ID}}
+\DoxyCodeLine{117                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'p'} \&\& (pos + 1 < argc)) \{}
+\DoxyCodeLine{118                     \textcolor{keywordtype}{id} = argv[pos+1];}
+\DoxyCodeLine{119                     pos+=2;}
+\DoxyCodeLine{120                     \textcolor{comment}{//cout << pos << endl;}}
+\DoxyCodeLine{121                 \}}
+\DoxyCodeLine{122                 \textcolor{comment}{// VALID NUCLEOTIDES}}
+\DoxyCodeLine{123                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'n'} \&\& (pos + 1 < argc)) \{}
+\DoxyCodeLine{124                     nucleotidesSet = argv[pos+1];}
+\DoxyCodeLine{125                     pos+=2;}
+\DoxyCodeLine{126                 \}}
+\DoxyCodeLine{127                 \textcolor{comment}{// OUTPUT}}
+\DoxyCodeLine{128                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argv[pos][1] == \textcolor{charliteral}{'o'} \&\& (pos + 1 < argc)) \{}
+\DoxyCodeLine{129                     output = argv[pos+1];}
+\DoxyCodeLine{130                     pos+=2;}
+\DoxyCodeLine{131                     \textcolor{comment}{//cout << pos << endl;}}
+\DoxyCodeLine{132                 \}}
+\DoxyCodeLine{133                 \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{134                     \mbox{\hyperlink{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{135                     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{136                 \}}
+\DoxyCodeLine{137                     }
+\DoxyCodeLine{138             \}\textcolor{comment}{//strlen(argv[pos]) == 2}}
+\DoxyCodeLine{139             \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{140                 \textcolor{comment}{// Error, se ha puesto solo ‘-\/’}}
+\DoxyCodeLine{141                 \mbox{\hyperlink{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{142                 \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{143             \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145         \}\textcolor{comment}{//argv[pos][0] == '-\/'}}
+\DoxyCodeLine{146         \textcolor{comment}{// Aquí comienza lista de ficheros de entrada.}}
+\DoxyCodeLine{147         \textcolor{keywordflow}{else} }
+\DoxyCodeLine{148             fin = \textcolor{keyword}{true};}
+\DoxyCodeLine{149     \}}
+\DoxyCodeLine{150     }
+\DoxyCodeLine{151     \textcolor{keywordflow}{if}(pos + 1 >= argc)\{}
+\DoxyCodeLine{152             }
+\DoxyCodeLine{153             \mbox{\hyperlink{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{154             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156         }
+\DoxyCodeLine{157     \textcolor{comment}{// Loop to calculate the kmer frecuencies of the input genome files using }}
+\DoxyCodeLine{158     \textcolor{comment}{// a KmerCounter object}}
+\DoxyCodeLine{159     \mbox{\hyperlink{classKmerCounter}{KmerCounter}} kmerCounter(kValue);}
+\DoxyCodeLine{160     \mbox{\hyperlink{classKmerCounter}{KmerCounter}} tmp(kValue);}
+\DoxyCodeLine{161     }
+\DoxyCodeLine{162     \textcolor{keywordflow}{if}(!nucleotidesSet.empty())\{}
+\DoxyCodeLine{163         kmerCounter = \mbox{\hyperlink{classKmerCounter}{KmerCounter}}(kValue,nucleotidesSet);}
+\DoxyCodeLine{164         tmp = \mbox{\hyperlink{classKmerCounter}{KmerCounter}}(kValue,nucleotidesSet);}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166     }
+\DoxyCodeLine{167     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = pos;i < argc; i++)\{}
+\DoxyCodeLine{168         }
+\DoxyCodeLine{169         tmp.calculateFrequencies(argv[i]);}
+\DoxyCodeLine{170         kmerCounter += tmp;}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172     }
+\DoxyCodeLine{173     }
+\DoxyCodeLine{174     \textcolor{comment}{// Obtain a Profile object from the KmerCounter object}}
+\DoxyCodeLine{175     \mbox{\hyperlink{classProfile}{Profile}} profile = kmerCounter.toProfile();}
+\DoxyCodeLine{176     \textcolor{keywordflow}{if}(!\textcolor{keywordtype}{id}.empty())}
+\DoxyCodeLine{177         profile.\mbox{\hyperlink{classProfile_a61f455b03b0842bfeaebe404de23e0f6}{setProfileId}}(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{178     }
+\DoxyCodeLine{179     \textcolor{comment}{// Zip the Profile object}}
+\DoxyCodeLine{180     profile.\mbox{\hyperlink{classProfile_ad4b354430500852139736ec518ccbd40}{zip}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{181     }
+\DoxyCodeLine{182     \textcolor{comment}{// Sort the Profile object}}
+\DoxyCodeLine{183     profile.\mbox{\hyperlink{classProfile_a570418ae069bf73b6c41802ec4925a67}{sort}}();}
+\DoxyCodeLine{184     }
+\DoxyCodeLine{185     \textcolor{comment}{// Save the Profile object in the output file}}
+\DoxyCodeLine{186     profile.\mbox{\hyperlink{classProfile_ace8940dd5a2eca67f1dacb0ecaf754ea}{save}}(output.c\_str(), mode);}
+\DoxyCodeLine{187     }
+\DoxyCodeLine{188 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}\label{LEARN_8cpp_a82208e7f47d4a50db15e00036cfdf73a}} 
+\index{LEARN.cpp@{LEARN.cpp}!showEnglishHelp@{showEnglishHelp}}
+\index{showEnglishHelp@{showEnglishHelp}!LEARN.cpp@{LEARN.cpp}}
+\doxysubsubsection{\texorpdfstring{showEnglishHelp()}{showEnglishHelp()}}
+{\footnotesize\ttfamily void show\+English\+Help (\begin{DoxyParamCaption}\item[{ostream \&}]{output\+Stream }\end{DoxyParamCaption})}
+
+Shows help about the use of this program in the given output stream 
+\begin{DoxyParams}{Parameters}
+{\em output\+Stream} & The output stream where the help will be shown (for example, cout, cerr, etc) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 26 of file LEARN.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26                                             \{}
+\DoxyCodeLine{27     outputStream << \textcolor{stringliteral}{"{}ERROR in LEARN parameters"{}} << endl;}
+\DoxyCodeLine{28     outputStream << \textcolor{stringliteral}{"{}Run with the following parameters:"{}} << endl;}
+\DoxyCodeLine{29     outputStream << \textcolor{stringliteral}{"{}LEARN [-\/t|-\/b] [-\/k kValue] [-\/n nucleotidesSet] [-\/p profileId] [-\/o outputFilename] <file1.dna> [<file2.dna> <file3.dna> .... ]"{}} << endl;}
+\DoxyCodeLine{30     outputStream << endl;}
+\DoxyCodeLine{31     outputStream << \textcolor{stringliteral}{"{}Parameters:"{}} << endl;}
+\DoxyCodeLine{32     outputStream << \textcolor{stringliteral}{"{}-\/t|-\/b: text mode or binary mode for the output file (-\/t by default)"{}} << endl;}
+\DoxyCodeLine{33     outputStream << \textcolor{stringliteral}{"{}-\/k kValue: number of nucleotides in a kmer (5 by default)"{}} << endl;}
+\DoxyCodeLine{34     outputStream << \textcolor{stringliteral}{"{}-\/n nucleotidesSet: set of possible nucleotides in a kmer (ACGT by default). "{}} }
+\DoxyCodeLine{35                  << \textcolor{stringliteral}{"{}Note that the characters should be provided in uppercase"{}} << endl;}
+\DoxyCodeLine{36     outputStream << \textcolor{stringliteral}{"{}-\/p profileId: profile identifier (unknown by default)"{}} << endl;}
+\DoxyCodeLine{37     outputStream << \textcolor{stringliteral}{"{}-\/o outputFilename: name of the output file (output.prf by default)"{}} << endl;}
+\DoxyCodeLine{38     outputStream << \textcolor{stringliteral}{"{}<file1.dna> <file2.dna> <file3.dna> ....: names of the input files (at least one is mandatory)"{}} << endl;}
+\DoxyCodeLine{39     outputStream << endl;}
+\DoxyCodeLine{40     outputStream << \textcolor{stringliteral}{"{}This program learns a profile model from a set of "{}}<< }
+\DoxyCodeLine{41             \textcolor{stringliteral}{"{}input DNA files <file1.dna> <file2.dna> <file3.dna> ...."{}} << endl;}
+\DoxyCodeLine{42     outputStream << endl;}
+\DoxyCodeLine{43 \}}
+
+\end{DoxyCode}

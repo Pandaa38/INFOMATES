@@ -1,0 +1,843 @@
+\hypertarget{classKmerCounter}{}\doxysection{Kmer\+Counter Class Reference}
+\label{classKmerCounter}\index{KmerCounter@{KmerCounter}}
+
+
+It is a helper class used to calculate the frequency of each kmer in a text file. It consists of a matrix of integers. Each element in the matrix contains the frequency of the kmer that is defined by its row and column\+: the kmer formed taking the nucleotides defined by the row and column of that element.  
+
+
+
+
+{\ttfamily \#include $<$Kmer\+Counter.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classKmerCounter_a0327beffb129ddbed7b2beb88e8f5516}{Kmer\+Counter}} (int k=5, std\+::string valid\+Nucleotides=\mbox{\hyperlink{classKmerCounter_a0c290717cbabe266966e2533f97fd299}{DEFAULT\+\_\+\+VALID\+\_\+\+NUCLEOTIDES}})
+\begin{DoxyCompactList}\small\item\em Constructor of the class. This object uses a matrix of integers that contains the frequency for each kmer. Each element of the matrix will be initialized with 0. The constructor also initializes the private data \+\_\+k, \+\_\+valid\+Nucleotides and \+\_\+all\+Nucleotides. \+\_\+all\+Nucleotides is initialized with the characters \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}} + valid\+Nucleotides. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmerCounter_aa34fd017468e985f3a8ce9808b52e279}{Kmer\+Counter}} (const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&orig)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKmerCounter_ac42f87be9dd6aecf9911ab45481efa17}\label{classKmerCounter_ac42f87be9dd6aecf9911ab45481efa17}} 
+\mbox{\hyperlink{classKmerCounter_ac42f87be9dd6aecf9911ab45481efa17}{$\sim$\+Kmer\+Counter}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a354e6c78208511b54a5d7297c7643ff7}{get\+Num\+Nucleotides}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of nucleotides that can be part of a kmer, that is, the number of characters in the private data \+\_\+all\+Nucleotides. For example, if \char`\"{}\+\_\+\+ACGT\char`\"{} are the set of all nucleotides, then this method will return 5. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a3692ae889a64e4270ffb27de81455098}{getK}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of nucleotides in each kmer Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a302916d81acdfd44d21b0a006743c875}{get\+Num\+Kmers}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of different kmers that can be built using {\ttfamily \+\_\+k} nucleotides (including the missing nucleotide) Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a48be658ff5257a0c74c0ed42bd98797b}{get\+Number\+Active\+Kmers}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of kmers with a frequency greater than 0 Query method. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classKmerCounter_a40cb2e91d1ce44d153eaa9a3d4548846}{to\+String}} () const
+\begin{DoxyCompactList}\small\item\em Obtains a string with the following content\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKmerCounter_af3e67fb9d9e2190a15e2458cd720c8d0}{increase\+Frequency}} (const \mbox{\hyperlink{classKmer}{Kmer}} \&kmer, int frequency=1)
+\begin{DoxyCompactList}\small\item\em Increases the current frequency of the given kmer using the value provided by {\ttfamily frequency}. If the argument {\ttfamily frequency} is not provided, then 1 is added to the current frequency of the kmer. Modifier method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \& \mbox{\hyperlink{classKmerCounter_ab455c7361c295537d8c1c6b568421b2d}{operator=}} (const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&orig)
+\begin{DoxyCompactList}\small\item\em Overloading of the assignment operator. Modifier method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \& \mbox{\hyperlink{classKmerCounter_a6405c2720db3b95f7c9ddcde1fe11b61}{operator+=}} (const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&kc)
+\begin{DoxyCompactList}\small\item\em Overloading of the operator +=. It increases the current frequencies of the kmers of this object with the frequencies of the kmers of the given object. Modifier method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKmerCounter_aefc19e641ff99ee8749ddeed8dd17a30}{calculate\+Frequencies}} (const char $\ast$file\+Name)
+\begin{DoxyCompactList}\small\item\em Reads the given text file and calculates the frequencies of each kmer in that file. This method normalizes each found \mbox{\hyperlink{classKmer}{Kmer}} and then sum 1 at the corresponding element of the frequency matrix. This method sets to zero the frequency of each kmer before starting to calculate frequencies. In this way, if this method is called twice consecutively, then this \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} will contain only the frecuencies calculated in the last call. Modifier method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classProfile}{Profile}} \mbox{\hyperlink{classKmerCounter_a0d6b86c9dc588fbaa706a8c197073e09}{to\+Profile}} ()
+\begin{DoxyCompactList}\small\item\em Builds a \mbox{\hyperlink{classProfile}{Profile}} object from this \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object. The \mbox{\hyperlink{classProfile}{Profile}} will contain the kmers and frequencies for those one with a frequency greater than 0. Note that the resulting \mbox{\hyperlink{classProfile}{Profile}} could contain kmers with the missing nucleotide. If you want to eliminate them, you must zip (using Profile\+::zip(true) method) the returned \mbox{\hyperlink{classProfile}{Profile}} after calling to this method. Also note that this method does not obtain a \mbox{\hyperlink{classProfile}{Profile}} with an ordered vector of kmers. If you need an ordered vector of kmers, you must sort (using \mbox{\hyperlink{classProfile_a570418ae069bf73b6c41802ec4925a67}{Profile\+::sort()}} method) the returned \mbox{\hyperlink{classProfile}{Profile}} after calling to this method. Query method. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKmerCounter_aca98fa3775e93abb55b2a6cf4c9bb08c}\label{classKmerCounter_aca98fa3775e93abb55b2a6cf4c9bb08c}} 
+void {\bfseries allocate} (int nrow, int ncol)
+\item 
+\mbox{\Hypertarget{classKmerCounter_a2619863d81f987f474260800fd83b7f8}\label{classKmerCounter_a2619863d81f987f474260800fd83b7f8}} 
+void {\bfseries dellocate} ()
+\item 
+\mbox{\Hypertarget{classKmerCounter_abbe719a4f2e887924af210cfaa7e304a}\label{classKmerCounter_abbe719a4f2e887924af210cfaa7e304a}} 
+void {\bfseries copy} (const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&other)
+\item 
+int \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{get\+Num\+Rows}} () const
+\begin{DoxyCompactList}\small\item\em Returns the numbers of rows of the matrix in this object. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{get\+Num\+Cols}} () const
+\begin{DoxyCompactList}\small\item\em Returns the numbers of columns of the matrix in this object. Query method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKmerCounter_a7cf88ae42df8c6f20ad03acdf3155424}{get\+Index}} (const std\+::string \&kmer) const
+\item 
+std\+::string \mbox{\hyperlink{classKmerCounter_ab8988c146bb6ee42d3601c06c89c48a4}{get\+Inverted\+Index}} (int index, int n\+Characters) const
+\item 
+void \mbox{\hyperlink{classKmerCounter_a5afa2dc088cba98c260d95406ad2c143}{get\+Row\+Column}} (const \mbox{\hyperlink{classKmer}{Kmer}} \&kmer, int \&row, int \&column) const
+\begin{DoxyCompactList}\small\item\em Obtains the row and column for the frequency of the given argument \mbox{\hyperlink{classKmer}{Kmer}}. -\/1 will be assigned to row or column if some of the nucleotides in {\ttfamily kmer} does not belong to the set \+\_\+all\+Nucleotides Query method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classKmer}{Kmer}} \mbox{\hyperlink{classKmerCounter_ac265555f8b4a91391a1dcdd300d85988}{get\+Kmer}} (int row, int column) const
+\begin{DoxyCompactList}\small\item\em Returns the \mbox{\hyperlink{classKmer}{Kmer}} that is defined by the provided row and column Query method. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKmerCounter_a0d218a8212c729ee57263ff7ea1b7feb}\label{classKmerCounter_a0d218a8212c729ee57263ff7ea1b7feb}} 
+void \mbox{\hyperlink{classKmerCounter_a0d218a8212c729ee57263ff7ea1b7feb}{init\+Frequencies}} ()
+\begin{DoxyCompactList}\small\item\em Sets the frequency of each kmer to 0, that is, it fills with 0 the matrix of frequencies Modifier method. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{classKmerCounter_a108e243a90b3cb322a6459861af20be5}{operator()}} (int row, int column) const
+\begin{DoxyCompactList}\small\item\em Overloading of the () operator to access to the element at a given position. Query method. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{classKmerCounter_a18233e365b24d1ac21beeed16447afaa}{operator()}} (int row, int column)
+\begin{DoxyCompactList}\small\item\em Overloading of the () operator to access to the element at a given position. Query and modifier method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}\label{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}} 
+int $\ast$$\ast$ \mbox{\hyperlink{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}{\+\_\+frequency}}
+\begin{DoxyCompactList}\small\item\em 2D matrix with the frequency of each kmer \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKmerCounter_aa87e118549397310b85fc36d778e371d}\label{classKmerCounter_aa87e118549397310b85fc36d778e371d}} 
+int \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\+\_\+k}}
+\begin{DoxyCompactList}\small\item\em Value of K (number of nucleotides in each kmer) \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}{\+\_\+valid\+Nucleotides}}
+\item 
+std\+::string \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\+\_\+all\+Nucleotides}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$const \mbox{\hyperlink{classKmerCounter_a0c290717cbabe266966e2533f97fd299}{DEFAULT\+\_\+\+VALID\+\_\+\+NUCLEOTIDES}} =\char`\"{}ACGT\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+It is a helper class used to calculate the frequency of each kmer in a text file. It consists of a matrix of integers. Each element in the matrix contains the frequency of the kmer that is defined by its row and column\+: the kmer formed taking the nucleotides defined by the row and column of that element. 
+
+This class has a private data member string \+\_\+valid\+Nucleotides to contain the set of possible nucleotides in a kmer and a private data member string \+\_\+all\+Nucleotides that contains the character that define the missing nucleotide (\mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}}) plus the characters in \+\_\+valid\+Nucleotides. Also, it contains a private data member int \+\_\+k that defines the number of nucleotides in each kmer.
+
+For example, if \char`\"{}\+ACGT\char`\"{} are the valid nucleotides, then \+\_\+valid\+Nucleotides will be \char`\"{}\+ACGT\char`\"{}, \+\_\+all\+Nucleotides will be \char`\"{}\+\_\+\+ACGT\char`\"{}. If the number of nucleotides in each kmer is 5, then \+\_\+k will be 5. The first 3 nucleotides of each kmer will be associated to index the rows of the frequency matrix and the last 2 nucleotides to index the columns. For example, for the kmer \char`\"{}\+ACATG\char`\"{}, \char`\"{}\+ACA\char`\"{} will be used to index the row and \char`\"{}\+TG\char`\"{} to index the column. In this example, the first row corresponds to \char`\"{}\+\_\+\+\_\+\+\_\+\char`\"{}, the second to \char`\"{}\+\_\+\+\_\+\+A\char`\"{}, the third to \char`\"{}\+\_\+\+\_\+\+C\char`\"{} and so on. The first column corresponds to \char`\"{}\+\_\+\+\_\+\char`\"{}, the second to \char`\"{}\+\_\+\+A\char`\"{}, the third to \char`\"{}\+\_\+\+C\char`\"{} and so on.
+
+When searching for kmers in a text file, if we find a character that does not belong to the set of valid nucleotides, it will be replaced by the character \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}} in the corresponding kmer 
+
+Definition at line 53 of file Kmer\+Counter.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classKmerCounter_a0327beffb129ddbed7b2beb88e8f5516}\label{classKmerCounter_a0327beffb129ddbed7b2beb88e8f5516}} 
+\index{KmerCounter@{KmerCounter}!KmerCounter@{KmerCounter}}
+\index{KmerCounter@{KmerCounter}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{KmerCounter()}{KmerCounter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Kmer\+Counter\+::\+Kmer\+Counter (\begin{DoxyParamCaption}\item[{int}]{k = {\ttfamily 5},  }\item[{std\+::string}]{valid\+Nucleotides = {\ttfamily \mbox{\hyperlink{classKmerCounter_a0c290717cbabe266966e2533f97fd299}{DEFAULT\+\_\+\+VALID\+\_\+\+NUCLEOTIDES}}} }\end{DoxyParamCaption})}
+
+
+
+Constructor of the class. This object uses a matrix of integers that contains the frequency for each kmer. Each element of the matrix will be initialized with 0. The constructor also initializes the private data \+\_\+k, \+\_\+valid\+Nucleotides and \+\_\+all\+Nucleotides. \+\_\+all\+Nucleotides is initialized with the characters \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}} + valid\+Nucleotides. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & The number of nucleotides in each kmer. Input parameter \\
+\hline
+{\em valid\+Nucleotides} & The set of nucleotides (characters) that are considered as part of a kmer. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33 : \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}}(k), \mbox{\hyperlink{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}{\_validNucleotides}}(validNucleotides), }
+\DoxyCodeLine{34   \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}(\mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer::MISSING\_NUCLEOTIDE}} + validNucleotides)}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     }
+\DoxyCodeLine{37     \textcolor{keywordtype}{int} nrow = \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}();}
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} ncol = \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}();}
+\DoxyCodeLine{39    }
+\DoxyCodeLine{40     allocate(nrow, ncol);}
+\DoxyCodeLine{41     \mbox{\hyperlink{classKmerCounter_a0d218a8212c729ee57263ff7ea1b7feb}{initFrequencies}}();    }
+\DoxyCodeLine{42 \} }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_aa34fd017468e985f3a8ce9808b52e279}\label{classKmerCounter_aa34fd017468e985f3a8ce9808b52e279}} 
+\index{KmerCounter@{KmerCounter}!KmerCounter@{KmerCounter}}
+\index{KmerCounter@{KmerCounter}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{KmerCounter()}{KmerCounter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Kmer\+Counter\+::\+Kmer\+Counter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&}]{orig }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & the \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object used as source for the copy. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{44                                                \{}
+\DoxyCodeLine{45     copy(orig);}
+\DoxyCodeLine{46 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classKmerCounter_aefc19e641ff99ee8749ddeed8dd17a30}\label{classKmerCounter_aefc19e641ff99ee8749ddeed8dd17a30}} 
+\index{KmerCounter@{KmerCounter}!calculateFrequencies@{calculateFrequencies}}
+\index{calculateFrequencies@{calculateFrequencies}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{calculateFrequencies()}{calculateFrequencies()}}
+{\footnotesize\ttfamily void Kmer\+Counter\+::calculate\+Frequencies (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Reads the given text file and calculates the frequencies of each kmer in that file. This method normalizes each found \mbox{\hyperlink{classKmer}{Kmer}} and then sum 1 at the corresponding element of the frequency matrix. This method sets to zero the frequency of each kmer before starting to calculate frequencies. In this way, if this method is called twice consecutively, then this \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} will contain only the frecuencies calculated in the last call. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & The name of the file to process. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::ios\+\_\+base\+::failure} & Throws a std\+::ios\+\_\+base\+::failure if the given file cannot be opened \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 126 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{126                                                           \{}
+\DoxyCodeLine{127     }
+\DoxyCodeLine{128     std::ifstream inFile;}
+\DoxyCodeLine{129     inFile.open(fileName);}
+\DoxyCodeLine{130     }
+\DoxyCodeLine{131     \textcolor{keywordflow}{if}(!inFile)}
+\DoxyCodeLine{132         \textcolor{keywordflow}{throw} std::ios\_base::failure(std::string(\textcolor{stringliteral}{"{}calculateFrequencies: "{}})}
+\DoxyCodeLine{133                                         + \textcolor{stringliteral}{"{}filename cannot be opened"{}});}
+\DoxyCodeLine{134     }
+\DoxyCodeLine{135     this-\/>\mbox{\hyperlink{classKmerCounter_a0d218a8212c729ee57263ff7ea1b7feb}{initFrequencies}}();}
+\DoxyCodeLine{136     }
+\DoxyCodeLine{137     std::string genome;}
+\DoxyCodeLine{138     \textcolor{keywordtype}{int} total\_used;}
+\DoxyCodeLine{139     }
+\DoxyCodeLine{140     inFile >> genome;}
+\DoxyCodeLine{141     total\_used = genome.length() -\/ \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}}  + 1;}
+\DoxyCodeLine{142     }
+\DoxyCodeLine{143     \mbox{\hyperlink{classKmer}{Kmer}} *kmerArray = \textcolor{keyword}{new} \mbox{\hyperlink{classKmer}{Kmer}} [total\_used];}
+\DoxyCodeLine{144     }
+\DoxyCodeLine{145     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < total\_used; i++)\{}
+\DoxyCodeLine{146         }
+\DoxyCodeLine{147         kmerArray[i] = \mbox{\hyperlink{classKmer}{Kmer}}(genome.substr(i, \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}}));}
+\DoxyCodeLine{148         kmerArray[i].\mbox{\hyperlink{classKmer_ac4f03c56da85aed417d2139199e7a6bd}{normalize}}(\mbox{\hyperlink{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}{\_validNucleotides}});}
+\DoxyCodeLine{149         }
+\DoxyCodeLine{150         \mbox{\hyperlink{classKmerCounter_af3e67fb9d9e2190a15e2458cd720c8d0}{increaseFrequency}}(kmerArray[i]);}
+\DoxyCodeLine{151     \}}
+\DoxyCodeLine{152     }
+\DoxyCodeLine{153     \textcolor{keyword}{delete} [] kmerArray;}
+\DoxyCodeLine{154     inFile.close();}
+\DoxyCodeLine{155 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a7cf88ae42df8c6f20ad03acdf3155424}\label{classKmerCounter_a7cf88ae42df8c6f20ad03acdf3155424}} 
+\index{KmerCounter@{KmerCounter}!getIndex@{getIndex}}
+\index{getIndex@{getIndex}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getIndex()}{getIndex()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Index (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{kmer }\end{DoxyParamCaption}) const}
+
+Returns the index (a row or a column in the frequency matrix) corresponding to the given argument string. Note that this method will be used calling it with a string that will contain a half of a \mbox{\hyperlink{classKmer}{Kmer}}. Query method 
+\begin{DoxyParams}{Parameters}
+{\em kmer} & A string with a set of nucleotides. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the index (a row or a column in the frequency matrix) corresponding to the given argument string. It returns -\/1 if some of the nucleotides in {\ttfamily kmer} does not belong to the set \+\_\+all\+Nucleotides 
+\end{DoxyReturn}
+
+
+Definition at line 228 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{228                                                     \{}
+\DoxyCodeLine{229     \textcolor{keywordtype}{int} index = 0;}
+\DoxyCodeLine{230     \textcolor{keywordtype}{int} base = 1;}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < kmer.size(); i++) \{}
+\DoxyCodeLine{233         \textcolor{keywordtype}{size\_t} pos = \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.find(kmer[kmer.size()-\/i-\/1]);}
+\DoxyCodeLine{234         \textcolor{keywordflow}{if} (pos == string::npos)}
+\DoxyCodeLine{235             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{236         index += pos * base;}
+\DoxyCodeLine{237         base *= \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.size();}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239     \textcolor{keywordflow}{return} index;}
+\DoxyCodeLine{240 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_ab8988c146bb6ee42d3601c06c89c48a4}\label{classKmerCounter_ab8988c146bb6ee42d3601c06c89c48a4}} 
+\index{KmerCounter@{KmerCounter}!getInvertedIndex@{getInvertedIndex}}
+\index{getInvertedIndex@{getInvertedIndex}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getInvertedIndex()}{getInvertedIndex()}}
+{\footnotesize\ttfamily string Kmer\+Counter\+::get\+Inverted\+Index (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{n\+Characters }\end{DoxyParamCaption}) const}
+
+Returns a string with the nucleotides that define the given index (a row or a column of the frequency matrix). Query method
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & An integer, row or column of the frequency matrix. Input parameter \\
+\hline
+{\em n\+Characters} & Number of characters that will be in the returned string. If defines the number of nucleotides associated with a row or column. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string with the nucleotides that define the given index ~\newline
+ (row or a column of the frequency matrix). 
+\end{DoxyReturn}
+
+
+Definition at line 242 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{242                                                                      \{}
+\DoxyCodeLine{243     \textcolor{keywordtype}{string} result(nCharacters, \mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer::MISSING\_NUCLEOTIDE}});}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = result.size(); i > 0; i-\/-\/) \{}
+\DoxyCodeLine{246         result[i -\/ 1] = \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}[index \% \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.size()];}
+\DoxyCodeLine{247         index = index / \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.size();}
+\DoxyCodeLine{248     \}}
+\DoxyCodeLine{249     \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{250 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a3692ae889a64e4270ffb27de81455098}\label{classKmerCounter_a3692ae889a64e4270ffb27de81455098}} 
+\index{KmerCounter@{KmerCounter}!getK@{getK}}
+\index{getK@{getK}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getK()}{getK()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::getK (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the number of nucleotides in each kmer Query method. 
+
+\begin{DoxyReturn}{Returns}
+The number of nucleotides in each kmer 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{56                            \{}
+\DoxyCodeLine{57     \textcolor{keywordflow}{return} \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}};}
+\DoxyCodeLine{58 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_ac265555f8b4a91391a1dcdd300d85988}\label{classKmerCounter_ac265555f8b4a91391a1dcdd300d85988}} 
+\index{KmerCounter@{KmerCounter}!getKmer@{getKmer}}
+\index{getKmer@{getKmer}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getKmer()}{getKmer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKmer}{Kmer}} Kmer\+Counter\+::get\+Kmer (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column }\end{DoxyParamCaption}) const}
+
+
+
+Returns the \mbox{\hyperlink{classKmer}{Kmer}} that is defined by the provided row and column Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & A row in the frequency matrix (int value from 0 to n\+Rows-\/1). Input parameter \\
+\hline
+{\em column} & A column in the frequency matrix (int value from 0 to n\+Columns-\/1). Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & This method throws an std\+::invalid\+\_\+argument exception if the given row or column are out of the correct bounds \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{classKmer}{Kmer}} that is defined by the provided row and column 
+\end{DoxyReturn}
+
+
+Definition at line 260 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{260                                                   \{}
+\DoxyCodeLine{261     }
+\DoxyCodeLine{262     \textcolor{keywordflow}{if}(row < 0 || column < 0 || row >= \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}() || column >= \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}())\{}
+\DoxyCodeLine{263         \textcolor{keywordflow}{throw} std::invalid\_argument(std::string(\textcolor{stringliteral}{"{}getKmer: the given row or"{}}) +}
+\DoxyCodeLine{264                 (\textcolor{stringliteral}{"{}column are out of the correct bounds"{}}));}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266     }
+\DoxyCodeLine{267     \textcolor{keywordtype}{int} rp = ( \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} + 1)/2;}
+\DoxyCodeLine{268     \textcolor{keywordtype}{int} lp = \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} -\/ ( \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} + 1)/2;}
+\DoxyCodeLine{269     }
+\DoxyCodeLine{270     std::string genome = \mbox{\hyperlink{classKmerCounter_ab8988c146bb6ee42d3601c06c89c48a4}{getInvertedIndex}}(row, rp)+\mbox{\hyperlink{classKmerCounter_ab8988c146bb6ee42d3601c06c89c48a4}{getInvertedIndex}}(column, lp);}
+\DoxyCodeLine{271     }
+\DoxyCodeLine{272     \mbox{\hyperlink{classKmer}{Kmer}} kmer(genome);}
+\DoxyCodeLine{273     }
+\DoxyCodeLine{274     \textcolor{keywordflow}{return} kmer;}
+\DoxyCodeLine{275 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a48be658ff5257a0c74c0ed42bd98797b}\label{classKmerCounter_a48be658ff5257a0c74c0ed42bd98797b}} 
+\index{KmerCounter@{KmerCounter}!getNumberActiveKmers@{getNumberActiveKmers}}
+\index{getNumberActiveKmers@{getNumberActiveKmers}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getNumberActiveKmers()}{getNumberActiveKmers()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Number\+Active\+Kmers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of kmers with a frequency greater than 0 Query method. 
+
+\begin{DoxyReturn}{Returns}
+the number of kmers with a frequency greater than 0 
+\end{DoxyReturn}
+
+
+Definition at line 64 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{64                                            \{}
+\DoxyCodeLine{65     }
+\DoxyCodeLine{66     \textcolor{keywordtype}{int} nak = 0;}
+\DoxyCodeLine{67     }
+\DoxyCodeLine{68     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}(); i++)\{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}(); j++)\{}
+\DoxyCodeLine{70             \textcolor{keywordflow}{if}((*\textcolor{keyword}{this})(i,j) > 0)}
+\DoxyCodeLine{71                 nak++;}
+\DoxyCodeLine{72         \}}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74     \textcolor{keywordflow}{return} nak;}
+\DoxyCodeLine{75 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}\label{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}} 
+\index{KmerCounter@{KmerCounter}!getNumCols@{getNumCols}}
+\index{getNumCols@{getNumCols}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getNumCols()}{getNumCols()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Num\+Cols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the numbers of columns of the matrix in this object. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The numbers of columns of the matrix in this object 
+\end{DoxyReturn}
+
+
+Definition at line 222 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{222                                  \{}
+\DoxyCodeLine{223     \textcolor{keywordtype}{int} lp = \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} -\/ ( \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} + 1)/2;}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keywordflow}{return} pow(\mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.length(),lp);}
+\DoxyCodeLine{226 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a302916d81acdfd44d21b0a006743c875}\label{classKmerCounter_a302916d81acdfd44d21b0a006743c875}} 
+\index{KmerCounter@{KmerCounter}!getNumKmers@{getNumKmers}}
+\index{getNumKmers@{getNumKmers}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getNumKmers()}{getNumKmers()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Num\+Kmers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the number of different kmers that can be built using {\ttfamily \+\_\+k} nucleotides (including the missing nucleotide) Query method. 
+
+\begin{DoxyReturn}{Returns}
+The number of different kmers that can be built using {\ttfamily \+\_\+k} nucleotides 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60                                   \{}
+\DoxyCodeLine{61     \textcolor{keywordflow}{return} pow(\mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}}, \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.length());}
+\DoxyCodeLine{62 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a354e6c78208511b54a5d7297c7643ff7}\label{classKmerCounter_a354e6c78208511b54a5d7297c7643ff7}} 
+\index{KmerCounter@{KmerCounter}!getNumNucleotides@{getNumNucleotides}}
+\index{getNumNucleotides@{getNumNucleotides}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getNumNucleotides()}{getNumNucleotides()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Num\+Nucleotides (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the number of nucleotides that can be part of a kmer, that is, the number of characters in the private data \+\_\+all\+Nucleotides. For example, if \char`\"{}\+\_\+\+ACGT\char`\"{} are the set of all nucleotides, then this method will return 5. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The number of nucleotides that can be part of a kmer 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52                                         \{}
+\DoxyCodeLine{53     \textcolor{keywordflow}{return} \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.length();}
+\DoxyCodeLine{54 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}\label{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}} 
+\index{KmerCounter@{KmerCounter}!getNumRows@{getNumRows}}
+\index{getNumRows@{getNumRows}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getNumRows()}{getNumRows()}}
+{\footnotesize\ttfamily int Kmer\+Counter\+::get\+Num\+Rows (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the numbers of rows of the matrix in this object. Query method. 
+
+\begin{DoxyReturn}{Returns}
+The numbers of rows of the matrix in this object 
+\end{DoxyReturn}
+
+
+Definition at line 216 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{216                                  \{}
+\DoxyCodeLine{217     \textcolor{keywordtype}{int} rp = ( \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} + 1)/2;}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     \textcolor{keywordflow}{return} pow(\mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}.length(),rp);}
+\DoxyCodeLine{220 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a5afa2dc088cba98c260d95406ad2c143}\label{classKmerCounter_a5afa2dc088cba98c260d95406ad2c143}} 
+\index{KmerCounter@{KmerCounter}!getRowColumn@{getRowColumn}}
+\index{getRowColumn@{getRowColumn}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{getRowColumn()}{getRowColumn()}}
+{\footnotesize\ttfamily void Kmer\+Counter\+::get\+Row\+Column (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmer}{Kmer}} \&}]{kmer,  }\item[{int \&}]{row,  }\item[{int \&}]{column }\end{DoxyParamCaption}) const}
+
+
+
+Obtains the row and column for the frequency of the given argument \mbox{\hyperlink{classKmer}{Kmer}}. -\/1 will be assigned to row or column if some of the nucleotides in {\ttfamily kmer} does not belong to the set \+\_\+all\+Nucleotides Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & A \mbox{\hyperlink{classKmer}{Kmer}}. Input parameter \\
+\hline
+{\em row} & The row in the frequency matrix corresponding to \mbox{\hyperlink{classKmer}{Kmer}} {\ttfamily kmer}. Output parameter \\
+\hline
+{\em column} & The column in the frequency matrix corresponding to \mbox{\hyperlink{classKmer}{Kmer}} {\ttfamily kmer}. Output parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 252 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{252                                                                            \{}
+\DoxyCodeLine{253     }
+\DoxyCodeLine{254     \textcolor{keywordtype}{int} rp = ( \mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}} + 1)/2;}
+\DoxyCodeLine{255     }
+\DoxyCodeLine{256     row = this-\/>\mbox{\hyperlink{classKmerCounter_a7cf88ae42df8c6f20ad03acdf3155424}{getIndex}}(kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}().substr(0,rp));}
+\DoxyCodeLine{257     column = this-\/>\mbox{\hyperlink{classKmerCounter_a7cf88ae42df8c6f20ad03acdf3155424}{getIndex}}(kmer.\mbox{\hyperlink{classKmer_ae394adf5587405c5204a07df6b95cebb}{toString}}().substr(rp));}
+\DoxyCodeLine{258 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_af3e67fb9d9e2190a15e2458cd720c8d0}\label{classKmerCounter_af3e67fb9d9e2190a15e2458cd720c8d0}} 
+\index{KmerCounter@{KmerCounter}!increaseFrequency@{increaseFrequency}}
+\index{increaseFrequency@{increaseFrequency}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{increaseFrequency()}{increaseFrequency()}}
+{\footnotesize\ttfamily void Kmer\+Counter\+::increase\+Frequency (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmer}{Kmer}} \&}]{kmer,  }\item[{int}]{frequency = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Increases the current frequency of the given kmer using the value provided by {\ttfamily frequency}. If the argument {\ttfamily frequency} is not provided, then 1 is added to the current frequency of the kmer. Modifier method. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & This method throws an std\+::invalid\+\_\+argument exception if the given kmer contains any invalid nucleotide. \\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em kmer} & The kmer in which the frequency will be modified. Input parameter \\
+\hline
+{\em frequency} & The quantity that will be added to the current frequency. Input parameter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 90 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{90                                                                   \{}
+\DoxyCodeLine{91     }
+\DoxyCodeLine{92     \textcolor{keywordflow}{if}(kmer.thereIsInvalidNucleotide(\mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}}))}
+\DoxyCodeLine{93         \textcolor{keywordflow}{throw} std::invalid\_argument(\textcolor{stringliteral}{"{}increaseFrequency: invalid kmer"{}});}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{int} row = -\/1, col = -\/1;}
+\DoxyCodeLine{96     \mbox{\hyperlink{classKmerCounter_a5afa2dc088cba98c260d95406ad2c143}{getRowColumn}}(kmer, row, col);}
+\DoxyCodeLine{97     }
+\DoxyCodeLine{98     \mbox{\hyperlink{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}{\_frequency}}[row][col] += frequency;}
+\DoxyCodeLine{99 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a18233e365b24d1ac21beeed16447afaa}\label{classKmerCounter_a18233e365b24d1ac21beeed16447afaa}} 
+\index{KmerCounter@{KmerCounter}!operator()@{operator()}}
+\index{operator()@{operator()}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int \& Kmer\+Counter\+::operator() (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column }\end{DoxyParamCaption})}
+
+
+
+Overloading of the () operator to access to the element at a given position. Query and modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row of the element. Input parameter \\
+\hline
+{\em column} & Column of the element. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the element at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 289 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{289                                                \{}
+\DoxyCodeLine{290     \textcolor{keywordflow}{return} \mbox{\hyperlink{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}{\_frequency}}[row][column];}
+\DoxyCodeLine{291 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a108e243a90b3cb322a6459861af20be5}\label{classKmerCounter_a108e243a90b3cb322a6459861af20be5}} 
+\index{KmerCounter@{KmerCounter}!operator()@{operator()}}
+\index{operator()@{operator()}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const int \& Kmer\+Counter\+::operator() (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{column }\end{DoxyParamCaption}) const}
+
+
+
+Overloading of the () operator to access to the element at a given position. Query method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row of the element. Input parameter \\
+\hline
+{\em column} & Column of the element. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const reference to the element at the given position 
+\end{DoxyReturn}
+
+
+Definition at line 286 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{286                                                            \{}
+\DoxyCodeLine{287     \textcolor{keywordflow}{return} \mbox{\hyperlink{classKmerCounter_a9c8f0f592fa617317b72b4454da86f92}{\_frequency}}[row][column];}
+\DoxyCodeLine{288 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a6405c2720db3b95f7c9ddcde1fe11b61}\label{classKmerCounter_a6405c2720db3b95f7c9ddcde1fe11b61}} 
+\index{KmerCounter@{KmerCounter}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \& Kmer\+Counter\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&}]{kc }\end{DoxyParamCaption})}
+
+
+
+Overloading of the operator +=. It increases the current frequencies of the kmers of this object with the frequencies of the kmers of the given object. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kc} & a \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object. Input parameter \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & This method throws an std\+::invalid\+\_\+argument exception if the given argument {\ttfamily kc} has a different set of nucleotides or a different K (number of nucleotides in kmers). \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+A reference to this object 
+\end{DoxyReturn}
+
+
+Definition at line 109 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{109                                                          \{}
+\DoxyCodeLine{110     }
+\DoxyCodeLine{111     \textcolor{keywordflow}{if}(this-\/>\mbox{\hyperlink{classKmerCounter_a3692ae889a64e4270ffb27de81455098}{getK}}() != kc.\mbox{\hyperlink{classKmerCounter_a3692ae889a64e4270ffb27de81455098}{getK}}() || \mbox{\hyperlink{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}{\_validNucleotides}} != kc.\mbox{\hyperlink{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}{\_validNucleotides}})\{}
+\DoxyCodeLine{112         \textcolor{keywordflow}{throw} std::invalid\_argument(std::string(\textcolor{stringliteral}{"{}operator+=: the given"{}}) + }
+\DoxyCodeLine{113               (\textcolor{stringliteral}{"{}argument has a different set of nucleotides or a different K"{}}));}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115     }
+\DoxyCodeLine{116     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}(); i++)\{}
+\DoxyCodeLine{117         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}(); j++)\{}
+\DoxyCodeLine{118             }
+\DoxyCodeLine{119             (*this)(i,j) += kc(i,j);            }
+\DoxyCodeLine{120         \}}
+\DoxyCodeLine{121     \}}
+\DoxyCodeLine{122     }
+\DoxyCodeLine{123     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{124 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_ab455c7361c295537d8c1c6b568421b2d}\label{classKmerCounter_ab455c7361c295537d8c1c6b568421b2d}} 
+\index{KmerCounter@{KmerCounter}!operator=@{operator=}}
+\index{operator=@{operator=}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \& Kmer\+Counter\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} \&}]{orig }\end{DoxyParamCaption})}
+
+
+
+Overloading of the assignment operator. Modifier method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & the \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object used as source for the assignment. Input parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this object 
+\end{DoxyReturn}
+
+
+Definition at line 101 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{101                                                           \{}
+\DoxyCodeLine{102     }
+\DoxyCodeLine{103     \textcolor{keywordflow}{if}(\&orig != \textcolor{keyword}{this})\{}
+\DoxyCodeLine{104         this-\/>copy(orig);}
+\DoxyCodeLine{105     \}    }
+\DoxyCodeLine{106     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{107 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a0d6b86c9dc588fbaa706a8c197073e09}\label{classKmerCounter_a0d6b86c9dc588fbaa706a8c197073e09}} 
+\index{KmerCounter@{KmerCounter}!toProfile@{toProfile}}
+\index{toProfile@{toProfile}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{toProfile()}{toProfile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classProfile}{Profile}} Kmer\+Counter\+::to\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Builds a \mbox{\hyperlink{classProfile}{Profile}} object from this \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object. The \mbox{\hyperlink{classProfile}{Profile}} will contain the kmers and frequencies for those one with a frequency greater than 0. Note that the resulting \mbox{\hyperlink{classProfile}{Profile}} could contain kmers with the missing nucleotide. If you want to eliminate them, you must zip (using Profile\+::zip(true) method) the returned \mbox{\hyperlink{classProfile}{Profile}} after calling to this method. Also note that this method does not obtain a \mbox{\hyperlink{classProfile}{Profile}} with an ordered vector of kmers. If you need an ordered vector of kmers, you must sort (using \mbox{\hyperlink{classProfile_a570418ae069bf73b6c41802ec4925a67}{Profile\+::sort()}} method) the returned \mbox{\hyperlink{classProfile}{Profile}} after calling to this method. Query method. 
+
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{classProfile}{Profile}} object from this \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} object 
+\end{DoxyReturn}
+
+
+Definition at line 157 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{157                               \{}
+\DoxyCodeLine{158     }
+\DoxyCodeLine{159     \textcolor{keyword}{const} \textcolor{keywordtype}{int} nActive = \mbox{\hyperlink{classKmerCounter_a48be658ff5257a0c74c0ed42bd98797b}{getNumberActiveKmers}}();}
+\DoxyCodeLine{160     \mbox{\hyperlink{classProfile}{Profile}} profile(nActive);}
+\DoxyCodeLine{161     }
+\DoxyCodeLine{162     \textcolor{keywordtype}{bool} finished = \textcolor{keyword}{false};}
+\DoxyCodeLine{163     \textcolor{keywordtype}{int} nAdded = 0;}
+\DoxyCodeLine{164     }
+\DoxyCodeLine{165     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}() \&\& !finished; i++)\{}
+\DoxyCodeLine{166         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < \mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}() \&\& !finished; j++)\{}
+\DoxyCodeLine{167             }
+\DoxyCodeLine{168             \textcolor{keywordflow}{if}( (*\textcolor{keyword}{this})(i,j) > 0)\{}
+\DoxyCodeLine{169                 profile.at(nAdded).setFrequency((*\textcolor{keyword}{this})(i,j));}
+\DoxyCodeLine{170                 profile.at(nAdded).setKmer(this-\/>\mbox{\hyperlink{classKmerCounter_ac265555f8b4a91391a1dcdd300d85988}{getKmer}}(i,j));}
+\DoxyCodeLine{171                 }
+\DoxyCodeLine{172                 nAdded++;}
+\DoxyCodeLine{173                 finished = nAdded >= nActive;}
+\DoxyCodeLine{174             \}}
+\DoxyCodeLine{175         \}}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keywordflow}{return} profile;}
+\DoxyCodeLine{179 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classKmerCounter_a40cb2e91d1ce44d153eaa9a3d4548846}\label{classKmerCounter_a40cb2e91d1ce44d153eaa9a3d4548846}} 
+\index{KmerCounter@{KmerCounter}!toString@{toString}}
+\index{toString@{toString}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Kmer\+Counter\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtains a string with the following content\+: 
+
+
+\begin{DoxyItemize}
+\item In the first line, the content of the private data \+\_\+all\+Nucleotides and the value of \+\_\+k (number of nucleotides in each kmer) separated by a whitespace.
+\item In the following lines, each one of the rows in the frequency matrix (frequencies separated by a whitespace). Query method \begin{DoxyReturn}{Returns}
+A string with the content of this object 
+\end{DoxyReturn}
+
+\end{DoxyItemize}
+
+Definition at line 77 of file Kmer\+Counter.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{77                                      \{}
+\DoxyCodeLine{78     \textcolor{keywordtype}{string} outputString = \mbox{\hyperlink{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}{\_allNucleotides}} + \textcolor{stringliteral}{"{} "{}} + to\_string(\mbox{\hyperlink{classKmerCounter_aa87e118549397310b85fc36d778e371d}{\_k}}) + \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{79     }
+\DoxyCodeLine{80     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} row=0; row<this-\/>\mbox{\hyperlink{classKmerCounter_a425cec15fe3bec5814497e8096de53b4}{getNumRows}}(); row++)\{}
+\DoxyCodeLine{81         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} col=0; col<this-\/>\mbox{\hyperlink{classKmerCounter_a42f8928f175f2fc0b74d3a506760daf9}{getNumCols}}(); col++)\{}
+\DoxyCodeLine{82             outputString += to\_string((*\textcolor{keyword}{this})(row,col)) + \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{83         \}}
+\DoxyCodeLine{84         outputString += \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86     }
+\DoxyCodeLine{87     \textcolor{keywordflow}{return} outputString;}
+\DoxyCodeLine{88 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}\label{classKmerCounter_aed76908181473e61b9d86b9ecfed5dfe}} 
+\index{KmerCounter@{KmerCounter}!\_allNucleotides@{\_allNucleotides}}
+\index{\_allNucleotides@{\_allNucleotides}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{\_allNucleotides}{\_allNucleotides}}
+{\footnotesize\ttfamily std\+::string Kmer\+Counter\+::\+\_\+all\+Nucleotides}
+
+Set with the character representing a missing (unknown) nucleotide (\mbox{\hyperlink{classKmer_a4cdc2682181a0435d9fe703316fad091}{Kmer\+::\+MISSING\+\_\+\+NUCLEOTIDE}}) and the set of valid nucleotides. 
+
+Definition at line 224 of file Kmer\+Counter.\+h.
+
+\mbox{\Hypertarget{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}\label{classKmerCounter_a5ed7dc11459d76e06544cf100f3ea454}} 
+\index{KmerCounter@{KmerCounter}!\_validNucleotides@{\_validNucleotides}}
+\index{\_validNucleotides@{\_validNucleotides}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{\_validNucleotides}{\_validNucleotides}}
+{\footnotesize\ttfamily std\+::string Kmer\+Counter\+::\+\_\+valid\+Nucleotides}
+
+Set of characters that define the possible nucleotides of a kmer. Any other character will be considered an invalid nucleotide. Only uppercase characters are included in this string 
+
+Definition at line 218 of file Kmer\+Counter.\+h.
+
+\mbox{\Hypertarget{classKmerCounter_a0c290717cbabe266966e2533f97fd299}\label{classKmerCounter_a0c290717cbabe266966e2533f97fd299}} 
+\index{KmerCounter@{KmerCounter}!DEFAULT\_VALID\_NUCLEOTIDES@{DEFAULT\_VALID\_NUCLEOTIDES}}
+\index{DEFAULT\_VALID\_NUCLEOTIDES@{DEFAULT\_VALID\_NUCLEOTIDES}!KmerCounter@{KmerCounter}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_VALID\_NUCLEOTIDES}{DEFAULT\_VALID\_NUCLEOTIDES}}
+{\footnotesize\ttfamily const char $\ast$const Kmer\+Counter\+::\+DEFAULT\+\_\+\+VALID\+\_\+\+NUCLEOTIDES =\char`\"{}ACGT\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+A const c-\/string with the set of characters that are considered as part of a word. Any other character will be considered a separator ~\newline
+ Only lowercase characters are included in this string. This c-\/string is used in the constructor of this class, as the default value to assign to the field \+\_\+valid\+Nucleotides
+
+DEFAULT\+\_\+\+VALID\+\_\+\+NUCLEOTIDES is a c-\/string that contains the set of characters that will be considered as valid nucleotides.
+
+The constructor of the class \mbox{\hyperlink{classKmerCounter}{Kmer\+Counter}} uses this c-\/string as a default parameter. It is possible to use a different c-\/string if that constructor is used with a different c-\/string 
+
+Definition at line 63 of file Kmer\+Counter.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Kmer\+Counter.\+h\item 
+src/\mbox{\hyperlink{KmerCounter_8cpp}{Kmer\+Counter.\+cpp}}\end{DoxyCompactItemize}
