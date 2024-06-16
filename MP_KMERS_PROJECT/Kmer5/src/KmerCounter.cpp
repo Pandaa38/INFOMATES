@@ -184,26 +184,40 @@ void KmerCounter::allocate(int nrow, int ncol){
     _frequency = new int* [nrow];
     _frequency[0] = new int [nrow * ncol];
     
-    for(int i = 1; i < nrow; i++){
+    for(int i = 1; i < nrow; ++i){
         _frequency[i] = _frequency[i-1]+ncol;        
     }
+    
+//    _frequency = new int* [nrow];
+//    for(int i=0; i < nrow; ++i){
+//        _frequency[i] = new int [ncol];
+//    }
 }
 
 void KmerCounter::dellocate(){
     
-    delete [] _frequency[0];
-    delete [] _frequency;
+    if (_frequency != nullptr) {
+        delete[] _frequency[0];
+        delete[] _frequency;
+        _frequency = nullptr;
+    }
     
-    _frequency = nullptr;
+//    for(int i = 0; i < getNumRows(); ++i){
+//        delete [] _frequency[i];
+//    }
+//    delete [] _frequency;
+    
 }
 
 void KmerCounter::copy(const KmerCounter& other){
     
+    if (_frequency != nullptr) {
+        dellocate();
+    }
     _k = other._k;
     _validNucleotides = other._validNucleotides;
     _allNucleotides = other._allNucleotides;
     
-    //dellocate();
     allocate(other.getNumRows(),other.getNumCols());
     
     for(int i = 0; i < getNumRows(); i++){

@@ -31,6 +31,7 @@ Profile::Profile(int size) : _profileId("unknown"), _size(size){
 }
 
 Profile::Profile(const Profile& orig){
+    this -> dellocate();
     this -> copy(orig);
 }
 
@@ -63,7 +64,7 @@ const KmerFreq& Profile::at(int index) const{
     if(index < 0 || index >= _size)
         throw std::out_of_range("const at(int): Invalid position");
     
-    return _vectorKmerFreq[index];
+    return (*this)[index];
 }
 
 KmerFreq& Profile::at(int index){
@@ -71,7 +72,7 @@ KmerFreq& Profile::at(int index){
     if(index < 0 || index >= _size)
         throw std::out_of_range("at(int): Invalid position");
     
-    return _vectorKmerFreq[index];
+    return (*this)[index];
 }
 
 int Profile::getSize() const{
@@ -137,7 +138,7 @@ std::string Profile::toString() const{
     
     for(int i = 0; i < _size; i++){
         
-        kmer_str += _vectorKmerFreq[i].toString();
+        kmer_str += (*this)[i].toString();
         kmer_str += "\n";
     }
     
@@ -151,11 +152,11 @@ void Profile::swapElements(int first, int second){
                            "are positions out of the range of the given array");
     
     KmerFreq intermediate;
-    intermediate = _vectorKmerFreq[first];
+    intermediate = (*this)[first];
     
-    _vectorKmerFreq[first] = _vectorKmerFreq[second];
+    (*this)[first] = (*this)[second];
     
-    _vectorKmerFreq[second] = intermediate;
+    (*this)[second] = intermediate;
     
 }
 
@@ -185,16 +186,16 @@ void Profile::quickSort(int first, int last){
 int Profile::split(int first, int last){
     
     int left, right;
-    KmerFreq value_pivote = _vectorKmerFreq[first];
+    KmerFreq value_pivote = (*this)[first];
     
     left = first + 1; // left go foward
     right = last; // dcha go back
     
     while (left <= right){
-        while (left <= right && value_pivote <= _vectorKmerFreq[right])
+        while (left <= right && value_pivote <= (*this)[right])
             left++;
         
-        while (left <= right && _vectorKmerFreq[right] <= value_pivote)
+        while (left <= right && (*this)[right] <= value_pivote)
             right--;
         
         if (left < right) {
@@ -215,13 +216,13 @@ void Profile::selectionSort(){
     
     for (int left = 0 ; left < _size ; left++) {
         
-        KmerFreq max = _vectorKmerFreq[left]; 
+        KmerFreq max = (*this)[left]; 
         int pos_max = left;
         
         for (int i = left + 1; i < _size ; i++){
             
-            if(_vectorKmerFreq[i] > max){
-                max = _vectorKmerFreq[i];
+            if((*this)[i] > max){
+                max = (*this)[i];
                 pos_max = i;
             }
             
@@ -267,7 +268,7 @@ void Profile::save(const char fileName[], char mode) const{
         outFile <<  _profileId + "\n" + std::to_string(_size) + "\n";
         
         for(int i = 0; i < getSize(); i++){
-            _vectorKmerFreq[i].write(outFile);
+            (*this)[i].write(outFile);
         }
     }
     
@@ -345,16 +346,16 @@ void Profile::append(const KmerFreq& kmerFreq){
     
     if(index != -1){
         
-        int freq = _vectorKmerFreq[index].getFrequency()
+        int freq = (*this)[index].getFrequency()
                                                     + kmerFreq.getFrequency();
-        _vectorKmerFreq[index].setFrequency(freq);
+        (*this)[index].setFrequency(freq);
     }
     else{
         
         if(_size >= _capacity)
             this -> rellocate();
     
-        _vectorKmerFreq[_size] = kmerFreq;
+        (*this)[_size] = kmerFreq;
         _size++;
     }
 }
@@ -365,9 +366,9 @@ void Profile::normalize(const std::string& validNucleotides){
     Kmer normalized;
     for(int i = 0; i < _size; i++){
         
-        normalized = _vectorKmerFreq[i].getKmer();
+        normalized = (*this)[i].getKmer();
         normalized.normalize(validNucleotides);
-        _vectorKmerFreq[i].setKmer(normalized);
+        (*this)[i].setKmer(normalized);
     }
     
     int i = 1;
@@ -376,16 +377,15 @@ void Profile::normalize(const std::string& validNucleotides){
         
         // index = Position of array[i].getKmer() in the subarray that begins
         //         at position 0 and ends at position i-1
-        int index = findKmer(_vectorKmerFreq[i].getKmer(), 0, i-1);
+        int index = findKmer((*this)[i].getKmer(), 0, i-1);
         
         // If array[i].getKmer() was found in the the subarray from 0 to i-1 
         if(index != -1){
             
             // Accumulate the frequencies of the kmers at positions 
             //    index and i in the kmer at position index
-            int freq = _vectorKmerFreq[i].getFrequency() 
-                       + _vectorKmerFreq[index].getFrequency();
-            _vectorKmerFreq[index].setFrequency(freq);
+            int freq=(*this)[i].getFrequency() + (*this)[index].getFrequency();
+            (*this)[index].setFrequency(freq);
             
             // Delete from the array, the kmer at position i
             deletePos(i);
@@ -403,7 +403,7 @@ void Profile::deletePos(int pos){
     
     
     for(int i = pos; i < _size - 1; i++)
-        _vectorKmerFreq[i] = _vectorKmerFreq[i + 1];
+        (*this)[i] = (*this)[i + 1];
     
     _size--;
 }
@@ -414,12 +414,12 @@ void Profile::zip(bool deleteMissing, int lowerBound){
     
     while(i < _size){
         
-        if(_vectorKmerFreq[i].getFrequency() <= lowerBound){
+        if((*this)[i].getFrequency() <= lowerBound){
             deletePos(i);
         }
         else if(deleteMissing){
             
-            Kmer Kmer_delete = _vectorKmerFreq[i].getKmer();
+            Kmer Kmer_delete = (*this)[i].getKmer();
             
             if(Kmer_delete.thereIsMissingNucleotide()){
                 deletePos(i);
@@ -520,12 +520,10 @@ std::istream& operator>>(std::istream& is, Profile& profile){
     profile.allocate(n_kmer);  
                               
     profile._size = n_kmer;
-    
-    KmerFreq kmerfreq_aux;
-    
+        
     for(int i = 0; i < n_kmer; i++){
         
-        is >> profile._vectorKmerFreq[i]; //tal vez mejor un aux
+        is >> profile._vectorKmerFreq[i];
     }
     
     return is;

@@ -14,7 +14,6 @@
 #include<cctype>
 #include"Kmer.h"
 
-
 Kmer::Kmer(int k){
     
     if(k <= 0) throw std::invalid_argument( std::string("Kmer(int k): ") 
