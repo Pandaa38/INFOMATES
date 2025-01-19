@@ -1,0 +1,17 @@
+El bebedor "juanrechea" ha bebido este año:
+	43naranja: 1
+	roncola: 2
+	whiskycola: 2
+Eso hace un total de 5 cubatas 
+
+El bebedor "ivánelruso" ha bebido este año:
+	roncola: 4
+	whiskycola: 1
+Eso hace un total de 5 cubatas 
+
+El bebedor "martarodriguez" ha bebido este año:
+	roncola: 1
+Eso hace un total de 1 cubatas 
+
+
+El total final de cubatas es: 11

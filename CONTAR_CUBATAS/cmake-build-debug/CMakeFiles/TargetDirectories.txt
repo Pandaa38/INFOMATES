@@ -1,0 +1,3 @@
+/home/juan/Documentos/MyProgram/CONTAR_CUBATAS/cmake-build-debug/CMakeFiles/CONTAR_CUBATAS.dir
+/home/juan/Documentos/MyProgram/CONTAR_CUBATAS/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/MyProgram/CONTAR_CUBATAS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
