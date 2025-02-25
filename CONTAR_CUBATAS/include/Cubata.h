@@ -56,7 +56,6 @@ class Cubatas {
 	//ITERADORES
 	std::vector<persona>::iterator find_persona(const std::string &name);
 	std::vector<persona>::const_iterator find_persona(const std::string &name) const;
-	//void read_cubatas(std::ifstream &file);
 
 	void leer_personas(std::istream &is);
 
@@ -64,7 +63,7 @@ class Cubatas {
 };
 
 std::ostream& operator<<(std::ostream& os, const Cubatas& cubatas);
-//std::istream& operator>>(std::istream& is, Cubatas& cubatas, const std::string & nombres_validos);
+//std::istream& operator>>(std::istream& is, Cubatas& cubatas);
 
 std::string normalizar(const std::string &line);
 

@@ -32,7 +32,6 @@ void Cubatas::remove_persona(const persona &persona) {
 	remove_persona(persona.name);
 }
 
-//ERRORRRRRRR ESTA MAL NO SE PORQUE
 std::map<std::string, int> Cubatas::get_cubatas_persona(const std::string &name) const{
 
 	//std::vector<persona>::iterator
@@ -44,6 +43,29 @@ std::map<std::string, int> Cubatas::get_cubatas_persona(const std::string &name)
 
 Cubatas::persona Cubatas::get_persona(const std::string &name) const{
 	return (*find_persona(name));
+}
+
+std::string Cubatas::get_persona_name(int pos) const {
+	std::vector<persona>::const_iterator it = bebedor.begin();
+	it += pos;
+	return it->name;
+}
+
+int Cubatas::get_num_cubatas(int pos) const {
+	return bebedor[pos].num_cubatas;
+}
+
+int Cubatas::num_personas() const{
+	return bebedor.size();
+}
+
+int Cubatas::total_cubatas() const {
+
+	int total = 0;
+	for (auto it : bebedor) {
+		total += it.num_cubatas;
+	}
+	return total;
 }
 
 std::vector<Cubatas::persona>::iterator Cubatas::find_persona(const std::string &name) {
@@ -64,29 +86,6 @@ std::vector<Cubatas::persona>::const_iterator Cubatas::find_persona(const std::s
 		else ++it;
 	}
 	return it;
-}
-
-int Cubatas::num_personas() const{
-	return bebedor.size();
-}
-
-int Cubatas::total_cubatas() const {
-
-	int total = 0;
-	for (auto it : bebedor) {
-		total += it.num_cubatas;
-	}
-	return total;
-}
-
-
-std::string Cubatas::get_persona_name(int pos) const {
-	std::vector<persona>::const_iterator it = bebedor.begin();
-	it += pos;
-	return it->name;
-}
-int Cubatas::get_num_cubatas(int pos) const {
-	return bebedor[pos].num_cubatas;
 }
 
 
