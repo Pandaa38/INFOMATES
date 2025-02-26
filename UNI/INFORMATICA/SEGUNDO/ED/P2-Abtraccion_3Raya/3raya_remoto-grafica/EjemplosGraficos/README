@@ -1,0 +1,17 @@
+Instalar Qt5 versiones mayores o iguales Qt5.10
+Usar el comando en linux como root
+ 
+	sudo apt-get install qt5-defaults
+
+
+Dentro de la carpeta EjemplosGraficos ejecutar desde la linea de ordenes
+	1.-cmake CMakeLists.txt
+	2.-make 
+
+Debe haber creado un directorio bin donde se encuenta los ejecutables
+	Ej1_tablero (el programa principal en src/Ej1_tablero.cpp)
+	Ej2_tablero (el programa principal en src/Ej2_tablero.cpp)
+	Ej1_consola (el programa principal en src/Ej1_consola.cpp)
+	Ej_ventana  (el programa principal en src/Ej1_ventana.cpp)
+            
+

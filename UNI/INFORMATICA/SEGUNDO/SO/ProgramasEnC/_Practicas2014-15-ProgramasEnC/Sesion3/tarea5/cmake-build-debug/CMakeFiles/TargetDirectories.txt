@@ -1,0 +1,3 @@
+/home/juan/Documentos/INFORMATICA/SEGUNDO/SO/ProgramasEnC/_Practicas2014-15-ProgramasEnC/Sesion3/tarea5/cmake-build-debug/CMakeFiles/tarea5.dir
+/home/juan/Documentos/INFORMATICA/SEGUNDO/SO/ProgramasEnC/_Practicas2014-15-ProgramasEnC/Sesion3/tarea5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFORMATICA/SEGUNDO/SO/ProgramasEnC/_Practicas2014-15-ProgramasEnC/Sesion3/tarea5/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,32 @@
+funcion crear_arbol:
+	if (num_personajes == 1) {
+          int pos_personaje = 0;
+          bool encontrado = false;
+
+          while (!personajes_restantes[pos_personaje]) {
+                pos_personaje++;
+          }
+...
+
+duncion iniciar_juego:
+	// Si llegamos a un nodo hoja, identificamos el personaje
+     // Los nodos hoja tienen como atributo el nombre del personaje según crear_arbol()
+     cout << "¡Ya lo sé! Tu personaje es: " << (*nodo_actual).obtener_personaje() << std::endl;
+     
+     Diria que no es necesario nodo_actual = arbol.root(); al final
+
+...
+
+set<string> QuienEsQuien::informacion_jugada(bintree<Pregunta>::node jugada_actual) {
+
+     if ((*jugada_actual).obtener_num_personajes() == 1) {
+        personajes_levantados.insert((*jugada_actual).obtener_personaje());
+        return personajes_levantados;
+     }
+     
+...
+funcion profundidad_promedio_hojas
+//auto en este caso es un int y asi te quitas el tema de recorrerlo con iteradores que es mas complicado
+for (auto it:prof_hojas) {
+          profundidad_promedio += it;
+     }

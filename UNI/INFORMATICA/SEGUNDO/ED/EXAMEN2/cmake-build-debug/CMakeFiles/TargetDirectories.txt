@@ -1,0 +1,3 @@
+/home/juan/Documentos/INFORMATICA/SEGUNDO/ED/EXAMEN2/cmake-build-debug/CMakeFiles/EXAMEN2.dir
+/home/juan/Documentos/INFORMATICA/SEGUNDO/ED/EXAMEN2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFORMATICA/SEGUNDO/ED/EXAMEN2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
