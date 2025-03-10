@@ -1,5 +1,5 @@
 module Irrgarten
-  module game_character
+  module Game_character
     PLAYER =  :player
     MONSTER = :monster
   end   
