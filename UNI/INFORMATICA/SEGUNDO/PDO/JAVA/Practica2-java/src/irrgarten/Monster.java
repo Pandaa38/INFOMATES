@@ -39,10 +39,10 @@ public class Monster {
         
         return to_s;        
     }
-    void gotWounded(){
+    private void gotWounded(){
         health--;
     }
-    boolean defend(float receivedAttack){
-        throw new UnsupportedOperationException();
-    }
+    //boolean defend(float receivedAttack){
+    //    throw new UnsupportedOperationException();
+    //}
 }
