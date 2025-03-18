@@ -1,0 +1,3 @@
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/prueba.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/rebuild_cache.dir
