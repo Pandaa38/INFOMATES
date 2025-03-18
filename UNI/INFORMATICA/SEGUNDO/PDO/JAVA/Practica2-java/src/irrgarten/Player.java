@@ -78,9 +78,13 @@ public class Player {
     public void receiveReward(){
         //PRACTICA 3 **************************************
     }
-    public String toString(){
-        return "hola";
-    }
+    public String toString() {
+    return name + ": \n\t" + 
+           "Inteligencia = " + intelligence + 
+           "\n\tFuerza = " + strength + 
+           "\n\tVida = " + health + 
+           "\n\tPos = (" + row + ", " + col + ")";
+}
     
     //PRIVATE-------------------------
     private void receiveWeapon(Weapon w){

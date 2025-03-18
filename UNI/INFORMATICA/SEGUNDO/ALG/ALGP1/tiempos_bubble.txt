@@ -1,0 +1,15 @@
+Time bubbleSort tam 1000: 9883 us
+Time bubbleSort tam 5000: 208952 us
+Time bubbleSort tam 10000: 821107 us
+Time bubbleSort tam 15000: 1843096 us
+Time bubbleSort tam 20000: 3285422 us
+Time bubbleSort tam 25000: 5130709 us
+Time bubbleSort tam 30000: 7366368 us
+Time bubbleSort tam 35000: 10044004 us
+Time bubbleSort tam 40000: 13112020 us
+Time bubbleSort tam 45000: 16652703 us
+Time bubbleSort tam 50000: 21272669 us
+Time bubbleSort tam 55000: 25403892 us
+Time bubbleSort tam 60000: 30553111 us
+Time bubbleSort tam 65000: 35162699 us
+Time bubbleSort tam 70000: 41569229 us

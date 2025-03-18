@@ -1,0 +1,133 @@
+Time quickSort tam 1000: 238 us
+Time quickSort tam 2000: 516 us
+Time quickSort tam 3000: 823 us
+Time quickSort tam 4000: 1097 us
+Time quickSort tam 5000: 2489 us
+Time quickSort tam 6000: 3088 us
+Time quickSort tam 7000: 3146 us
+Time quickSort tam 8000: 2707 us
+Time quickSort tam 9000: 2774 us
+Time quickSort tam 10000: 3294 us
+Time quickSort tam 11000: 3880 us
+Time quickSort tam 12000: 4082 us
+Time quickSort tam 13000: 4380 us
+Time quickSort tam 14000: 5141 us
+Time quickSort tam 15000: 5735 us
+Time quickSort tam 20000: 8517 us
+Time quickSort tam 25000: 11618 us
+Time quickSort tam 30000: 15312 us
+Time quickSort tam 35000: 19050 us
+
+Time mergeSort tam 1000: 582 us
+Time mergeSort tam 2000: 1186 us
+Time mergeSort tam 3000: 1830 us
+Time mergeSort tam 4000: 2508 us
+Time mergeSort tam 5000: 3152 us
+Time mergeSort tam 6000: 3807 us
+Time mergeSort tam 7000: 4512 us
+Time mergeSort tam 8000: 5112 us
+Time mergeSort tam 9000: 5758 us
+Time mergeSort tam 10000: 6433 us
+Time mergeSort tam 11000: 7378 us
+Time mergeSort tam 12000: 7822 us
+Time mergeSort tam 13000: 8500 us
+Time mergeSort tam 14000: 9215 us
+Time mergeSort tam 15000: 10029 us
+Time mergeSort tam 20000: 13713 us
+Time mergeSort tam 25000: 16864 us
+Time mergeSort tam 30000: 20283 us
+Time mergeSort tam 35000: 23579 us
+
+Time bubbleSort tam 1000: 7829 us
+Time bubbleSort tam 2000: 32195 us
+Time bubbleSort tam 3000: 72938 us
+Time bubbleSort tam 4000: 131458 us
+Time bubbleSort tam 5000: 208664 us
+Time bubbleSort tam 6000: 297741 us
+Time bubbleSort tam 7000: 407043 us
+Time bubbleSort tam 8000: 535867 us
+Time bubbleSort tam 9000: 675606 us
+Time bubbleSort tam 10000: 837917 us
+Time bubbleSort tam 11000: 1015483 us
+Time bubbleSort tam 12000: 1206883 us
+Time bubbleSort tam 13000: 1422936 us
+Time bubbleSort tam 14000: 1649290 us
+Time bubbleSort tam 15000: 1898018 us
+Time bubbleSort tam 20000: 3350084 us
+Time bubbleSort tam 25000: 5242753 us
+Time bubbleSort tam 30000: 7532748 us
+Time bubbleSort tam 35000: 10266937 us
+
+Time quickSort tam 10: 1 us
+Time quickSort tam 20: 2 us
+Time quickSort tam 30: 4 us
+Time quickSort tam 40: 5 us
+Time quickSort tam 50: 7 us
+Time quickSort tam 60: 7 us
+Time quickSort tam 70: 11 us
+Time quickSort tam 80: 15 us
+Time quickSort tam 90: 19 us
+Time quickSort tam 100: 21 us
+
+Time mergeSort tam 10: 7 us
+Time mergeSort tam 20: 10 us
+Time mergeSort tam 30: 14 us
+Time mergeSort tam 40: 18 us
+Time mergeSort tam 50: 23 us
+Time mergeSort tam 60: 28 us
+Time mergeSort tam 70: 47 us
+Time mergeSort tam 80: 38 us
+Time mergeSort tam 90: 44 us
+Time mergeSort tam 100: 50 us
+
+Time bubbleSort tam 10: 1 us
+Time bubbleSort tam 20: 4 us
+Time bubbleSort tam 30: 10 us
+Time bubbleSort tam 40: 18 us
+Time bubbleSort tam 50: 28 us
+Time bubbleSort tam 60: 38 us
+Time bubbleSort tam 70: 83 us
+Time bubbleSort tam 80: 67 us
+Time bubbleSort tam 90: 64 us
+Time bubbleSort tam 100: 81 us
+
+
+Time quickSort tam 100000: 115889 us
+Time quickSort tam 125000: 166587 us
+Time quickSort tam 175000: 310709 us
+Time quickSort tam 200000: 389920 us
+Time quickSort tam 225000: 492765 us
+Time quickSort tam 275000: 722371 us
+Time quickSort tam 300000: 859501 us
+Time quickSort tam 325000: 997754 us
+Time quickSort tam 375000: 1328518 us
+Time quickSort tam 400000: 1554985 us
+Time quickSort tam 425000: 1785695 us
+Time quickSort tam 475000: 2189194 us
+Time quickSort tam 500000: 2517744 us
+
+Time mergeSort tam 100000: 71026 us
+Time mergeSort tam 125000: 91634 us
+Time mergeSort tam 175000: 125283 us
+Time mergeSort tam 200000: 144018 us
+Time mergeSort tam 225000: 165218 us
+Time mergeSort tam 275000: 205137 us
+Time mergeSort tam 300000: 228795 us
+Time mergeSort tam 325000: 238791 us
+Time mergeSort tam 375000: 275342 us
+Time mergeSort tam 400000: 297997 us
+Time mergeSort tam 425000: 322195 us
+Time mergeSort tam 475000: 358943 us
+Time mergeSort tam 500000: 373570 us
+
+
+
+QuickSort ordenado
+Time quicksort tam 10000: 870197 us
+Time quicksort tam 20000: 3470240 us
+Time quicksort tam 30000: 7890947 us
+
+MergeSort ordenado
+Time mergeSort tam 10000: 5502 us
+Time mergeSort tam 20000: 13952 us
+Time mergeSort tam 30000: 17251 us

@@ -7,6 +7,8 @@ package irrgarten;
  */
 public class Monster {
     
+    private static final int INITIALHEALTH = 5;
+    
     private String name;
     private float intelligence;
     private float strenght;
@@ -18,6 +20,7 @@ public class Monster {
         this.name = name;
         this.intelligence = intelligence;
         this.strenght = strenght;
+        this.health = INITIALHEALTH;
         
         row = -1; col = -1;
     }
@@ -42,7 +45,7 @@ public class Monster {
     private void gotWounded(){
         health--;
     }
-    //boolean defend(float receivedAttack){
-    //    throw new UnsupportedOperationException();
-    //}
+    boolean defend(float receivedAttack){
+        throw new UnsupportedOperationException();
+    }
 }
