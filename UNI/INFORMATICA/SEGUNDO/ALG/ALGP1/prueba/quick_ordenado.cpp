@@ -55,7 +55,7 @@ int main(int argc, char const *argv[]) {
 
     srand(time(NULL));
 
-    ofstream file("tiempos_quick_1000.csv");
+    ofstream file("tiempos_quick_ordenado.csv");
 
     vector<long int> tamanios;
     for(long int i = 1000; i <= 35000; i+= 1000){
@@ -67,7 +67,7 @@ int main(int argc, char const *argv[]) {
         vector<int> vec(n);
 
         for (size_t j = 0; j < n; j++) {
-            vec[j] = rand() % 1000;
+            vec[j] = j;
         }
 
         auto start = chrono::high_resolution_clock::now();

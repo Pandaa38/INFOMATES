@@ -1,3 +1,11 @@
-C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/prueba.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/quick.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/quick_ordenado.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/quick_pequenios.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/merge.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/merge_ordenado.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/merge_pequenios.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/bubble.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/bubble_ordenado.dir
+C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/bubble_pequenios.dir
 C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/ALGP1/prueba/cmake-build-debug/CMakeFiles/rebuild_cache.dir
