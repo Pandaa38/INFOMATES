@@ -1,0 +1,10 @@
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/atomic.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/barrier.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/bucle-for.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/critical.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/critical_sin.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/master.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/parallel.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/single.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/AC/bp1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
