@@ -28,8 +28,11 @@ public class Labyrinth {
     private char LabyrinthSquare[][];
     
     
-    Labyrinth(){
-                
+    Labyrinth(int nRows, int nCols, int exitRow, int exitCol){
+        this.nRows = nRows;
+        this.nCols = nCols;
+        this.exitRow = exitRow;
+        this.exitCol= exitCol;
         
     }
     public void spreadPlayers(Player players){
@@ -39,7 +42,7 @@ public class Labyrinth {
         return PlayerSquare[exitRow][exitCol] != null;
     }
     public String toString(){
-        
+        return "Laberinto";
     }
     public void addMonster(int row, int col, Monster monster){
         if( posOk(row, col) && emptyPos(row, col) ){
