@@ -8,6 +8,37 @@ import java.util.ArrayList;
  * @author juan
  */
 public class Game {
+    
+    // ---------------------- PERSONALIZACIÓN LABERINTO ---------------- 
+    // Tamaño del laberinto
+    /**
+     * Número de filas del laberinto.
+     */
+    private static final int ROWS=7;
+    /**
+     * Número de columnas del laberinto.
+     */
+    private static final int COLS=7;
+    
+
+    // Monstruos a incluir
+    /**
+     * Número de monstruos a incluir en el laberinto.
+     */
+    private static final int NUM_MONSTERS=5;
+    /**
+     * Posiciones iniciales de los monstruos en el laberinto.
+     */
+    private static final int [][] INIT_MONSTERS= {{0,0}, {1,1}, {2,2}, {3,3}, {0,3}};
+    
+    // Bloques a incluir
+    /**
+     * Número de bloques a incluir en el laberinto.
+     */
+    private static final int NUM_BLOCKS=4;  
+    
+    
+    // ----------------------- DATOS GAME ------------------------
     private static final int MAXROUNDS = 10;
     
     private int currentPlayerIndex;
@@ -21,8 +52,8 @@ public class Game {
     
     Game(int nplayers){
         // Definimos casilla de salida
-        int exitRow=Dice.randomPos();
-        int exitCol=Dice.randomPos();
+        int exitRow=Dice.randomPos(10);
+        int exitCol=Dice.randomPos(10);
 
         // Inicializamos los vectores de jugadores y monstruos
         this.players=new ArrayList<>();

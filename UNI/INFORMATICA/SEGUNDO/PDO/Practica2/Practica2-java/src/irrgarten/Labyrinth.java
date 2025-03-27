@@ -35,7 +35,7 @@ public class Labyrinth {
         this.exitCol= exitCol;
         
     }
-    public void spreadPlayers(Player players){
+    public void spreadPlayers(ArrayList<Player> players){
         //PRACTICA 3 ---------------------------------------------------
     }
     public boolean haveAWinner(){
@@ -94,6 +94,7 @@ public class Labyrinth {
         
     }
     private int[] dir2Pos(int row, int col, Directions direction){
+                
         switch(direction){
             case DOWN -> row++;
             case UP -> row--;
