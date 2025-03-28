@@ -1,0 +1,181 @@
+\hypertarget{main_8cpp}{}\doxysection{src/main.cpp File Reference}
+\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}Profile.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{show\+English\+Help}} (ostream \&output\+Stream)
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Juan Reche Aguilar
+\end{DoxyAuthor}
+Created on 16 November 2023, 14\+:15 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+This program reads an undefined number of \mbox{\hyperlink{classProfile}{Profile}} objects from the set of files passed as parameters to \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}}. All the Profiles object, except the first one, must be stored in a dynamic array of \mbox{\hyperlink{classProfile}{Profile}} objects. Then, for each \mbox{\hyperlink{classProfile}{Profile}} in the dynamic array, this program prints to the standard output the name of the file of that \mbox{\hyperlink{classProfile}{Profile}} and the distance from the first \mbox{\hyperlink{classProfile}{Profile}} to the current \mbox{\hyperlink{classProfile}{Profile}}. Finally, the program should print in the standard output, the name of the file with the \mbox{\hyperlink{classProfile}{Profile}} with the minimum$\vert$maximum distance to the \mbox{\hyperlink{classProfile}{Profile}} of the first file and its profile identifier.
+
+At least, two \mbox{\hyperlink{classProfile}{Profile}} files are required to run this program.
+
+This program assumes that the profile files are already normalized and sorted by frequency. This is not checked in this program. Unexpected results will be obtained if those conditions are not met.
+
+Running sintax\+: \begin{quote}
+kmer3 \mbox{[}-\/t min$\vert$max\mbox{]} $<$file1.\+prf$>$ $<$file2.\+prf$>$ \mbox{[} ... $<$filen.\+prf$>$\mbox{]} \end{quote}
+~\newline
+ Running example\+: \begin{quote}
+kmer3 ../\+Genomes/human1.prf ../\+Genomes/worm1.prf ../\+Genomes/mouse1.prf \end{quote}
+Distance to ../\+Genomes/worm1.prf\+: 0.\+330618 Distance to ../\+Genomes/mouse1.prf\+: 0.\+224901 Nearest profile file\+: ../\+Genomes/mouse1.prf Identifier of the nearest profile\+: mus musculus
+
+Running example\+: \begin{quote}
+kmer3 -\/t max ../\+Genomes/human1.prf ../\+Genomes/worm1.prf ../\+Genomes/mouse1.prf \end{quote}
+Distance to ../\+Genomes/worm1.prf\+: 0.\+330618 Distance to ../\+Genomes/mouse1.prf\+: 0.\+224901 Farthest profile file\+: ../\+Genomes/worm1.prf Identifier of the farthest profile\+: worm 
+
+Definition at line 73 of file main.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73                                  \{}
+\DoxyCodeLine{74     }
+\DoxyCodeLine{75     \textcolor{comment}{// Process the main() arguments}}
+\DoxyCodeLine{76      \textcolor{keywordflow}{if}(argc < 3)\{}
+\DoxyCodeLine{77         \mbox{\hyperlink{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{78         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{79     \}}
+\DoxyCodeLine{80      }
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool} min = \textcolor{keyword}{true}; \textcolor{comment}{//Default}}
+\DoxyCodeLine{82     \textcolor{keywordtype}{int} pos\_base = 1;}
+\DoxyCodeLine{83     }
+\DoxyCodeLine{84     \textcolor{comment}{//mejorar para test 3 (pone -\/f)}}
+\DoxyCodeLine{85     \textcolor{keywordflow}{if}(argv[1][0] == \textcolor{charliteral}{'-\/'})\{}
+\DoxyCodeLine{86         }
+\DoxyCodeLine{87         \textcolor{keywordflow}{if}(argv[1][1] == \textcolor{charliteral}{'t'})\{}
+\DoxyCodeLine{88             }
+\DoxyCodeLine{89             pos\_base = 3;}
+\DoxyCodeLine{90             }
+\DoxyCodeLine{91             \textcolor{keywordflow}{if}(argc -\/ pos\_base < 2)\{}
+\DoxyCodeLine{92                 \mbox{\hyperlink{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{93                 \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{94             \}}
+\DoxyCodeLine{95             }
+\DoxyCodeLine{96             \textcolor{keywordflow}{if}((\textcolor{keywordtype}{string})argv[2] == \textcolor{stringliteral}{"{}max"{}})\{}
+\DoxyCodeLine{97                 min = \textcolor{keyword}{false};}
+\DoxyCodeLine{98             \}}
+\DoxyCodeLine{99             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((\textcolor{keywordtype}{string})argv[2] != \textcolor{stringliteral}{"{}max"{}})\{}
+\DoxyCodeLine{100                 \mbox{\hyperlink{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{101                 \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{102             \}}
+\DoxyCodeLine{103         \}\textcolor{comment}{//if(argv[1][1] == 't')}}
+\DoxyCodeLine{104         \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{105             \mbox{\hyperlink{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}{showEnglishHelp}}(cerr);}
+\DoxyCodeLine{106             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108     \}\textcolor{comment}{//if(argv[1][0] == '-\/')}}
+\DoxyCodeLine{109     }
+\DoxyCodeLine{110     }
+\DoxyCodeLine{111     \textcolor{comment}{// Allocate a dynamic array of Profiles}}
+\DoxyCodeLine{112     \textcolor{keywordtype}{int} num\_candidates = argc -\/ pos\_base -\/1;}
+\DoxyCodeLine{113     }
+\DoxyCodeLine{114     \mbox{\hyperlink{classProfile}{Profile}} *candidates = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{115     candidates = \textcolor{keyword}{new} \mbox{\hyperlink{classProfile}{Profile}} [num\_candidates];}
+\DoxyCodeLine{116     }
+\DoxyCodeLine{117     \textcolor{comment}{// Load the input Profiles}}
+\DoxyCodeLine{118     \mbox{\hyperlink{classProfile}{Profile}} base;}
+\DoxyCodeLine{119     base.\mbox{\hyperlink{classProfile_a13cd5a8edb2b02ac2d86ac87d8be4eab}{load}}(argv[pos\_base]);}
+\DoxyCodeLine{120     \textcolor{comment}{//base.sort(); estoy seguro que deberia ordenarlos }}
+\DoxyCodeLine{121     }
+\DoxyCodeLine{122     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < num\_candidates; i++)\{}
+\DoxyCodeLine{123         }
+\DoxyCodeLine{124         candidates[i].\mbox{\hyperlink{classProfile_a13cd5a8edb2b02ac2d86ac87d8be4eab}{load}}(argv[pos\_base+1 + i]);}
+\DoxyCodeLine{125         \textcolor{comment}{//candidates[i].sort(); //puede que sea error}}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127     }
+\DoxyCodeLine{128     \textcolor{comment}{// Calculate and print the distance from the first Profile to the rest}}
+\DoxyCodeLine{129     \textcolor{keywordtype}{double} dist\_mode = min ? 1:0; \textcolor{comment}{//dist c [0,1] }}
+\DoxyCodeLine{130     \textcolor{keywordtype}{int} index; \textcolor{comment}{//= 0;}}
+\DoxyCodeLine{131     }
+\DoxyCodeLine{132     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < num\_candidates; i++)\{}
+\DoxyCodeLine{133         }
+\DoxyCodeLine{134         \textcolor{keywordtype}{double} dist = base.\mbox{\hyperlink{classProfile_ac7fdfdcdbdb4b1042c3378e7fd2b87a3}{getDistance}}(candidates[i]);}
+\DoxyCodeLine{135         cout << \textcolor{stringliteral}{"{}Distance to "{}} << argv[pos\_base+1 + i] << \textcolor{stringliteral}{"{}: "{}} << dist << endl;}
+\DoxyCodeLine{136         }
+\DoxyCodeLine{137         \textcolor{comment}{//preguntar si < o <=}}
+\DoxyCodeLine{138         \textcolor{keywordtype}{bool} new\_dist\_mode = min ? dist <= dist\_mode : dist >= dist\_mode;}
+\DoxyCodeLine{139         }
+\DoxyCodeLine{140         \textcolor{keywordflow}{if}(new\_dist\_mode)\{}
+\DoxyCodeLine{141             index = i;}
+\DoxyCodeLine{142             dist\_mode = dist;}
+\DoxyCodeLine{143         \}}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145     }
+\DoxyCodeLine{146     \textcolor{comment}{/*}}
+\DoxyCodeLine{147 \textcolor{comment}{    // Print name of the file and identifier that takes min|max distance to the first one}}
+\DoxyCodeLine{148 \textcolor{comment}{    if(min)\{}}
+\DoxyCodeLine{149 \textcolor{comment}{        cout << "{}Nearest profile file: "{} << (string)argv[pos\_base+1+index]}}
+\DoxyCodeLine{150 \textcolor{comment}{             << endl;}}
+\DoxyCodeLine{151 \textcolor{comment}{        cout << "{}Identifier of the nearest profile: "{} }}
+\DoxyCodeLine{152 \textcolor{comment}{             << candidates[index].getProfileId() << endl;}}
+\DoxyCodeLine{153 \textcolor{comment}{    \}}}
+\DoxyCodeLine{154 \textcolor{comment}{    else\{}}
+\DoxyCodeLine{155 \textcolor{comment}{        cout << "{}Farthest profile file: "{} << (string)argv[pos\_base+1+index] }}
+\DoxyCodeLine{156 \textcolor{comment}{             << endl;}}
+\DoxyCodeLine{157 \textcolor{comment}{        cout << "{}Identifier of the farthest profile: "{} }}
+\DoxyCodeLine{158 \textcolor{comment}{             << candidates[index].getProfileId() << endl;}}
+\DoxyCodeLine{159 \textcolor{comment}{    \}}}
+\DoxyCodeLine{160 \textcolor{comment}{    */}}
+\DoxyCodeLine{161     }
+\DoxyCodeLine{162     \textcolor{comment}{//Preguntar creo que cortijo seria suspenso}}
+\DoxyCodeLine{163     cout << (min ? \textcolor{stringliteral}{"{}Nearest"{}} : \textcolor{stringliteral}{"{}Farthest"{}}) << \textcolor{stringliteral}{"{} profile file: "{}} }
+\DoxyCodeLine{164          << (\textcolor{keywordtype}{string})argv[pos\_base+1+index] << endl;}
+\DoxyCodeLine{165     cout << \textcolor{stringliteral}{"{}Identifier of the "{}} << (min ? \textcolor{stringliteral}{"{}nearest"{}} : \textcolor{stringliteral}{"{}farthest"{}})<< \textcolor{stringliteral}{"{} profile: "{}} }
+\DoxyCodeLine{166          << candidates[index].getProfileId() << endl;}
+\DoxyCodeLine{167     }
+\DoxyCodeLine{168     \textcolor{comment}{// Deallocate the dynamic array of Profile}}
+\DoxyCodeLine{169     \textcolor{keyword}{delete} [] candidates;}
+\DoxyCodeLine{170     }
+\DoxyCodeLine{171     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{172 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}\label{main_8cpp_a82208e7f47d4a50db15e00036cfdf73a}} 
+\index{main.cpp@{main.cpp}!showEnglishHelp@{showEnglishHelp}}
+\index{showEnglishHelp@{showEnglishHelp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{showEnglishHelp()}{showEnglishHelp()}}
+{\footnotesize\ttfamily void show\+English\+Help (\begin{DoxyParamCaption}\item[{ostream \&}]{output\+Stream }\end{DoxyParamCaption})}
+
+Shows help about the use of this program in the given output stream 
+\begin{DoxyParams}{Parameters}
+{\em output\+Stream} & The output stream where the help will be shown (for example, cout, cerr, etc) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 24 of file main.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24                                             \{}
+\DoxyCodeLine{25     outputStream << \textcolor{stringliteral}{"{}ERROR in Kmer3 parameters"{}} << endl;}
+\DoxyCodeLine{26     outputStream << \textcolor{stringliteral}{"{}Run with the following parameters:"{}} << endl;}
+\DoxyCodeLine{27     outputStream << \textcolor{stringliteral}{"{}kmer3 [-\/t min|max] <file1.prf> <file2.prf> [ ... <filen.prf>]"{}} << endl;}
+\DoxyCodeLine{28     outputStream << endl;}
+\DoxyCodeLine{29     outputStream << \textcolor{stringliteral}{"{}Parameters:"{}} << endl;}
+\DoxyCodeLine{30     outputStream << \textcolor{stringliteral}{"{}-\/t min | -\/t max: search for minimun distances or maximum distances (-\/t min by default)"{}} << endl;}
+\DoxyCodeLine{31     outputStream << \textcolor{stringliteral}{"{}<file1.prf>: source profile file for computing distances"{}} << endl;}
+\DoxyCodeLine{32     outputStream << \textcolor{stringliteral}{"{}<file2.prf> [ ... <filen.prf>]: target profile files for computing distances"{}} << endl;  }
+\DoxyCodeLine{33     outputStream << endl;}
+\DoxyCodeLine{34     outputStream << \textcolor{stringliteral}{"{}This program computes the distance from profile <file1.prf> to the rest"{}} << endl;}
+\DoxyCodeLine{35     outputStream << endl;}
+\DoxyCodeLine{36 \}}
+
+\end{DoxyCode}

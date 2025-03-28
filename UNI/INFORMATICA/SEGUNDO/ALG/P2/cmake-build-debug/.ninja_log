@@ -1,3 +1,6 @@
 # ninja log v6
-1	974	1742560232579697334	CMakeFiles/euclidia_divide.dir/euclidia_divide.cpp.o	37ce4be302575dd8
+2	796	1743158194988797323	CMakeFiles/euclidia_fuerza.dir/Punto2D.cpp.o	2ec45acdb0dd564
+797	900	1743158195783803424	euclidia_fuerza	fed542b0eac5e7c4
+4	940	1743157784356910163	CMakeFiles/euclidia_fuerza.dir/euclidia_fuerza.cpp.o	d2e5379aac336547
 974	1075	1742560233552705066	euclidia_divide	c09ad674e61f7119
+1	26	1743158502611596403	build.ninja	1f505c1a3d76beae
