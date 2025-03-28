@@ -1,0 +1,4 @@
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/cmake-build-debug/CMakeFiles/euclidia_fuerza.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/cmake-build-debug/CMakeFiles/euclidia_divide.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

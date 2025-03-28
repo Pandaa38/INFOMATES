@@ -1,6 +1,10 @@
 module Irrgarten
+
+  require_relative 'dice'
+  require_relative 'weapon'
+  require_relative 'shield'
+
   class Player
-    class Player
       @@MAX_WEAPONS = 2
       @@MAX_SHIELDS = 3
       @@INITIAL_HEALTH = 10
@@ -18,13 +22,16 @@ module Irrgarten
     
         @weapons = Array.new   
         @shields = Array.new
+
+        @row = -1
+        @col = -1
       end
 
       def resurrect
         @weapons.clear
         @shields.clear
     
-        @health = @@initial_health
+        @health = @@INITIAL_HEALTH
         reset_hits
       end
     
@@ -39,18 +46,17 @@ module Irrgarten
       def get_number
         @number
       end
-    
+
       def set_pos(row, col)
         @row = row
         @col = col
       end
     
-      def dead?
+      def dead
         @health == 0
       end
     
       def move(direction, valid_moves)
-        raise NotImplementedError, "El método move no está implementado."
         # PRACTICA 3 **************************************
       end
     
@@ -67,10 +73,22 @@ module Irrgarten
       end
     
       def to_s
-        "#{@name}: \n\tInteligencia = #{@intelligence}\n\tFuerza = #{@strength}\n\tVida = #{@health}\n\tPos = (#{@row}, #{ @col})"
+        weapons_str = ""
+        @weapons.each do |weapon|
+          weapons_str += weapon.to_s + ", "
+        end
+        weapons_str.chomp(", ")
+    
+        shields_str = ""
+        @shields.each do |shield|
+          shields_str += shield.to_s + ", "
+        end
+        shields_str.chomp(", ")
+    
+        "#{@name}: \n\tInteligencia = #{@intelligence}\n\tFuerza = #{@strength}\n\tVida = #{@health}\n\tPos = (#{@row}, #{ @col})\n\tArmas = [#{weapons_str}]\n\tEscudos = [#{shields_str}]"
       end
     
-      private
+      #private
     
       def receive_weapon(w)
         # PRACTICA 3 **************************************
@@ -81,12 +99,12 @@ module Irrgarten
       end
     
       def new_weapon
-        w = Weapon.new(Dice.weaponPower, Dice.usesLeft)
+        w = Weapon.new(Dice.weapon_power, Dice.uses_left)
         w
       end
     
       def new_shield
-        s = Shield.new(Dice.shieldPower, Dice.usesLeft)
+        s = Shield.new(Dice.shield_power, Dice.uses_left)
         s
       end
     
@@ -111,7 +129,6 @@ module Irrgarten
       end
     
       def manage_hit(received_attack)
-        raise NotImplementedError, "El método manage_hit no está implementado."
         # PRACTICA 3 **************************************
       end
     
@@ -128,4 +145,35 @@ module Irrgarten
       end
 
   end
+
+
+=begin
+  puts "Prueba de la clase Player"
+
+  # Crear una instancia de Player
+  player = Player.new('A', 10, 7)
+  puts "\nEstado inicial del Player:"
+  puts player.to_s
+
+  # Probar el método set_pos
+  player.set_pos(3, 5)
+  puts "\nDespués de ejecutar set_pos(3, 5):"
+  puts player.to_s
+
+  # Simular daño usando el método take_damage
+  player.got_wounded
+  player.got_wounded
+  puts "\nDespués de simular daño (reduciendo 2 puntos de vida):"
+  puts "¿Está muerto? #{player.dead}"
+  puts player.to_s
+
+  # Probar resurrect para restaurar la salud y vaciar armas/escudos
+  player.resurrect
+  puts "\nDespués de ejecutar resurrect:"
+  puts player.to_s
+
+  # Probar el método new_weapon
+  puts "\nCreando un arma con new_weapon:"
+  puts player.new_weapon.to_s
+=end
 end

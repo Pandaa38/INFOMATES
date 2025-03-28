@@ -94,23 +94,26 @@ public class Labyrinth {
         
     }
     private int[] dir2Pos(int row, int col, Directions direction){
-                
+        
+        int[] pos = {row,col};
+        
         switch(direction){
-            case DOWN -> row++;
-            case UP -> row--;
-            case LEFT -> col--;
-            case RIGHT -> col++;
+            case DOWN -> pos[ROW]++;
+            case UP -> pos[ROW]--;
+            case LEFT -> pos[COL]--;
+            case RIGHT -> pos[COL]++;
         }
-        return new int[]{row, col};
+        return pos;
     }
     private int[] randomEmptyPos(){
-        int row = Dice.randomPos(nRows);
-        int col = Dice.randomPos(nCols);
-        while(emptyPos(row, col)){
-            row = Dice.randomPos(nRows);
-            col = Dice.randomPos(nCols);
-        }
-        return new int[]{row, col};
+        
+        int[] pos = new int [2];
+        do{
+            pos[ROW] = Dice.randomPos(nRows);
+            pos[COL] = Dice.randomPos(nCols);
+        }while(emptyPos(pos[ROW],pos[COL]));
+        
+        return pos;
     }
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, 
             Player player){
