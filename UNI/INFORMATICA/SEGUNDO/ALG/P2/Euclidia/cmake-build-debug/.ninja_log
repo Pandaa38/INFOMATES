@@ -1,0 +1,19 @@
+# ninja log v6
+1155	1257	1743159381269755603	euclidia_fuerza	594d313d00f19cc7
+1064	1168	1743239583825978824	euclidia_divide	537550433c0713ae
+1	34	1743239976792387852	build.ninja	1f505c1a3d76beae
+1	979	1743159380115764579	CMakeFiles/euclidia_fuerza.dir/scr/Punto2D.cpp.o	fae1dd6ca3209e2a
+7	1281	1743238612740447724	CMakeFiles/euclidia_divide.dir/scr/Punto2D.cpp.o	c7958a27f05d217b
+3	1064	1743239582764878365	CMakeFiles/euclidia_divide.dir/scr/euclidia_divide.cpp.o	4ae5dc7086fd738a
+0	1155	1743159380114764586	CMakeFiles/euclidia_fuerza.dir/scr/euclidia_fuerza.cpp.o	23f5bdfc4739e114
+4	1102	1743239986595480844	CMakeFiles/euclidia_divide2.dir/scr/Punto2D.cpp.o	8136fedc975ed62f
+2	1359	1743239986593480826	CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o	387304fde8da041f
+1359	1462	1743239987950493041	euclidia_divide2	44c13da486c84ca0
+2	1117	1743240280647948126	CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o	387304fde8da041f
+1118	1242	1743240281763987848	euclidia_divide2	44c13da486c84ca0
+3	1220	1743240319718278118	CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o	387304fde8da041f
+1220	1339	1743240320934317569	euclidia_divide2	44c13da486c84ca0
+2	1075	1743240463189209653	CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o	387304fde8da041f
+1075	1181	1743240464262234055	euclidia_divide2	44c13da486c84ca0
+3	1540	1743240521134434465	CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o	387304fde8da041f
+1540	1641	1743240522671464466	euclidia_divide2	44c13da486c84ca0

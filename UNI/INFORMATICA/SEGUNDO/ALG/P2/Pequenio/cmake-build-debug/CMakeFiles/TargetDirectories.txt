@@ -1,0 +1,4 @@
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Pequenio/cmake-build-debug/CMakeFiles/pequenio_fuerza.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Pequenio/cmake-build-debug/CMakeFiles/pequenio_divide.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Pequenio/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Pequenio/cmake-build-debug/CMakeFiles/rebuild_cache.dir
