@@ -5,7 +5,7 @@
 Punto2D::Punto2D() : x(0), y(0) {}
 Punto2D::Punto2D(int x, int y) : x(x), y(y) {}
 
-float Punto2D::distancia(const Punto2D& punto) const {
+double Punto2D::distancia(const Punto2D &punto) const {
 	int dx = abs(this->x - punto.x);
 	int dy = abs(this->y - punto.y);
 	return sqrt(dx * dx + dy * dy);

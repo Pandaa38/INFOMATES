@@ -12,7 +12,7 @@ public:
 	Punto2D();
 	Punto2D(int x, int y);
 
-	float distancia(const Punto2D& punto) const;
+	double distancia(const Punto2D &punto) const;
 	int getx() const;
 	int gety() const;
 };

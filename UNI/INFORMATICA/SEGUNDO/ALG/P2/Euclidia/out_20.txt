@@ -1,0 +1,396 @@
+Puntos: 
+(5, 95)
+(11, 22)
+(12, 34)
+(15, 25)
+(20, 30)
+(23, 89)
+(25, 15)
+(33, 44)
+(34, 23)
+(40, 60)
+(45, 67)
+(50, 70)
+(55, 66)
+(56, 12)
+(70, 80)
+(77, 88)
+(78, 45)
+(80, 90)
+(90, 10)
+(99, 0)
+
+Puntos: normal
+izq: 0 der: 19
+(5, 95)
+(11, 22)
+(12, 34)
+(15, 25)
+(20, 30)
+(23, 89)
+(25, 15)
+(33, 44)
+(34, 23)
+(40, 60)
+(45, 67)
+(50, 70)
+(55, 66)
+(56, 12)
+(70, 80)
+(77, 88)
+(78, 45)
+(80, 90)
+(90, 10)
+(99, 0)
+Mid: (40, 60)
+
+Puntos: normal
+izq: 0 der: 9
+(5, 95)
+(11, 22)
+(12, 34)
+(15, 25)
+(20, 30)
+(23, 89)
+(25, 15)
+(33, 44)
+(34, 23)
+(40, 60)
+Mid: (20, 30)
+
+Puntos: normal
+izq: 0 der: 4
+(5, 95)
+(11, 22)
+(12, 34)
+(15, 25)
+(20, 30)
+Mid: (12, 34)
+
+Puntos: normal
+izq: 0 der: 2
+(5, 95)
+(11, 22)
+(12, 34)
+Mid: (11, 22)
+
+Puntos: normal
+izq: 0 der: 1
+(5, 95)
+(11, 22)
+Distancia: 73.2462
+Puntos: normal
+izq: 2 der: 2
+(12, 34)
+Puntos: strip
+izq: 0 der: 1
+(5, 95)
+(11, 22)
+Distancia: 73.2462
+Puntos: strip
+izq: 1 der: 2
+(11, 22)
+(12, 34)
+Distancia: 12.0416
+Puntos: normal
+izq: 3 der: 4
+(15, 25)
+(20, 30)
+Distancia: 7.07107
+Puntos: strip
+izq: 0 der: 2
+(5, 95)
+(11, 22)
+(12, 34)
+Mid: (11, 22)
+
+Puntos: normal
+izq: 0 der: 1
+(5, 95)
+(11, 22)
+Distancia: 73.2462
+Puntos: normal
+izq: 2 der: 2
+(12, 34)
+Puntos: strip
+izq: 0 der: 1
+(5, 95)
+(11, 22)
+Distancia: 73.2462
+Puntos: strip
+izq: 1 der: 2
+(11, 22)
+(12, 34)
+Distancia: 12.0416
+Puntos: strip
+izq: 2 der: 3
+(12, 34)
+(15, 25)
+Distancia: 9.48683
+Puntos: normal
+izq: 5 der: 9
+(23, 89)
+(25, 15)
+(33, 44)
+(34, 23)
+(40, 60)
+Mid: (33, 44)
+
+Puntos: normal
+izq: 5 der: 7
+(23, 89)
+(25, 15)
+(33, 44)
+Mid: (25, 15)
+
+Puntos: normal
+izq: 5 der: 6
+(23, 89)
+(25, 15)
+Distancia: 74.027
+Puntos: normal
+izq: 7 der: 7
+(33, 44)
+Puntos: strip
+izq: 0 der: 1
+(23, 89)
+(25, 15)
+Distancia: 74.027
+Puntos: strip
+izq: 1 der: 2
+(25, 15)
+(33, 44)
+Distancia: 30.0832
+Puntos: normal
+izq: 8 der: 9
+(34, 23)
+(40, 60)
+Distancia: 37.4833
+Puntos: strip
+izq: 0 der: 2
+(23, 89)
+(25, 15)
+(33, 44)
+Mid: (25, 15)
+
+Puntos: normal
+izq: 0 der: 1
+(23, 89)
+(25, 15)
+Distancia: 74.027
+Puntos: normal
+izq: 2 der: 2
+(33, 44)
+Puntos: strip
+izq: 0 der: 1
+(23, 89)
+(25, 15)
+Distancia: 74.027
+Puntos: strip
+izq: 1 der: 2
+(25, 15)
+(33, 44)
+Distancia: 30.0832
+Puntos: strip
+izq: 2 der: 4
+(33, 44)
+(34, 23)
+(40, 60)
+Mid: (34, 23)
+
+Puntos: normal
+izq: 2 der: 3
+(33, 44)
+(34, 23)
+Distancia: 21.0238
+Puntos: normal
+izq: 4 der: 4
+(40, 60)
+Puntos: strip
+izq: 0 der: 1
+(33, 44)
+(34, 23)
+Distancia: 21.0238
+Puntos: strip
+izq: 1 der: 2
+(34, 23)
+(40, 60)
+Distancia: 37.4833
+Puntos: strip
+izq: 0 der: 2
+(15, 25)
+(20, 30)
+(23, 89)
+Mid: (20, 30)
+
+Puntos: normal
+izq: 0 der: 1
+(15, 25)
+(20, 30)
+Distancia: 7.07107
+Puntos: normal
+izq: 2 der: 2
+(23, 89)
+Puntos: strip
+izq: 0 der: 1
+(15, 25)
+(20, 30)
+Distancia: 7.07107
+Puntos: strip
+izq: 1 der: 2
+(20, 30)
+(23, 89)
+Distancia: 59.0762
+Puntos: strip
+izq: 2 der: 3
+(23, 89)
+(25, 15)
+Distancia: 74.027
+Puntos: normal
+izq: 10 der: 19
+(45, 67)
+(50, 70)
+(55, 66)
+(56, 12)
+(70, 80)
+(77, 88)
+(78, 45)
+(80, 90)
+(90, 10)
+(99, 0)
+Mid: (70, 80)
+
+Puntos: normal
+izq: 10 der: 14
+(45, 67)
+(50, 70)
+(55, 66)
+(56, 12)
+(70, 80)
+Mid: (55, 66)
+
+Puntos: normal
+izq: 10 der: 12
+(45, 67)
+(50, 70)
+(55, 66)
+Mid: (50, 70)
+
+Puntos: normal
+izq: 10 der: 11
+(45, 67)
+(50, 70)
+Distancia: 5.83095
+Puntos: normal
+izq: 12 der: 12
+(55, 66)
+Puntos: strip
+izq: 0 der: 1
+(45, 67)
+(50, 70)
+Distancia: 5.83095
+Puntos: strip
+izq: 1 der: 2
+(50, 70)
+(55, 66)
+Distancia: 6.40312
+Puntos: normal
+izq: 13 der: 14
+(56, 12)
+(70, 80)
+Distancia: 69.4262
+Puntos: strip
+izq: 0 der: 1
+(50, 70)
+(55, 66)
+Distancia: 6.40312
+Puntos: strip
+izq: 1 der: 2
+(55, 66)
+(56, 12)
+Distancia: 54.0093
+Puntos: normal
+izq: 15 der: 19
+(77, 88)
+(78, 45)
+(80, 90)
+(90, 10)
+(99, 0)
+Mid: (80, 90)
+
+Puntos: normal
+izq: 15 der: 17
+(77, 88)
+(78, 45)
+(80, 90)
+Mid: (78, 45)
+
+Puntos: normal
+izq: 15 der: 16
+(77, 88)
+(78, 45)
+Distancia: 43.0116
+Puntos: normal
+izq: 17 der: 17
+(80, 90)
+Puntos: strip
+izq: 0 der: 1
+(77, 88)
+(78, 45)
+Distancia: 43.0116
+Puntos: strip
+izq: 1 der: 2
+(78, 45)
+(80, 90)
+Distancia: 45.0444
+Puntos: normal
+izq: 18 der: 19
+(90, 10)
+(99, 0)
+Distancia: 13.4536
+Puntos: strip
+izq: 0 der: 2
+(77, 88)
+(78, 45)
+(80, 90)
+Mid: (78, 45)
+
+Puntos: normal
+izq: 0 der: 1
+(77, 88)
+(78, 45)
+Distancia: 43.0116
+Puntos: normal
+izq: 2 der: 2
+(80, 90)
+Puntos: strip
+izq: 0 der: 1
+(77, 88)
+(78, 45)
+Distancia: 43.0116
+Puntos: strip
+izq: 1 der: 2
+(78, 45)
+(80, 90)
+Distancia: 45.0444
+Puntos: strip
+izq: 2 der: 3
+(80, 90)
+(90, 10)
+Distancia: 80.6226
+Puntos: strip
+izq: 0 der: 0
+(70, 80)
+Puntos: strip
+izq: 0 der: 0
+(70, 80)
+Puntos: strip
+izq: 0 der: 1
+(40, 60)
+(45, 67)
+Distancia: 8.60233
+Puntos: strip
+izq: 1 der: 1
+(45, 67)
+
+Distancia minima: 5.83095

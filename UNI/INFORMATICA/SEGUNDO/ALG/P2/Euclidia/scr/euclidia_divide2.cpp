@@ -8,8 +8,7 @@
 
 using namespace std;
 
-float distanciaStrip(vector<Punto2D>& strip, float d);
-float distMin(vector<Punto2D>& v, int izq, int der);
+double distMin(vector<Punto2D> &v, int izq, int der, const string& func = "normal");
 
 int main(int argc, char const *argv[]) {
     vector<Punto2D> puntos;
@@ -38,72 +37,87 @@ int main(int argc, char const *argv[]) {
     for (const Punto2D& p : puntos) {
         cout << p << endl;
     }
+    cout << endl;
 
     // Calcular distancia mínima
-    float minDist = distMin(puntos, 0, puntos.size() - 1);
+    double minDist = distMin(puntos, 0, puntos.size() - 1);
 
-    cout << endl;
+
     cout << "Distancia minima: " << minDist << endl;
 
     return 0;
 }
 
-float distanciaStrip(vector<Punto2D>& strip, float d) {
-    // Ordenar la franja por coordenada y
-    sort(strip.begin(), strip.end(), [](const Punto2D& a, const Punto2D& b) {
-        return a.gety() < b.gety();
-    });
-    /*
-    float dist = d;
-    float minDist = distMin(strip, 0, strip.size() - 1);
+double distMin(vector<Punto2D> &v, int izq, int der, const string& func) {
 
-    return min(d, minDist);
-    */
-
-    float minDist = d;
-
-    // Limitar comparaciones a un número constante (máximo 7)
-    for (size_t i = 0; i < strip.size(); ++i) {
-        for (size_t j = i + 1; j < strip.size() &&
-             (strip[j].gety() - strip[i].gety()) < minDist &&
-             j < i + 7; ++j) {
-            float dist = strip[i].distancia(strip[j]);
-            if (dist < minDist) {
-                minDist = dist;
-            }
-             }
+    cout << "Puntos: " << func << endl;
+    cout << "izq: " << izq << " der: " << der << endl;
+    // Se corrige el límite del bucle para incluir el elemento en 'der'
+    for (int i = izq; i <= der; i++) {
+        cout << v[i] << endl;
     }
 
-    return minDist;
-}
-
-float distMin(vector<Punto2D>& v, int izq, int der) {
-
-    if (der - izq + 1 == 2) {           // Caso base: 2 puntos
-        return v[izq].distancia(v[der]);
-    }else if (der - izq + 1 <= 1) {     // Caso base: 1 punto
-        return numeric_limits<float>::max();
+    // Caso base: 2 o menos puntos
+    if (der - izq + 1 <= 2) {
+        if (der - izq + 1 == 2) {
+            double dist = v[izq].distancia(v[der]);
+            cout << "Distancia: " << dist << endl;
+            return dist;
+        }
+        return numeric_limits<double>::max();
     }
 
     // Punto medio
-    int mid = izq + (der - izq) / 2;
+    int mid = (izq + der) / 2;
     Punto2D midPoint = v[mid];
+    cout << "Mid: " << midPoint << endl << endl;
 
-    // Dividir y conquistar
-    float dl = distMin(v, izq, mid);
-    float dr = distMin(v, mid + 1, der);
-    float d = min(dl, dr);
+    // Dividir y conquistar:
+    // Se utiliza la misma estrategia, dividiendo el arreglo en dos mitades que se solapan en el punto medio
+    double dl = distMin(v, izq, mid);
+    double dr = distMin(v, mid+1, der);
+    double d = min(dl, dr);
 
-    // Construir franja de puntos cercanos a la línea media
+    // Construir la franja de puntos cercanos a la línea media
     vector<Punto2D> strip;
-    for (int i = izq; i <= der; ++i) {
-        if (abs(v[i].getx() - midPoint.getx()) < d) {
+    for (int i = izq; i <= der; i++) {
+        if (abs(v[i].getx() - midPoint.getx()) < d)
+            strip.push_back(v[i]);
+
+        /*
+        if (v[i].distancia(midPoint) <= d && v[i] != midPoint) {
             strip.push_back(v[i]);
         }
+        */
     }
+    /*
+    // Ordenar la franja por la coordenada y
+    sort(strip.begin(), strip.end(), [](const Punto2D &a, const Punto2D &b) {
+        return a.gety() < b.gety();
+    });
 
-    // Calcular distancia mínima en la franja
-    float dStrip = distanciaStrip(strip, d);
+    // Comparar cada punto de la franja solo con aquellos siguientes cuya diferencia en y sea menor que d
+    double dStrip = d;
+    int stripSize = strip.size();
+    for (int i = 0; i < stripSize; i++) {
+        for (int j = i + 1; j < stripSize && (strip[j].gety() - strip[i].gety()) < dStrip; j++) {
+            dStrip = min(dStrip, strip[i].distancia(strip[j]));
+        }
+    }
+    */
+
+    //FALLA EL COMO COMPROBAR LA FRANJA
+    double dStrip = numeric_limits<double>::max();
+    if (!strip.empty()) {
+        int midStrip = strip.size() / 2;
+        // Llamadas recursivas para calcular la distancia mínima en la franja
+        double dStripl = distMin(strip, 0, midStrip, "strip");
+        double dStripr = distMin(strip, midStrip, strip.size() - 1, "strip");
+
+        dStrip = min(dStripl, dStripr);
+        //dStrip = distMin(strip, 0, strip.size() - 1, "strip");
+    }
+    
 
     return min(d, dStrip);
 }
