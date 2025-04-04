@@ -118,45 +118,6 @@ build euclidia_divide: CXX_EXECUTABLE_LINKER__euclidia_divide_Debug CMakeFiles/e
   TARGET_FILE = euclidia_divide
   TARGET_PDB = euclidia_divide.dbg
 
-# =============================================================================
-# Object build statements for EXECUTABLE target euclidia_divide2
-
-
-#############################################
-# Order-only phony target for euclidia_divide2
-
-build cmake_object_order_depends_target_euclidia_divide2: phony || .
-
-build CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o: CXX_COMPILER__euclidia_divide2_unscanned_Debug /home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Euclidia/scr/euclidia_divide2.cpp || cmake_object_order_depends_target_euclidia_divide2
-  DEP_FILE = CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o.d
-  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -I/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Euclidia/include
-  OBJECT_DIR = CMakeFiles/euclidia_divide2.dir
-  OBJECT_FILE_DIR = CMakeFiles/euclidia_divide2.dir/scr
-
-build CMakeFiles/euclidia_divide2.dir/scr/Punto2D.cpp.o: CXX_COMPILER__euclidia_divide2_unscanned_Debug /home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Euclidia/scr/Punto2D.cpp || cmake_object_order_depends_target_euclidia_divide2
-  DEP_FILE = CMakeFiles/euclidia_divide2.dir/scr/Punto2D.cpp.o.d
-  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -I/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Euclidia/include
-  OBJECT_DIR = CMakeFiles/euclidia_divide2.dir
-  OBJECT_FILE_DIR = CMakeFiles/euclidia_divide2.dir/scr
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target euclidia_divide2
-
-
-#############################################
-# Link the executable euclidia_divide2
-
-build euclidia_divide2: CXX_EXECUTABLE_LINKER__euclidia_divide2_Debug CMakeFiles/euclidia_divide2.dir/scr/euclidia_divide2.cpp.o CMakeFiles/euclidia_divide2.dir/scr/Punto2D.cpp.o
-  FLAGS = -g
-  OBJECT_DIR = CMakeFiles/euclidia_divide2.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = euclidia_divide2
-  TARGET_PDB = euclidia_divide2.dbg
-
 
 #############################################
 # Utility command for edit_cache
@@ -191,7 +152,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P2/Euclidia/cmake-build-debug
 
-build all: phony euclidia_fuerza euclidia_divide euclidia_divide2
+build all: phony euclidia_fuerza euclidia_divide
 
 # =============================================================================
 # Built-in targets

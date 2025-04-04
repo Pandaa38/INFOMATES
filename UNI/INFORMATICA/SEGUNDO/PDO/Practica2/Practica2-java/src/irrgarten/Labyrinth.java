@@ -66,7 +66,7 @@ public class Labyrinth {
     
     
     private boolean posOk(int row, int col){
-        return (row > 0 && col > 0 && row < nRows && col < nCols);
+        return (row >= 0 && col >= 0 && row < nRows && col < nCols);
     }
     private boolean emptyPos(int row, int col){
         return LabyrinthSquare[row][col] == EMPTYCHAR;
@@ -111,7 +111,7 @@ public class Labyrinth {
         do{
             pos[ROW] = Dice.randomPos(nRows);
             pos[COL] = Dice.randomPos(nCols);
-        }while(emptyPos(pos[ROW],pos[COL]));
+        }while(!emptyPos(pos[ROW],pos[COL]));
         
         return pos;
     }

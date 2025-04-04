@@ -16,8 +16,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -33,8 +32,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -45,13 +43,6 @@
 					"id" : "euclidia_divide::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-euclidia_divide-Debug-df19607bd7a63c1a6ca6.json",
 					"name" : "euclidia_divide",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "euclidia_divide2::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-euclidia_divide2-Debug-18bc14cd1874b83fea12.json",
-					"name" : "euclidia_divide2",
 					"projectIndex" : 0
 				},
 				{
