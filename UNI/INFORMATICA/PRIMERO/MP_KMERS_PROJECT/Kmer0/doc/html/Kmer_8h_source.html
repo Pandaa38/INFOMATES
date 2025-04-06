@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kmer: include/Kmer.h Source File</title>
+<title>Kmer: include/kmer.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,10 +67,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Kmer.h</div>  </div>
+<div class="title">kmer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="Kmer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Metodología de la Programación: Kmer0</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Curso 2023/2024</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> */</span></div>
@@ -108,19 +108,19 @@ $(function() {
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    std::string _text;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}; <span class="comment">// end class Kmer</span></div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="Kmer_8h.html#ab37d45ac1439c9a30303f1c023d825fc">IsValidNucleotide</a>(<span class="keywordtype">char</span> nucleotide, <span class="keyword">const</span> std::string&amp; validNucleotides);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="Kmer_8cpp.html#ab37d45ac1439c9a30303f1c023d825fc">IsValidNucleotide</a>(<span class="keywordtype">char</span> nucleotide, <span class="keyword">const</span> std::string&amp; validNucleotides);</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Kmer_8h.html#a77194578942a94dd58a0d5721ffa89d4">ToLower</a>(<a class="code" href="classKmer.html">Kmer</a>&amp; kmer);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Kmer_8cpp.html#a77194578942a94dd58a0d5721ffa89d4">ToLower</a>(<a class="code" href="classKmer.html">Kmer</a>&amp; kmer);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Kmer_8h.html#a529f93b76b54a04d3d72be14476cd38e">ToUpper</a>(<a class="code" href="classKmer.html">Kmer</a>&amp; kmer);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Kmer_8cpp.html#a529f93b76b54a04d3d72be14476cd38e">ToUpper</a>(<a class="code" href="classKmer.html">Kmer</a>&amp; kmer);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* KMER_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aKmer_8h_html_a529f93b76b54a04d3d72be14476cd38e"><div class="ttname"><a href="Kmer_8h.html#a529f93b76b54a04d3d72be14476cd38e">ToUpper</a></div><div class="ttdeci">void ToUpper(Kmer &amp;kmer)</div><div class="ttdoc">Converts to uppercase the characters (nucleotides) of the given Kmer.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00131">Kmer.cpp:131</a></div></div>
-<div class="ttc" id="aKmer_8h_html_a77194578942a94dd58a0d5721ffa89d4"><div class="ttname"><a href="Kmer_8h.html#a77194578942a94dd58a0d5721ffa89d4">ToLower</a></div><div class="ttdeci">void ToLower(Kmer &amp;kmer)</div><div class="ttdoc">Converts to lowercase the characters (nucleotides) of the given Kmer.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00123">Kmer.cpp:123</a></div></div>
-<div class="ttc" id="aKmer_8h_html_ab37d45ac1439c9a30303f1c023d825fc"><div class="ttname"><a href="Kmer_8h.html#ab37d45ac1439c9a30303f1c023d825fc">IsValidNucleotide</a></div><div class="ttdeci">bool IsValidNucleotide(char nucleotide, const std::string &amp;validNucleotides)</div><div class="ttdoc">Checks if the given nucleotide is contained in validNucleotides. That is, if the given character can ...</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00113">Kmer.cpp:113</a></div></div>
-<div class="ttc" id="aclassKmer_html"><div class="ttname"><a href="classKmer.html">Kmer</a></div><div class="ttdoc">It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8h_source.html#l00028">Kmer.h:28</a></div></div>
+<div class="ttc" id="aKmer_8cpp_html_a529f93b76b54a04d3d72be14476cd38e"><div class="ttname"><a href="Kmer_8cpp.html#a529f93b76b54a04d3d72be14476cd38e">ToUpper</a></div><div class="ttdeci">void ToUpper(Kmer &amp;kmer)</div><div class="ttdoc">Converts to uppercase the characters (nucleotides) of the given Kmer.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00131">Kmer.cpp:131</a></div></div>
+<div class="ttc" id="aKmer_8cpp_html_a77194578942a94dd58a0d5721ffa89d4"><div class="ttname"><a href="Kmer_8cpp.html#a77194578942a94dd58a0d5721ffa89d4">ToLower</a></div><div class="ttdeci">void ToLower(Kmer &amp;kmer)</div><div class="ttdoc">Converts to lowercase the characters (nucleotides) of the given Kmer.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00123">Kmer.cpp:123</a></div></div>
+<div class="ttc" id="aKmer_8cpp_html_ab37d45ac1439c9a30303f1c023d825fc"><div class="ttname"><a href="Kmer_8cpp.html#ab37d45ac1439c9a30303f1c023d825fc">IsValidNucleotide</a></div><div class="ttdeci">bool IsValidNucleotide(char nucleotide, const std::string &amp;validNucleotides)</div><div class="ttdoc">Checks if the given nucleotide is contained in validNucleotides. That is, if the given character can ...</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00113">Kmer.cpp:113</a></div></div>
+<div class="ttc" id="aclassKmer_html"><div class="ttname"><a href="classKmer.html">Kmer</a></div><div class="ttdoc">It represents a list of k consecutive nucleotides of a DNA or RNA sequence. Each nucleotide is repres...</div><div class="ttdef"><b>Definition:</b> <a href="kmer_8h_source.html#l00028">kmer.h:28</a></div></div>
 <div class="ttc" id="aclassKmer_html_a20154d7f1b00e893ecaf05cdf4221859"><div class="ttname"><a href="classKmer.html#a20154d7f1b00e893ecaf05cdf4221859">Kmer::size</a></div><div class="ttdeci">int size() const</div><div class="ttdoc">Returns the number of nucleotides in this Kmer. Query method.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00047">Kmer.cpp:47</a></div></div>
-<div class="ttc" id="aclassKmer_html_a4cdc2682181a0435d9fe703316fad091"><div class="ttname"><a href="classKmer.html#a4cdc2682181a0435d9fe703316fad091">Kmer::MISSING_NUCLEOTIDE</a></div><div class="ttdeci">static const char MISSING_NUCLEOTIDE</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8h_source.html#l00035">Kmer.h:35</a></div></div>
+<div class="ttc" id="aclassKmer_html_a4cdc2682181a0435d9fe703316fad091"><div class="ttname"><a href="classKmer.html#a4cdc2682181a0435d9fe703316fad091">Kmer::MISSING_NUCLEOTIDE</a></div><div class="ttdeci">static const char MISSING_NUCLEOTIDE</div><div class="ttdef"><b>Definition:</b> <a href="kmer_8h_source.html#l00035">kmer.h:35</a></div></div>
 <div class="ttc" id="aclassKmer_html_a5573b9ac8221d4fd2f11b30bfc7d0c7a"><div class="ttname"><a href="classKmer.html#a5573b9ac8221d4fd2f11b30bfc7d0c7a">Kmer::complementary</a></div><div class="ttdeci">Kmer complementary(const std::string &amp;nucleotides, const std::string &amp;complementaryNucleotides) const</div><div class="ttdoc">Returns the complementary of this Kmer. For example, given the Kmer &quot;TAGAC&quot;, the complementary is &quot;AT...</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00089">Kmer.cpp:89</a></div></div>
 <div class="ttc" id="aclassKmer_html_a8b06a05bfbef4e0b7897bfb041691b04"><div class="ttname"><a href="classKmer.html#a8b06a05bfbef4e0b7897bfb041691b04">Kmer::toString</a></div><div class="ttdeci">std::string toString() const</div><div class="ttdoc">Returns a string with a list of characters, each one representing a nucleotide of this Kmer....</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00052">Kmer.cpp:52</a></div></div>
 <div class="ttc" id="aclassKmer_html_aa800a4d2d89dae1044d13bdc6a42a066"><div class="ttname"><a href="classKmer.html#aa800a4d2d89dae1044d13bdc6a42a066">Kmer::getK</a></div><div class="ttdeci">int getK() const</div><div class="ttdoc">Returns the number of nucleotides in this Kmer. Query method.</div><div class="ttdef"><b>Definition:</b> <a href="Kmer_8cpp_source.html#l00042">Kmer.cpp:42</a></div></div>
