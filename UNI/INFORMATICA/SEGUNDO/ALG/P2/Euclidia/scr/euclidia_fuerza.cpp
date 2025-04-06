@@ -32,53 +32,66 @@ double distMinFuerza(vector<Punto2D> puntos) {
 	return min_dist;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char* argv[]) {
+	// Verifica que se haya pasado al menos un parámetro
+	if (argc != 2) {
+		std::cerr << "Uso: " << argv[0] << " <N | puntos.txt>" << std::endl;
+		return 1;
+	}
 
+	std::vector<Punto2D> puntos;
+	std::string arg = argv[1];
 
-	/*
-	if (argc == 2) {
-		ifstream file(argv[1]);
+	// Comprueba si el argumento es un número
+	bool esNumero = true;
+	for (char c : arg) {
+		if (!std::isdigit(c)) {
+			esNumero = false;
+			break;
+		}
+	}
+
+	if (esNumero) {
+		// Caso 1: El usuario ingresa el número de puntos
+		int n = std::stoi(arg);
+		srand(time(NULL));
+		for(int i = 0; i < n; i++) {
+			puntos.push_back(Punto2D(rand()%100, rand()%100));
+		}
+	} else {
+		// Caso 2: El argumento es el nombre de un archivo que contiene los puntos
+		std::ifstream file(arg);
+		if (!file) {
+			std::cerr << "Error al abrir el archivo " << arg << std::endl;
+			return 1;
+		}
 		Punto2D punto_2d;
 		while (file >> punto_2d) {
 			puntos.push_back(punto_2d);
 		}
 		file.close();
 	}
-	else {
 
+	// Verifica que se hayan ingresado suficientes puntos para calcular distancias
+	if (puntos.size() < 2) {
+		std::cerr << "No hay suficientes puntos para calcular la distancia." << std::endl;
+		return 1;
 	}
-	*/
+	sort(puntos.begin(), puntos.end());
 
-	ofstream file("../tiempos_fuerza.csv");
-	srand(time(NULL));
-
-	for (int i = 5; i <= 105; i = i + 10) {
-		//creacion array
-		vector<Punto2D> puntos(i);
-
-		for(int j = 0; j < i; j++) {
-			puntos.push_back(Punto2D(rand()%100, rand()%100));
-		}
-
-		//sort(puntos.begin(), puntos.end()); //O(nlog(n)
-		auto start = chrono::high_resolution_clock::now();
-		double min_dist = distMinFuerza(puntos);
-		auto end = chrono::high_resolution_clock::now();
-
-		/*
-		cout << "Puntos: " << endl;
-		for (Punto2D i:puntos) {
-			cout << i << endl;
-		}
-		cout << endl;
-		cout << "Distancia minima: " << min_dist << " entre los puntos: "<< min1 << " y " << min2 << endl;
-		*/
-
-		cout << "Time fuerza tam " << i << ": "
-			 << chrono::duration_cast<chrono::microseconds>(end - start).count() << " us" << endl;
-		file << i << ","
-			 << chrono::duration_cast<chrono::microseconds>(end - start).count() << endl;
+	cout << "Puntos: " << endl;
+	for (int i = 0; i < puntos.size(); i++) {
+		cout << puntos[i] << endl;
 	}
-	file.close();
+	cout << "Total de puntos: " << puntos.size() << endl;
+
+	auto start = chrono::high_resolution_clock::now();
+	double min_dist = distMinFuerza(puntos);
+	auto end = chrono::high_resolution_clock::now();
+
+	cout << "Tiempo fuerza tam " << puntos.size() << ": "
+		 << chrono::duration_cast<chrono::microseconds>(end - start).count() << " us" << endl;
+	cout << "Distancia minima: " << min_dist << endl;
+
 	return 0;
 }
