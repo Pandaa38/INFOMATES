@@ -8,11 +8,11 @@ import java.util.ArrayList;
  * @author juan
  */
 public class Labyrinth {
-    private static final char BLOCKCHAR = 'X';
-    private static final char EMPTYCHAR = '-';
-    private static final char MONSTERCHAR = 'M';
-    private static final char COMBATCHAR = 'C';
-    private static final char EXITCHAR = 'E';
+    private static final char BLOCK_CHAR = 'X';
+    private static final char EMPTY_CHAR = '-';
+    private static final char MONSTER_CHAR = 'M';
+    private static final char COMBAT_CHAR = 'C';
+    private static final char EXIT_CHAR = 'E';
     private static final int ROW = 0;
     private static final int COL = 1;
     
@@ -23,9 +23,9 @@ public class Labyrinth {
     private int exitCol;
     
     
-    private Monster [][] MonsterSquare;
-    private Player [][] PlayerSquare;
-    private char [][] LabyrinthSquare;
+    private Monster [][] monsters;
+    private Player [][] players;
+    private char [][] labyrinth;
     
     
     Labyrinth(int nRows, int nCols, int exitRow, int exitCol){
@@ -35,33 +35,43 @@ public class Labyrinth {
         this.exitCol= exitCol;
         
          // Definimos tamaño del laberinto, players y monsters
-        this.LabyrinthSquare = new char [nRows][nCols];
-        this.PlayerSquare = new Player [nRows][nCols];
-        this.MonsterSquare = new Monster[nRows][nCols];
+        this.labyrinth = new char [nRows][nCols];
+        this.players = new Player [nRows][nCols];
+        this.monsters = new Monster[nRows][nCols];
         
         // Inicializaremos la matrice laberinto con valor por defecto
         // EMPTY_CHAR
         for (int i=0; i<this.nRows; i++){
             for(int j=0; j<this.nCols; j++){
-                this.LabyrinthSquare[i][j]=EMPTYCHAR;
+                this.labyrinth[i][j]=EMPTY_CHAR;
             }
         }
         
         // Definimos casilla salida
-        this.LabyrinthSquare[exitRow][exitCol]=EXITCHAR;
+        this.labyrinth[exitRow][exitCol]=EXIT_CHAR;
     }
     public void spreadPlayers(ArrayList<Player> players){
-        //PRACTICA 3 ---------------------------------------------------
+        for(Player p:players){
+            int []pos = randomEmptyPos();
+            putPlayer2D(-1,-1, pos[ROW], pos[COL], p);
+        }
+        /*
+        for (int i=0; i<players.size(); i++){
+            
+            int [] pos = randomEmptyPos();
+            putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], players.get(i));
+        }
+        */
     }
     public boolean haveAWinner(){
-        return PlayerSquare[exitRow][exitCol] != null;
+        return players[exitRow][exitCol] != null;
     }
     public String toString(){
 
         // Cálculo del número de caracteres que debe ocupar cada parte
         int filSize = Integer.toString(this.nRows-1).length();
         int colSize = Integer.toString(this.nCols-1).length();
-        int nPlayersSize = Integer.toString(this.PlayerSquare.length-1).length();
+        int nPlayersSize = Integer.toString(this.players.length-1).length();
         
         // Cálculo del tamaño máximo
         int maxSize = Math.max(Math.max(filSize, colSize), nPlayersSize);
@@ -81,7 +91,7 @@ public class Labyrinth {
         for(int r=0; r<this.nRows; r++){
             toReturn+=String.format(FORMAT, r)+" "; // Índices en cada fila
             for(int c=0; c<this.nCols; c++){
-                toReturn+=String.format(FORMAT, this.LabyrinthSquare[r][c])+" ";
+                toReturn+=String.format(FORMAT, this.labyrinth[r][c])+" ";
             }
             toReturn+="\n";
         }
@@ -91,21 +101,49 @@ public class Labyrinth {
     public void addMonster(int row, int col, Monster monster){
         if( posOk(row, col) && emptyPos(row, col) ){
             monster.setPos(row, col);
-            MonsterSquare[row][col] = monster;
-            LabyrinthSquare[row][col] = MONSTERCHAR;
+            monsters[row][col] = monster;
+            labyrinth[row][col] = MONSTER_CHAR;
         }
     }
     public Monster putPlayer(Directions direction, Player player){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 ---------------------------------------------------
+        int oldRow=player.getRow();
+        int oldCol=player.getCol();
+        
+        int[] newPos = dir2Pos(oldRow,oldCol,direction);
+        Monster monster = putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL],player);
+        
+        return monster;
     }
     public void addBlock(Orientation orientation, int startRow, int startCol, 
             int length){
-        //PRACTICA 3 ---------------------------------------------
+        int incRow=0,incCol=0;
+        if(orientation == Orientation.VERTICAL)
+            incRow++;
+        else
+            incCol++;
+        
+        int row=startRow, col=startCol;
+        
+        while(posOk(row,col)&&emptyPos(row,col)&&length>0){
+            row+=incRow;
+            col+=incCol;
+            length--;
+        }
     }
     public ArrayList<Directions> validMoves(int row, int col){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 ---------------------------------------------
+        
+        ArrayList<Directions> output = new ArrayList<>();
+        
+        if(canStepOn(row+1, col))
+            output.add(Directions.DOWN);
+        if(canStepOn(row-1, col))
+            output.add(Directions.UP);
+        if(canStepOn(row, col+1))
+            output.add(Directions.RIGHT);
+        if(canStepOn(row, col-1))
+            output.add(Directions.LEFT);
+            
+        return output;
     }
     
     
@@ -113,16 +151,16 @@ public class Labyrinth {
         return (row >= 0 && col >= 0 && row < nRows && col < nCols);
     }
     private boolean emptyPos(int row, int col){
-        return LabyrinthSquare[row][col] == EMPTYCHAR;
+        return labyrinth[row][col] == EMPTY_CHAR;
     }
     private boolean monsterPos(int row, int col){
-        return LabyrinthSquare[row][col] == MONSTERCHAR;
+        return labyrinth[row][col] == MONSTER_CHAR;
     }
     private boolean exitPos(int row, int col){
-        return LabyrinthSquare[row][col] == EXITCHAR;
+        return labyrinth[row][col] == EXIT_CHAR;
     }
     private boolean combatPos(int row, int col){
-        return LabyrinthSquare[row][col] == COMBATCHAR;
+        return labyrinth[row][col] == COMBAT_CHAR;
     }
     private boolean canStepOn(int row, int col){
         boolean can = emptyPos(row, col) || exitPos(row, col) || monsterPos(row, col);
@@ -131,9 +169,9 @@ public class Labyrinth {
     private void updateOldPos(int row, int col){
         if(posOk(row, col)){
             if(combatPos(row, col))
-                LabyrinthSquare[row][col] = MONSTERCHAR;
+                labyrinth[row][col] = MONSTER_CHAR;
             else
-                LabyrinthSquare[row][col] = EMPTYCHAR;
+                labyrinth[row][col] = EMPTY_CHAR;
         }
         
     }
@@ -161,8 +199,27 @@ public class Labyrinth {
     }
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, 
             Player player){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 ---------------------------------------------------
+        
+        Monster output = null;
+        
+        if(canStepOn(row,col)){
+            if(posOk(oldRow, oldCol) && players[oldRow][oldCol] == player){
+                updateOldPos(oldRow, oldCol);
+                players[oldRow][oldCol]=null;
+            }
+            
+            if(monsterPos(row, col)){
+                labyrinth[row][col] = COMBAT_CHAR;
+                output = monsters[row][col];
+            }
+            else{
+                this.labyrinth[row][col]=player.getNumber();
+            }
+            players[row][col] = player;
+            player.setPos(row, col);
+        }
+                
+        return output;
     }
             
 }
