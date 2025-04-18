@@ -67,8 +67,17 @@ public class Player {
         return health == 0;
     }
     public Directions move(Directions direction, ArrayList<Directions> validMoves){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 **************************************
+        int size = validMoves.size();
+        boolean contained = validMoves.contains(direction);
+        
+        Directions direct;
+        
+        if(size > 0 && !contained){
+            direct = validMoves.get(0);
+        }else
+            direct = direction;
+        
+        return direct;
     }
     public float attack(){
         return sumWeapons() + strength;
@@ -76,8 +85,19 @@ public class Player {
     public boolean defend(float receivedAttack){
         return manageHit(receivedAttack);
     }
-    public void receiveReward(){
-        //PRACTICA 3 **************************************
+     public void receiveReward(){
+        // Weapons rewards
+        int wReward = Dice.weaponsReward();
+        for (int i=0; i<wReward; i++)
+            this.receiveWeapon(this.newWeapon());
+        
+        // Shields rewards
+        int sReward = Dice.shieldsReward();
+        for (int i=0; i<sReward; i++)
+            this.receiveShield(this.newShield());
+        
+        this.health += Dice.healthReward();
+
     }
     public String toString() {
     return name + ": \n\t" + 
@@ -89,10 +109,28 @@ public class Player {
     
     //PRIVATE-------------------------
     private void receiveWeapon(Weapon w){
-        //PRACTICA 3 **************************************
+        for (int i=0; i<weapons.size(); i++){
+            if (weapons.get(i).discard()){
+                weapons.remove(i);
+                i--;
+            }
+        }
+
+        // Añadimos el escudo al jugador si cabe
+        if (weapons.size() < MAXWEAPONS)
+            weapons.add(w);
     }
     private void receiveShield(Shield s){
-        //PRACTICA 3 **************************************
+        for (int i=0; i<shields.size(); i++){
+            if (shields.get(i).discard()){
+                shields.remove(i);
+                i--;
+            }
+        }
+
+        // Añadimos el escudo al jugador si cabe
+        if (shields.size() < MAXSHIELDS)
+            shields.add(s);
     }
     private Weapon newWeapon(){
         Weapon w = new Weapon(Dice.weaponPower(), Dice.usesLeft());
@@ -146,7 +184,5 @@ public class Player {
     }
     private void incConsecutiveHits(){
         this.consecutiveHits++;
-    }
-    
-    
+    }    
 }
