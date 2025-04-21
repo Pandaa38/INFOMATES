@@ -48,7 +48,7 @@ public class Game {
     
     
     // ----------------------- DATOS GAME ------------------------
-    private static final int MAXROUNDS = 10;
+    private static final int MAX_ROUNDS = 10;
     
     private int currentPlayerIndex;
     private String log;
@@ -94,8 +94,30 @@ public class Game {
         return this.labyrinth.haveAWinner();
     }
     public boolean nextStep(Directions preferredDirection){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 -------------------------------------------
+        
+        log = "";
+        
+        if(!currentPlayer.dead()){
+            Directions direction = actualDirection(preferredDirection);
+            
+            if(direction != preferredDirection)
+                this.logPlayerNoOrders();
+            
+            Monster monster = this.labyrinth.putPlayer(direction, currentPlayer);
+            
+            if(monster == null)
+                this.logNoMonster();
+            else
+                manageReward(combat(monster));
+            
+        }else
+            manageResurrection();
+        
+        boolean endGame = finished();
+        if(!endGame)
+            nextPlayer();
+        
+        return endGame;
     }
     public GameState getGameState(){
         String infoPlayers="";
@@ -137,20 +159,51 @@ public class Game {
         this.currentPlayer=players.get(currentPlayerIndex);
     }
     private Directions actualDirection(Directions preferredDirection){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 -------------------------------------------
+        int currentRow = this.currentPlayer.getRow();
+        int currentCol = this.currentPlayer.getCol();
+
+        ArrayList<Directions> validMoves = this.labyrinth.validMoves(currentRow, currentCol);
+
+        return currentPlayer.move(preferredDirection, validMoves);
     }
     private GameCharacter combat(Monster monster){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 -------------------------------------------
+        int rounds = 0;
+        
+        GameCharacter winner = GameCharacter.PLAYER;
+        boolean lose = monster.defend(currentPlayer.attack());
+        
+        while(!lose && rounds < MAX_ROUNDS){
+            rounds++;
+
+            winner = GameCharacter.MONSTER;
+            lose = currentPlayer.defend(monster.attack());
+            
+            if(!lose){
+                winner = GameCharacter.PLAYER;
+                lose = monster.defend(currentPlayer.attack());
+            }
+        }
+        
+        this.logRounds(rounds, MAX_ROUNDS);
+        return winner;
     }
     private void manageReward(GameCharacter winner){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 -------------------------------------------
+        
+        if(winner == GameCharacter.PLAYER){
+            this.currentPlayer.receiveReward();
+            this.logPlayerWon();
+        }
+        else
+            this.logMonsterWon();
     }
     private void manageResurrection(){
-        throw new UnsupportedOperationException();
-        //PRACTICA 3 -------------------------------------------
+        
+        if(Dice.resurrectPlayer()){
+            this.currentPlayer.resurrect();
+            this.logResurrected();
+        }
+        else
+            this.logPlayerSkipTurn();
     }
     private void logPlayerWon() {
         log = log + "El jugador ha ganado el combate.\n";

@@ -37,7 +37,7 @@ public class Dice {
     }
 
     public static boolean resurrectPlayer() {
-        return generator.nextFloat() < RESURRECT_PROB;
+        return generator.nextFloat() <= RESURRECT_PROB;
     }
 
     public static int weaponsReward() {
