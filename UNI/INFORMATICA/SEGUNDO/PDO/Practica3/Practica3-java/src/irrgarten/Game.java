@@ -148,10 +148,13 @@ public class Game {
             this.labyrinth.addMonster(INIT_MONSTERS[i][0], INIT_MONSTERS[i][1], monstruo);
         }
         
-         for (int i=0; i<NUM_BLOCKS; i++){
+        for (int i=0; i<NUM_BLOCKS; i++){
             this.labyrinth.addBlock((Orientation)INIT_BLOCKS[i][0], (int)INIT_BLOCKS[i][1], 
                     (int)INIT_BLOCKS[i][2], (int)INIT_BLOCKS[i][3]);
         }
+        
+        
+        //this.labyrinth.addBlock(Orientation.HORIZONTAL, 4, 0 ,3);
         
     }
     private void nextPlayer(){

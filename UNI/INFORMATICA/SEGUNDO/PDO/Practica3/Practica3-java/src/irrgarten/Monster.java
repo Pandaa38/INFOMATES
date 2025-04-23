@@ -38,7 +38,7 @@ public class Monster {
     public String toString(){
         String to_s = name + ": \n\t" + "Inteligencia = " + intelligence
                 + "\n\tFuerza = " + strenght + "\n\tVida = " + health +
-                "\n\t Pos = (" + row +", " + col + ")";
+                "\n\tPos = (" + row +", " + col + ")";
         
         return to_s;        
     }

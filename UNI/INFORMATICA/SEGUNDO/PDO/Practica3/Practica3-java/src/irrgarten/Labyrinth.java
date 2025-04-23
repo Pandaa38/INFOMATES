@@ -114,8 +114,8 @@ public class Labyrinth {
         
         return monster;
     }
-    public void addBlock(Orientation orientation, int startRow, int startCol, 
-            int length){
+    public void addBlock(Orientation orientation, int startRow, int startCol, int length){
+        
         int incRow=0,incCol=0;
         if(orientation == Orientation.VERTICAL)
             incRow++;
@@ -125,6 +125,7 @@ public class Labyrinth {
         int row=startRow, col=startCol;
         
         while(posOk(row,col)&&emptyPos(row,col)&&length>0){
+            this.labyrinth[row][col] = BLOCK_CHAR;
             row+=incRow;
             col+=incCol;
             length--;
@@ -163,8 +164,9 @@ public class Labyrinth {
         return labyrinth[row][col] == COMBAT_CHAR;
     }
     private boolean canStepOn(int row, int col){
-        boolean can = emptyPos(row, col) || exitPos(row, col) || monsterPos(row, col);
-        return can && posOk(row, col);
+        boolean can = posOk(row, col);
+        can = can && (emptyPos(row, col) || exitPos(row, col) || monsterPos(row, col)); 
+        return can;
     }
     private void updateOldPos(int row, int col){
         if(posOk(row, col)){

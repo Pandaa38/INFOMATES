@@ -52,7 +52,18 @@ public class TextUI {
         return direction;
     }
     
-    public void showGame(GameState gameState) {   
+    public void showGame(GameState gameState) {
+       
+        System.out.print(gameState.getPlayers() + "\n");
+        System.out.print(gameState.getMonsters() + "\n");
+        System.out.print(gameState.getLabyrinth() + "\n");
+        System.out.print("Log:\n" + gameState.getLog() + "\n");
+                
+        if (gameState.isWinner()) {
+            System.out.print("We have a winner! Player " + gameState.getCurrentPlayer() + "\n");
+        }else{
+            System.out.print("Current player: " + gameState.getCurrentPlayer() + "\n");
+        }
     }
     
 }
