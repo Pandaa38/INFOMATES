@@ -1,6 +1,6 @@
 module Irrgarten
   module Orientation
-    VERTICAL=   :vertical
-    HORIZONTAL= :horizontal
+    VERTICAL =   :vertical
+    HORIZONTAL = :horizontal
   end   
 end

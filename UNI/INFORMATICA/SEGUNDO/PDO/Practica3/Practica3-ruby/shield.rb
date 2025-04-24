@@ -22,7 +22,7 @@ module Irrgarten
     end
 
     def discard
-      Dice.discardElement(@uses)
+      Dice.discard_element(@uses)
     end
 
   end

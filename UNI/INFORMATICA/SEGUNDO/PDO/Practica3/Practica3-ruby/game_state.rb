@@ -1,5 +1,5 @@
 module Irrgarten
-  class Game_state
+  class GameState
     def initialize(labyrinth, players, monsters, current_player, winner, log)
       @labyrinth = labyrinth
       @players = players

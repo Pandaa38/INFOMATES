@@ -5,144 +5,193 @@ module Irrgarten
   require_relative 'shield'
 
   class Player
-      @@MAX_WEAPONS = 2
-      @@MAX_SHIELDS = 3
-      @@INITIAL_HEALTH = 10
-      @@HITS2LOSE = 3
-    
-      attr_reader :row, :col, :number
-    
-      def initialize(number, intelligence, strength)
-        @name = "Player##{number}"
-        @number = number
-        @intelligence = intelligence
-        @strength = strength
-        @health = @@INITIAL_HEALTH
-        @consecutive_hits = 0
-    
-        @weapons = Array.new   
-        @shields = Array.new
+    @@MAX_WEAPONS = 2
+    @@MAX_SHIELDS = 3
+    @@INITIAL_HEALTH = 10
+    @@HITS2LOSE = 3
+  
+    attr_reader :row, :col, :number
+  
+    def initialize(number, intelligence, strength)
+      @name = "Player##{number}"
+      @number = number
+      @intelligence = intelligence
+      @strength = strength
+      @health = @@INITIAL_HEALTH
+      @consecutive_hits = 0
+  
+      @weapons = Array.new   
+      @shields = Array.new
 
-        @row = -1
-        @col = -1
+      @row = -1
+      @col = -1
+    end
+
+    def resurrect
+      @weapons.clear
+      @shields.clear
+  
+      @health = @@INITIAL_HEALTH
+      reset_hits
+    end
+  
+    def get_row
+      @row
+    end
+  
+    def get_col
+      @col
+    end
+  
+    def get_number
+      @number
+    end
+
+    def set_pos(row, col)
+      @row = row
+      @col = col
+    end
+  
+    def dead
+      @health == 0
+    end
+  
+    def move(direction, valid_moves)
+      size = valid_moves.size
+      contained = valid_moves.include?(direction)
+      if(size > 0 && !contained)
+        return valid_moves[0]
+      else
+        return direction
+      end
+    end
+  
+    def attack
+      sum_weapons + @strength
+    end
+  
+    def defend(received_attack)
+      manage_hit(received_attack)
+    end
+  
+    def receive_reward
+
+      w_reward = Dice.weapon_reward
+      w_reward.times do
+        receive_weapon(new_weapon)
+      end
+      
+      s_reward = Dice.shields_reward
+      s_reward.times do
+        receive_shield(new_shield)
       end
 
-      def resurrect
-        @weapons.clear
-        @shields.clear
-    
-        @health = @@INITIAL_HEALTH
-        reset_hits
+      @health += Dice.health_reward
+
+    end
+  
+    def to_s
+      weapons_str = ""
+      @weapons.each do |weapon|
+        weapons_str += weapon.to_s + ", "
       end
-    
-      def get_row
-        @row
+      weapons_str.chomp(", ")
+  
+      shields_str = ""
+      @shields.each do |shield|
+        shields_str += shield.to_s + ", "
       end
-    
-      def get_col
-        @col
-      end
-    
-      def get_number
-        @number
+      shields_str.chomp(", ")
+  
+      "#{@name}: \n\tInteligencia = #{@intelligence}\n\tFuerza = #{@strength}\n\tVida = #{@health}\n\tPos = (#{@row}, #{ @col})\n\tArmas = [#{weapons_str}]\n\tEscudos = [#{shields_str}]"
+    end
+  
+    private
+  
+    def receive_weapon(w)
+      @weapons.each do |weapon|
+        discard = weapon.discard
+        if(discard)
+          @weapons.delete(weapon)
+        end
       end
 
-      def set_pos(row, col)
-        @row = row
-        @col = col
+      if(@weapons.size < @@MAX_WEAPONS)
+        @weapons.push(w)
       end
-    
-      def dead
-        @health == 0
-      end
-    
-      def move(direction, valid_moves)
-        # PRACTICA 3 **************************************
-      end
-    
-      def attack
-        sum_weapons + @strength
-      end
-    
-      def defend(received_attack)
-        manage_hit(received_attack)
-      end
-    
-      def receive_reward
-        # PRACTICA 3 **************************************
-      end
-    
-      def to_s
-        weapons_str = ""
-        @weapons.each do |weapon|
-          weapons_str += weapon.to_s + ", "
+    end
+  
+    def receive_shield(s)
+      @shields.each do |shield|
+        discard = shield.discard
+        if(discard)
+          @shields.delete(shield)
         end
-        weapons_str.chomp(", ")
-    
-        shields_str = ""
-        @shields.each do |shield|
-          shields_str += shield.to_s + ", "
-        end
-        shields_str.chomp(", ")
-    
-        "#{@name}: \n\tInteligencia = #{@intelligence}\n\tFuerza = #{@strength}\n\tVida = #{@health}\n\tPos = (#{@row}, #{ @col})\n\tArmas = [#{weapons_str}]\n\tEscudos = [#{shields_str}]"
       end
-    
-      #private
-    
-      def receive_weapon(w)
-        # PRACTICA 3 **************************************
+      if(@shields.size < @@MAX_SHIELDS)
+        @shields.push(s)
       end
-    
-      def receive_shield(s)
-        # PRACTICA 3 **************************************
+    end
+  
+    def new_weapon
+      w = Weapon.new(Dice.weapon_power, Dice.uses_left)
+      w
+    end
+  
+    def new_shield
+      s = Shield.new(Dice.shield_power, Dice.uses_left)
+      s
+    end
+  
+    def sum_weapons
+      sum = 0.0
+      @weapons.each do |w|
+        sum += w.attack
       end
-    
-      def new_weapon
-        w = Weapon.new(Dice.weapon_power, Dice.uses_left)
-        w
+      sum
+    end
+  
+    def sum_shields
+      sum = 0.0
+      @shields.each do |s|
+        sum += s.protect
       end
-    
-      def new_shield
-        s = Shield.new(Dice.shield_power, Dice.uses_left)
-        s
+      sum
+    end
+  
+    def defensive_energy
+      sum_shields + @intelligence
+    end
+  
+    def manage_hit(received_attack)
+
+      if(defensive_energy() < received_attack)
+          self.got_wounded
+          self.inc_consecutive_hits
+      else
+          self.reset_hits
       end
-    
-      def sum_weapons
-        sum = 0.0
-        @weapons.each do |w|
-          sum += w.attack
-        end
-        sum
+
+      if ( (@consecutive_hits==@@HITS2LOSE) || self.dead )
+          self.reset_hits
+          lose=true
+      else
+          lose=false
       end
-    
-      def sum_shields
-        sum = 0.0
-        @shields.each do |s|
-          sum += s.protect
-        end
-        sum
-      end
-    
-      def defensive_energy
-        sum_shields + @intelligence
-      end
-    
-      def manage_hit(received_attack)
-        # PRACTICA 3 **************************************
-      end
-    
-      def reset_hits
-        @consecutive_hits = 0
-      end
-    
-      def got_wounded
-        @health -= 1
-      end
-    
-      def inc_cosecutive_hits
-        @consecutive_hits += 1
-      end
+      lose
+    end
+  
+    def reset_hits
+      @consecutive_hits = 0
+    end
+  
+    def got_wounded
+      @health -= 1
+    end
+  
+    def inc_consecutive_hits
+      @consecutive_hits += 1
+    end
 
   end
 
