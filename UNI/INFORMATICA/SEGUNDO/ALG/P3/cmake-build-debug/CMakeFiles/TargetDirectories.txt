@@ -1,3 +1,3 @@
-C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/P3.dir
-C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/DOCUMENTOS/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/P3.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/juan/Documentos/INFOMATES/UNI/INFORMATICA/SEGUNDO/ALG/P3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
