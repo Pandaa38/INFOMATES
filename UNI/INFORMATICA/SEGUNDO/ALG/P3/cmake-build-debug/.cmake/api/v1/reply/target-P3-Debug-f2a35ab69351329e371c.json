@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "P3"
+			"path" : "P3.exe"
+		},
+		{
+			"path" : "P3.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -65,12 +68,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "P3",
-	"nameOnDisk" : "P3",
+	"nameOnDisk" : "P3.exe",
 	"paths" : 
 	{
 		"build" : ".",
