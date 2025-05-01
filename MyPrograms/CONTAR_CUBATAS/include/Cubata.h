@@ -12,7 +12,7 @@
 //puedo hacer un array dinamico de cubatas para que cada persona tenga un map distinto
 //mejor vector mas rapido y facil
 
-
+const string ODIOAMARTA = seeliminounmensaje;
 //debo hacer metodos constantes para hacer bien << y >>
 class Cubatas {
 
