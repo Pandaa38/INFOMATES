@@ -5,52 +5,25 @@ package irrgarten;
  *
  * @author juan
  */
-public class Monster {
+public class Monster extends LabyrinthCharacter{
     
     private static final int INITIALHEALTH = 5;
     
-    private String name;
-    private float intelligence;
-    private float strenght;
-    private float health;
-    private int row;
-    private int col;
-    
     Monster(String name, float intelligence, float strenght){
-        this.name = name;
-        this.intelligence = intelligence;
-        this.strenght = strenght;
-        this.health = INITIALHEALTH;
-        
-        setPos(-1, -1);
+        super(name, intelligence, strenght, INITIALHEALTH);
     }
     
-    public boolean dead(){ 
-        return health == 0;
-    }
+    @Override
     public float attack(){
-        return Dice.intensity(strenght);
+        return Dice.intensity(this.getStrength());
     }
-    public void setPos(int row, int col){
-        this.row = row;
-        this.col = col;
-    }
-    public String toString(){
-        String to_s = name + ": \n\t" + "Inteligencia = " + intelligence
-                + "\n\tFuerza = " + strenght + "\n\tVida = " + health +
-                "\n\tPos = (" + row +", " + col + ")";
-        
-        return to_s;        
-    }
-    private void gotWounded(){
-        health--;
-    }
-    boolean defend(float receivedAttack){
+    
+    @Override
+    public boolean defend(float receivedAttack){
         
         boolean isDead = dead();
         if(!isDead){
-            float defensiveEnergy = Dice.intensity(intelligence);
-            if(defensiveEnergy < receivedAttack){
+            if(Dice.intensity(this.getIntelligence()) < receivedAttack){
                 gotWounded();
                 isDead = dead();
             }

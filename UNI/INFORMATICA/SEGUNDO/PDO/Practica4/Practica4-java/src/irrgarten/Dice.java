@@ -2,6 +2,7 @@
 package irrgarten;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,6 +72,12 @@ public class Dice {
     public static boolean discardElement(int usesLeft) {
         float probability = 1.0f - ((float) usesLeft / MAX_USES);
         return generator.nextFloat() < probability;
+    }
+    
+    public static Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
+        
+        return (Dice.randomIntelligence() > intelligence) ? 
+                validMoves.get(generator.nextInt(validMoves.size())) : preference;
     }
     
 }

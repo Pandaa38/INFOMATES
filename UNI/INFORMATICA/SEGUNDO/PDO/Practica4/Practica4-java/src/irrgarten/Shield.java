@@ -1,37 +1,23 @@
 
 package irrgarten;
 
-import irrgarten.Dice;
-
 /**
  *
  * @author juan
  */
-public class Shield {
-    private float protection;
-    private int uses;
-    
-    Shield(float power, int uses){
-        this.protection = power;
-        this.uses = uses;
+public class Shield extends CombatElement{
+        
+    public Shield(float protection, int uses){
+        super(protection, uses);
     }
     
     public float protect(){
-        float protect;
-        if(this.uses > 0){
-            protect = protection;
-            uses--;
-        }else 
-            protect = 0;
-        
-        return protect;        
+        return this.produceEffect();
     }
     
+    @Override
     public String toString(){
-        return "S[" + protection + "," + uses + "]";
-    }
-    
-    public boolean discard(){
-        return Dice.discardElement(uses);
+        String thisClass = "S";
+        return thisClass + super.toString();
     }
 }

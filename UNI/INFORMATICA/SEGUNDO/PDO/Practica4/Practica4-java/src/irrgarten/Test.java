@@ -9,7 +9,7 @@ import irrgarten.controller.Controller;
  *
  * @author juan
  */
-public class TestP3 {
+public class Test {
     
     public static void main ( String [ ] args ) {
         

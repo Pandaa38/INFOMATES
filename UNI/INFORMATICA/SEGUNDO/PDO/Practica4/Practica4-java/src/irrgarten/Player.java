@@ -7,38 +7,46 @@ import java.util.ArrayList;
  *
  * @author juan
  */
-public class Player {
+public class Player extends LabyrinthCharacter{
     private static final int MAXWEAPONS = 2;
     private static final int MAXSHIELDS = 3;
     private static final int INITIALHEALTH = 10;
     private static final int HITS2LOSE = 3;
     
-    private String name;
-    private char number;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
     private int consecutiveHits = 0;
+    private char number;
     
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
     
-    Player(char number, float intelligence, float strength){
+    private WeaponCardDeck weaponCardDeck;
+    private ShieldCardDeck shieldCardDeck;
+    
+    public Player(char number, float intelligence, float strength){
+        
+        super("Player#" + number, intelligence, strength, INITIALHEALTH);
         
         //ATRIBUTOS
-        name = "Player#" + number;
         this.number = number;
-        this.intelligence = intelligence;
-        this.strength = strength;
-        
-        health = INITIALHEALTH;
         consecutiveHits = 0;
         
         //ARRAYLISTS
         weapons = new ArrayList<Weapon>();
-        shields = new ArrayList<Shield>();        
+        shields = new ArrayList<Shield>();     
+        
+        //DECKS
+        weaponCardDeck = new WeaponCardDeck();
+        shieldCardDeck = new ShieldCardDeck();
+    }
+    public Player(Player other){
+        
+        super(other);
+        
+        this.number = other.number;
+        this.consecutiveHits = other.number;
+        
+        weapons = new ArrayList<Weapon>(other.weapons);
+        shields = new ArrayList<Shield>(other.shields);
     }
     public void resurrect(){
         
@@ -47,25 +55,12 @@ public class Player {
         shields.clear();
         
         //Restaurar atributos
-        health = INITIALHEALTH;
+        this.setHealth(INITIALHEALTH);
         resetHits();
     }
-    public int getRow(){
-        return row;
-    }
-    public int getCol(){
-        return col;
-    }
-    public char getNumber(){
-        return number;
-    }
-    public void setPos(int row, int col){
-        this.row = row;
-        this.col = col;       
-    }
-    public boolean dead(){
-        return health == 0;
-    }
+    
+    public char getNumber(){ return number; }
+    
     public Directions move(Directions direction, ArrayList<Directions> validMoves){
         int size = validMoves.size();
         boolean contained = validMoves.contains(direction);
@@ -79,9 +74,11 @@ public class Player {
         
         return direct;
     }
+    @Override
     public float attack(){
-        return sumWeapons() + strength;
+        return sumWeapons() + this.getStrength();
     }
+    @Override
     public boolean defend(float receivedAttack){
         return manageHit(receivedAttack);
     }
@@ -96,15 +93,38 @@ public class Player {
         for (int i=0; i<sReward; i++)
             this.receiveShield(this.newShield());
         
-        this.health += Dice.healthReward();
+        this.setHealth(Dice.healthReward() + this.getHealth());
 
     }
-    public String toString() {
-    return name + ": \n\t" + 
-           "Inteligencia = " + intelligence + 
-           "\n\tFuerza = " + strength + 
-           "\n\tVida = " + health + 
-           "\n\tPos = (" + row + ", " + col + ")";
+    @Override 
+    public String toString(){
+        String toReturn=super.toString();
+        toReturn+="\n\tGolpes consecutivos = " + this.consecutiveHits;
+        
+        // Bucles para mostrar con un formato determinado el array de
+        // armas y escudos del jugador
+        String toWeapons="[";
+        int tamWeapons=this.weapons.size();
+        for(int i=0; i<tamWeapons-1; i++){
+            toWeapons+=this.weapons.get(i).toString()+", ";
+        }
+        if (tamWeapons>0)
+            toWeapons+=this.weapons.get(tamWeapons-1);
+        toWeapons+="]";
+        
+        String toShields="[";
+        int tamShields=this.shields.size();
+        for(int i=0; i<tamShields-1; i++){
+            toShields+=this.shields.get(i).toString()+", ";
+        }
+        if (tamShields>0)
+            toShields+=this.shields.get(tamShields-1);
+        toShields+="]";
+        
+        // Definimos el formato final para el toString
+        toReturn+="\n\tw:" + toWeapons+"\n\tsh:"+toShields;
+        
+        return toReturn;
     }
     
     //PRIVATE-------------------------
@@ -140,22 +160,22 @@ public class Player {
         Shield s = new Shield(Dice.shieldPower(), Dice.usesLeft());
         return s;
     }
-    private float sumWeapons(){
+    protected float sumWeapons(){
         float sum = 0;
         for(Weapon w : weapons){
             sum += w.attack();
         }
         return sum;
     }
-    private float sumShields(){
+    protected float sumShields(){
         float sum = 0;
         for(Shield s : shields){
             sum += s.protect();
         }
         return sum;
     }
-    private float defensiveEnergy(){
-        return sumShields() + this.intelligence;
+    protected float defensiveEnergy(){
+        return sumShields() + this.getIntelligence();
     }
     private boolean manageHit(float receivedAttack){
         boolean lose;
@@ -178,9 +198,6 @@ public class Player {
     }
     private void resetHits(){
         this.consecutiveHits = 0;
-    }
-    private void gotWounded(){
-        this.health--;
     }
     private void incConsecutiveHits(){
         this.consecutiveHits++;
