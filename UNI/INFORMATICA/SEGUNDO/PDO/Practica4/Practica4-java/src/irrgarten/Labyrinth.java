@@ -50,6 +50,13 @@ public class Labyrinth {
         // Definimos casilla salida
         this.labyrinth[exitRow][exitCol]=EXIT_CHAR;
     }
+    
+    public void changeToFuzzy(Player currentPlayer, FuzzyPlayer newFuzzy){
+        int row = currentPlayer.getRow();
+        int col = currentPlayer.getCol();
+        
+        this.players[row][col] = newFuzzy;
+    }
     public void spreadPlayers(ArrayList<Player> players){
         for(Player p:players){
             int []pos = randomEmptyPos();

@@ -43,7 +43,7 @@ public class Player extends LabyrinthCharacter{
         super(other);
         
         this.number = other.number;
-        this.consecutiveHits = other.number;
+        this.consecutiveHits = other.consecutiveHits;
         
         weapons = new ArrayList<Weapon>(other.weapons);
         shields = new ArrayList<Shield>(other.shields);

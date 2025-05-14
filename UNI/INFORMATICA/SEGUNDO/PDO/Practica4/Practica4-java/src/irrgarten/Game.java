@@ -204,6 +204,10 @@ public class Game {
         if(Dice.resurrectPlayer()){
             this.currentPlayer.resurrect();
             this.logResurrected();
+            
+            //FuzzyPlayer
+            FuzzyPlayer fuzzy = new FuzzyPlayer(this.currentPlayer);
+            this.players.set(this.currentPlayerIndex, fuzzy);
         }
         else
             this.logPlayerSkipTurn();

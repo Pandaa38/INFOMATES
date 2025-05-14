@@ -13,6 +13,7 @@ public class TextUI {
     private static Scanner in = new Scanner(System.in);
     
     private char readChar() {
+        
         String s = in.nextLine();     
         return s.charAt(0);
     }
