@@ -153,12 +153,10 @@ public class Player extends LabyrinthCharacter{
             shields.add(s);
     }
     private Weapon newWeapon(){
-        Weapon w = new Weapon(Dice.weaponPower(), Dice.usesLeft());
-        return w;
+        return this.weaponCardDeck.nextCard();
     }
     private Shield newShield(){
-        Shield s = new Shield(Dice.shieldPower(), Dice.usesLeft());
-        return s;
+        return this.shieldCardDeck.nextCard();
     }
     protected float sumWeapons(){
         float sum = 0;

@@ -1,5 +1,8 @@
+require_relative 'combat_element'
+require_relative 'dice'
+
 module Irrgarten
-  require_relative 'dice' 
+  
 
   class Weapon < CombatElement
 

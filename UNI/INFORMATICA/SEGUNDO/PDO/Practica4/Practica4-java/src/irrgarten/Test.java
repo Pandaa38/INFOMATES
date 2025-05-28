@@ -2,6 +2,8 @@
 package irrgarten;
 
 import irrgarten.UI.TextUI;
+import irrgarten.UI.*;
+
 import irrgarten.controller.Controller;
 
 
@@ -15,7 +17,7 @@ public class Test {
         
         final int N_PLAYERS = 1;
 
-        TextUI vista = new TextUI();
+        GameWindow vista = new GameWindow();
         
         Game juego = new Game(N_PLAYERS);
         Controller controlador = new Controller(juego, vista);

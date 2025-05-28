@@ -18,7 +18,7 @@ module Irrgarten
       @strength = other.strength
       @health = other.health
       pos(other.row, other.col)
-  end
+    end
 
     def dead
       @health <= 0
@@ -49,6 +49,5 @@ module Irrgarten
     def got_wounded
       @health -= 1
     end
-
-
+  end
 end

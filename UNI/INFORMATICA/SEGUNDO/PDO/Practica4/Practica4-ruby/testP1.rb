@@ -2,8 +2,8 @@ module Irrgarten
   require_relative 'weapon'
   require_relative 'shield'
   require_relative 'dice'
-  require_relative 'gamestate'
-  require_relative 'gamecharacter'
+  require_relative 'game_state'
+  require_relative 'game_character'
   require_relative 'directions'
   require_relative 'orientation'
 

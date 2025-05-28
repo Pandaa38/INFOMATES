@@ -10,7 +10,7 @@ module Irrgarten
     end
 
     def discard
-      Dice.dicard_element(@uses)
+      Dice.discard_element(@uses)
     end
 
     def to_s

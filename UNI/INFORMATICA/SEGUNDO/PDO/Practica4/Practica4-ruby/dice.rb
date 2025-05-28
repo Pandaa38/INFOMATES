@@ -71,5 +71,6 @@ module Irrgarten
       #preguntar por .sample
       return self.random_intelligence > intelligence ? 
               valid_moves[@@generator.rand(valid_moves.size)] : preference
+    end
   end
 end

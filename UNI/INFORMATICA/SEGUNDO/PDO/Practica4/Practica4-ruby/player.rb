@@ -1,8 +1,10 @@
-module Irrgarten
+require_relative 'dice'
+require_relative 'weapon'
+require_relative 'shield'
+require_relative 'labyrinth_character'
 
-  require_relative 'dice'
-  require_relative 'weapon'
-  require_relative 'shield'
+
+module Irrgarten
 
   class Player < LabyrinthCaracter
     @@MAX_WEAPONS = 2

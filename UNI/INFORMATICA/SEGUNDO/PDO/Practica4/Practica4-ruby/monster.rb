@@ -1,6 +1,9 @@
+require_relative 'dice'
+require_relative 'labyrinth_character'
+
 module Irrgarten
 
-  class Monster < LabyrinthCharacter
+  class Monster < LabyrinthCaracter
     @@INITIAL_HEALTH = 5
 
     def initialize(name, intelligence, strength)
