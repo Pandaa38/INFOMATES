@@ -67,5 +67,9 @@ module Irrgarten
       @@generator.rand <= prob
     end
 
+    def self.next_step(preference, valid_moves, intelligence)
+      #preguntar por .sample
+      return self.random_intelligence > intelligence ? 
+              valid_moves[@@generator.rand(valid_moves.size)] : preference
   end
 end

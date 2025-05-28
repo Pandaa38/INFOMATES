@@ -1,29 +1,19 @@
-module Irrgarten
-  require_relative 'dice'
-  class Shield
-    #inicalizador con atributos protection y uses
+require_relative 'dice'
+
+module Irrgarten  
+  class Shield < CombatElement
+    
     def initialize(protection, uses)
-      @protection = protection
-      @uses = uses
+      super(protection, uses)
     end
 
     def protect
-      if @uses > 0
-        @uses -= 1
-        protection_sh = @protection
-      else
-        protection_sh = 0.0
-      end
-      protection_sh
+      self.produce_effect
     end
 
     def to_s
-      "W[#{@protection}, #{@uses}]"
+      "S" + super
     end
-
-    def discard
-      Dice.discard_element(@uses)
-    end
-
+    
   end
 end

@@ -5,6 +5,7 @@ require_relative 'labyrinth'
 require_relative 'game_state'
 require_relative 'game_character'
 require_relative 'orientation'
+require_relative 'fuzzy_player'
 
 module Irrgarten
   
@@ -178,6 +179,11 @@ module Irrgarten
       if(Dice.resurrect_player)
         @current_player.resurrect
         log_resurrected
+
+        fuzzy = FuzzyPlayer.new(@current_player)
+        @players[@current_player_index] = fuzzy
+        @labyrinth.convert_to_fuzzy(fuzzy)
+
       else
         log_player_skip_turn
       end
@@ -192,7 +198,7 @@ module Irrgarten
     end
   
     def log_resurrected
-      @log += "El jugador ha resucitado.\n"
+      @log += "El jugador ha resucitado (fuzzy).\n"
     end
   
     def log_player_skip_turn

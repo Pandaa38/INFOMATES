@@ -4,27 +4,30 @@ module Irrgarten
   require_relative 'weapon'
   require_relative 'shield'
 
-  class Player
+  class Player < LabyrinthCaracter
     @@MAX_WEAPONS = 2
     @@MAX_SHIELDS = 3
     @@INITIAL_HEALTH = 10
     @@HITS2LOSE = 3
   
-    attr_reader :row, :col, :number
+    attr_reader :number
   
     def initialize(number, intelligence, strength)
-      @name = "Player##{number}"
-      @number = number
-      @intelligence = intelligence
-      @strength = strength
-      @health = @@INITIAL_HEALTH
-      @consecutive_hits = 0
-  
-      @weapons = Array.new   
+      @number = number.to_s
+      name = "Player #{@number}"
+      super(name, intelligence, strength, @@INITIAL_HEALTH)
+
+      @weapons = Array.new
       @shields = Array.new
 
-      @row = -1
-      @col = -1
+      @consecutive_hits = 0
+    end
+    def copy(other)
+      super
+      @number = other.number
+      @weapons = other.weapons
+      @shields = other.shields
+      @consecutive_hits = other.consecutive_hits
     end
 
     def resurrect
@@ -32,30 +35,13 @@ module Irrgarten
       @shields.clear
   
       @health = @@INITIAL_HEALTH
-      reset_hits
-    end
-  
-    def get_row
-      @row
-    end
-  
-    def get_col
-      @col
+      reset_hits()
     end
   
     def get_number
       @number
     end
-
-    def set_pos(row, col)
-      @row = row
-      @col = col
-    end
-  
-    def dead
-      @health == 0
-    end
-  
+    
     def move(direction, valid_moves)
       size = valid_moves.size
       contained = valid_moves.include?(direction)
@@ -90,20 +76,33 @@ module Irrgarten
 
     end
   
+    #######################################################################################
     def to_s
-      weapons_str = ""
-      @weapons.each do |weapon|
-        weapons_str += weapon.to_s + ", "
+      # Guardamos la info de todas las armas en un string
+      to_weapons="["
+      tam_weapons=@weapons.size
+      # Se incluye 0 y tam_weapons-1
+      for i in 0..(tam_weapons-1) do
+          to_weapons+=@weapons[i].to_s
+
+          # NO hace la parte de delante si i == (tam_weapons-1)
+          to_weapons += ", " unless i == (tam_weapons - 1)
       end
-      weapons_str.chomp(", ")
-  
-      shields_str = ""
-      @shields.each do |shield|
-        shields_str += shield.to_s + ", "
+      to_weapons+="]"
+
+      # Guardamos la info de todas las armas en un string
+      to_shields="["
+      tam_shields=@shields.size
+      # Se incluye 0 y tam_shields-1
+      for i in 0..(tam_shields-1) do
+          to_shields+=@shields[i].to_s
+
+          # NO hace la parte de delante si i == (tam_weapons-1)
+          to_shields += ", " unless i == (tam_shields - 1)
       end
-      shields_str.chomp(", ")
-  
-      "#{@name}: \n\tInteligencia = #{@intelligence}\n\tFuerza = #{@strength}\n\tVida = #{@health}\n\tPos = (#{@row}, #{ @col})\n\tArmas = [#{weapons_str}]\n\tEscudos = [#{shields_str}]"
+      to_shields+="]"
+
+      return super + " [ ch:#{@consecutive_hits}, w:"+to_weapons+", sh:"+to_shields + " ]"
     end
   
     private
@@ -143,6 +142,7 @@ module Irrgarten
       s
     end
   
+    protected
     def sum_weapons
       sum = 0.0
       @weapons.each do |w|
@@ -162,7 +162,8 @@ module Irrgarten
     def defensive_energy
       sum_shields + @intelligence
     end
-  
+    
+    private
     def manage_hit(received_attack)
 
       if(defensive_energy() < received_attack)
@@ -183,10 +184,6 @@ module Irrgarten
   
     def reset_hits
       @consecutive_hits = 0
-    end
-  
-    def got_wounded
-      @health -= 1
     end
   
     def inc_consecutive_hits

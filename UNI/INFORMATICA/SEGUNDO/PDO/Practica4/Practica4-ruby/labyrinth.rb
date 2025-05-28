@@ -1,6 +1,7 @@
 require_relative 'dice'
 require_relative 'directions'
 require_relative 'orientation'
+require_relative 'fuzzy_player'
 
 module Irrgarten
 
@@ -25,6 +26,15 @@ module Irrgarten
       @labyrinth = Array.new(@n_rows) {Array.new(@n_cols, @@EMPTY_CHAR)}
 
       @labyrinth[@exit_row][@exit_col] = @@EXIT_CHAR
+    end
+
+    def convert_to_fuzzy(fuzzy_player)
+      row = fuzzy_player.row
+      col = fuzzy_player.col
+
+      if (@players[row][col].number == fuzzy_player.number)
+          @players[row][col] = fuzzy_player
+      end
     end
 
     def spread_players(players)
