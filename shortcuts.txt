@@ -1,0 +1,37 @@
+| **Acción**                                | **NetBeans**                                     | **IntelliJ IDEA**                                                    |
+| ----------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------- |
+| **Buscar palabra en punto de inserción**  | Ctrl + F3                                        | Ctrl + F (selección)                                                 |
+| **Buscar siguiente/anterior en archivo**  | F3 / Shift + F3                                  | F3 / Shift + F3                                                      |
+| **Buscar/reemplazar en archivo**          | Ctrl + F / Ctrl + H                              | Ctrl + F / Ctrl + R                                                  |
+| **Buscar en proyectos**                   | Ctrl + Shift + F / H                             | Ctrl + Shift + F (Find in Path) / Ctrl + Shift + R (Replace in Path) |
+| **Buscar usos (Find usages)**             | Alt + F7                                         | Alt + F7                                                             |
+| **Renombrar símbolo**                     | Ctrl + R                                         | Shift + F6                                                           |
+| **Ir a línea…**                           | Ctrl + G                                         | Ctrl + G                                                             |
+| **Ir a declaración**                      | Ctrl + B                                         | Ctrl + B (o Ctrl + Click)                                            |
+| **Ir a tipo / archivo**                   | Ctrl + O / Alt+Shift + O                         | Ctrl + N (clase) / Ctrl + Shift + N (archivo)                        |
+| **Saltar a prueba JUnit**                 | Ctrl + Shift + T                                 | Ctrl + Shift + T                                                     |
+| **Mostrar historial de portapapeles**     | Ctrl + Shift + V                                 | Ctrl + Shift + V                                                     |
+| **Copiar línea arriba/abajo**             | Ctrl + Shift + Up/Down                           | Ctrl + D (duplicar línea)                                            |
+| **Mover línea arriba/abajo**              | Alt + Shift + Left/Right / Alt + Shift + Up/Down | Ctrl + Shift + Up/Down (move line)                                   |
+| **Seleccionar bloque rectangular**        | Ctrl + Shift + R                                 | Alt + Shift + Insert (column selection)                              |
+| **Comentar / descomentar línea**          | Ctrl + Shift + C / Ctrl + /                      | Ctrl + /                                                             |
+| **Comentar / descomentar bloque**         | —                                                | Ctrl + Shift + /                                                     |
+| **Eliminar línea actual**                 | Ctrl + E                                         | Ctrl + Y                                                             |
+| **Reformatear código**                    | Alt + Shift + F                                  | Ctrl + Alt + L                                                       |
+| **Optimizar imports**                     | Ctrl + Shift +I / Alt + Shift + I                | Ctrl + Alt + O                                                       |
+| **Generar código (getter/setter, etc.)**  | Alt + Insert                                     | Alt + Insert                                                         |
+| **Extraer método / variable / constante** | Ctrl + Shift +M / V / C                          | Ctrl + Alt + M / V / C                                               |
+| **Refactor “Change Signature”**           | —                                                | Ctrl + F6                                                            |
+| **Navegar atrás / adelante**              | Alt + Left/Right                                 | Ctrl + Alt + Left/Right                                              |
+| **Volver a última edición**               | Ctrl + Shift +Backspace                          | Ctrl + Shift +Backspace                                              |
+| **Abrir archivos recientes**              | Ctrl + Tab                                       | Ctrl + E                                                             |
+| **Cerrar ventana/editor**                 | Ctrl + F4 / Ctrl + W                             | Ctrl + F4 / Ctrl + W                                                 |
+| **Maximizar/Centrar ventana**             | Shift + Escape                                   | Ctrl + Shift + F12                                                   |
+| **Compilar paquete/archivo**              | F9                                               | Ctrl + Shift + F9                                                    |
+| **Construir proyecto**                    | F11                                              | Ctrl + F9                                                            |
+| **Limpiar y construir**                   | Shift + F11                                      | (no existe directo; usa “Build > Rebuild Project”)                   |
+| **Ejecutar proyecto principal**           | F6 / Shift + F6                                  | Shift + F10                                                          |
+| **Depurar proyecto / archivo**            | Ctrl + F5 / Shift + F5 / Ctrl + Shift + F6       | Shift + F9 / Ctrl + Shift + F9                                       |
+| **Paso sobre / dentro / fuera**           | F7 / F8 / Ctrl + F7                              | F8 / F7 / Shift + F8                                                 |
+| **Toggle breakpoint**                     | Ctrl + F8                                        | Ctrl + F8                                                            |
+| **Evaluar expresión**                     | Ctrl + F9 / F4                                   | Alt + F8                                                             |
