@@ -50,7 +50,8 @@ void consumir_dato( unsigned dato )
 // Variables globales para el buffer y sincronización
 Semaphore puede_insertar(tam_vec); // Semáforo para espacios libres
 Semaphore puede_extraer(0);        // Semáforo para items disponibles
-Semaphore mutex(1);
+mutex mtx;
+Semaphore mutex_sem(1);
 
 // Buffer circular compartido
 int buffer[tam_vec];
@@ -92,14 +93,16 @@ void  funcion_hebra_productora(  )
       sem_wait(puede_insertar);
       
       // Entrar a sección crítica
-      sem_wait(mutex);
+      //mtx.lock();
+      sem_wait(mutex_sem);
       
       // Insertar el dato en el buffer
       buffer[primera_libre] = dato;
       primera_libre = (primera_libre + 1) % tam_vec;
       
       // Salir de sección crítica
-      sem_signal(mutex);
+      //mtx.unlock();
+      sem_signal(mutex_sem);
       
       // Señalar que hay un dato más
       sem_signal(puede_extraer);
@@ -112,19 +115,21 @@ void funcion_hebra_consumidora(  )
 {
    for( unsigned i = 0 ; i < num_items ; i++ )
    {
-      int dato ;
+      int dato=0;
       // Esperar a que haya un dato disponible
       sem_wait(puede_extraer);
       
       // Entrar a sección crítica
-      sem_wait(mutex);
+      mtx.lock();
+      //sem_wait(mutex_sem);
       
       // Extraer el dato del buffer
-      int dato = buffer[primera_ocupada];
+      dato = buffer[primera_ocupada];
       primera_ocupada = (primera_ocupada + 1) % tam_vec;
       
       // Salir de sección crítica
-      sem_signal(mutex);
+      mtx.unlock();
+      //sem_signal(mutex_sem);
       
       // Señalar que hay un hueco libre más
       sem_signal(puede_insertar);
