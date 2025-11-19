@@ -9,6 +9,9 @@
 using namespace std ;
 using namespace scd ;
 
+// g++ -std=c++11 -pthread -o [ejecutable] [fichero].cpp
+
+
 // numero de fumadores 
 
 const int num_fumadores = 3 ;
