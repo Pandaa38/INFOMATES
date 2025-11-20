@@ -48,12 +48,13 @@ int producir_ingrediente()
 void funcion_hebra_estanquero(  )
 {
    int ingrediente;
-
-   for( int i = 0 ; i < 10 ; i++ )
+   int i=0;
+   while(true)
    {
       ingrediente = producir_ingrediente( );
       mostrador_vacio.sem_wait( );
       cout << i << " Estanquero : Ingrediente " << ingrediente << " puesto." << endl << flush;
+      i++;
       ingr_disponible[ingrediente].sem_signal( );
    }
 
