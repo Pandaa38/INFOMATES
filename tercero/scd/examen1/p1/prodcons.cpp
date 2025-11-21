@@ -8,6 +8,8 @@
 using namespace std ;
 using namespace scd ;
 
+//g++ -std=c++11 -pthread -o ejecutable
+
 //**********************************************************************
 // Variables globales
 const unsigned 

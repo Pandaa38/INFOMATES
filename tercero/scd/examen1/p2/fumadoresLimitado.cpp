@@ -1,9 +1,4 @@
-/**
- * @file fumadores.cpp
- * @brief Problema de los fumadores limitado con monitores
- * 
- * @author Arturo Olivares Martos
- */
+
 
 #include <iostream>
 #include <cassert>

@@ -1,9 +1,4 @@
-/**
- * @file lectores_escritores.cpp
- * @brief Problema de los lectores-escritores con monitores de Hoare
- * 
- * @author Arturo Olivares Martos
- */
+
 
 #include <iostream>
 #include <iomanip>

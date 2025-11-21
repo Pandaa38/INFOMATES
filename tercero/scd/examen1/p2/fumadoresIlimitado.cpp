@@ -1,9 +1,3 @@
-/**
- * @file fumadores.cpp
- * @brief Problema de los fumadores con monitores
- * 
- * @author Arturo Olivares Martos
- */
 
 #include <iostream>
 #include <cassert>
@@ -12,7 +6,7 @@
 #include <random> // dispositivos, generadores y distribuciones aleatorias
 #include <chrono> // duraciones (duration), unidades de tiempo
 #include <vector>
-#include "../../Práctica1/Código/scd.h"
+#include "scd.h"
 
 using namespace std ;
 using namespace scd ;
