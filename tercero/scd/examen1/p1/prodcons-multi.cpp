@@ -12,14 +12,16 @@ using namespace scd ;
 //**********************************************************************
 // Variables globales
 const unsigned 
-   num_items = 500 ,   // número de items
+   num_items = 80 ,   // número de items
 	tam_vec   = 5 ,   // tamaño del buffer
-   num_productores = 10, // número de productores. Ha de ser divisor de num_items
-   num_consumidores = 20; // número de consumidores. Ha de ser divisor de num_items
+   num_productores = 4, // número de productores. Ha de ser divisor de num_items
+   num_consumidores = 5; // número de consumidores. Ha de ser divisor de num_items
 unsigned  
    cont_prod[num_items] = {0}, // contadores de verificación: para cada dato, número de veces que se ha producido.
    cont_cons[num_items] = {0}, // contadores de verificación: para cada dato, número de veces que se ha consumido.
    siguiente_dato       = 0 ;  // siguiente dato a producir en 'producir_dato' (solo se usa ahí)
+
+
 
 // Semáforos usados para controlar la sincronización
 // - espera_consumidor: indica cuántos valores hay disponibles para consumir.
@@ -28,25 +30,21 @@ Semaphore espera_consumidor = 0;
 Semaphore espera_productor = tam_vec;
 
 // Mutex necesario para Exclusión Mutua
-// En LIFO, primera_libre es compartida, necesitamos un mutex para protegerla.
-mutex mtx_lifo;
 // En FIFO, como hay muchos productores y consumidores, necesitamos un mutex para proteger la variable de condición.
-mutex mtx_fifo_esc;
-mutex mtx_fifo_lect;
+//mutex mtx_fifo_esc;
+//mutex mtx_fifo_lect;
+
+Semaphore buffer_esc(1);
+Semaphore buffer_lect(1);
+
 // Para que no se entrelacen los couts
 mutex mtx_cout;
 
 
-// Variables para el buffer según estructura LIFO y FIFO
-#define FIFO
-#ifdef LIFO
-   int vec[tam_vec];
-   int primera_libre = 0;
-#elif defined FIFO
-   int vec[tam_vec];
-   int primera_libre = 0;
-   int primera_ocupada = 0;
-#endif
+// Variables para el buffer según estructura FIFO
+int vec[tam_vec];
+int primera_libre = 0;
+int primera_ocupada = 0;
 
 
 /**
@@ -115,16 +113,10 @@ void  funcion_hebra_productora(int productor_id){
 
       // Comprobamos que se puede producir
       sem_wait(espera_productor);
-      #ifdef LIFO
-         mtx_lifo.lock();
-            vec[primera_libre++] = dato;
-         mtx_lifo.unlock();
-      #elif defined FIFO
-         mtx_fifo_esc.lock();
-            vec[primera_libre++] = dato;
-            primera_libre %= tam_vec;
-         mtx_fifo_esc.unlock();
-      #endif
+      buffer_esc.sem_wait();
+         vec[primera_libre++] = dato;
+         primera_libre %= tam_vec;
+      buffer_esc.sem_signal();
       sem_signal(espera_consumidor);
    }
 }
@@ -141,16 +133,10 @@ void funcion_hebra_consumidora(int consumidor_id){
    for( unsigned i = 0 ; i < items_por_consumidor ; i++ ){
       int dato = 0;
       sem_wait(espera_consumidor);
-      #ifdef LIFO
-         mtx_lifo.lock();
-            dato = vec[--primera_libre];
-         mtx_lifo.unlock();
-      #elif defined FIFO
-         mtx_fifo_lect.lock();
-            dato = vec[primera_ocupada++];
-            primera_ocupada %= tam_vec;
-         mtx_fifo_lect.unlock();
-      #endif
+      buffer_lect.sem_wait();
+         dato = vec[primera_ocupada++];
+         primera_ocupada %= tam_vec;
+      buffer_lect.sem_signal();
       sem_signal(espera_productor);
 
       consumir_dato( consumidor_id, dato ) ;
@@ -158,10 +144,11 @@ void funcion_hebra_consumidora(int consumidor_id){
 }
 //----------------------------------------------------------------------
 
+
 int main()
 {
    cout << "-----------------------------------------------------------------" << endl
-        << "Problema de los productores-consumidores (solución LIFO o FIFO ?)." << endl
+        << "Problema de los productores-consumidores (solución FIFO)." << endl
         << "------------------------------------------------------------------" << endl
         << flush ;
 
