@@ -1,0 +1,189 @@
+%{
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stack>
+#include <sstream>
+#include <cctype> 
+
+using namespace std;
+
+stack<string> pila_bloques;
+
+string extraer_nombre(string declaracion) {
+
+    if (declaracion.empty()) return "";
+
+    int posicion_final = declaracion.length() - 1;
+    
+    // Ignorar espacios, corchetes, punteros y punto y coma al final
+    while (posicion_final >= 0 && (isspace(declaracion[posicion_final]) || declaracion[posicion_final] == ']' || declaracion[posicion_final] == '[' || declaracion[posicion_final] == '*' || declaracion[posicion_final] == ';')) {
+        posicion_final--;
+    }
+
+    // Leer hacia atrás hasta encontrar el inicio del nombre
+    int posicion_inicial = posicion_final;
+    while (posicion_inicial >= 0 && (isalnum(declaracion[posicion_inicial]) || declaracion[posicion_inicial] == '_')) {
+        posicion_inicial--;
+    }
+
+    posicion_inicial++; 
+
+    if (posicion_final < posicion_inicial) return "";
+
+    return declaracion.substr(posicion_inicial, posicion_final - posicion_inicial + 1);
+}
+
+void generar_doxygen(const char* declaracion_funcion) {
+
+    string texto(declaracion_funcion);
+    
+    size_t inicio_argumentos = texto.find('(');
+    size_t fin_argumentos = texto.rfind(')');
+    
+    if (inicio_argumentos == string::npos || fin_argumentos == string::npos) {
+        cout << declaracion_funcion;
+        return;
+    }
+
+    string cabecera = texto.substr(0, inicio_argumentos);
+    bool tiene_retorno = (cabecera.find("void") == string::npos);
+    string argumentos = texto.substr(inicio_argumentos + 1, fin_argumentos - inicio_argumentos - 1);
+    
+    cout << "/**" << endl;
+    cout << " * @brief" << endl;
+    cout << " *" << endl;
+    
+    if (!argumentos.empty()) {
+        stringstream ss(argumentos);
+        string segmento;
+        while (getline(ss, segmento, ',')) {
+            string nombre_param = extraer_nombre(segmento);
+            if (!nombre_param.empty()) {
+                cout << " * @param " << nombre_param << endl;
+            }
+        }
+    }
+    
+    if (tiene_retorno) {
+        cout << " * @return" << endl;
+    }
+    
+    cout << " */" << endl;
+    cout << declaracion_funcion; 
+}
+%}
+
+%option noyywrap
+
+letra               [a-zA-Z_]
+digito              [0-9]
+espacio             [ \t\n]+   
+espacio_opcional    [ \t\n]*
+
+ID                  {letra}({letra}|{digito})*
+
+tipo                (const{espacio})?{ID}({espacio}{ID})*
+
+puntero             (\*{espacio_opcional})*
+
+funcion             {tipo}{espacio_opcional}{puntero}{espacio_opcional}{ID}{espacio_opcional}\([^)]*\){espacio_opcional}\{
+
+ciclo_if            (if|for|while){espacio_opcional}\(.*\){espacio_opcional}\{
+%%
+
+{ciclo_if} {
+    string texto = yytext;
+    
+    // Detectar qué tipo es para guardarlo en la pila
+    if (texto.find("for") != string::npos) {
+        pila_bloques.push("for");
+    } else if (texto.find("while") != string::npos) {
+        pila_bloques.push("while");
+    }
+    else{pila_bloques.push("if");}
+        
+    
+    
+    cout << yytext; // Imprimimos la cabecera original
+}
+
+"}" {
+    cout << "}"; // Imprimimos la llave
+    
+    if (!pila_bloques.empty()) {
+        string tipo = pila_bloques.top(); // Miramos qué bloque estamos cerrando
+        pila_bloques.pop();           // Lo sacamos de la pila
+        
+        // Si es un ciclo, añadimos el comentario
+        if (tipo == "for") {
+            cout << " // end for";
+        } else if (tipo == "while") {
+            cout << " // end while";
+        } else if (tipo == "if") {
+            cout << " // end if";
+        }
+        // Si es "generico", no hacemos nada extra
+    }
+}
+
+{funcion} { 
+    generar_doxygen(yytext); 
+}
+
+.|\n        { 
+    cout << yytext; 
+}
+
+%%
+
+int main(int argc, char *argv[]) {
+    
+    if (argc < 2) {
+        cerr << "Uso: " << argv[0] << " <archivo.cpp>" << endl;
+        return 1;
+    }
+
+    string input_path = argv[1];
+    string temp_path = input_path + ".tmp";
+
+    FILE *archivo_lectura = fopen(input_path.c_str(), "r");
+    if (!archivo_lectura) {
+        cerr << "Error: No se puede abrir " << input_path << endl;
+        return 1;
+    }
+
+    ofstream archivo_salida(temp_path);
+    if (!archivo_salida.is_open()) {
+        cerr << "Error: No se puede crear archivo temporal." << endl;
+        fclose(archivo_lectura);
+        return 1;
+    }
+
+    // Redirigir cout al archivo temporal
+    streambuf *coutbuf = cout.rdbuf(); 
+    cout.rdbuf(archivo_salida.rdbuf());
+
+    yyin = archivo_lectura;
+    yylex();
+
+    // Restaurar buffers y cerrar
+    cout.rdbuf(coutbuf);
+    archivo_salida.close();
+    fclose(archivo_lectura);
+
+    // Reemplazar el archivo original con el temporal
+    if (remove(input_path.c_str()) != 0) {
+        cerr << "Error: No se pudo borrar el archivo original (permisos?). El resultado está en " << temp_path << endl;
+        return 1;
+    }
+    if (rename(temp_path.c_str(), input_path.c_str()) != 0) {
+        cerr << "Error: No se pudo renombrar el archivo temporal." << endl;
+        return 1;
+    }
+
+    cerr << "Exito: Documentacion generada en " << input_path << endl;
+
+    return 0;
+}

@@ -1,0 +1,109 @@
+%{
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+const unsigned int LIMITE = 80;
+int columna_actual = 0;
+ostringstream salida_buffer;
+
+void imprimir_seguro(const char* texto, bool es_cadena = false) {
+    int longitud = strlen(texto);
+
+    if (es_cadena && longitud > 2) {
+        // Para cadenas: texto = "contenido"
+        // Procesar carácter por carácter respetando el límite
+        salida_buffer << '"';  // Comilla inicial
+        columna_actual++;
+        
+        for (int i = 1; i < longitud - 1; i++) {  // Ignorar comillas inicial y final
+            if (columna_actual >= LIMITE) {
+                salida_buffer << '"' << endl << '"';  // Cerrar y abrir nueva línea
+                columna_actual = 1;  // Ya contamos la nueva comilla de apertura
+            }
+            salida_buffer << texto[i];
+            columna_actual++;
+        }
+        
+        salida_buffer << '"';  // Comilla final
+        columna_actual++;
+    } else {
+        // Para texto normal
+        if (columna_actual + longitud > LIMITE) {
+            salida_buffer << endl;
+            columna_actual = 0;
+        }
+        salida_buffer << texto;
+        columna_actual += longitud;
+    }
+}
+
+%}
+
+%option noyywrap
+
+%%
+
+
+\n {
+    salida_buffer << endl;
+    columna_actual = 0; // Importante: Resetear si el archivo ya traía un enter
+}
+
+    /* 2. Espacios y tabuladores */
+[ \t]+ {
+    // Opcional: Si vas a imprimir un espacio justo en el borde 80, 
+    // mejor imprimes un enter directamente.
+    if (columna_actual >= LIMITE) {
+        salida_buffer << endl;
+        columna_actual = 0;
+    } else {
+        salida_buffer << " ";
+        columna_actual++;
+    }
+}
+
+\"[^\"]*\" {
+    imprimir_seguro(yytext, true);
+}
+    /* 3. Palabras o cualquier otro texto */
+[^ \t\n]+ {
+    // Usamos nuestra función para verificar si cabe
+    imprimir_seguro(yytext);
+}
+
+%%
+
+int main(int argc, char *argv[]) {
+    string nombre_archivo;
+    
+    if (argc > 1) {
+        nombre_archivo = argv[1];
+        FILE *archivo = fopen(argv[1], "r");
+        if (!archivo) {
+            cerr << "Error: No se puede abrir " << argv[1] << endl;
+            return 1;
+        }
+        yyin = archivo;
+    } else {
+        cerr << "Error: Debe especificar un archivo de entrada" << endl;
+        return 1;
+    }
+
+    // Procesar el archivo
+    yylex();
+    
+    // Escribir el resultado en el mismo archivo (sobrescribir)
+    ofstream archivo_salida(nombre_archivo);
+    if (!archivo_salida) {
+        cerr << "Error: No se puede escribir en " << nombre_archivo << endl;
+        return 1;
+    }
+    
+    archivo_salida << salida_buffer.str();
+    archivo_salida.close();
+    
+    return 0;
+}
