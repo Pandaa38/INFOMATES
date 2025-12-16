@@ -1,13 +1,4 @@
-/**
- * @file filosofosSinInterbloqueo.cpp
- * @brief Problema de los filósofos, básico, sin interbloqueo.
- * 
- * No se da interbloqueo. La situacion anterior se soluciona como sigue:
- * 	- El filosofo 1 coge primero el de la derecha y luego el de la izquierda.
- * 	- El resto de filosofos cogen primero el de la izquierda y luego el de la derecha.
- * 
- * @author Arturo Olivares Martos
- */
+
 
 #include <mpi.h>
 #include <thread> // this_thread::sleep_for

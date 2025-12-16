@@ -59,6 +59,10 @@ template< int min, int max > int aleatorio()
 /// 
 void funcion_coche( int id )
 {
+//MPI_Ssend( &dato, count, datatype, dest, tag, comm )
+//MPI_Recv( &dato, count, datatype, source, tag, comm, &status )
+//status.MPI_SOURCE: Quién envió el mensaje.
+//status.MPI_TAG
   
   const int tipo_combustible  = aleatorio<0,num_tipos_combustible-1>() ; // tipo de combustible (0,1,2)
       
@@ -90,6 +94,7 @@ void funcion_gasolinera( )
       int hay_msg = 0 ; // indica si se ha recibido un mensaje de cualquier tipo en esta iteración (>1 sí, 0 no)
      
       // comprobar y procesar mensaje de terminar
+      // MPI_Iprobe( source, tag, comm, &flag, &status )
       MPI_Iprobe( MPI_ANY_SOURCE, etiq_terminar, MPI_COMM_WORLD, &hay_msg, &estado );
       if ( hay_msg > 0 )
       {

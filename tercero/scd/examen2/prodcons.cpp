@@ -1,9 +1,4 @@
-/**
- * @file prodcons.cpp
- * @brief Problema de los productores-consumidores distribuido con MPI
- * 
- * @author Arturo Olivares Martos
- */
+
 
 #include <iostream>
 #include <thread> // this_thread::sleep_for

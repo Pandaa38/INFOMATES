@@ -1,14 +1,5 @@
-/**
- * @file filosofosInterbloqueo.cpp
- * @brief Problema de los filósofos con camarero.
- * 
- * Para evitar el interbloqueo, se añade un nuevo proceso, llamado camarero.
- * Cada filosofo:
- * 		- Antes de solicitar los tenedores, solicita sentarse al camarero.
- * 		- Después de liberar los tenedores, avisa al camarero de que se va a levantar.
- * 
- * @author Arturo Olivares Martos
- */
+//mpicxx -std=c++11 -o nombre_ejecutable nombre_archivo.cpp compliar
+//mpirun -oversubscribe -np <número_procesos> ./nombre_ejecutable
 
 #include <mpi.h>
 #include <thread> // this_thread::sleep_for

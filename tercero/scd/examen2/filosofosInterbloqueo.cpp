@@ -1,11 +1,4 @@
-/**
- * @file filosofosInterbloqueo.cpp
- * @brief Problema de los filósofos, básico.
- * 
- * En este caso, se puede dar interbloqueo si todos los filósofos cogen el tenedor, por ejemplo, de su izquierda.
- * 
- * @author Arturo Olivares Martos
- */
+
 
 #include <mpi.h>
 #include <thread> // this_thread::sleep_for
