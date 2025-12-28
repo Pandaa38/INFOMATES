@@ -1,0 +1,542 @@
+%{
+
+/**
+ * @file documentador
+ * @brief Generador automático de documentación y comentarios para C++ utilizando Flex.
+ * 
+ * Este programa analiza código fuente en C++, detecta estructuras de control 
+ * (if, while, for) y definiciones de funciones, e inyecta comentarios explicativos 
+ * en lenguaje natural y bloques de documentación estilo Doxygen automáticamente.
+ */
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stack>
+#include <sstream>
+#include <cctype>
+#include <cstdio>
+
+using namespace std;
+
+/**
+ * @brief Pila auxiliar para gestionar el anidamiento de bloques.
+ * Almacena cadenas ("if", "while", "for") cada vez que se abre una llave '{'
+ * asociada a una estructura de control. Se usa para añadir el comentario
+ * "// end if", "// end while", etc., al encontrar la llave de cierre '}'.
+ */
+static stack<string> pila_bloques;
+
+/**
+ * @brief Elimina los espacios en blanco sobrantes al inicio y final de una cadena.
+ * Útil para limpiar los operandos extraídos.
+ *
+ * @param texto La cadena original que puede contener espacios innecesarios.
+ * 
+ * @return std::string La cadena limpia. Devuelve cadena vacía si solo habían espacios.
+ */
+string trim(const string& texto) {
+
+    // Buscar el primer carácter que no sea espacio_obligatorio, tabulador o salto de línea
+    size_t primero = texto.find_first_not_of(" \t\n\r");
+    
+    // Si find_first_not_of devuelve npos, significa que todo eran espacios
+    if (string::npos == primero) return "";
+    
+    // Buscar el último carácter útil (que no es espacio)
+    size_t ultimo = texto.find_last_not_of(" \t\n\r");
+    
+    // Devolver la subcadena desde el primero hasta el último carácter útil
+    return texto.substr(primero, (ultimo - primero + 1));
+}
+
+/**
+ * @brief Analiza una declaración de una variable o un parámetro para aislar su identificador.
+ *
+ * Esta función es útil para generar la etiqueta @param en Doxygen. Debe ser capaz de
+ * ignorar tipos complejos, punteros, referencias y valores por defecto.
+ *
+ * @param declaracion Texto que contiene la declaración del parámetro.
+ * @return std::string El nombre del parámetro limpio.
+ */
+string extraer_nombre_parametro(string declaracion) {
+
+    if (declaracion.empty()) return "";
+
+    // 1. Eliminar inicializaciones por defecto.
+    size_t pos_igual = declaracion.find('=');
+    if (pos_igual != string::npos) {
+        declaracion = declaracion.substr(0, pos_igual);
+    }
+
+    // 2.  Buscar el final del nombre real: Empezamos desde el final de la cadena y retrocedemos 
+    // ignorando espacios, asteriscos, ampersands, corchetes y puntos y comas.
+    int fin = (int)declaracion.length() - 1;
+    while (fin >= 0 && (isspace(declaracion[fin]) || 
+                        declaracion[fin] == '*' || 
+                        declaracion[fin] == '&' || 
+                        declaracion[fin] == '[' || 
+                        declaracion[fin] == ']' || 
+                        declaracion[fin] == ';')) {
+        fin--;
+    }
+
+    // 3.  Buscar el inicio del nombre: Desde la posición 'fin', seguimos retrocediendo mientras encontremos
+    // caracteres alfanuméricos o guiones bajos. En cuanto encontremos un espacio_obligatorio
+    // o un carácter especial, sabremos que el nombre ha terminado.
+    int inicio = fin;
+    while (inicio >= 0 && (isalnum(declaracion[inicio]) || declaracion[inicio] == '_')) {
+        inicio--;
+    }
+    inicio++; // Ajustamos porque el bucle se pasa en una posición
+
+    // Validación de seguridad
+    if (fin < inicio) return "";
+
+    // Retornamos solo el nombre aislado
+    return declaracion.substr(inicio, fin - inicio + 1);
+}
+
+/**
+ * @brief Genera e imprime un comentario explicativo para las condiciones de bloques if y while.
+ *
+ * Analiza el contenido entre paréntesis, separa los operandos basándose en el
+ * operador detectado y genera una frase en lenguaje natural.
+ *
+ * @param texto       Cadena que contiene la cabecera del bloque.
+ * @param operador    El operador lógico detectado.
+ * @param explicacion Traducción textual del operador.
+ * @param tipo        Tipo de estructura: "if" o "while".
+ */
+void imprimir_condicion(const string& texto, const string& operador, const string& explicacion, const string& tipo) {
+
+    // Detectar la indentacion que tiene el codigo
+    size_t pos_codigo = texto.find_first_not_of(" \t");
+    string indentacion = (pos_codigo != string::npos) ? texto.substr(0, pos_codigo) : "";
+    string codigo = (pos_codigo != string::npos) ? texto.substr(pos_codigo) : texto;
+
+    // 1. Encontrar los paréntesis que encierran la lógica
+    size_t parentesis_inicial = texto.find('(');
+    size_t parentesis_final = texto.rfind(')');
+    
+    // Verificación de seguridad
+    if (parentesis_inicial != string::npos && parentesis_final != string::npos) {
+        
+        // 2. Extraer lo que hay dentro de los paréntesis
+        string contenido = texto.substr(parentesis_inicial + 1, parentesis_final - parentesis_inicial - 1);
+        
+        // 3. Buscar dónde está el operador dentro de ese contenido
+        size_t posicion_operador = contenido.find(operador);
+
+        if (posicion_operador != string::npos) {
+
+            // 4. Separar los operandos
+            string operando_izquierdo = trim(contenido.substr(0, posicion_operador));
+            string operando_derecho = trim(contenido.substr(posicion_operador + operador.length()));
+            
+            // 5. Imprimir comentario según el tipo de bucle
+            cout << indentacion;
+            if (tipo == "while") {
+                cout << "// Mientras que " << operando_izquierdo << " sea " << explicacion << " " << operando_derecho << "..." << endl;
+            } else {
+                cout << "// Si " << operando_izquierdo << " es " << explicacion << " " << operando_derecho << "..." << endl;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Analiza un bucle for simple y explica su rango.
+ *
+ * Asume estructura: for (inicialización; condicion; incremento).
+ * Intenta extraer el valor inicial y el valor límite.
+ *
+ * @param texto La cabecera completa del bucle for.
+ */
+void imprimir_for(const string& cabecera) {
+
+    // Detectar la indentacion que tiene el codigo
+    size_t pos_codigo = cabecera.find_first_not_of(" \t");
+    string indentacion = (pos_codigo != string::npos) ? cabecera.substr(0, pos_codigo) : "";
+
+    // 1. Localizar los delimitadores estructurales
+    // Buscamos '=' para saber dónde empieza el valor inicial
+    size_t pos_asignacion = cabecera.find('=');
+    
+    // Buscamos el primer ';' para saber dónde termina la inicialización
+    size_t pos_fin_inicializacion = cabecera.find(';', pos_asignacion);
+    
+    // Buscamos '<' para encontrar el operador de comparación
+    size_t pos_operador_menor = cabecera.find('<', pos_fin_inicializacion); 
+    
+    // Buscamos el segundo ';' para saber dónde termina la condición
+    size_t pos_fin_condicion = cabecera.find(';', pos_operador_menor);
+
+    // 2. Verificar integridad estructural
+    // Todas las posiciones deben ser válidas (no npos) para proceder
+    if (pos_asignacion != string::npos && 
+        pos_fin_inicializacion != string::npos && 
+        pos_operador_menor != string::npos && 
+        pos_fin_condicion != string::npos) {
+        
+        // 3. Extraer el valor inicial
+        // Tomamos la subcadena entre el '=' y el primer ';'
+        string valor_inicial = trim(cabecera.substr(pos_asignacion + 1, pos_fin_inicializacion - pos_asignacion - 1));
+        
+        string valor_final;
+        
+        // 4. Extraer el valor final y ajustar según el operador (< o <=)
+        // Verificamos si el operador es realmente "<=" (2 caracteres)
+        bool es_menor_o_igual = (pos_operador_menor + 1 < cabecera.length()) && (cabecera.substr(pos_operador_menor, 2) == "<=");
+
+        if (es_menor_o_igual) {
+            // Saltamos 2 caracteres ("<=")
+            valor_final = trim(cabecera.substr(pos_operador_menor + 2, pos_fin_condicion - pos_operador_menor - 2));
+        } 
+        else {
+            // Saltamos 1 carácter ("<")
+            valor_final = trim(cabecera.substr(pos_operador_menor + 1, pos_fin_condicion - pos_operador_menor - 1));
+        }
+        
+        // 5. Imprimir el comentario
+        cout << indentacion << "// Desde " << valor_inicial << " hasta " << valor_final << "..." << endl;
+    }
+}
+
+/**
+ * @brief Genera un bloque de documentación Doxygen completo antes de una función.
+ *
+ * Detecta:
+ * - Nombre de la función.
+ * - Parámetros (generando líneas @param).
+ * - Retorno (generando @return si no es void).
+ *
+ * @param texto La firma de la función capturada por Flex.
+ */
+void generar_doxygen(const string& texto) {
+
+    // 1. Detectar indentación y separar cuerpo
+    size_t pos_codigo = texto.find_first_not_of(" \t");
+    string indentacion = (pos_codigo != string::npos) ? texto.substr(0, pos_codigo) : "";
+    string cuerpo = (pos_codigo != string::npos) ? texto.substr(pos_codigo) : texto;
+
+    // 2. Buscar paréntesis en el cuerpo
+    size_t parentesis_inicial = cuerpo.find('(');
+    size_t parentesis_final = cuerpo.rfind(')');
+
+    if (parentesis_inicial == string::npos || parentesis_final == string::npos) { 
+        cout << texto; 
+        return; 
+    }
+    
+    // 3. Analizar la cabecera
+    string cabecera = cuerpo.substr(0, parentesis_inicial);
+    
+    // Limpieza de espacios finales en la cabecera
+    size_t fin_cab = cabecera.find_last_not_of(" \t\n");
+    if (fin_cab != string::npos) cabecera = cabecera.substr(0, fin_cab + 1);
+    
+    // El nombre de la función es el último identificador tras un separador (espacio, *, &)
+    size_t pos_inicio_nombre = cabecera.find_last_of(" \t\n*&");
+    
+    string nombre_funcion;
+    string tipo_retorno;
+
+    if (pos_inicio_nombre == string::npos) {
+        // Caso constructor o sin tipo explícito
+        nombre_funcion = cabecera;
+        tipo_retorno = ""; 
+    } else {
+        nombre_funcion = cabecera.substr(pos_inicio_nombre + 1);
+        tipo_retorno = cabecera.substr(0, pos_inicio_nombre + 1);
+    }
+
+    // 4. Decidir si documentar retorno
+    bool documentar_retorno = true;
+
+    if (nombre_funcion.find('~') != string::npos) documentar_retorno = false; // Destructor
+    else if (trim(tipo_retorno).empty()) documentar_retorno = false; // Constructor
+    else {
+        bool es_void = (tipo_retorno.find("void") != string::npos);
+        bool es_puntero = (tipo_retorno.find('*') != string::npos);
+        // Si es void y no es puntero, no hay return
+        if (es_void && !es_puntero) documentar_retorno = false;
+    }
+
+    // 5. Imprimir la documentación
+    cout << indentacion << "/**" << endl 
+         << indentacion << " * @brief Funcion " << nombre_funcion << endl
+         << indentacion << " *" << endl;
+
+    // 6. Procesar los argumentos
+    // Usamos 'cuerpo' para extraer argumentos correctamente
+    string argumentos = cuerpo.substr(parentesis_inicial + 1, parentesis_final - parentesis_inicial - 1);
+    
+    if (!argumentos.empty() && trim(argumentos) != "") {
+        
+        string parametro_actual;
+        int nivel_anidacion_template = 0;
+        
+        string argumentos_procesar = argumentos + ","; 
+
+        for (char caracter : argumentos_procesar) {
+            if (caracter == '<') nivel_anidacion_template++;
+            else if (caracter == '>') nivel_anidacion_template--;
+            
+            if (caracter == ',' && nivel_anidacion_template == 0) {
+                string nombre_param = extraer_nombre_parametro(parametro_actual);
+                if (!nombre_param.empty() && nombre_param != "void") {
+                    cout << indentacion << " * @param " << nombre_param << endl;
+                }
+                parametro_actual = "";
+            } else {
+                parametro_actual += caracter;
+            }
+        }
+    }
+
+    if (documentar_retorno) {
+        cout << indentacion << " * @return " << endl;
+    }
+
+    cout << indentacion << " */" << endl;
+    
+    // Imprimimos el texto original (que ya incluye la indentación)
+    cout << texto; 
+}
+
+%}
+
+%option noyywrap
+
+/* Un solo carácter numérico del 0 al 9 */
+digito                      [0-9]
+
+/* Letras válidas para iniciar variables en C/C++ (incluye guion bajo) */
+letra                       [a-zA-Z_]
+
+/* Espacio obligatorio: Busca 1 o más repeticiones de espacios, tabuladores o saltos de línea */
+espacio_obligatorio         [ \t\r\n]+
+
+/* Espacio opcional: Busca 0 o más repeticiones de espacios */
+espacio_opcional            [ \t\r\n]*
+
+/* Identación: Busca espacios y tabuladores opcionales */
+indentacion                 [ \t]*
+
+/* Identificador C++:
+   1. {letra}: Debe empezar obligatoriamente por letra o guion bajo.
+   2. ({letra}|{digito})*: Después puede tener cualquier cantidad de letras o números. */
+identificador               {letra}({letra}|{digito})*
+
+/* Numero (entero o flotante):
+   Tiene dos partes separadas por `|` para cubrir dos casos:
+   Caso 1: {digito}+(\.{digito}*)? -> Un entero literal opcionalmente seguido de punto y decimales (10.5 o 10.)
+   Caso 2: \.{digito}+             -> Un flotante que empieza directamente con punto (.5) */
+numero                      {digito}+(\.{digito}*)?|\.{digito}+
+
+/* Espacio de nombres: Busca un identificador, seguido opcionalmente de bloques "::identificador" */
+id_scope                    {identificador}(::{identificador})*
+
+/* Template simple:
+   1. < : Empieza con el símbolo menor que.
+   2. {espacio_opcional} : Puede haber espacios.
+   3. [^>]+ : "Cualquier cosa que no sea un símbolo '>'".
+   4. > : Termina con mayor que.
+   Nota: Es una aproximación simple. Fallaría con anidados como "vector<vector<int>>". */
+template                    <{espacio_opcional}[^>]+>
+
+/* Tipo base: Combina el espacio de nombres y los templates */
+tipo_base                   {id_scope}({template})?
+
+/* Tipo completo:
+
+   Se divide en 3 partes lógicas:
+   
+    1. Prefijos opcionales: Busca palabras clave como 'const', 'unsigned' o 'static' seguidas de un espacio obligatorio.
+   
+    2. El tipo en si mismo (tipo_base).
+
+    3. Sufijos de puntero o referencia: Busca espacios opcionales seguidos de uno o más asteriscos o ampersands. */
+tipo                        (const{espacio_obligatorio}|unsigned{espacio_obligatorio}|static{espacio_obligatorio})?{tipo_base}({espacio_opcional}(\*|&)+)?
+
+/* Argumento sin menor (<): Lee 1 o más caracteres que no sean '<' ni ')'. Se usa en if ( a < b ), para capturar 'a' (se detiene al ver el '<') */
+argumento_sin_menor         [^<)]+
+
+/* Argumento sin mayor (>): Lee todo hasta encontrar un '>' o un ')' */
+argumento_sin_mayor         [^>)]+
+
+/* Argumento sin igual (=): Lee todo hasta encontrar un '=' o un ')'. Útil para detectar '==' separando los operandos */
+argumento_sin_igual         [^=)]+
+
+/* Argumento sin exclamación (!): Lee todo hasta encontrar un '!' o un ')'. Útil para detectar '!=' */
+argumento_sin_exclamacion   [^!)]+
+
+%%
+
+    /* --- REGLAS --- */
+    /* Mantener comentarios, strings y caracteres existentes intactos */
+"//".* { cout << yytext; }
+"/*"([^*]|(\*+[^*/]))*"*"+"/"  { cout << yytext; }
+\"(\\.|[^"\\])*\"           { cout << yytext; }
+\'(\\.|[^'\\])+\'           { cout << yytext; }
+^#.* { cout << yytext; }
+
+    /* --- DETECCIÓN DE CONDICIONALES (IF y WHILE) --- */
+    
+    /* 1. Menor o igual (<=) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_menor}<={argumento_sin_menor}\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, "<=", "menor o igual que", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* 2. Mayor o igual (>=) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_mayor}>={argumento_sin_mayor}\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, ">=", "mayor o igual que", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* 3. Menor que (<) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_menor}<{argumento_sin_menor}\){espacio_opcional}\{ {
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, "<", "menor que", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* 4. Mayor que (>) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_mayor}>{argumento_sin_mayor}\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, ">", "mayor que", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* 5. Igualdad (==) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_igual}=={argumento_sin_igual}\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, "==", "igual a", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* 6. Desigualdad (!=) */
+{indentacion}(if|while){espacio_opcional}\({espacio_opcional}{argumento_sin_exclamacion}!={argumento_sin_exclamacion}\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo = (letra == 'w') ? "while" : "if";
+    imprimir_condicion(yytext, "!=", "diferente de", tipo);
+    pila_bloques.push(tipo); 
+    cout << yytext; 
+}
+
+    /* --- DETECCIÓN DE BUCLE FOR --- */
+    /* Busca estructura básica: for ( ... ; ... < ... ; ... ) */
+{indentacion}for{espacio_opcional}\([^{=]*=[^;]+;[^<]+(<|<=)[^;]+;[^)]+\){espacio_opcional}\{ { 
+    imprimir_for(yytext); 
+    pila_bloques.push("for"); 
+    cout << yytext; 
+}
+
+    /* --- REGLA DE BLOQUES GENÉRICA --- */
+    /* Captura bloques if, while o for que no cumplan los patrones estrictos anteriores */
+{indentacion}(if|for|while){espacio_opcional}\([^)]*\){espacio_opcional}\{ { 
+    size_t i = string(yytext).find_first_not_of(" \t");
+    char letra = yytext[i];
+    string tipo_bloque;
+    if (letra == 'f') tipo_bloque = "for";
+    else if (letra == 'w') tipo_bloque = "while";
+    else tipo_bloque = "if";
+    pila_bloques.push(tipo_bloque);
+    cout << yytext; 
+}
+
+    /* --- DETECCIÓN DE FUNCIONES --- */
+    /* Cambiado [^{]* por [^{;}]* para no capturar llamadas a métodos como obj.metodo(); */
+{indentacion}{tipo}{espacio_opcional}{identificador}{espacio_opcional}\([^)]*\)[^{;}]*\{ {
+    generar_doxygen(yytext);
+}
+
+    /* --- CIERRE DE BLOQUES --- */
+    /* Detecta '}' y añade comentario de cierre según la pila */
+{indentacion}"}" { 
+    cout << yytext;
+    if (!pila_bloques.empty()) {                 
+        string tipo_bloque = pila_bloques.top(); 
+        pila_bloques.pop();                      
+        cout << " // end " << tipo_bloque;       
+    }
+}
+
+    /* Todo lo demás se imprime tal cual */
+.|\n { cout << yytext; }
+
+%%
+
+/**
+ * @brief Función principal.
+ * Gestiona la apertura del archivo de entrada, crea un archivo temporal
+ * para volcar la salida y redirige cout.
+ */
+int main(int argc, char *argv[]) {
+
+    // 1. Validación de argumentos de entrada
+    if (argc < 2) {
+        std::cerr << "Uso: " << argv[0] << " <archivo_fuente.cpp>" << std::endl;
+        return 1;
+    }
+    
+    // 2. Configuración de nombres de archivo
+    // Se crea un archivo temporal para escribir la salida procesada antes de sobrescribir.
+    std::string nombre_archivo = argv[1];
+    std::string nombre_archivo_temporal = nombre_archivo + ".tmp";
+    
+    // 3. Apertura del archivo de lectura
+    FILE *archivo_entrada = fopen(nombre_archivo.c_str(), "r");
+    if (!archivo_entrada) {
+        std::cerr << "Error: No se pudo abrir el archivo '" << nombre_archivo << "'." << std::endl;
+        return 1;
+    }
+
+    // 4. Preparación del archivo de escritura 
+    std::ofstream archivo_salida(nombre_archivo_temporal);
+    if (!archivo_salida.is_open()) {
+        std::cerr << "Error: No se pudo crear el archivo temporal." << std::endl;
+        fclose(archivo_entrada);
+        return 1;
+    }
+    
+    // 5. Redirección de flujos (Salida Estándar -> Archivo)
+    // Guardamos el buffer original de cout para restaurarlo después.
+    // Redirigimos cout para que todas las impresiones de yylex() vayan al archivo temporal.
+    std::streambuf *buffer_original = std::cout.rdbuf(archivo_salida.rdbuf());
+    
+    // 6. Ejecución del Analizador Léxico
+    yyin = archivo_entrada; // Asignamos el archivo abierto a la variable global de Flex
+    yylex();                // Iniciamos el escaneo
+    
+    // 7. Restauracion de la salida estándar y cierre del archivo
+    std::cout.rdbuf(buffer_original); // Restauramos la salida estándar a la consola
+    archivo_salida.close();           // Cerramos el ofstream
+    fclose(archivo_entrada);          // Cerramos el FILE*
+    
+    // 8. Eliminamos el archivo original y renombramos el archivo temporal
+    remove(nombre_archivo.c_str());
+    rename(nombre_archivo_temporal.c_str(), nombre_archivo.c_str());
+    
+    return 0;
+}

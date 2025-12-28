@@ -2,35 +2,63 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <cstring>
 
 using namespace std;
+
+// 1. DEFINICIÓN DEL ENUMERADO
+enum TipoContenido {
+    CODIGO,             // Texto normal de C++
+    CADENA,             // "Texto entre comillas"
+    COMENTARIO_LINEA,   // // Comentario de una línea
+    COMENTARIO_BLOQUE   // /* Comentario de bloque */
+};
 
 const unsigned int LIMITE = 80;
 int columna_actual = 0;
 ostringstream salida_buffer;
 
-void imprimir_seguro(const char* texto, bool es_cadena = false) {
+void imprimir_seguro(const char* texto, TipoContenido tipo = CODIGO) {
     int longitud = strlen(texto);
 
-    if (es_cadena && longitud > 2) {
-        // Para cadenas: texto = "contenido"
-        // Procesar carácter por carácter respetando el límite
-        salida_buffer << '"';  // Comilla inicial
+    if (tipo == CADENA) {
+        salida_buffer << '"'; // Comilla inicial
         columna_actual++;
         
-        for (int i = 1; i < longitud - 1; i++) {  // Ignorar comillas inicial y final
+        for (int i = 1; i < longitud - 1; i++) { 
             if (columna_actual >= LIMITE) {
-                salida_buffer << '"' << endl << '"';  // Cerrar y abrir nueva línea
-                columna_actual = 1;  // Ya contamos la nueva comilla de apertura
+                salida_buffer << '"' << endl << '"';
+                columna_actual = 1; 
             }
             salida_buffer << texto[i];
             columna_actual++;
         }
-        
-        salida_buffer << '"';  // Comilla final
+        salida_buffer << '"';
         columna_actual++;
-    } else {
-        // Para texto normal
+    }
+    
+    else if (tipo == COMENTARIO_LINEA) {
+        if (columna_actual + longitud > LIMITE) {
+            salida_buffer << endl;
+            salida_buffer << "// "; 
+            columna_actual = 3;     // sumamos 3 por los "// "
+        }
+        salida_buffer << texto;
+        columna_actual += longitud;
+    }
+
+    else if (tipo == COMENTARIO_BLOQUE) {
+        if (columna_actual + longitud > LIMITE) {
+            salida_buffer << endl;
+            salida_buffer << " * ";
+            columna_actual = 0;
+        }
+        salida_buffer << texto;
+        columna_actual += longitud;
+    }
+
+    else { // CODIGO
         if (columna_actual + longitud > LIMITE) {
             salida_buffer << endl;
             columna_actual = 0;
@@ -44,18 +72,37 @@ void imprimir_seguro(const char* texto, bool es_cadena = false) {
 
 %option noyywrap
 
-%%
+%x ESTADO_COMENTARIO_LINEA
+%x ESTADO_COMENTARIO_BLOQUE
 
+%%
 
 \n {
     salida_buffer << endl;
-    columna_actual = 0; // Importante: Resetear si el archivo ya traía un enter
+    columna_actual = 0;
 }
 
-    /* 2. Espacios y tabuladores */
+    /* Detectar inicio de comentario de línea // */
+"//" {
+    salida_buffer << "//";
+    columna_actual += 2;
+    BEGIN(ESTADO_COMENTARIO_LINEA);
+}
+
+    /* Detectar inicio de comentario de bloque /* */
+"/*" {
+    salida_buffer << "/*";
+    columna_actual += 2;
+    BEGIN(ESTADO_COMENTARIO_BLOQUE);
+}
+
+    /* Detectar cadenas completas (como antes) */
+\"[^\"]*\" {
+    imprimir_seguro(yytext, CADENA);
+}
+
+    /* Espacios (tabuladores y espacios simples) */
 [ \t]+ {
-    // Opcional: Si vas a imprimir un espacio justo en el borde 80, 
-    // mejor imprimes un enter directamente.
     if (columna_actual >= LIMITE) {
         salida_buffer << endl;
         columna_actual = 0;
@@ -65,45 +112,94 @@ void imprimir_seguro(const char* texto, bool es_cadena = false) {
     }
 }
 
-\"[^\"]*\" {
-    imprimir_seguro(yytext, true);
-}
-    /* 3. Palabras o cualquier otro texto */
-[^ \t\n]+ {
-    // Usamos nuestra función para verificar si cabe
+    /* Código Normal */
+[^ \t\n\"/]+ {
     imprimir_seguro(yytext);
+}
+    /* Caracteres sueltos que no sean espacios ni inicio de comentario (ej: la barra / sola) */
+. {
+    imprimir_seguro(yytext);
+}
+
+
+    /* --- REGLAS DENTRO DE COMENTARIO DE LÍNEA () --- */
+
+<ESTADO_COMENTARIO_LINEA>\n {
+    salida_buffer << endl;
+    columna_actual = 0;
+    BEGIN(INITIAL); // El salto de línea termina el comentario
+}
+
+<ESTADO_COMENTARIO_LINEA>[ \t]+ {
+    salida_buffer << " "; // Simplificamos espacios en comentarios
+    columna_actual++;
+}
+
+<ESTADO_COMENTARIO_LINEA>[^ \t\n]+ { 
+    imprimir_seguro(yytext, COMENTARIO_LINEA);
+}
+
+    /* --- REGLAS DENTRO DE COMENTARIO DE BLOQUE --- */
+
+<ESTADO_COMENTARIO_BLOQUE>"*/" {
+    imprimir_seguro("*/", COMENTARIO_BLOQUE);
+    BEGIN(INITIAL);
+}
+
+<ESTADO_COMENTARIO_BLOQUE>\n {
+    salida_buffer << endl;
+    columna_actual = 0;
+}
+
+<ESTADO_COMENTARIO_BLOQUE>[ \t]+ {
+     salida_buffer << yytext;  // Preservar espacios originales
+     columna_actual += strlen(yytext);
+}
+
+<ESTADO_COMENTARIO_BLOQUE>[^ \t\n*]+ {
+    imprimir_seguro(yytext, COMENTARIO_BLOQUE);
+}
+
+<ESTADO_COMENTARIO_BLOQUE>. {
+    imprimir_seguro(yytext, COMENTARIO_BLOQUE);
 }
 
 %%
 
 int main(int argc, char *argv[]) {
-    string nombre_archivo;
-    
-    if (argc > 1) {
-        nombre_archivo = argv[1];
-        FILE *archivo = fopen(argv[1], "r");
-        if (!archivo) {
-            cerr << "Error: No se puede abrir " << argv[1] << endl;
-            return 1;
-        }
-        yyin = archivo;
-    } else {
-        cerr << "Error: Debe especificar un archivo de entrada" << endl;
+
+    if (argc < 2) {
+        cerr << "Uso: " << argv[0] << " <archivo_fuente.cpp>" << endl;
         return 1;
     }
 
-    // Procesar el archivo
+    string nombre_archivo = argv[1];
+    string nombre_archivo_temporal = nombre_archivo + ".tmp";
+
+    // Abrir archivo de entrada
+    FILE *archivo_entrada = fopen(nombre_archivo.c_str(), "r");
+    if (!archivo_entrada) {
+        cerr << "Error: No se pudo abrir el archivo '" << nombre_archivo << "'." << endl;
+        return 1;
+    }
+
+    yyin = archivo_entrada;
     yylex();
-    
-    // Escribir el resultado en el mismo archivo (sobrescribir)
-    ofstream archivo_salida(nombre_archivo);
+    fclose(archivo_entrada);
+
+    // Escribir al archivo temporal
+    ofstream archivo_salida(nombre_archivo_temporal);
     if (!archivo_salida) {
-        cerr << "Error: No se puede escribir en " << nombre_archivo << endl;
+        cerr << "Error: No se puede escribir en " << nombre_archivo_temporal << endl;
         return 1;
     }
     
     archivo_salida << salida_buffer.str();
     archivo_salida.close();
+
+    // Reemplazar el archivo original con el temporal
+    remove(nombre_archivo.c_str());
+    rename(nombre_archivo_temporal.c_str(), nombre_archivo.c_str());
     
     return 0;
 }
