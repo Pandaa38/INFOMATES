@@ -1,0 +1,26 @@
+\title{Implementación de Procesadores de Código mediante Expresiones Regulares}
+\author{Juan Reche Aguilar & Ismael Vergara García}
+\date{Curso 2025/26}
+
+\begin{document}
+
+%-----------------------------------------------------%
+
+\begin{titlepage}
+    \maketitle
+    \centering
+    \includegraphics[width=0.4\textwidth]{UGR-MARCA-01-color.png}\par\vspace{1cm}
+    
+    {\scshape\LARGE Universidad de Granada \par}
+    \vspace{1cm}
+    {\scshape\Large Modelos de Computación \par}
+    \vspace{1.5cm}
+    
+\end{titlepage}
+
+%-----------------------------------------------------%
+
+\tableofcontents
+\newpage
+
+%-----------------------------------------------------%

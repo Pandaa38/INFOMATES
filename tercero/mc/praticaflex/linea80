@@ -107,8 +107,8 @@ void imprimir_seguro(const char* texto, TipoContenido tipo = CODIGO) {
         salida_buffer << endl;
         columna_actual = 0;
     } else {
-        salida_buffer << " ";
-        columna_actual++;
+        salida_buffer << yytext;  // Preservar espacios y tabuladores originales
+        columna_actual += strlen(yytext);
     }
 }
 
