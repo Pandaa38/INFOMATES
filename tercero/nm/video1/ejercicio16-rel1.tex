@@ -1,0 +1,60 @@
+\documentclass[11pt]{article}
+   
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+
+\title{Relación de Ejercicios: Resolución numérica de ecuaciones no lineales} 
+\author{Grado en Ingeniería Informática y Matemáticas \\ Métodos Numéricos II} 
+\date{Curso 25/26} 
+
+\begin{document}
+
+\maketitle
+
+\section*{Problema 16: Método de Steffensen} 
+
+El presente problema pretende estudiar el método de Steffensen para la resolución de ecuaciones no lineales. % 
+
+Sea $f:[a,b] \longrightarrow \mathbb{R}$ una función real suficientemente regular y sea $s \in (a,b)$ la única raíz de la ecuación $f(x)=0$. Supongamos además que $f'(x)$ no se anula en $[a,b]$. % [cite: 91]
+Se define la función $g:[a,b] \longrightarrow \mathbb{R}$ mediante la expresión: 
+
+\[
+g(x) = \begin{cases} 
+      \dfrac{f(x+f(x))-f(x)}{f(x)} & x \neq s \\ 
+      \rule{0pt}{4ex} \displaystyle \lim_{x \to s} \frac{f(x+f(x))-f(x)}{f(x)} & x = s 
+   \end{cases}
+\] 
+
+\begin{enumerate}
+    \item[a)] Utilice la regla de L'Hôpital para demostrar que $g(s)=f'(s)$. 
+    
+    \item[b)] Demuestre que $g(x) \neq 0$ para todo $x \in [a,b]$. 
+    
+    \item[c)] Se define la función $F:[a,b] \longrightarrow \mathbb{R}$ mediante: 
+    \[
+    F(x) = x - \frac{f(x)}{g(x)}
+    \] 
+    Demuestre que $F(s) = F'(s) = 0$. 
+    
+    \item[d)] A partir de los apartados anteriores, encuentre condiciones suficientes para que el método de iteración funcional definido por: % [cite: 103]
+    \[
+    x_{n+1} = x_{n} - f(x_{n}) \cdot \frac{f(x_{n})}{f(x_{n}+f(x_{n})) - f(x_{n})}
+    \] 
+    converja localmente a $s$, con velocidad de convergencia al menos cuadrática. 
+\end{enumerate}
+
+\begin{enumerate}
+    \item [a)]
+    Para calcular $g(s)$ debemos evaluar el límite:
+\[
+g(s) = \lim_{x \to s} \frac{f(x+f(x))-f(x)}{f(x)} = \frac{0}{0}
+\]
+    
+\end{enumerate}
+
+\end{document}

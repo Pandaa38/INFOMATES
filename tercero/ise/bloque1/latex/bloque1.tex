@@ -5,46 +5,242 @@
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 
-% Paquete para insertar imágenes (para tus capturas)
+% Paquete para insertar imágenes
 \usepackage{graphicx}
+
+% --- PAQUETE NUEVO PARA FORZAR LA POSICIÓN DE LAS IMÁGENES ---
+\usepackage{float} 
 
 % Paquete para que el índice tenga enlaces clickeables
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
 
 % Configuración del título
 \title{Memoria de Prácticas: Ingeniería de Servidores}
-\author{Juan}
+\author{Juan Reche Aguilar}
 \date{\today}
 
 \begin{document}
 
 % Genera la portada con el título
 \maketitle
-\newpage
+\clearpage % Usamos clearpage en lugar de newpage
 
 % Genera el índice automático
 \tableofcontents
-\newpage
+\clearpage
 
 % --- INICIO DE LAS SECCIONES ---
 
-\section{Ejercicio 1}
-% Escribe aquí el texto y pon las capturas del Ejercicio 1
-\newpage
+\section{Ejercicio 2: Configuración de red}
 
-\section{Ejercicio 2}
-% Escribe aquí el texto y pon las capturas del Ejercicio 2
-\newpage
+% Imagen 1 (Fíjate en la H mayúscula)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej2/ej2_1.png}
+    \caption{configuración red del servidor con ip a}
+\end{figure}
 
-\section{Ejercicio 3}
-% Escribe aquí el texto y pon las capturas del Ejercicio 3
-\newpage
+% Imagen 2
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej2/ej2_2.png}
+    \caption{configuración red del host con ifconfig}
+\end{figure}
 
-\section{Ejercicio 4}
-% Escribe aquí el texto y pon las capturas del Ejercicio 4
-\newpage
+% Imagen 3
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej2/ej2_3.png}
+    \caption{Desde la VM hacemos ping al ordenador fisico}
+\end{figure}
 
-\section{Ejercicio 5}
-% Escribe aquí el texto y pon las capturas del Ejercicio 5
+% Imagen 4
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej2/ej2_4.png}
+    \caption{Desde la VM hacemos ping a la ugr}
+\end{figure}
+
+% Imagen 5
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej2/ej2_5.png}
+    \caption{Desde el ordenador fisico hacemos ping a la VM}
+\end{figure}
+
+
+\clearpage % Salto de página limpio asegurando que no queden imágenes atrás
+
+\section{Ejercicio 3: Diseño e implementación de un servicio de almacenamiento}
+
+Para garantizar tanto la tolerancia a fallos (alta disponibilidad) como la flexibilidad 
+operativa (escalabilidad), se ha optado por implementar una arquitectura de almacenamiento 
+en dos capas: un gestor de volúmenes lógicos (LVM) montado sobre un arreglo redundante de 
+discos independientes (RAID 5).
+
+\begin{itemize}
+    \item \textbf{Capa Física (RAID 5):} Se ha seleccionado el nivel RAID 5 empleando tres discos 
+    físicos (sdb, sdc, sdd). Esta configuración ofrece un equilibrio óptimo entre rendimiento, capacidad de 
+    almacenamiento y redundancia. Dado que no se concreta qué tan críticos son los datos se opta por RAID 5 
+    ya que se ``pierde'' menos espacio. Al utilizar paridad distribuida, el sistema es capaz de 
+    soportar el fallo catastrófico de uno de los discos sin pérdida de datos, garantizando 
+    la integridad de la información del servidor.
+
+    \item \textbf{Capa Lógica (LVM):} En lugar de formatear directamente el volumen RAID, este se 
+    ha inicializado como un Volumen Físico (PV) de LVM. Posteriormente, se ha añadido este PV a 
+    un Grupo de Volúmenes (VG) llamado ``vg\_ejercicio''. Dentro de este VG, se ha creado un Volumen Lógico 
+    (LV) denominado ``lv\_ejercicio'' que ocupa de primeras 10GB del espacio disponible. 
+    Esta capa de abstracción permite una gestión más flexible del almacenamiento, facilitando la expansión o 
+    reducción del espacio asignado al volumen lógico sin afectar la estructura física subyacente, 
+    eliminando el problema del crecimiento del volumen de datos a almacenar.
+\end{itemize}
+
+% Imagen 6
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_6.png}
+    \caption{Creación del RAID 5 con tres discos fisicos mediante el comando mdadm.}
+\end{figure}
+
+% Imagen 7
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_7.png}
+    \caption{Comprobamos que RAID 5 se esta creando}
+\end{figure}
+
+% Imagen 8
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_8.png}
+    \caption{Comprobamos que RAID 5 existe}
+\end{figure}
+
+% Imagen 9
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_9.png}
+    \caption{Creacion del volumen fisico con el comando pvcreate}
+\end{figure}
+
+% Imagen 10
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_10.png}
+    \caption{Creacion del grupo de volumen con el comando vgcreate}
+\end{figure}
+
+% Imagen 11
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_11.png}
+    \caption{Creacion del volumen logico con el comando lvcreate}
+\end{figure}
+
+% Imagen 12
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_12.png}
+    \caption{Formateamos el volumen logico con el sistema de archivos ext4}
+\end{figure}
+
+% Imagen 13
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_13.png}
+    \caption{Garantizamos la persisistencia del montaje del volumen logico editando el archivo /etc/fstab}
+\end{figure}
+
+% Imagen 14
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_14.png}
+    \caption{Montamos todos los sistemas de archivos del servidor con el comando mount -a 
+    y comprobamos la disponibilidad de este nuevo volumen logico con el comando df -h}
+\end{figure}
+
+% Imagen 15
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej3/ej3_15.png}
+    \caption{Comando final para mostrar el árbol de dispositivos de almacenamiento}
+\end{figure}
+
+\clearpage
+
+\section{Ejercicio 4.1: Instalación y configuración de un servidor de HTTP}
+
+En este ejercicio se decidio usar Apache como servidor web
+% Imagen 1
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej4/ej4_1.png}
+    \caption{ Acceso desde el ordenador anfitrión, con google chrome, a la página web alojada en el servidor. 
+    Se puede ver la dirección IP del servidor en la barra de direcciones.}
+\end{figure}
+
+% Imagen 2
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej4/ej4_2.png}
+    \caption{Resultado del comando nmap desde el ordenador anfitrión, mostrando el puerto 80 abierto en la dirección IP del servidor.}
+\end{figure}
+
+\section{Ejercicio 4.2: Configuración de SSHD}
+% Imagen 3
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej4/ej4_3.png}
+    \caption{comando mediante ssh}
+\end{figure}
+
+% Imagen 4
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej4/ej4_4.png}
+    \caption{comando desde la terminal de la maquina virtual}
+\end{figure}
+
+Podemos ver que el resultado de ambos comando es el mismo, 
+lo que indica que la conexión SSH se ha establecido correctamente y que el servidor SSH está funcionando en la máquina virtual.
+
+\clearpage
+
+\section{Ejercicio 5: Ansible}
+% Imagen 1
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej5/ej5_1.png}
+    \caption{Parte 1 de la ejecucion del playbook de Ansible}
+\end{figure}
+
+% Imagen 2
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej5/ej5_2.png}
+    \caption{Parte 2 de la ejecucion del playbook de Ansible}
+\end{figure}
+
+% Imagen 3
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej5/ej5_3.png}
+    \caption{Comprobacion de Apache}
+\end{figure}
+
+% Imagen 4
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej5/ej5_4.png}
+    \caption{Comprobacion de Nginx}
+\end{figure}
+
+% Imagen 5
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../ej5/ej5_5.png}
+    \caption{Comprobacion mediante ping de la conexion ssh de los usuarios 
+    creados por el playbook de Ansible del grupo rueda}
+\end{figure}
 
 \end{document}
