@@ -1,0 +1,109 @@
+---
+# ====================================================================
+# Playbook de Configuración de Servidores Web (Práctica ISE)
+# Autor: Juan
+# ====================================================================
+
+# --------------------------------------------------------------------
+#Tareas comunes para TODOS los servidores
+# --------------------------------------------------------------------
+- name: Tareas Globales - Usuarios y Seguridad
+  hosts: all
+  become: yes
+  vars:
+    usuarios_rueda:
+      - rueda1
+      - rueda2
+    llave_publica_host: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+  tasks:
+    - name: Crear el grupo de sistema 'rueda'
+      ansible.builtin.group:
+        name: rueda
+        state: present
+
+    - name: Permitir al grupo 'rueda' usar sudo (con peticion de contraseña)
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/rueda
+        content: "%rueda ALL=(ALL) ALL\n"
+        validate: /usr/sbin/visudo -cf %s
+
+    - name: Crear la lista de usuarios y añadirlos al grupo 'rueda'
+      ansible.builtin.user:
+        name: "{{ item }}"
+        groups: rueda
+        append: yes
+        state: present
+        create_home: yes
+        shell: /bin/bash
+      loop: "{{ usuarios_rueda }}"
+
+    - name: Inyectar llave publica SSH a los nuevos usuarios
+      ansible.posix.authorized_key:
+        user: "{{ item }}"
+        state: present
+        key: "{{ llave_publica_host }}"
+      loop: "{{ usuarios_rueda }}"
+
+
+# --------------------------------------------------------------------
+#Servidor Web 1 (Apache)
+# --------------------------------------------------------------------
+- name: Configuracion Específica - Servidor Apache
+  hosts: httpds
+  become: yes
+  tasks:
+    - name: Instalar el paquete Apache (httpd)
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Arrancar el servicio Apache y habilitarlo al inicio
+      ansible.builtin.systemd:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Desplegar la pagina web index.html (Apache)
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: "<h1>Bienvenidos a la web de Juan (Servidor Apache) en Practicas ISE</h1>\n"
+
+    - name: Abrir el puerto 80 (HTTP) en el cortafuegos
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+
+# --------------------------------------------------------------------
+#Servidor Web 2 (Nginx)
+# --------------------------------------------------------------------
+- name: Configuracion Especifica - Servidor Nginx
+  hosts: nginxs
+  become: yes
+  tasks:
+    - name: Instalar el paquete Nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+
+    - name: Arrancar el servicio Nginx y habilitarlo al inicio
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Desplegar la pagina web index.html (Nginx)
+      ansible.builtin.copy:
+        # Nota: La ruta por defecto de Nginx en RedHat/Rocky es diferente a la de Apache
+        dest: /usr/share/nginx/html/index.html
+        content: "<h1>Bienvenidos a la web de Juan (Servidor Nginx) en Practicas ISE</h1>\n"
+
+    - name: Abrir el puerto 80 (HTTP) en el cortafuegos
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes

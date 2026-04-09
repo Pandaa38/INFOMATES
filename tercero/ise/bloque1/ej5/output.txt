@@ -1,0 +1,130 @@
+
+PLAY [Tareas Globales - Usuarios y Seguridad] **********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.2]
+ok: [192.168.56.3]
+
+TASK [Crear el grupo de sistema 'rueda'] ***************************************
+ok: [192.168.56.3]
+ok: [192.168.56.2]
+
+TASK [Permitir al grupo 'rueda' usar sudo (con peticion de contraseña)] ********
+ok: [192.168.56.2]
+ok: [192.168.56.3]
+
+TASK [Crear la lista de usuarios y añadirlos al grupo 'rueda'] *****************
+ok: [192.168.56.2] => (item=rueda1)
+ok: [192.168.56.3] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda2)
+ok: [192.168.56.3] => (item=rueda2)
+
+TASK [Inyectar llave publica SSH a los nuevos usuarios] ************************
+ok: [192.168.56.3] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda2)
+ok: [192.168.56.3] => (item=rueda2)
+
+PLAY [Configuracion Específica - Servidor Apache] ******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.2]
+
+TASK [Instalar el paquete Apache (httpd)] **************************************
+ok: [192.168.56.2]
+
+TASK [Arrancar el servicio Apache y habilitarlo al inicio] *********************
+ok: [192.168.56.2]
+
+TASK [Desplegar la pagina web index.html (Apache)] *****************************
+ok: [192.168.56.2]
+
+TASK [Abrir el puerto 80 (HTTP) en el cortafuegos] *****************************
+ok: [192.168.56.2]
+
+PLAY [Configuracion Especifica - Servidor Nginx] *******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.3]
+
+TASK [Instalar el paquete Nginx] ***********************************************
+ok: [192.168.56.3]
+
+TASK [Arrancar el servicio Nginx y habilitarlo al inicio] **********************
+ok: [192.168.56.3]
+
+TASK [Desplegar la pagina web index.html (Nginx)] ******************************
+ok: [192.168.56.3]
+
+TASK [Abrir el puerto 80 (HTTP) en el cortafuegos] *****************************
+ok: [192.168.56.3]
+
+PLAY RECAP *********************************************************************
+192.168.56.2               : ok=10   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.56.3               : ok=10   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Tareas Globales - Usuarios y Seguridad] **********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.2]
+ok: [192.168.56.3]
+
+TASK [Crear el grupo de sistema 'rueda'] ***************************************
+ok: [192.168.56.2]
+ok: [192.168.56.3]
+
+TASK [Permitir al grupo 'rueda' usar sudo (con peticion de contraseña)] ********
+ok: [192.168.56.3]
+ok: [192.168.56.2]
+
+TASK [Crear la lista de usuarios y añadirlos al grupo 'rueda'] *****************
+ok: [192.168.56.3] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda2)
+ok: [192.168.56.3] => (item=rueda2)
+
+TASK [Inyectar llave publica SSH a los nuevos usuarios] ************************
+ok: [192.168.56.3] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda1)
+ok: [192.168.56.2] => (item=rueda2)
+ok: [192.168.56.3] => (item=rueda2)
+
+PLAY [Configuracion Específica - Servidor Apache] ******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.2]
+
+TASK [Instalar el paquete Apache (httpd)] **************************************
+ok: [192.168.56.2]
+
+TASK [Arrancar el servicio Apache y habilitarlo al inicio] *********************
+ok: [192.168.56.2]
+
+TASK [Desplegar la pagina web index.html (Apache)] *****************************
+ok: [192.168.56.2]
+
+TASK [Abrir el puerto 80 (HTTP) en el cortafuegos] *****************************
+ok: [192.168.56.2]
+
+PLAY [Configuracion Especifica - Servidor Nginx] *******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.56.3]
+
+TASK [Instalar el paquete Nginx] ***********************************************
+ok: [192.168.56.3]
+
+TASK [Arrancar el servicio Nginx y habilitarlo al inicio] **********************
+ok: [192.168.56.3]
+
+TASK [Desplegar la pagina web index.html (Nginx)] ******************************
+ok: [192.168.56.3]
+
+TASK [Abrir el puerto 80 (HTTP) en el cortafuegos] *****************************
+ok: [192.168.56.3]
+
+PLAY RECAP *********************************************************************
+192.168.56.2               : ok=10   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.56.3               : ok=10   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
