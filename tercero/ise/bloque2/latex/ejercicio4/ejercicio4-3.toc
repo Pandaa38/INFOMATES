@@ -1,0 +1,2 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1} Ejercicio 4.3.1. Logs de arranque del sistema. }{2}{}%

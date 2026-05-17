@@ -1,0 +1,70 @@
+\documentclass[12pt, a4paper]{article}
+
+% --- Paquetes de Idioma y Codificación ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish, es-tabla]{babel}
+
+% --- Tipografía (Times New Roman) ---
+% El paquete 'newtxtext' y 'newtxmath' proporciona una versión moderna de Times
+\usepackage{newtxtext,newtxmath}
+
+% --- Configuración de Color de Fondo ---
+\usepackage{xcolor}
+\definecolor{fondocrema}{RGB}{255, 253, 235} % Amarillo muy ligero
+\pagecolor{fondocrema}
+
+% --- Márgenes y Geometría ---
+\usepackage[margin=2.5cm]{geometry}
+
+% --- Enlaces e Índice ---
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Plantilla con Fondo Amarillento},
+}
+
+% --- Título y Autor ---
+\title{Plantilla Académica Estilo Clásico \\ \large Una Guía sobre el Formato de Artículo}
+\author{Nombre del Autor}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este documento sirve como ejemplo de una plantilla en LaTeX con fondo ligeramente amarillento, diseñada para reducir la fatiga visual y dar un aspecto elegante. Incluye una estructura de cinco secciones y un índice automático.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducción}
+Esta es la primera sección de tu documento. LaTeX permite organizar el contenido de manera jerárquica y profesional. En esta plantilla hemos configurado la fuente \textit{Times New Roman} (mediante el paquete \texttt{newtxtext}) para mantener un estándar académico.
+
+\section{Estado del Arte}
+Aquí puedes describir las investigaciones previas. El color de fondo se ha definido mediante el paquete \texttt{xcolor} usando una mezcla RGB que imita el papel de alta calidad.
+
+\section{Metodología Utilizada}
+En esta sección se detallan los procedimientos. Gracias al uso del tamaño de papel A4 y márgenes de 2.5cm, el texto mantiene una legibilidad óptima. 
+\begin{itemize}
+    \item Recolección de datos.
+    \item Procesamiento estadístico.
+    \item Validación de resultados.
+\end{itemize}
+
+\section{Análisis de Resultados}
+Presentación de los datos obtenidos. Puedes incluir tablas, figuras y ecuaciones matemáticas complejas que se renderizarán perfectamente con la tipografía Times:
+\begin{equation}
+    E = mc^2
+\end{equation}
+
+\section{Conclusiones y Recomendaciones}
+Finalmente, se resumen los hallazgos. Esta plantilla es ideal para trabajos que requieren una lectura prolongada, ya que el tono amarillento es más suave para la vista que el blanco puro.
+
+\end{document}
