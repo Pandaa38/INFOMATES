@@ -35,7 +35,7 @@
 
     \includegraphics[width=1\textwidth]{../../capturas4/seccion1/top_sin_stress.png}
 
-    \caption{Ejecucion de top antes de simular carga de trabajo.}
+    \caption{Ejecución de top antes de simular carga de trabajo.}
 
 \end{figure}
 
@@ -44,7 +44,7 @@
 
     \includegraphics[width=1\textwidth]{../../capturas4/seccion1/stress.png}
 
-    \caption{Ejecucion del programa stress.}
+    \caption{Ejecución del programa stress.}
 
 \end{figure}
 
@@ -53,14 +53,34 @@
 
     \includegraphics[width=1\textwidth]{../../capturas4/seccion1/top_stress.png}
 
-    \caption{Ejecucion de top durante la simulacion de carga de trabajo.}
+    \caption{Ejecución de top durante la simulación de carga de trabajo.}
 
 \end{figure}
 
-En un primer monento, se ha ejecutado el programa \texttt{top} para observar el estado del sistema 
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=1\textwidth]{../../capturas4/seccion1/stress_todo.png}
+
+    \caption{Ejecución de stress para probar memoria, cpu y i/o.}
+
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=1\textwidth]{../../capturas4/seccion1/top_todo.png}
+
+    \caption{Ejecución de top durante la simulación de carga de trabajo.}
+
+\end{figure}
+
+En un primer momento, se ha ejecutado el programa \texttt{top} para observar el estado del sistema 
 antes de simular la carga de trabajo, podemos ver múltiples procesos en ejecución como por ejemplo chrome. 
 Posteriormente, se ha ejecutado el programa \texttt{stress} para generar una carga de trabajo en el sistema. 
 Finalmente, se ha vuelto a ejecutar \texttt{top} durante la simulación de carga de trabajo para observar cómo 
 afecta al sistema, se puede ver un aumento en el uso de CPU y los cuatro procesos generados.
+\\
+Por ultimo se ha ejecutado el comando de stress para probar memoria, cpu y i/o que recomienda la propia documentación de stress.
 
 \end{document}

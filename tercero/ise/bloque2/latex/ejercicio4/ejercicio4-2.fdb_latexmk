@@ -1,11 +1,11 @@
 # Fdb version 4
-["pdflatex"] 1779012702.84163 "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-2.tex" "ejercicio4-2.pdf" "ejercicio4-2" 1779012704.03682 0
-  "../../capturas4/seccion2/archivo_cron.png" 1778958111.77673 184055 1f17da1ebbb258ed760036624ff73a5b ""
+["pdflatex"] 1779389137.20136 "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-2.tex" "ejercicio4-2.pdf" "ejercicio4-2" 1779389138.29814 0
+  "../../capturas4/seccion2/bash.png" 1779388627.66941 88176 2c6308bebcfb174bd2a5f8d54508ac28 ""
+  "../../capturas4/seccion2/cron.png" 1779388834.31075 222610 dbb5377ad4eba7a13ed4dc8ed1fa38f3 ""
   "../../capturas4/seccion2/ejecucion_crontab.png" 1778958051.46355 66391 2f0e383cf89da77c3e69c51b4ecd4c88 ""
-  "../../capturas4/seccion2/resultado1.png" 1778958562.41963 259500 03599e591eedbd52511ef66c88f25bb3 ""
-  "../../capturas4/seccion2/resultado2.png" 1778958578.23165 183433 4f0a52051d6bb511c05d293030d023f5 ""
+  "../../capturas4/seccion2/journal.png" 1779388816.63046 113303 c91add4e8983dd192d7c1cc735d336eb ""
   "/etc/texmf/web2c/texmf.cnf" 1759420119.94669 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-2.tex" 1779012701.30632 1372 aad925cfc4c63df5caaa8216cb243da4 ""
+  "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-2.tex" 1779389135.70263 1373 edb252ad90a79137c3d74aafe6e260e3 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -57,9 +57,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1776161722.89919 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1776161773 8213107 39f7fe38fa3dd2ecafcc660e6ca3fe30 ""
-  "ejercicio4-2.aux" 1779012703.97064 839 8aa840a97419228becff3d205aead5a7 "pdflatex"
-  "ejercicio4-2.tex" 1779012701.30632 1372 aad925cfc4c63df5caaa8216cb243da4 ""
-  "ejercicio4-2.toc" 1779012703.97264 122 8f8e9bf271b1f78025f27207120e219f "pdflatex"
+  "ejercicio4-2.aux" 1779389138.23186 856 b58a16df81260d80ab954745589e026e "pdflatex"
+  "ejercicio4-2.tex" 1779389135.70263 1373 edb252ad90a79137c3d74aafe6e260e3 ""
+  "ejercicio4-2.toc" 1779389138.23386 122 8f8e9bf271b1f78025f27207120e219f "pdflatex"
   (generated)
   "ejercicio4-2.aux"
   "ejercicio4-2.log"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.14)  16 MAY 2026 20:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.14)  21 MAY 2026 20:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -286,6 +286,11 @@ File: ../../capturas4/seccion1/top_stress.png Graphic file (type png)
 <use ../../capturas4/seccion1/top_stress.png>
 Package pdftex.def Info: ../../capturas4/seccion1/top_stress.png  used on input line 54.
 (pdftex.def)             Requested size: 455.24411pt x 221.8272pt.
+<../../capturas4/seccion1/stress_todo.png, id=13, 1371.1225pt x 73.27374pt>
+File: ../../capturas4/seccion1/stress_todo.png Graphic file (type png)
+<use ../../capturas4/seccion1/stress_todo.png>
+Package pdftex.def Info: ../../capturas4/seccion1/stress_todo.png  used on input line 63.
+(pdftex.def)             Requested size: 455.24411pt x 24.32799pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -295,6 +300,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [2 <../../capturas4/seccion1/top_sin_stress.png> <../../capturas4/seccion1/stress.png> <../../capturas4/seccion1/top_stress.png>]
+<../../capturas4/seccion1/top_todo.png, id=20, 1393.205pt x 697.60625pt>
+File: ../../capturas4/seccion1/top_todo.png Graphic file (type png)
+<use ../../capturas4/seccion1/top_todo.png>
+Package pdftex.def Info: ../../capturas4/seccion1/top_todo.png  used on input line 72.
+(pdftex.def)             Requested size: 455.24411pt x 227.94347pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -302,7 +313,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[3] (./ejercicio4-1.aux
+[3 <../../capturas4/seccion1/stress_todo.png> <../../capturas4/seccion1/top_todo.png>] (./ejercicio4-1.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -312,18 +323,18 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4816 strings out of 474222
- 74330 string characters out of 5748733
+ 4830 strings out of 474222
+ 74965 string characters out of 5748733
  1926975 words of memory out of 5000000
- 27037 multiletter control sequences out of 15000+600000
+ 27051 multiletter control sequences out of 15000+600000
  562347 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,12n,65p,298b,365s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ejercicio4-1.pdf (3 pages, 653412 bytes).
+Output written on ejercicio4-1.pdf (3 pages, 986920 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
+ 45 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

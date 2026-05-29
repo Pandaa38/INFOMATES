@@ -1,10 +1,12 @@
 # Fdb version 4
-["pdflatex"] 1778956835.35983 "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-1.tex" "ejercicio4-1.pdf" "ejercicio4-1" 1778956836.661 0
+["pdflatex"] 1779386665.54053 "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-1.tex" "ejercicio4-1.pdf" "ejercicio4-1" 1779386667.16134 0
   "../../capturas4/seccion1/stress.png" 1778955072.47918 30823 72b957ba897c3c1628ba74fd9f14dd24 ""
+  "../../capturas4/seccion1/stress_todo.png" 1779386319.84923 45914 56c51d9e7bd2d5c5d2a196c0b3ec770a ""
   "../../capturas4/seccion1/top_sin_stress.png" 1778953817.97003 386140 cc8e2d6c4e212a24744fd6222d5deaac ""
   "../../capturas4/seccion1/top_stress.png" 1778955087.91475 414381 6c46bbf59a9a815c651237230a31411f ""
+  "../../capturas4/seccion1/top_todo.png" 1779386356.01326 412631 739713b48c275b19a60d819fddd60439 ""
   "/etc/texmf/web2c/texmf.cnf" 1759420119.94669 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-1.tex" 1778956834.9721 1770 a62e6cb547705848cf034e21508eb0d5 ""
+  "/home/juan/Documentos/INFOMATES/tercero/ise/bloque2/latex/ejercicio4/ejercicio4-1.tex" 1779386663.57112 2311 3330d31571832b98287a881aa4380cde ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -58,9 +60,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1776161722.89919 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1776161773 8213107 39f7fe38fa3dd2ecafcc660e6ca3fe30 ""
-  "ejercicio4-1.aux" 1778956836.57415 763 dd40efed1476629e85634e70988d29c2 "pdflatex"
-  "ejercicio4-1.tex" 1778956834.9721 1770 a62e6cb547705848cf034e21508eb0d5 ""
-  "ejercicio4-1.toc" 1778956836.57715 109 5dc1ff32d50066bedfd9053e06230822 "pdflatex"
+  "ejercicio4-1.aux" 1779386667.0923 1086 5c496a0872a0390a439a882abccde6b5 "pdflatex"
+  "ejercicio4-1.tex" 1779386663.57112 2311 3330d31571832b98287a881aa4380cde ""
+  "ejercicio4-1.toc" 1779386667.0943 109 5dc1ff32d50066bedfd9053e06230822 "pdflatex"
   (generated)
   "ejercicio4-1.aux"
   "ejercicio4-1.log"
