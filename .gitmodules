@@ -1,3 +1,9 @@
 [submodule "segundo/ed/ed_practicas"]
 	path = segundo/ed/ed_practicas
 	url = git@github.com:Pandaa38/ED_PRACTICAS.git
+[submodule "tercero/ia/practica2_IA"]
+	path = tercero/ia/practica2_IA
+	url = git@github.com:Pandaa38/practica2_IA.git
+[submodule "tercero/ia/practica3_IA"]
+	path = tercero/ia/practica3_IA
+	url = git@github.com:Pandaa38/practica3_IA.git
